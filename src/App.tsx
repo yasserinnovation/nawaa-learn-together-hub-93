@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import DiscoverSpaces from "./pages/DiscoverSpaces";
 import Courses from "./pages/Courses";
 import AccessTools from "./pages/AccessTools";
+import BuildBundle from "./pages/BuildBundle";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/discover-spaces" element={<DiscoverSpaces />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/access-tools" element={<AccessTools />} />
+          <Route path="/build-bundle" element={<BuildBundle />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

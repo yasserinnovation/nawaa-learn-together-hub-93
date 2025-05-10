@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -15,8 +16,11 @@ const Hero = () => {
               Mix and match your perfect learning bundle with trainers, spaces, tools, and courses tailored to your child's interests.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600">
-                Get Started
+              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600" asChild>
+                <Link to="/build-bundle" className="flex items-center gap-2">
+                  Start Building Your Bundle
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link to="/discover-spaces">
