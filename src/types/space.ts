@@ -1,6 +1,4 @@
 
-import { StaticImageData } from "next/image";
-
 export interface Space {
   id: string;
   name: string;
