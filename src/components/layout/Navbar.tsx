@@ -53,8 +53,14 @@ const Navbar = () => {
           <Link to="/" className="text-gray-700 hover:text-yellow-600">
             Home
           </Link>
+          <Link to="/courses" className="text-gray-700 hover:text-yellow-600">
+            Courses
+          </Link>
           <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600">
             Discover Spaces
+          </Link>
+          <Link to="/access-tools" className="text-gray-700 hover:text-yellow-600">
+            Access Tools
           </Link>
           <Link to="/contact" className="text-gray-700 hover:text-yellow-600">
             Contact
@@ -81,11 +87,25 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
+                to="/courses"
+                className="text-gray-700 hover:text-yellow-600 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Courses
+              </Link>
+              <Link
                 to="/discover-spaces"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Discover Spaces
+              </Link>
+              <Link
+                to="/access-tools"
+                className="text-gray-700 hover:text-yellow-600 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Access Tools
               </Link>
               <Link
                 to="/contact"
