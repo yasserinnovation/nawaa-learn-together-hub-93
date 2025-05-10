@@ -58,7 +58,8 @@ const BundleNavigation = ({ currentStepId = "trainer", compact = false }: Bundle
   const navigate = useNavigate();
   
   const handleStepClick = (path: string) => {
-    navigate(path);
+    // Use replace: true to prevent adding to history stack and avoid scroll jumps
+    navigate(path, { replace: true });
   };
 
   if (compact) {
