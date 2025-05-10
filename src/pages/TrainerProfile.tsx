@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { 
@@ -7,7 +6,7 @@ import {
   Star, 
   Calendar, 
   Award, 
-  Language, 
+  Languages, 
   Users, 
   Clock,
   GraduationCap
@@ -191,7 +190,7 @@ const TrainerProfile = () => {
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <Language className="h-5 w-5 text-yellow-500 mt-0.5" />
+                    <Languages className="h-5 w-5 text-yellow-500 mt-0.5" />
                     <div>
                       <h3 className="font-medium">Languages</h3>
                       <p className="text-gray-600 text-sm mt-1">

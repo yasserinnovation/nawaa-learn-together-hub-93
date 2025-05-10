@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { User, MapPin, Language, Star, Clock, Calendar } from "lucide-react";
+import { User, MapPin, Languages, Star, Clock, Calendar } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
