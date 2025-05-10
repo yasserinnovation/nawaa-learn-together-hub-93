@@ -18,7 +18,7 @@ const mockTrainer = {
   expertise: ["Robotics", "Arduino", "Electronics"],
   gender: "Male",
   rating: 4.8,
-  imageUrl: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+  imageUrl: "https://images.unsplash.com/photo-1612883600377-617235130904?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
   experience: 5,
   specialties: ["LEGO Robotics", "Arduino Programming", "Electronics for Kids"],
   availability: ["Weekends", "Weekday Evenings"],

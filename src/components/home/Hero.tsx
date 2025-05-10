@@ -33,7 +33,7 @@ const Hero = () => {
             <div className="relative">
               <div className="bg-white rounded-lg shadow-xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1567057469246-03bf63afa843?w=800&auto=format&fit=crop"
                   alt="Children learning technology"
                   className="w-full h-auto"
                 />
