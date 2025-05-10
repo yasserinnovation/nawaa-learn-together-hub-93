@@ -1,10 +1,11 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Robot, Drone, Printer3d, Brain, SolarPanel, Vr, Cpu, BarChart, Shield, Dna } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope } from "lucide-react";
 import { Course } from "@/types/course";
 
 const CoursesList = () => {
@@ -14,7 +15,7 @@ const CoursesList = () => {
     {
       id: 1,
       title: "Robotics",
-      icon: Robot,
+      icon: Bot,
       ageGroup: "10–12",
       duration: "2 hours",
       category: "technology",
@@ -26,7 +27,7 @@ const CoursesList = () => {
     {
       id: 2,
       title: "Drones",
-      icon: Drone,
+      icon: Gamepad2,
       ageGroup: "12–14",
       duration: "2 hours",
       category: "technology",
@@ -38,7 +39,7 @@ const CoursesList = () => {
     {
       id: 3,
       title: "3D Printing",
-      icon: Printer3d,
+      icon: Printer,
       ageGroup: "11–14",
       duration: "2 hours",
       category: "technology",
@@ -62,7 +63,7 @@ const CoursesList = () => {
     {
       id: 5,
       title: "Renewable Energy",
-      icon: SolarPanel,
+      icon: Lightbulb,
       ageGroup: "10–13",
       duration: "2 hours",
       category: "science",
@@ -74,7 +75,7 @@ const CoursesList = () => {
     {
       id: 6,
       title: "Virtual Reality",
-      icon: Vr,
+      icon: Gamepad2,
       ageGroup: "11–15",
       duration: "2 hours",
       category: "technology",
@@ -98,7 +99,7 @@ const CoursesList = () => {
     {
       id: 8,
       title: "Data Analysis",
-      icon: BarChart,
+      icon: BarChart3,
       ageGroup: "12–15",
       duration: "2 hours",
       category: "math",
@@ -110,7 +111,7 @@ const CoursesList = () => {
     {
       id: 9,
       title: "Cybersecurity",
-      icon: Shield,
+      icon: ShieldCheck,
       ageGroup: "10–14",
       duration: "2 hours",
       category: "technology",
@@ -122,7 +123,7 @@ const CoursesList = () => {
     {
       id: 10,
       title: "Biotechnology",
-      icon: Dna,
+      icon: Microscope,
       ageGroup: "10–13",
       duration: "2 hours",
       category: "science",
