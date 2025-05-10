@@ -99,3 +99,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Mapbox styles */
+.mapboxgl-popup-content {
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 16px;
+  padding: 0 6px;
+}
