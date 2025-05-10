@@ -1,8 +1,7 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Star, Calendar, Award, Language, Users } from "lucide-react";
+import { MapPin, Star, Calendar, Award, Languages, Users } from "lucide-react";
 import { Trainer } from "@/types/trainer";
 import { useNavigate } from "react-router-dom";
 
@@ -62,7 +61,7 @@ const TrainerCard = ({ trainer }: TrainerCardProps) => {
           </div>
           
           <div className="mb-3 flex items-start gap-2">
-            <Language className="h-4 w-4 text-gray-500 mt-0.5" />
+            <Languages className="h-4 w-4 text-gray-500 mt-0.5" />
             <span className="text-sm text-gray-600">
               Languages: {trainer.languages.join(", ")}
             </span>

@@ -1,7 +1,9 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import BundleStepProgress from "@/components/bundle/BundleStepProgress";
+import BundleNavigation from "@/components/bundle/BundleNavigation";
 import TrainerSelection from "@/components/bundle/TrainerSelection";
 import SpaceSelection from "@/components/bundle/SpaceSelection";
 import ToolsSelection from "@/components/bundle/ToolsSelection";
@@ -21,7 +23,10 @@ type BundleStep =
   | "preview";
 
 const BuildBundle = () => {
-  const [currentStep, setCurrentStep] = useState<BundleStep>("trainer");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const stepFromUrl = searchParams.get("step") as BundleStep | null;
+  
+  const [currentStep, setCurrentStep] = useState<BundleStep>(stepFromUrl || "trainer");
   const [bundle, setBundle] = useState({
     trainer: null,
     space: null,
@@ -38,6 +43,18 @@ const BuildBundle = () => {
       sessions: 2,
     },
   });
+
+  // Update URL when step changes
+  useEffect(() => {
+    setSearchParams({ step: currentStep });
+  }, [currentStep, setSearchParams]);
+
+  // Update current step if URL changes
+  useEffect(() => {
+    if (stepFromUrl && steps.includes(stepFromUrl)) {
+      setCurrentStep(stepFromUrl);
+    }
+  }, [stepFromUrl]);
 
   const steps: BundleStep[] = [
     "trainer",
@@ -101,13 +118,8 @@ const BuildBundle = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-          Build Your Learning Bundle
-        </h1>
-        <p className="text-gray-700 text-center mb-12 max-w-3xl mx-auto">
-          Mix and match the perfect combination of trainer, tools, space, and content — all tailored to your goals.
-        </p>
-
+        <BundleNavigation currentStepId={currentStep} />
+        
         <BundleStepProgress currentStep={currentStep} steps={steps} />
 
         <div className="mt-12">
