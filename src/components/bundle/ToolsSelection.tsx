@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tool } from "lucide-react";
+import { Hammer } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -211,7 +211,7 @@ const ToolsSelection = ({ bundle, updateBundle }: ToolsSelectionProps) => {
       <div className="lg:col-span-1">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex items-center mb-6">
-            <Tool className="h-6 w-6 text-yellow-500 mr-2" />
+            <Hammer className="h-6 w-6 text-yellow-500 mr-2" />
             <h2 className="text-xl font-semibold">Filter Tools</h2>
           </div>
           

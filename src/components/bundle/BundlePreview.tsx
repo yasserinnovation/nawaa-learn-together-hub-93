@@ -1,11 +1,10 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
   User, 
   MapPin, 
-  Tool, 
+  Hammer, 
   Book, 
   Users, 
   Clock, 
@@ -133,7 +132,7 @@ const BundlePreview = ({ bundle, onBook }: BundlePreviewProps) => {
         
         <Card className={bundle.tools && bundle.tools.length > 0 ? "border-green-200" : "border-red-200 opacity-60"}>
           <CardHeader className="bg-gray-50 flex flex-row items-center gap-2">
-            <Tool className="h-5 w-5 text-yellow-600" />
+            <Hammer className="h-5 w-5 text-yellow-600" />
             <CardTitle className="text-lg">Tools</CardTitle>
           </CardHeader>
           <CardContent className="pt-4">
