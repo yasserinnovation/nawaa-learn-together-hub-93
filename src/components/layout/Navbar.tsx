@@ -1,98 +1,112 @@
 
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <nav className="bg-white sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold text-nawaa-black">
-                <span className="text-nawaa-yellow">Na</span>waa
-              </span>
-            </Link>
-          </div>
-          
-          {/* Desktop menu */}
-          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
-            <Link to="/spaces" className="text-gray-800 hover:text-nawaa-yellow px-3 py-2 text-sm font-medium transition-colors">
-              Spaces
-            </Link>
-            <Link to="/tools" className="text-gray-800 hover:text-nawaa-yellow px-3 py-2 text-sm font-medium transition-colors">
-              Tools
-            </Link>
-            <Link to="/trainers" className="text-gray-800 hover:text-nawaa-yellow px-3 py-2 text-sm font-medium transition-colors">
-              Trainers
-            </Link>
-            <Link to="/courses" className="text-gray-800 hover:text-nawaa-yellow px-3 py-2 text-sm font-medium transition-colors">
-              Courses
-            </Link>
-            <Button variant="default" className="ml-4">
-              Sign In
-            </Button>
-          </div>
+    <header className="border-b bg-white sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link to="/" className="font-bold text-xl">
+          Nawaa
+        </Link>
 
-          {/* Mobile menu button */}
-          <div className="flex items-center sm:hidden">
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-nawaa-yellow focus:outline-none"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+        {/* Mobile menu button */}
+        <button
+          className="lg:hidden text-gray-700"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            {isMenuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
+
+        {/* Desktop navigation */}
+        <nav className="hidden lg:flex items-center gap-6">
+          <Link to="/" className="text-gray-700 hover:text-yellow-600">
+            Home
+          </Link>
+          <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600">
+            Discover Spaces
+          </Link>
+          <Link to="/contact" className="text-gray-700 hover:text-yellow-600">
+            Contact
+          </Link>
+        </nav>
+
+        {/* Auth buttons */}
+        <div className="hidden lg:flex items-center gap-4">
+          <Button variant="outline">Sign in</Button>
+          <Button className="bg-yellow-500 hover:bg-yellow-600">
+            Sign up
+          </Button>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="sm:hidden bg-white shadow-lg rounded-b-xl">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link 
-              to="/spaces" 
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-nawaa-yellow"
-              onClick={toggleMenu}
-            >
-              Spaces
-            </Link>
-            <Link 
-              to="/tools"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-nawaa-yellow"
-              onClick={toggleMenu}
-            >
-              Tools
-            </Link>
-            <Link 
-              to="/trainers"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-nawaa-yellow"
-              onClick={toggleMenu}
-            >
-              Trainers
-            </Link>
-            <Link 
-              to="/courses"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-nawaa-yellow"
-              onClick={toggleMenu}
-            >
-              Courses
-            </Link>
-            <div className="pt-4">
-              <Button variant="default" className="w-full">
-                Sign In
-              </Button>
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="lg:hidden absolute top-16 left-0 right-0 bg-white border-b shadow-lg z-50">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-yellow-600 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                to="/discover-spaces"
+                className="text-gray-700 hover:text-yellow-600 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Discover Spaces
+              </Link>
+              <Link
+                to="/contact"
+                className="text-gray-700 hover:text-yellow-600 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <div className="flex flex-col gap-2 mt-2">
+                <Button variant="outline" className="w-full">
+                  Sign in
+                </Button>
+                <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
+                  Sign up
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )}
+      </div>
+    </header>
   );
 };
 
