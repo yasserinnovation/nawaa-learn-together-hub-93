@@ -56,6 +56,9 @@ const Navbar = () => {
           <Link to="/courses" className="text-gray-700 hover:text-yellow-600">
             Courses
           </Link>
+          <Link to="/find-trainers" className="text-gray-700 hover:text-yellow-600">
+            Find Trainers
+          </Link>
           <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600">
             Discover Spaces
           </Link>
@@ -95,6 +98,13 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Courses
+              </Link>
+              <Link
+                to="/find-trainers"
+                className="text-gray-700 hover:text-yellow-600 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Find Trainers
               </Link>
               <Link
                 to="/discover-spaces"
