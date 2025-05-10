@@ -16,7 +16,7 @@ const ToolsList = ({ filters }: ToolsListProps) => {
     {
       id: 1,
       name: "Arduino Starter Kit",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1608564697071-ddf911d3c1a8?auto=format&fit=crop&q=80&w=600",
       condition: "new",
       price: 180,
       location: "Riyadh",
@@ -30,7 +30,7 @@ const ToolsList = ({ filters }: ToolsListProps) => {
     {
       id: 2,
       name: "3D Pen for Kids",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=600",
       condition: "good",
       price: 120,
       rentalRate: "SAR 20/day",
@@ -45,7 +45,7 @@ const ToolsList = ({ filters }: ToolsListProps) => {
     {
       id: 3,
       name: "Drone Kit with Camera",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=600",
       condition: "used",
       price: 350,
       location: "Dammam",
@@ -59,7 +59,7 @@ const ToolsList = ({ filters }: ToolsListProps) => {
     {
       id: 4,
       name: "BBC micro:bit Kit",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1623479322729-28b25c16b011?auto=format&fit=crop&q=80&w=600",
       condition: "good",
       price: 0,
       location: "Abha",
@@ -73,7 +73,7 @@ const ToolsList = ({ filters }: ToolsListProps) => {
     {
       id: 5,
       name: "Robot Building Set",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&q=80&w=600",
       condition: "new",
       price: 250,
       rentalRate: "SAR 40/day",
@@ -88,7 +88,7 @@ const ToolsList = ({ filters }: ToolsListProps) => {
     {
       id: 6, 
       name: "Basic Electronics Components Set",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1580481072645-022f9a6dbf27?auto=format&fit=crop&q=80&w=600",
       condition: "needs-care",
       price: 90,
       location: "Jeddah",

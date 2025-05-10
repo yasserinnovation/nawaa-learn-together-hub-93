@@ -12,6 +12,36 @@ interface SpaceCardProps {
 const SpaceCard = ({ space }: SpaceCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Enhance the image URLs with real images based on space types
+  const getEnhancedImageUrl = (index: number) => {
+    const imageMap: Record<string, string[]> = {
+      "makerspace": [
+        "https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=600",
+        "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=600"
+      ],
+      "classroom": [
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600",
+        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600"
+      ],
+      "lab": [
+        "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=600",
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600"
+      ],
+      "studio": [
+        "https://images.unsplash.com/photo-1593697821252-0c9137d9fc45?auto=format&fit=crop&q=80&w=600",
+        "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?auto=format&fit=crop&q=80&w=600"
+      ]
+    };
+
+    if (space.type in imageMap) {
+      const images = imageMap[space.type];
+      const imgIndex = index % images.length;
+      return images[imgIndex];
+    }
+    
+    return space.images[index % space.images.length];
+  };
+
   const nextImage = () => {
     setCurrentImageIndex((prev) => 
       prev === space.images.length - 1 ? 0 : prev + 1
@@ -29,7 +59,7 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
       <div className="relative">
         <div className="aspect-[16/9] bg-gray-100 relative overflow-hidden">
           <img 
-            src={`${space.images[currentImageIndex]}?w=600&auto=format&fit=crop`} 
+            src={getEnhancedImageUrl(currentImageIndex)}
             alt={space.name}
             className="w-full h-full object-cover transition-transform duration-500"
           />

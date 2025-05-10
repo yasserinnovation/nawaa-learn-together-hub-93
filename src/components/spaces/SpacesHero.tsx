@@ -3,8 +3,15 @@ import { MapPin, Search } from "lucide-react";
 
 const SpacesHero = () => {
   return (
-    <div className="bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 py-16">
-      <div className="container mx-auto px-4 text-center">
+    <div className="bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 py-16 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-10">
+        <img 
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1920" 
+          alt="Collaborative spaces" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="container mx-auto px-4 text-center relative z-10">
         <div className="flex justify-center mb-4">
           <MapPin className="h-12 w-12 text-yellow-500" />
         </div>
