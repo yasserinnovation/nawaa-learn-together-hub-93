@@ -2,17 +2,7 @@
 import { useState } from "react";
 
 const LogoShowcase = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [illustrationLoaded, setIllustrationLoaded] = useState(false);
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-    console.log("Logo image loaded successfully");
-  };
-
-  const handleImageError = () => {
-    console.error("Failed to load the logo image");
-  };
 
   const handleIllustrationLoad = () => {
     setIllustrationLoaded(true);
@@ -31,23 +21,7 @@ const LogoShowcase = () => {
             Empowering the Next Generation of Innovators
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-8 w-full max-w-6xl mx-auto">
-            {/* Logo */}
-            <div className="bg-black rounded-lg overflow-hidden shadow-lg p-8">
-              {!imageLoaded && (
-                <div className="w-full h-64 bg-gray-800 flex items-center justify-center">
-                  <p className="text-gray-400">Loading logo...</p>
-                </div>
-              )}
-              <img 
-                src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
-                alt="Nawaa logo - hexagonal spiral design with NAWAA text" 
-                className={`w-full h-auto ${!imageLoaded ? 'hidden' : ''}`}
-                onLoad={handleImageLoad}
-                onError={handleImageError}
-              />
-            </div>
-            
+          <div className="w-full max-w-4xl mx-auto">
             {/* Illustration */}
             <div className="bg-white rounded-lg overflow-hidden shadow-lg">
               {!illustrationLoaded && (

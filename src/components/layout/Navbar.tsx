@@ -5,20 +5,34 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogoLoad = () => {
+    setLogoLoaded(true);
+  };
+
+  const handleLogoError = () => {
+    console.error("Failed to load logo");
   };
 
   return (
     <header className="border-b bg-white sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <img 
-            src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
-            alt="Nawaa Logo"
-            className="h-10 w-auto"
-          />
+          <div className="bg-black rounded-md p-1 h-12 w-auto flex items-center justify-center">
+            {!logoLoaded && <div className="h-8 w-8 bg-gray-800"></div>}
+            <img 
+              src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
+              alt="Nawaa Logo"
+              className={`h-8 w-auto ${!logoLoaded ? 'hidden' : ''}`}
+              onLoad={handleLogoLoad}
+              onError={handleLogoError}
+            />
+          </div>
           <span className="font-bold text-xl">Nawaa</span>
         </Link>
 
