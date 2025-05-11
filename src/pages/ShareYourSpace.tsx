@@ -7,12 +7,33 @@ import SpaceForm from "@/components/spaces/share/SpaceForm";
 import SpacePreview from "@/components/spaces/share/SpacePreview";
 import SubmissionSuccess from "@/components/spaces/share/SubmissionSuccess";
 import { toast } from "@/hooks/use-toast";
+import { Space } from "@/types/space";
 
 type FormStep = "form" | "preview" | "success";
 
+// Define the form data type to match what's expected in SpaceForm and used throughout
+export type SpaceFormData = {
+  name: string;
+  type: 'library' | 'classroom' | 'makerspace' | 'coworking' | 'hall';
+  address: string;
+  city: string;
+  coordinates: { lat: number; lng: number };
+  capacity: number;
+  days: string[];
+  hours: string;
+  rentalType: 'free' | 'fixed' | 'donation';
+  pricePerHour: number;
+  images: string[];
+  equipment: string[];
+  safetyNotes: string;
+  hostName: string;
+  hostBio: string;
+  bankDetails: string;
+};
+
 const ShareYourSpace = () => {
   const [currentStep, setCurrentStep] = useState<FormStep>("form");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SpaceFormData>({
     name: "",
     type: "classroom",
     address: "",
@@ -31,7 +52,7 @@ const ShareYourSpace = () => {
     bankDetails: "",
   });
 
-  const handleSubmitForm = (data: typeof formData) => {
+  const handleSubmitForm = (data: SpaceFormData) => {
     setFormData(data);
     setCurrentStep("preview");
     window.scrollTo(0, 0);

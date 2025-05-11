@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { MapPin, Upload, Info } from "lucide-react";
+import { SpaceFormData } from "@/pages/ShareYourSpace";
 
 const formSchema = z.object({
   name: z.string().min(3, {
@@ -57,14 +57,11 @@ const formSchema = z.object({
   bankDetails: z.string().optional(),
 });
 
-type FormData = z.infer<typeof formSchema> & {
-  coordinates: { lat: number; lng: number };
-  images: string[];
-};
+type FormSchemaType = z.infer<typeof formSchema>;
 
 type SpaceFormProps = {
-  initialData?: Partial<FormData>;
-  onSubmit: (data: FormData) => void;
+  initialData?: Partial<SpaceFormData>;
+  onSubmit: (data: SpaceFormData) => void;
 };
 
 const SpaceForm = ({ initialData = {}, onSubmit }: SpaceFormProps) => {
@@ -72,7 +69,7 @@ const SpaceForm = ({ initialData = {}, onSubmit }: SpaceFormProps) => {
   const [coordinates, setCoordinates] = useState(initialData.coordinates || { lat: 24.7136, lng: 46.6753 });
 
   // Form setup with react-hook-form and zod validation
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: initialData.name || "",
@@ -123,13 +120,13 @@ const SpaceForm = ({ initialData = {}, onSubmit }: SpaceFormProps) => {
     { id: "kitchen", label: "Kitchen Access" },
   ];
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    const completeData = {
+  const handleSubmit = (values: FormSchemaType) => {
+    const completeData: SpaceFormData = {
       ...values,
       coordinates,
       images,
     };
-    onSubmit(completeData as FormData);
+    onSubmit(completeData);
   };
 
   return (

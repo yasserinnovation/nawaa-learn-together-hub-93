@@ -1,26 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Calendar, Clock, CheckCircle } from "lucide-react";
+import { SpaceFormData } from "@/pages/ShareYourSpace";
 
 type SpacePreviewProps = {
-  spaceData: {
-    name: string;
-    type: string;
-    address: string;
-    city: string;
-    coordinates: { lat: number; lng: number };
-    capacity: number;
-    days: string[];
-    hours: string;
-    rentalType: string;
-    pricePerHour: number;
-    images: string[];
-    equipment: string[];
-    safetyNotes: string;
-    hostName: string;
-    hostBio: string;
-    bankDetails: string;
-  };
+  spaceData: SpaceFormData;
   onEdit: () => void;
   onSubmit: () => void;
 };
