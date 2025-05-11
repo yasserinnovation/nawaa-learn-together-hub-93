@@ -46,7 +46,7 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "3",
-    name: "Norah Al-Qahtani",
+    name: "Norah Alsharhan",
     location: "Dammam",
     languages: ["Arabic", "English", "French"],
     expertise: ["AI for Kids", "Electronics"],
