@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <img 
-            src="/lovable-uploads/b0de8c1d-16f7-4476-88a5-c7f7f54292cf.png" 
+            src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
             alt="Nawaa Logo"
             className="h-10 w-auto"
           />

@@ -1,10 +1,9 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const LogoShowcase = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Check if the image loads correctly
   const handleImageLoad = () => {
     setImageLoaded(true);
     console.log("Logo image loaded successfully");
@@ -22,15 +21,15 @@ const LogoShowcase = () => {
             Empowering the Next Generation of Innovators
           </h2>
           
-          <div className="rounded-lg overflow-hidden shadow-lg max-w-4xl mx-auto">
+          <div className="bg-black rounded-lg overflow-hidden shadow-lg max-w-xl mx-auto p-8">
             {!imageLoaded && (
-              <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-                <p className="text-gray-500">Loading logo...</p>
+              <div className="w-full h-64 bg-gray-800 flex items-center justify-center">
+                <p className="text-gray-400">Loading logo...</p>
               </div>
             )}
             <img 
-              src="/lovable-uploads/b0de8c1d-16f7-4476-88a5-c7f7f54292cf.png" 
-              alt="Nawaa logo - hexagonal spiral design" 
+              src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
+              alt="Nawaa logo - hexagonal spiral design with NAWAA text" 
               className={`w-full h-auto ${!imageLoaded ? 'hidden' : ''}`}
               onLoad={handleImageLoad}
               onError={handleImageError}
