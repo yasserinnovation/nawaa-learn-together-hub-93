@@ -52,14 +52,26 @@ const steps: BundleStep[] = [
 interface BundleNavigationProps {
   currentStepId?: string;
   compact?: boolean;
+  onStepChange?: (stepId: string) => void;
 }
 
-const BundleNavigation = ({ currentStepId = "trainer", compact = false }: BundleNavigationProps) => {
+const BundleNavigation = ({ 
+  currentStepId = "trainer", 
+  compact = false,
+  onStepChange
+}: BundleNavigationProps) => {
   const navigate = useNavigate();
   
-  const handleStepClick = (path: string) => {
-    // Use replace: true and prevent default scroll behavior
-    navigate(path, { replace: true });
+  const handleStepClick = (path: string, stepId: string) => {
+    // Instead of navigation causing re-renders, use the callback to handle step state
+    if (onStepChange) {
+      onStepChange(stepId);
+      // Update URL without causing navigation
+      window.history.replaceState({}, '', path);
+    } else {
+      // Fallback to navigate if no callback provided, but use replace to minimize flashing
+      navigate(path, { replace: true });
+    }
   };
 
   if (compact) {
@@ -72,7 +84,7 @@ const BundleNavigation = ({ currentStepId = "trainer", compact = false }: Bundle
               key={step.id}
               variant={step.id === currentStepId ? "default" : "ghost"}
               className={`justify-start ${step.id === currentStepId ? "bg-yellow-500 hover:bg-yellow-600" : ""}`}
-              onClick={() => handleStepClick(step.path)}
+              onClick={() => handleStepClick(step.path, step.id)}
             >
               <span className="mr-2">{step.icon}</span>
               {step.name}
@@ -99,7 +111,7 @@ const BundleNavigation = ({ currentStepId = "trainer", compact = false }: Bundle
           return (
             <Button
               key={step.id}
-              onClick={() => handleStepClick(step.path)}
+              onClick={() => handleStepClick(step.path, step.id)}
               variant={isActive ? "default" : "outline"}
               className={`
                 h-auto py-4 flex flex-col items-center justify-center gap-2 

@@ -44,17 +44,21 @@ const BuildBundle = () => {
     },
   });
 
-  // Update URL when step changes without triggering navigation events
+  // Remove automatic URL updates that trigger flashing
   useEffect(() => {
-    setSearchParams({ step: currentStep }, { replace: true });
-  }, [currentStep, setSearchParams]);
+    // Only update URL if the current step doesn't match the URL
+    if (stepFromUrl !== currentStep) {
+      window.history.replaceState({}, '', `/build-bundle?step=${currentStep}`);
+    }
+  }, [currentStep, stepFromUrl]);
 
-  // Update current step if URL changes without triggering scroll behavior
+  // Only update step from URL on initial load, not during navigation
   useEffect(() => {
-    if (stepFromUrl && steps.includes(stepFromUrl)) {
+    // We only want this to run on initial page load, not during navigation
+    if (stepFromUrl && steps.includes(stepFromUrl) && !document.referrer.includes('build-bundle')) {
       setCurrentStep(stepFromUrl);
     }
-  }, [stepFromUrl]);
+  }, []); // Empty dependency array to run only once on mount
 
   const steps: BundleStep[] = [
     "trainer",
@@ -64,6 +68,12 @@ const BuildBundle = () => {
     "audience",
     "preview",
   ];
+
+  const handleStepChange = (stepId: string) => {
+    if (steps.includes(stepId as BundleStep)) {
+      setCurrentStep(stepId as BundleStep);
+    }
+  };
 
   const goToNextStep = () => {
     const currentIndex = steps.indexOf(currentStep);
@@ -116,7 +126,10 @@ const BuildBundle = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
-        <BundleNavigation currentStepId={currentStep} />
+        <BundleNavigation 
+          currentStepId={currentStep} 
+          onStepChange={handleStepChange}
+        />
         
         <BundleStepProgress currentStep={currentStep} steps={steps} />
 
