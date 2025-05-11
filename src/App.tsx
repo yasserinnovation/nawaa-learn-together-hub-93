@@ -14,6 +14,7 @@ import BuildBundle from "./pages/BuildBundle";
 import FindTrainers from "./pages/FindTrainers";
 import TrainerProfile from "./pages/TrainerProfile";
 import ShareYourSpace from "./pages/ShareYourSpace";
+import AddTool from "./pages/AddTool";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/find-trainers" element={<FindTrainers />} />
           <Route path="/trainers/:id" element={<TrainerProfile />} />
           <Route path="/share-your-space" element={<ShareYourSpace />} />
+          <Route path="/add-tool" element={<AddTool />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
