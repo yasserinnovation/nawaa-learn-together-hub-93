@@ -44,13 +44,12 @@ const BuildBundle = () => {
     },
   });
 
-  // Update URL when step changes, but prevent the scroll behavior
+  // Update URL when step changes without triggering navigation events
   useEffect(() => {
-    // Use replaceState to update the URL without causing scrolling
     setSearchParams({ step: currentStep }, { replace: true });
   }, [currentStep, setSearchParams]);
 
-  // Update current step if URL changes without scrolling to top
+  // Update current step if URL changes without triggering scroll behavior
   useEffect(() => {
     if (stepFromUrl && steps.includes(stepFromUrl)) {
       setCurrentStep(stepFromUrl);
@@ -70,10 +69,6 @@ const BuildBundle = () => {
     const currentIndex = steps.indexOf(currentStep);
     if (currentIndex < steps.length - 1) {
       setCurrentStep(steps[currentIndex + 1]);
-      // Smooth scroll to top with a slight delay to prevent vibration
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 50);
     }
   };
 
@@ -81,10 +76,6 @@ const BuildBundle = () => {
     const currentIndex = steps.indexOf(currentStep);
     if (currentIndex > 0) {
       setCurrentStep(steps[currentIndex - 1]);
-      // Smooth scroll to top with a slight delay to prevent vibration
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 50);
     }
   };
 
