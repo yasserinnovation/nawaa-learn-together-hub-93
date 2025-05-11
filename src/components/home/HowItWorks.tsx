@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const HowItWorks = () => {
   const steps = [
@@ -7,19 +8,19 @@ const HowItWorks = () => {
       number: "01",
       title: "Choose Your Components",
       description: "Select trainers, spaces, tools, courses, and set your audience preferences.",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop",
     },
     {
       number: "02",
       title: "Preview Your Bundle",
       description: "Review your selections and get AI recommendations to optimize your learning package.",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=800&auto=format&fit=crop",
     },
     {
       number: "03",
       title: "Book & Learn",
       description: "Confirm your bundle, make payment, and start your hands-on learning journey.",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop",
     },
   ];
 
@@ -50,8 +51,12 @@ const HowItWorks = () => {
                     </div>
                     <h3 className="mt-6 text-xl font-semibold text-gray-900">{step.title}</h3>
                     <p className="mt-2 text-base text-gray-500 text-center">{step.description}</p>
-                    <div className="mt-8 h-48 w-full bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                      <span className="text-gray-400 text-sm">Step illustration</span>
+                    <div className="mt-8 h-48 w-full bg-gray-100 rounded-lg overflow-hidden">
+                      <img 
+                        src={step.image} 
+                        alt={`Step ${step.number}: ${step.title}`}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 </div>
@@ -60,8 +65,8 @@ const HowItWorks = () => {
           </div>
 
           <div className="mt-16 flex justify-center">
-            <Button className="px-8 py-6 text-lg">
-              Start Building Your Bundle
+            <Button className="px-8 py-6 text-lg" asChild>
+              <Link to="/build-bundle">Start Building Your Bundle</Link>
             </Button>
           </div>
         </div>
