@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +27,7 @@ import { z } from "zod";
 import { MapPin, Upload, Info } from "lucide-react";
 import { SpaceFormData } from "@/pages/ShareYourSpace";
 
+// Define the schema with the same types as SpaceFormData
 const formSchema = z.object({
   name: z.string().min(3, {
     message: "Space name must be at least 3 characters.",
@@ -121,11 +123,27 @@ const SpaceForm = ({ initialData = {}, onSubmit }: SpaceFormProps) => {
   ];
 
   const handleSubmit = (values: FormSchemaType) => {
+    // Create a complete data object with all required properties
+    // This ensures all required properties from SpaceFormData are present
     const completeData: SpaceFormData = {
-      ...values,
-      coordinates,
-      images,
+      name: values.name,
+      type: values.type, 
+      address: values.address,
+      city: values.city,
+      coordinates: coordinates,
+      capacity: values.capacity,
+      days: values.days,
+      hours: values.hours,
+      rentalType: values.rentalType,
+      pricePerHour: values.pricePerHour || 0, // Provide default for optional fields
+      images: images,
+      equipment: values.equipment || [],
+      safetyNotes: values.safetyNotes || "",
+      hostName: values.hostName,
+      hostBio: values.hostBio || "",
+      bankDetails: values.bankDetails || "",
     };
+    
     onSubmit(completeData);
   };
 
