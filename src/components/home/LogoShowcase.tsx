@@ -1,5 +1,19 @@
 
+import { useState, useEffect } from "react";
+
 const LogoShowcase = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Check if the image loads correctly
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    console.log("Logo image loaded successfully");
+  };
+
+  const handleImageError = () => {
+    console.error("Failed to load the logo image");
+  };
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -9,10 +23,17 @@ const LogoShowcase = () => {
           </h2>
           
           <div className="rounded-lg overflow-hidden shadow-lg max-w-4xl mx-auto">
+            {!imageLoaded && (
+              <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
+                <p className="text-gray-500">Loading logo...</p>
+              </div>
+            )}
             <img 
               src="/lovable-uploads/b0de8c1d-16f7-4476-88a5-c7f7f54292cf.png" 
-              alt="Children learning with Nawaa's spiral hexagonal technology logo" 
-              className="w-full h-auto"
+              alt="Nawaa logo - hexagonal spiral design" 
+              className={`w-full h-auto ${!imageLoaded ? 'hidden' : ''}`}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
             />
           </div>
           

@@ -13,8 +13,13 @@ const Navbar = () => {
   return (
     <header className="border-b bg-white sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="font-bold text-xl">
-          Nawaa
+        <Link to="/" className="flex items-center gap-2">
+          <img 
+            src="/lovable-uploads/b0de8c1d-16f7-4476-88a5-c7f7f54292cf.png" 
+            alt="Nawaa Logo"
+            className="h-10 w-auto"
+          />
+          <span className="font-bold text-xl">Nawaa</span>
         </Link>
 
         {/* Mobile menu button */}
