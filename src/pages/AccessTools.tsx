@@ -3,6 +3,7 @@ import Layout from "@/components/layout/Layout";
 import ToolsHero from "@/components/tools/ToolsHero";
 import ToolsList from "@/components/tools/ToolsList";
 import ToolsFilters from "@/components/tools/ToolsFilters";
+import ContributorCTA from "@/components/tools/ContributorCTA";
 import { useState } from "react";
 import { ToolFilter } from "@/types/tool";
 
@@ -29,6 +30,7 @@ const AccessTools = () => {
             <ToolsFilters filters={filters} onFilterChange={handleFilterChange} />
           </div>
           <div className="lg:w-2/3">
+            <ContributorCTA />
             <ToolsList filters={filters} />
           </div>
         </div>

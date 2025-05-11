@@ -6,6 +6,8 @@ import AddToolForm from "@/components/tools/AddToolForm";
 import AddToolSidebar from "@/components/tools/AddToolSidebar";
 import { Tool } from "@/types/tool";
 import { toast } from "sonner";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const AddTool = () => {
   const navigate = useNavigate();
@@ -14,7 +16,8 @@ const AddTool = () => {
     condition: "new",
     availability: "sale",
     tags: [],
-    photos: []
+    photos: [],
+    compatibleCourses: []
   });
   
   const handleStepChange = (step: number) => {
@@ -37,6 +40,14 @@ const AddTool = () => {
     <Layout>
       <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 py-8">
         <div className="container mx-auto px-4">
+          <Button 
+            variant="ghost" 
+            className="mb-4 flex items-center gap-2"
+            onClick={() => navigate('/access-tools')}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to Tools</span>
+          </Button>
           <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">Add Your Tool</h1>
           <p className="text-gray-700 text-center mb-4">
             Share your tech learning tools with the community for rent, sale, or free sharing
