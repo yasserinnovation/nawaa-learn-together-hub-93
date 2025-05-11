@@ -13,6 +13,7 @@ import AccessTools from "./pages/AccessTools";
 import BuildBundle from "./pages/BuildBundle";
 import FindTrainers from "./pages/FindTrainers";
 import TrainerProfile from "./pages/TrainerProfile";
+import ShareYourSpace from "./pages/ShareYourSpace";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/build-bundle" element={<BuildBundle />} />
           <Route path="/find-trainers" element={<FindTrainers />} />
           <Route path="/trainers/:id" element={<TrainerProfile />} />
+          <Route path="/share-your-space" element={<ShareYourSpace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

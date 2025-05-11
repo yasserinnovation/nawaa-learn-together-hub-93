@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -25,6 +25,14 @@ const Hero = () => {
               <Button size="lg" variant="outline" asChild>
                 <Link to="/discover-spaces">
                   Explore Spaces
+                </Link>
+              </Button>
+            </div>
+            <div className="mt-6">
+              <Button variant="link" className="text-yellow-600" asChild>
+                <Link to="/share-your-space" className="flex items-center gap-1">
+                  <MapPin className="h-4 w-4" />
+                  Share your own space
                 </Link>
               </Button>
             </div>
