@@ -559,8 +559,7 @@ const courses: Course[] = [
         skills: "Facilitation, adaptation"
       },
       {
-        day: 5,
- title: "Ethics & Inclusion",
+        day: 5 title: "Ethics & Inclusion",
         hours: 4,
         activities: "Equity in STEM, teaching with empathy, cultural context awareness",
         skills: "Educational ethics, empathy"
@@ -956,6 +955,52 @@ const courses: Course[] = [
         hours: 3,
         activities: "Display & present favorite creations",
         skills: "Presentation, reflection"
+      }
+    ]
+  },
+  {
+    id: 26,
+    title: "Talk to a Robot! – Create Stories, Jokes & Games with AI",
+    icon: MessageSquare,
+    ageGroup: "10–13",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 1",
+    maxGroupSize: 15,
+    totalDuration: "12 hours (4 sessions × 3 hours)",
+    project: "Create interactive stories, jokes, riddles, and choose-your-own-adventure games using AI",
+    stemFocus: "Artificial intelligence, computational thinking, language processing, creative writing",
+    lifeSkills: "Communication, creativity, storytelling, presentation skills",
+    outcomes: "Learn how to \"talk\" to AI using prompts and questions. Create short stories, poems, and fun characters. Design interactive stories with choices and branching paths. Use AI to generate silly jokes, riddles, and quiz questions. Present their work and get feedback in a group.",
+    description: "This course brings language to life! Kids will chat with AI to invent stories, make up jokes, write riddles, and even build choose-your-own-adventure games. It's a playful path into writing and creativity using smart tools that talk back.",
+    days: [
+      {
+        day: 1,
+        title: "Hello AI Writer!",
+        hours: 3,
+        activities: "Intro to chatting with AI, poems, fun facts",
+        skills: "AI conversation, prompt writing"
+      },
+      {
+        day: 2,
+        title: "Joke & Riddle Lab",
+        hours: 3,
+        activities: "Write original jokes, riddles, and mini quizzes",
+        skills: "Humor, creative writing"
+      },
+      {
+        day: 3,
+        title: "Build a Story Game",
+        hours: 3,
+        activities: "Plan branching stories and use AI to help write",
+        skills: "Narrative design, decision trees"
+      },
+      {
+        day: 4,
+        title: "Storytelling Stage",
+        hours: 3,
+        activities: "Share creations, peer feedback, celebration",
+        skills: "Presentation, peer feedback"
       }
     ]
   }
