@@ -116,6 +116,59 @@ const courses: Course[] = [
     ]
   },
   {
+    id: 20,
+    title: "Drone Challenge! – Code, Race & Rescue",
+    icon: Gamepad2,
+    ageGroup: "11–14",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 2",
+    maxGroupSize: 12,
+    totalDuration: "15 hours (5 sessions × 3 hours)",
+    project: "Design and fly complex drone missions using block-based programming",
+    stemFocus: "Advanced coding, spatial navigation, mission planning, aerodynamics",
+    lifeSkills: "Team collaboration, problem-solving under pressure, creative thinking, planning",
+    outcomes: "Control drones using advanced block coding (loops, conditionals). Design and fly complex missions (e.g., rescue, delivery). Understand drone roles in industries (agriculture, delivery, safety). Work in teams to solve flight-based challenges. Begin exploring sensors and camera use (intro only).",
+    description: "This intermediate-level course ramps up drone skills with exciting missions: coding obstacle runs, simulating rescue operations, and creating flight plans using block-based programming. Students will explore how drones are used in real-world scenarios like delivery, mapping, and disaster response.",
+    days: [
+      {
+        day: 1,
+        title: "Fly the Maze!",
+        hours: 3,
+        activities: "Practice loops, turns, and hovering through obstacles",
+        skills: "Advanced flight control, coding concepts"
+      },
+      {
+        day: 2,
+        title: "Program a Delivery Route",
+        hours: 3,
+        activities: "Map a coded route to deliver a small object",
+        skills: "Sequential programming, spatial planning"
+      },
+      {
+        day: 3,
+        title: "Find & Help the Lost Hiker!",
+        hours: 3,
+        activities: "Code a search pattern, \"drop\" aid package",
+        skills: "Search algorithms, precision flying"
+      },
+      {
+        day: 4,
+        title: "Make Your Own Mission",
+        hours: 3,
+        activities: "Design & test an original drone mission",
+        skills: "Creative problem-solving, mission design"
+      },
+      {
+        day: 5,
+        title: "Fly-Off and Award Ceremony",
+        hours: 3,
+        activities: "Teams compete in speed, accuracy & mission design",
+        skills: "Performance under pressure, teamwork"
+      }
+    ]
+  },
+  {
     id: 16,
     title: "Meet Mr. AI! – Discover the Smart Side of Tech",
     icon: Brain,
