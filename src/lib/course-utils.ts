@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare, FileText } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -147,7 +147,7 @@ const courses: Course[] = [
       },
       {
         day: 3,
- title: "Find & Help the Lost Hiker!",
+        title: "Find & Help the Lost Hiker!",
         hours: 3,
         activities: "Code a search pattern, \"drop\" aid package",
         skills: "Search algorithms, precision flying"
@@ -850,6 +850,66 @@ const courses: Course[] = [
         hours: 3,
         activities: "Discuss limits, present portfolios to peers",
         skills: "Ethics, presentation, peer feedback"
+      }
+    ]
+  },
+  {
+    id: 24,
+    title: "AI Story Studio! – Build a World with Text, Art & Sound",
+    icon: FileText,
+    ageGroup: "13–16",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 3",
+    maxGroupSize: 10,
+    totalDuration: "18 hours (6 sessions × 3 hours)",
+    project: "Create a multimedia story using AI-generated text, images, and audio",
+    stemFocus: "AI integration, digital storytelling, media production, creative technology",
+    lifeSkills: "Project management, creative direction, narrative design, presentation skills",
+    outcomes: "Design and script an original AI-generated story, documentary, or explainer. Use multiple AI tools to generate visual, textual, and audio elements. Build a multimedia story (video, slideshow, podcast, or animated comic). Edit and polish AI outputs into a professional final product. Present their work as part of a public or classroom exhibition.",
+    description: "This advanced course transforms students into creative directors of their own AI-powered worlds. They will use generative tools to script, illustrate, narrate, and even animate mini-stories or documentaries. The focus is on combining different media types (text, image, audio) into cohesive digital productions.",
+    days: [
+      {
+        day: 1,
+        title: "Build Your World!",
+        hours: 3,
+        activities: "Plan plot, characters, scenes with AI assistance",
+        skills: "Story engineering, world-building"
+      },
+      {
+        day: 2,
+        title: "Draw My Imagination!",
+        hours: 3,
+        activities: "Generate and refine visual scenes and characters",
+        skills: "Visual prompt engineering, image curation"
+      },
+      {
+        day: 3,
+        title: "Make It Speak!",
+        hours: 3,
+        activities: "Create AI voice narration or sound effects",
+        skills: "Voice direction, audio production"
+      },
+      {
+        day: 4,
+        title: "Now Bring It to Life!",
+        hours: 3,
+        activities: "Combine elements into video or animated story",
+        skills: "Animation, multimedia assembly"
+      },
+      {
+        day: 5,
+        title: "Sound Good? Look Right?",
+        hours: 3,
+        activities: "Edit, refine, sync narration, visuals, music",
+        skills: "Editing, quality control"
+      },
+      {
+        day: 6,
+        title: "My AI Show Launch!",
+        hours: 3,
+        activities: "Present projects, Q&A, feedback & digital certificates",
+        skills: "Presentation, receiving feedback"
       }
     ]
   }
