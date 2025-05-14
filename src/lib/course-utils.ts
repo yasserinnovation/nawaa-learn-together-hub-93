@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -186,6 +186,59 @@ const courses: Course[] = [
         hours: 3,
         activities: "Present solutions to a panel (parents, mentors, investors)",
         skills: "Public speaking, feedback handling"
+      }
+    ]
+  },
+  {
+    id: 14,
+    title: "Techpreneurs Lab – From Prototype to Product",
+    icon: Briefcase,
+    ageGroup: "15–18",
+    duration: "4 hours",
+    category: "technology",
+    level: "Level 4",
+    maxGroupSize: 10,
+    totalDuration: "20 hours (5 sessions of 4 hours each)",
+    project: "Refine an existing tech prototype or develop a new solution for market readiness",
+    stemFocus: "Digital fabrication, PCB design, 3D printing, product development",
+    lifeSkills: "Entrepreneurship, business modeling, market analysis, investor relations",
+    outcomes: "Refine and scale tech prototypes for real-world application. Conduct competitive and market analysis. Develop a business model and go-to-market strategy. Master digital fabrication (3D printing, laser cutting, PCB design). Build investor-ready pitch decks and product demos.",
+    description: "This capstone-level course blends deep tech innovation with entrepreneurship. Students refine an existing tech prototype or develop a new solution, conduct market research, design for manufacturability, and prepare full product presentations. The course ends with a demo day for investors, community leaders, and tech incubators.",
+    days: [
+      {
+        day: 1,
+        title: "Product Thinking",
+        hours: 4,
+        activities: "Analyze real tech products, user needs, lifecycle and roadmap planning",
+        skills: "UX thinking, research, planning"
+      },
+      {
+        day: 2,
+        title: "Tech to Market",
+        hours: 4,
+        activities: "Market research, SWOT, business model canvas, prototyping for scale",
+        skills: "Entrepreneurship, design thinking"
+      },
+      {
+        day: 3,
+        title: "Fabrication & Branding",
+        hours: 4,
+        activities: "PCB design, 3D print housing, visual identity, packaging",
+        skills: "Digital fabrication, branding"
+      },
+      {
+        day: 4,
+        title: "Startup Simulation",
+        hours: 4,
+        activities: "Pitch deck creation, pricing, marketing, legal/IP basics",
+        skills: "Startup skills, team roles"
+      },
+      {
+        day: 5,
+        title: "Demo & Funding Day",
+        hours: 4,
+        activities: "Present to community incubators, potential investors, online showcase",
+        skills: "Public speaking, investor relations"
       }
     ]
   },
