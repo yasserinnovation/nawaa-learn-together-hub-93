@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -751,6 +751,52 @@ const courses: Course[] = [
         hours: 3,
         activities: "Present data/maps, discuss findings, award medals",
         skills: "Data presentation, critical analysis"
+      }
+    ]
+  },
+  {
+    id: 22,
+    title: "Create with AI! – Your First Steps into Generative Magic",
+    icon: Image,
+    ageGroup: "11–14",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 1",
+    maxGroupSize: 15,
+    totalDuration: "12 hours (4 sessions × 3 hours)",
+    project: "Create images, stories, music, and presentations using AI tools",
+    stemFocus: "Artificial intelligence, digital creativity, computational thinking, multimedia production",
+    lifeSkills: "Creative expression, critical thinking, digital literacy, responsible technology use",
+    outcomes: "Understand what Generative AI is and how it creates new content. Use text prompts to generate images, stories, and art. Create their own characters, songs, or comics using AI tools. Discuss the pros, cons, and responsible use of AI creativity. Present a creative mini project made with AI.",
+    description: "This course unlocks the fun side of Generative AI — letting students create images, music, stories, and videos with the help of smart machines. Learners will experiment with tools like DALL·E, ChatGPT, and AI music generators, all while understanding the basics of how these tools \"think.\"",
+    days: [
+      {
+        day: 1,
+        title: "Can a Robot Draw?",
+        hours: 3,
+        activities: "Intro games, AI-generated image play",
+        skills: "Digital creativity, prompt writing"
+      },
+      {
+        day: 2,
+        title: "Write Me a Wild Tale!",
+        hours: 3,
+        activities: "Create characters, plot twists using ChatGPT",
+        skills: "Storytelling, AI interaction"
+      },
+      {
+        day: 3,
+        title: "Can AI Compose?",
+        hours: 3,
+        activities: "Make a theme song or game music with AI",
+        skills: "Audio production, mood design"
+      },
+      {
+        day: 4,
+        title: "Present Your Creation",
+        hours: 3,
+        activities: "Combine story + image + sound into final project",
+        skills: "Presentation, creative integration"
       }
     ]
   },
