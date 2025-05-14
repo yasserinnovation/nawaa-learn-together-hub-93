@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -239,6 +239,66 @@ const courses: Course[] = [
         hours: 4,
         activities: "Present to community incubators, potential investors, online showcase",
         skills: "Public speaking, investor relations"
+      }
+    ]
+  },
+  {
+    id: 15,
+    title: "Tech Ambassadors – Leading & Teaching Innovation",
+    icon: GraduationCap,
+    ageGroup: "16–19",
+    duration: "4 hours",
+    category: "technology",
+    level: "Level 5",
+    maxGroupSize: 8,
+    totalDuration: "24 hours (6 sessions of 4 hours)",
+    project: "Design and lead tech workshops for younger students",
+    stemFocus: "STEM pedagogy, educational design, leadership development",
+    lifeSkills: "Teaching, facilitation, mentoring, public speaking, ethical leadership",
+    outcomes: "Master the pedagogy of teaching STEM and tech to young learners. Facilitate hands-on learning with empathy and inclusivity. Lead small tech workshops, events, or hackathons. Understand educational ethics, motivation techniques, and team dynamics. Develop and evaluate educational content and toolkits.",
+    description: "This elite-level training transforms top learners into youth tech leaders and community changemakers. Participants develop advanced teaching, leadership, and facilitation skills, design learning experiences for younger students, and run their own mini workshops. It includes ethics, inclusive tech education, and mentoring practices.",
+    days: [
+      {
+        day: 1,
+        title: "Becoming a Leader",
+        hours: 4,
+        activities: "Identifying strengths, leadership styles, mentoring stories",
+        skills: "Self-awareness, role modeling"
+      },
+      {
+        day: 2,
+        title: "Tech Teaching Toolkit",
+        hours: 4,
+        activities: "How to teach tech to different age groups, breaking down complexity",
+        skills: "Pedagogy, communication"
+      },
+      {
+        day: 3,
+        title: "Educational Design",
+        hours: 4,
+        activities: "Design micro-lessons, activities, and inclusive learning kits",
+        skills: "Instructional design"
+      },
+      {
+        day: 4,
+        title: "Practice Teaching",
+        hours: 4,
+        activities: "Conduct a mock workshop, peer feedback, classroom management",
+        skills: "Facilitation, adaptation"
+      },
+      {
+        day: 5,
+        title: "Ethics & Inclusion",
+        hours: 4,
+        activities: "Equity in STEM, teaching with empathy, cultural context awareness",
+        skills: "Educational ethics, empathy"
+      },
+      {
+        day: 6,
+        title: "Final Showcase",
+        hours: 4,
+        activities: "Run a real session with younger students; reflection and certification",
+        skills: "Coaching, evaluation"
       }
     ]
   },
