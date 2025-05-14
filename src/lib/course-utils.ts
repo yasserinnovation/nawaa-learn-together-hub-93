@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare, FileText, Palette } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare, FileText, Palette, Wifi } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -329,7 +329,7 @@ const courses: Course[] = [
         day: 5,
         title: "Make It Smarter, Safer",
         hours: 3,
- activities: "Debug input/output, improve accuracy",
+        activities: "Debug input/output, improve accuracy",
         skills: "Troubleshooting, optimization"
       },
       {
@@ -387,7 +387,7 @@ const courses: Course[] = [
       },
       {
         day: 5,
-        title: "Test & Iterate",
+ title: "Test & Iterate",
         hours: 1,
         activities: "Diagnose issues, peer review, improve designs",
         skills: "Problem-solving, iteration"
@@ -1002,6 +1002,52 @@ const courses: Course[] = [
         hours: 3,
         activities: "Share creations, peer feedback, celebration",
         skills: "Presentation, peer feedback"
+      }
+    ]
+  },
+  {
+    id: 27,
+    title: "Hack Your Home! – Intro to Smart Devices & IoT",
+    icon: Wifi,
+    ageGroup: "11–14",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 1",
+    maxGroupSize: 12,
+    totalDuration: "12 hours (4 sessions × 3 hours)",
+    project: "Build a mini smart room with automated features using simple electronics",
+    stemFocus: "Internet of Things (IoT), electronics, sensor technology, basic programming",
+    lifeSkills: "Problem-solving, creative thinking, technical communication, presentation skills",
+    outcomes: "Understand what IoT is and how smart devices work. Learn about sensors (motion, light, temperature) and actuators. Program simple smart actions (like lights that react to movement). Build a mini \"smart room\" using plug-and-play electronics. Present a working demo of their automated idea.",
+    description: "This course introduces students to the Internet of Things (IoT) — the tech behind smart homes, smart lights, and automated gadgets. Learners will explore how sensors, apps, and basic coding can make devices smarter and more helpful, and they'll create simple home automation projects.",
+    days: [
+      {
+        day: 1,
+        title: "Welcome to Smart Tech",
+        hours: 3,
+        activities: "Intro to IoT, explore smart home examples",
+        skills: "IoT concepts, systems thinking"
+      },
+      {
+        day: 2,
+        title: "Sensors & Signals",
+        hours: 3,
+        activities: "Build simple circuits with motion-triggered LEDs",
+        skills: "Electronics basics, circuit building"
+      },
+      {
+        day: 3,
+        title: "Smart Room Project",
+        hours: 3,
+        activities: "Plan and build a smart room corner (e.g., auto-fan)",
+        skills: "Project design, implementation"
+      },
+      {
+        day: 4,
+        title: "Demo & Reflect",
+        hours: 3,
+        activities: "Present smart room idea, discuss real-world use",
+        skills: "Presentation, ethical thinking"
       }
     ]
   }
