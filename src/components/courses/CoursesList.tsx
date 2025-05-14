@@ -7,8 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { getAllCourses } from "@/lib/course-utils";
 
-const CoursesList = () => {
-  const [activeTab, setActiveTab] = useState("all");
+interface CoursesListProps {
+  categoryFilter?: string;
+}
+
+const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
+  const [activeTab, setActiveTab] = useState(categoryFilter);
   
   const courses = getAllCourses();
 
@@ -22,16 +26,18 @@ const CoursesList = () => {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">Our Course Catalog</h2>
           
-          <div className="mb-8">
-            <Tabs defaultValue="all" onValueChange={setActiveTab}>
-              <TabsList className="flex justify-center mb-6">
-                <TabsTrigger value="all">All Courses</TabsTrigger>
-                <TabsTrigger value="technology">Technology</TabsTrigger>
-                <TabsTrigger value="science">Science</TabsTrigger>
-                <TabsTrigger value="math">Mathematics</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
+          {!categoryFilter && (
+            <div className="mb-8">
+              <Tabs defaultValue="all" onValueChange={setActiveTab}>
+                <TabsList className="flex justify-center mb-6">
+                  <TabsTrigger value="all">All Courses</TabsTrigger>
+                  <TabsTrigger value="technology">Technology</TabsTrigger>
+                  <TabsTrigger value="science">Science</TabsTrigger>
+                  <TabsTrigger value="math">Mathematics</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (

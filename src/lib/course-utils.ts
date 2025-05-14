@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -147,7 +147,7 @@ const courses: Course[] = [
       },
       {
         day: 3,
-        title: "Find & Help the Lost Hiker!",
+ title: "Find & Help the Lost Hiker!",
         hours: 3,
         activities: "Code a search pattern, \"drop\" aid package",
         skills: "Search algorithms, precision flying"
@@ -800,6 +800,59 @@ const courses: Course[] = [
       }
     ]
   },
+  {
+    id: 23,
+    title: "Prompt Masters! – Shape AI into Your Creative Tool",
+    icon: MessageSquare,
+    ageGroup: "12–15",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 2",
+    maxGroupSize: 12,
+    totalDuration: "15 hours (5 sessions × 3 hours)",
+    project: "Create multimedia stories and digital posters with better AI prompts",
+    stemFocus: "Artificial intelligence, prompt engineering, digital storytelling, multimedia creation",
+    lifeSkills: "Creative thinking, digital literacy, critical evaluation, ethical awareness",
+    outcomes: "Write effective prompts to get more accurate and creative AI outputs. Mix text, image, and audio AI tools to build multimedia stories. Learn how to revise and improve AI-generated content. Explore where AI content comes from and why that matters. Build a mini portfolio of AI-generated creative work.",
+    description: "In this hands-on course, students level up their creativity by learning how to craft better prompts for smarter results. They'll experiment with image styles, story twists, voice and tone in writing, and even generate simple comics, music videos, and digital posters — all guided by Generative AI.",
+    days: [
+      {
+        day: 1,
+        title: "Say It Right to Make It Bright!",
+        hours: 3,
+        activities: "Experiment with prompt styles and tweaks",
+        skills: "Prompt engineering, creative thinking"
+      },
+      {
+        day: 2,
+        title: "Make It Smarter!",
+        hours: 3,
+        activities: "Compare AI drafts, improve them, rewrite endings",
+        skills: "Revision, creative writing"
+      },
+      {
+        day: 3,
+        title: "My AI Adventure!",
+        hours: 3,
+        activities: "Generate scenes, write dialogue, design layout",
+        skills: "Comic creation, storytelling"
+      },
+      {
+        day: 4,
+        title: "Soundtrack for My Story",
+        hours: 3,
+        activities: "Match story scenes with mood music",
+        skills: "Audio-visual pairing, mood design"
+      },
+      {
+        day: 5,
+        title: "What Should AI Create?",
+        hours: 3,
+        activities: "Discuss limits, present portfolios to peers",
+        skills: "Ethics, presentation, peer feedback"
+      }
+    ]
+  }
 ];
 
 export const getAllCourses = (): Course[] => {
