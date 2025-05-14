@@ -1,4 +1,3 @@
-
 import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer } from "lucide-react";
 import { Course } from "@/types/course";
 
@@ -180,6 +179,66 @@ const courses: Course[] = [
         hours: 3,
         activities: "Demo day: Each project presents and reflects",
         skills: "Presentation, peer feedback"
+      }
+    ]
+  },
+  {
+    id: 18,
+    title: "AI in the Wild! – Bring Smart Ideas to Life",
+    icon: Cpu,
+    ageGroup: "12–15",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 3",
+    maxGroupSize: 12,
+    totalDuration: "18 hours (6 sessions × 3 hours)",
+    project: "Connect AI models with real-world outputs using hardware like micro:bit or Arduino",
+    stemFocus: "AI integration, electronics, physical computing, interactive design",
+    lifeSkills: "Problem-solving, engineering design, troubleshooting, presentation skills",
+    outcomes: "Connect AI inputs (voice, image, motion) to real devices. Use Scratch or Python to control outputs (LEDs, motors, sounds). Design and build a working AI-powered invention. Understand basic hardware components and how AI can interact with them. Explore how AI affects real-world problem solving and safety.",
+    description: "This advanced hands-on course bridges digital and physical worlds. Students connect AI models with real-world outputs using simple hardware (micro:bit, Arduino, or Makey Makey) and explore how AI powers robots, smart devices, and interactive installations. They'll build a responsive prototype like an \"AI guard dog\" or \"smart plant helper.\"",
+    days: [
+      {
+        day: 1,
+        title: "Can AI Move Things?",
+        hours: 3,
+        activities: "Intro to hardware and connecting AI outputs",
+        skills: "Circuit basics, physical computing"
+      },
+      {
+        day: 2,
+        title: "Make It Smarter!",
+        hours: 3,
+        activities: "Train refined models (voice, image, pose)",
+        skills: "Model training, data collection"
+      },
+      {
+        day: 3,
+        title: "What Will Your AI Do?",
+        hours: 3,
+        activities: "Design idea: security bot, plant whisperer",
+        skills: "Engineering design, planning"
+      },
+      {
+        day: 4,
+        title: "Wires + Code = Magic",
+        hours: 3,
+        activities: "Assemble and connect model to physical output",
+        skills: "Hardware integration, coding"
+      },
+      {
+        day: 5,
+        title: "Make It Smarter, Safer",
+        hours: 3,
+        activities: "Debug input/output, improve accuracy",
+        skills: "Troubleshooting, optimization"
+      },
+      {
+        day: 6,
+        title: "Look What I Made!",
+        hours: 3,
+        activities: "Present AI creations with working demos",
+        skills: "Presentation, documentation"
       }
     ]
   },
