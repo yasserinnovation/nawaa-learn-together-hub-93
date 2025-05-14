@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -66,6 +66,59 @@ const courses: Course[] = [
         hours: 3,
         activities: "Present to peers and parents; simulate investor pitch",
         skills: "Leadership, reflection"
+      }
+    ]
+  },
+  {
+    id: 16,
+    title: "Meet Mr. AI! – Discover the Smart Side of Tech",
+    icon: Brain,
+    ageGroup: "10–13",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 1",
+    maxGroupSize: 15,
+    totalDuration: "15 hours (5 sessions × 3 hours)",
+    project: "Train AI models and build an interactive AI project using tools like Teachable Machine and Scratch",
+    stemFocus: "Artificial intelligence, machine learning, computer science, programming",
+    lifeSkills: "Digital creativity, critical thinking, problem-solving, presentation skills",
+    outcomes: "Grasp AI basics through storytelling and games. Explore real-world AI uses (YouTube, Siri, smart games). Train basic models (image or sound recognition). Build a project using AI-enhanced code in Scratch. Share ideas confidently in a friendly tech fair.",
+    description: "A hands-on, story-driven intro to Artificial Intelligence where kids learn how AI sees, hears, and learns — and then train their own smart assistant. Each child creates a playful AI project using tools like Teachable Machine and Scratch, helping them build logic and digital creativity.",
+    days: [
+      {
+        day: 1,
+        title: "Can Computers Think?",
+        hours: 3,
+        activities: "Icebreakers, intro games, roleplay AI",
+        skills: "AI literacy, critical thinking"
+      },
+      {
+        day: 2,
+        title: "Who Taught YouTube?",
+        hours: 3,
+        activities: "Discover AI in daily life, map ideas",
+        skills: "Analysis, pattern recognition"
+      },
+      {
+        day: 3,
+        title: "Catch the Cat or Clap!",
+        hours: 3,
+        activities: "Train a model with images/sounds",
+        skills: "Data collection, model training"
+      },
+      {
+        day: 4,
+        title: "Make AI Talk in Scratch!",
+        hours: 3,
+        activities: "Build a game/story with AI input",
+        skills: "Programming, creativity"
+      },
+      {
+        day: 5,
+        title: "Show Off Mr. AI!",
+        hours: 3,
+        activities: "Present project, reflect, get feedback",
+        skills: "Presentation, communication"
       }
     ]
   },
@@ -288,7 +341,7 @@ const courses: Course[] = [
       },
       {
         day: 5,
-        title: "Ethics & Inclusion",
+ title: "Ethics & Inclusion",
         hours: 4,
         activities: "Equity in STEM, teaching with empathy, cultural context awareness",
         skills: "Educational ethics, empathy"
