@@ -1,3 +1,4 @@
+
 import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer } from "lucide-react";
 import { Course } from "@/types/course";
 
@@ -119,6 +120,66 @@ const courses: Course[] = [
         hours: 3,
         activities: "Present project, reflect, get feedback",
         skills: "Presentation, communication"
+      }
+    ]
+  },
+  {
+    id: 17,
+    title: "Train Your AI Pet! – Make Smart Projects That Learn",
+    icon: Computer,
+    ageGroup: "11–14",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 2",
+    maxGroupSize: 15,
+    totalDuration: "18 hours (6 sessions × 3 hours)",
+    project: "Train a digital AI pet that responds to voice, poses, or objects using machine learning models",
+    stemFocus: "Machine learning, conditional logic, interactive design, computational thinking",
+    lifeSkills: "Design thinking, problem-solving, creativity, ethical awareness",
+    outcomes: "Deepen understanding of AI training and decision-making. Build more refined models with multiple labels and better accuracy. Apply conditional logic to AI inputs in creative projects. Develop and present interactive digital pets or characters that \"think.\" Begin exploring ethical thinking in how AI behaves and learns.",
+    description: "In this playful intermediate course, kids step up their AI skills by training their own \"AI pet\" — a custom digital friend that responds to voice, poses, or objects. They'll explore machine learning, logic building, and interactive design using Teachable Machine, Scratch, and optional tools like Machine Learning for Kids.",
+    days: [
+      {
+        day: 1,
+        title: "How AI Makes Decisions",
+        hours: 3,
+        activities: "Decision trees, input/output, logic games",
+        skills: "Computational thinking, logic"
+      },
+      {
+        day: 2,
+        title: "Train It Better!",
+        hours: 3,
+        activities: "Train multi-class models (3+ labels)",
+        skills: "Data collection, model training"
+      },
+      {
+        day: 3,
+        title: "Design a Smart Friend",
+        hours: 3,
+        activities: "Plan behavior: bark, wave, cheer, etc.",
+        skills: "Design planning, creativity"
+      },
+      {
+        day: 4,
+        title: "If... Then... AI",
+        hours: 3,
+        activities: "Link AI inputs to animated actions or sound effects",
+        skills: "Programming, integration"
+      },
+      {
+        day: 5,
+        title: "What If It Fails?",
+        hours: 3,
+        activities: "Error handling, re-training, smarter responses",
+        skills: "Debugging, optimization"
+      },
+      {
+        day: 6,
+        title: "My AI Pet's Got Talent!",
+        hours: 3,
+        activities: "Demo day: Each project presents and reflects",
+        skills: "Presentation, peer feedback"
       }
     ]
   },
@@ -484,6 +545,3 @@ export const getAllCourses = (): Course[] => {
 export const getCourseById = (id: number): Course | undefined => {
   return courses.find(course => course.id === id);
 };
-
-// Import missing icon
-import { CircuitBoard } from "lucide-react";
