@@ -70,6 +70,52 @@ const courses: Course[] = [
     ]
   },
   {
+    id: 19,
+    title: "Fly It Yourself! – First Steps with Drones",
+    icon: Gamepad2,
+    ageGroup: "10–13",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 1",
+    maxGroupSize: 12,
+    totalDuration: "12 hours (4 sessions × 3 hours)",
+    project: "Learn basic drone operations and complete a flight mission using simple coding",
+    stemFocus: "Aerodynamics, robotics, coding, spatial orientation",
+    lifeSkills: "Safety awareness, teamwork, problem-solving, hand-eye coordination",
+    outcomes: "Understand how drones work: lift, thrust, yaw, pitch, and roll. Safely operate a beginner drone indoors. Identify drone parts and their functions. Use a simple coding tool to control a drone's flight path. Complete a basic flight mission as a team.",
+    description: "This hands-on course introduces kids to the exciting world of drones through simple, safe activities. They'll learn how drones fly, what makes them stable, and how to control them using basic maneuvers and simple coding — all in a safe, supervised environment.",
+    days: [
+      {
+        day: 1,
+        title: "What Keeps It in the Air?",
+        hours: 3,
+        activities: "Explore drone parts, safety rules, flight demo",
+        skills: "Safety knowledge, mechanical understanding"
+      },
+      {
+        day: 2,
+        title: "You're the Pilot Now!",
+        hours: 3,
+        activities: "Learn takeoff, land, and hover",
+        skills: "Basic flight control, spatial awareness"
+      },
+      {
+        day: 3,
+        title: "Fly by Code!",
+        hours: 3,
+        activities: "Use blocks to create basic flight paths",
+        skills: "Visual programming, sequential thinking"
+      },
+      {
+        day: 4,
+        title: "Can You Save the Package?",
+        hours: 3,
+        activities: "Team challenge: code + fly to deliver a payload",
+        skills: "Mission planning, teamwork, problem-solving"
+      }
+    ]
+  },
+  {
     id: 16,
     title: "Meet Mr. AI! – Discover the Smart Side of Tech",
     icon: Brain,
