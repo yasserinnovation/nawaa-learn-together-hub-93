@@ -12,4 +12,17 @@ export interface Course {
   stemFocus: string;
   lifeSkills: string;
   outcomes: string;
+  level?: string;
+  maxGroupSize?: number;
+  totalDuration?: string;
+  description?: string;
+  days?: CourseDay[];
+}
+
+export interface CourseDay {
+  day: number;
+  title: string;
+  hours: number;
+  activities: string;
+  skills: string;
 }

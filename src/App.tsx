@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import DiscoverSpaces from "./pages/DiscoverSpaces";
 import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
 import AccessTools from "./pages/AccessTools";
 import BuildBundle from "./pages/BuildBundle";
 import FindTrainers from "./pages/FindTrainers";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/discover-spaces" element={<DiscoverSpaces />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:courseId" element={<CourseDetail />} />
           <Route path="/access-tools" element={<AccessTools />} />
           <Route path="/build-bundle" element={<BuildBundle />} />
           <Route path="/find-trainers" element={<FindTrainers />} />
