@@ -329,7 +329,7 @@ const courses: Course[] = [
         day: 5,
         title: "Make It Smarter, Safer",
         hours: 3,
-        activities: "Debug input/output, improve accuracy",
+ activities: "Debug input/output, improve accuracy",
         skills: "Troubleshooting, optimization"
       },
       {
@@ -559,7 +559,8 @@ const courses: Course[] = [
         skills: "Facilitation, adaptation"
       },
       {
-        day: 5 title: "Ethics & Inclusion",
+        day: 5,
+        title: "Ethics & Inclusion",
         hours: 4,
         activities: "Equity in STEM, teaching with empathy, cultural context awareness",
         skills: "Educational ethics, empathy"
