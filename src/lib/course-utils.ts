@@ -1,3 +1,4 @@
+
 import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope } from "lucide-react";
 import { Course } from "@/types/course";
 
@@ -66,6 +67,66 @@ const courses: Course[] = [
         hours: 3,
         activities: "Present to peers and parents; simulate investor pitch",
         skills: "Leadership, reflection"
+      }
+    ]
+  },
+  {
+    id: 12,
+    title: "Robo-Innovators – From Idea to Prototype",
+    icon: Bot,
+    ageGroup: "12–15",
+    duration: "2-3 hours",
+    category: "technology",
+    level: "Level 2",
+    maxGroupSize: 12,
+    totalDuration: "12 hours (flexible: 2–3 hours/day over 4–6 days)",
+    project: "Develop and prototype technological solutions to real-world problems using robotics",
+    stemFocus: "Robotics, electronics, programming, sensor integration",
+    lifeSkills: "Design thinking, problem-solving, presentation skills, teamwork",
+    outcomes: "Understand and apply the design thinking cycle (empathize, ideate, prototype, test). Build functional prototypes using EV3 components or Arduino. Learn advanced programming logic (loops, conditionals, sensor data). Use tools like the multimeter (AVO) to diagnose issues. Present and justify their inventions as social impact solutions.",
+    description: "This intermediate course focuses on innovation through robotics. Learners develop and prototype technological solutions to real-world problems using robotics kits, sensors, and programmable logic. Emphasis is placed on ideation, prototyping, and testing using a design-thinking approach.",
+    days: [
+      {
+        day: 1,
+        title: "Ideas that Matter",
+        hours: 2,
+        activities: "Brainstorm challenges, group selection, intro to design thinking",
+        skills: "Critical thinking, empathy"
+      },
+      {
+        day: 2,
+        title: "Circuit & Sensor Bootcamp",
+        hours: 3,
+        activities: "Review circuits, use sensors (color, distance, sound)",
+        skills: "Technical fluency, safety"
+      },
+      {
+        day: 3,
+        title: "Code it Smart",
+        hours: 2,
+        activities: "Advanced EV3/Arduino programming, control via mobile",
+        skills: "Programming, logical reasoning"
+      },
+      {
+        day: 4,
+        title: "Prototype Lab",
+        hours: 3,
+        activities: "Build working models: auto bin, light-sensitive curtain, smart glove",
+        skills: "Innovation, engineering"
+      },
+      {
+        day: 5,
+        title: "Test & Iterate",
+        hours: 1,
+        activities: "Diagnose issues, peer review, improve designs",
+        skills: "Problem-solving, iteration"
+      },
+      {
+        day: 6,
+        title: "Tech Talk",
+        hours: 1,
+        activities: "Final presentation: explain concept, benefits, demo prototype",
+        skills: "Pitching, storytelling"
       }
     ]
   },
