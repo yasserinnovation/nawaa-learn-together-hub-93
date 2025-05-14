@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -560,7 +560,7 @@ const courses: Course[] = [
       },
       {
         day: 5,
- title: "Ethics & Inclusion",
+        title: "Ethics & Inclusion",
         hours: 4,
         activities: "Equity in STEM, teaching with empathy, cultural context awareness",
         skills: "Educational ethics, empathy"
@@ -693,7 +693,67 @@ const courses: Course[] = [
     stemFocus: "Biology, experimentation, sensors",
     lifeSkills: "Patience, inquiry, scientific mindset",
     outcomes: "Students will learn about environmental impact and scientific testing"
-  }
+  },
+  {
+    id: 21,
+    title: "Eyes in the Sky! – Explore, Map & Measure with Drones",
+    icon: Map,
+    ageGroup: "13–16",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 3",
+    maxGroupSize: 10,
+    totalDuration: "18 hours (6 sessions × 3 hours)",
+    project: "Use drones for aerial photography, mapping, and environmental monitoring",
+    stemFocus: "Aerial imaging, data collection, GPS navigation, spatial analysis",
+    lifeSkills: "Environmental awareness, data interpretation, problem-solving, spatial reasoning",
+    outcomes: "Capture and interpret aerial images and videos. Measure real-world distances using drones. Understand how drones use sensors (camera, altimeter, compass). Explore basic GPS-based flight control. Conduct a mini drone-based research project.",
+    description: "In this advanced course, students become drone scientists and explorers. They'll learn how to use drones for aerial photography, mapping, environmental monitoring, and basic GPS navigation. Real-world missions include mapping a small area, measuring distances, and capturing visual data.",
+    days: [
+      {
+        day: 1,
+        title: "What Can You See From Up There?",
+        hours: 3,
+        activities: "Intro to aerial imaging, test photo flights",
+        skills: "Camera control, flight stability"
+      },
+      {
+        day: 2,
+        title: "How High, How Far?",
+        hours: 3,
+        activities: "Estimate height, area, and distance from the air",
+        skills: "Measurement, spatial estimation"
+      },
+      {
+        day: 3,
+        title: "Create Your Own Aerial Map",
+        hours: 3,
+        activities: "Fly in patterns, stitch photos into maps",
+        skills: "Systematic data collection, basic mapping"
+      },
+      {
+        day: 4,
+        title: "Spot the Flood or Trash Zone!",
+        hours: 3,
+        activities: "Collect data on an issue (e.g., blocked paths)",
+        skills: "Environmental analysis, documentation"
+      },
+      {
+        day: 5,
+        title: "Plan & Pitch a Drone Solution",
+        hours: 3,
+        activities: "Teams propose and prep a real-world flight mission",
+        skills: "Project planning, presentation design"
+      },
+      {
+        day: 6,
+        title: "What Did You Discover?",
+        hours: 3,
+        activities: "Present data/maps, discuss findings, award medals",
+        skills: "Data presentation, critical analysis"
+      }
+    ]
+  },
 ];
 
 export const getAllCourses = (): Course[] => {
