@@ -1,4 +1,4 @@
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare, FileText } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket, Briefcase, GraduationCap, CircuitBoard, Computer, Map, Image, MessageSquare, FileText, Palette } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -560,7 +560,7 @@ const courses: Course[] = [
       },
       {
         day: 5,
-        title: "Ethics & Inclusion",
+ title: "Ethics & Inclusion",
         hours: 4,
         activities: "Equity in STEM, teaching with empathy, cultural context awareness",
         skills: "Educational ethics, empathy"
@@ -910,6 +910,52 @@ const courses: Course[] = [
         hours: 3,
         activities: "Present projects, Q&A, feedback & digital certificates",
         skills: "Presentation, receiving feedback"
+      }
+    ]
+  },
+  {
+    id: 25,
+    title: "AI Art Lab! – Draw, Paint & Design with Smart Tools",
+    icon: Palette,
+    ageGroup: "10–13",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 1",
+    maxGroupSize: 15,
+    totalDuration: "12 hours (4 sessions × 3 hours)",
+    project: "Create digital art using AI tools and design a mini-gallery of work",
+    stemFocus: "Artificial intelligence, digital art, visual design, computational creativity",
+    lifeSkills: "Creative expression, digital literacy, design thinking, presentation skills",
+    outcomes: "Understand how AI turns text into art. Create art in different styles (cartoon, abstract, realistic). Mix their own ideas with AI outputs using creative prompts. Design a poster, card, or mini-gallery of their work. Reflect on the artist's role when using smart tools.",
+    description: "This course invites young learners into a digital art studio powered by AI. Students explore how machines can create pictures, mix styles, and even turn words into wild artworks. It's all about learning the magic of visual creativity with fun, safe tools.",
+    days: [
+      {
+        day: 1,
+        title: "Make a Flying Banana!",
+        hours: 3,
+        activities: "Intro to AI art, silly prompts",
+        skills: "AI literacy, creative thinking"
+      },
+      {
+        day: 2,
+        title: "Paint Like Picasso!",
+        hours: 3,
+        activities: "Use prompts to create art in different styles",
+        skills: "Style recognition, prompt crafting"
+      },
+      {
+        day: 3,
+        title: "Make a Poster or Card!",
+        hours: 3,
+        activities: "Turn AI art into a real design (gift, card)",
+        skills: "Design, digital editing"
+      },
+      {
+        day: 4,
+        title: "Show Your AI Masterpiece",
+        hours: 3,
+        activities: "Display & present favorite creations",
+        skills: "Presentation, reflection"
       }
     ]
   }
