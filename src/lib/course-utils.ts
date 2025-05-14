@@ -1,5 +1,4 @@
-
-import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope } from "lucide-react";
+import { Bot, Cpu, BarChart3, ShieldCheck, FlaskConical, Printer, Brain, Lightbulb, Gamepad2, Microscope, Smartphone, Rocket } from "lucide-react";
 import { Course } from "@/types/course";
 
 const courses: Course[] = [
@@ -127,6 +126,66 @@ const courses: Course[] = [
         hours: 1,
         activities: "Final presentation: explain concept, benefits, demo prototype",
         skills: "Pitching, storytelling"
+      }
+    ]
+  },
+  {
+    id: 13,
+    title: "FutureTech Founders – Smart Solutions for Real-World Challenges",
+    icon: Rocket,
+    ageGroup: "14–17",
+    duration: "3 hours",
+    category: "technology",
+    level: "Level 3",
+    maxGroupSize: 12,
+    totalDuration: "18 hours (6 sessions, 3 hours each)",
+    project: "Design and deploy smart, tech-based solutions for real-world challenges",
+    stemFocus: "Microcontrollers, IoT, mobile app integration, sensor technology",
+    lifeSkills: "Entrepreneurship, project management, presentation skills, innovation thinking",
+    outcomes: "Design and assemble complete smart systems integrating hardware and software. Use microcontrollers and multiple sensors (e.g., motion, sound, light, color). Learn basic IoT and app control (e.g., Bluetooth/WiFi modules). Build, test, and iterate a fully functional tech prototype. Deliver a persuasive investor-style pitch for their product.",
+    description: "This advanced-level program guides teens through designing and deploying smart, tech-based solutions for environmental, accessibility, or everyday life challenges. They will explore microcontrollers (Arduino), advanced sensors, mobile app integration, and IoT basics while simulating startup development—from concept to pitch.",
+    days: [
+      {
+        day: 1,
+        title: "Tech Startups & Big Ideas",
+        hours: 3,
+        activities: "Explore tech startups, identify problems worth solving, team setup",
+        skills: "Innovation thinking, team building"
+      },
+      {
+        day: 2,
+        title: "Deep Dive: Arduino & Sensors",
+        hours: 3,
+        activities: "Advanced Arduino, IoT sensors, mobile connectivity (e.g. Blynk app)",
+        skills: "Embedded systems, mobile control"
+      },
+      {
+        day: 3,
+        title: "Smart System Design",
+        hours: 3,
+        activities: "Circuit design, app integration, energy sources (solar, battery)",
+        skills: "Engineering design, IoT basics"
+      },
+      {
+        day: 4,
+        title: "Build Day",
+        hours: 3,
+        activities: "Assemble, code, and test smart devices",
+        skills: "Prototyping, troubleshooting"
+      },
+      {
+        day: 5,
+        title: "Pitch Day Prep",
+        hours: 3,
+        activities: "Develop branding, logos, financial model, investor pitch",
+        skills: "Entrepreneurship, design"
+      },
+      {
+        day: 6,
+        title: "Demo & Pitch Event",
+        hours: 3,
+        activities: "Present solutions to a panel (parents, mentors, investors)",
+        skills: "Public speaking, feedback handling"
       }
     ]
   },
