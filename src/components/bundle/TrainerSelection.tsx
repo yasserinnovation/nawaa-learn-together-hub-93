@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -24,8 +23,8 @@ interface Trainer {
 const mockTrainers: Trainer[] = [
   {
     id: "1",
-    name: "Fatima Al-Zahrani",
-    location: "Riyadh",
+    name: "Fatima El-Masry",
+    location: "Cairo",
     languages: ["Arabic", "English"],
     expertise: ["Robotics", "Electronics"],
     gender: "Female",
@@ -38,8 +37,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "2",
-    name: "Ahmed Al-Dosari",
-    location: "Jeddah",
+    name: "Ahmed Hassan",
+    location: "Alexandria",
     languages: ["Arabic", "English"],
     expertise: ["3D Printing", "Coding for Kids"],
     gender: "Male",
@@ -48,12 +47,12 @@ const mockTrainers: Trainer[] = [
     experience: 4,
     specialties: ["Game development", "Creative coding"],
     availability: ["Weekdays", "Mornings"],
-    bio: "Former software developer who now dedicates his time to teaching children coding through game development. Created several educational coding platforms used in schools across Saudi Arabia."
+    bio: "Former software developer who now dedicates his time to teaching children coding through game development. Created several educational coding platforms used in schools across Egypt."
   },
   {
     id: "3",
-    name: "Norah Alsharhan",
-    location: "Dammam",
+    name: "Noura Mahmoud",
+    location: "Luxor",
     languages: ["Arabic", "English", "French"],
     expertise: ["AI for Kids", "Electronics"],
     gender: "Female",
@@ -125,16 +124,16 @@ const TrainerSelection = ({ bundle, updateBundle }: TrainerSelectionProps) => {
                   <Label htmlFor="location-all">All Locations</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Riyadh" id="location-riyadh" />
-                  <Label htmlFor="location-riyadh">Riyadh</Label>
+                  <RadioGroupItem value="Cairo" id="location-cairo" />
+                  <Label htmlFor="location-cairo">Cairo</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Jeddah" id="location-jeddah" />
-                  <Label htmlFor="location-jeddah">Jeddah</Label>
+                  <RadioGroupItem value="Alexandria" id="location-alexandria" />
+                  <Label htmlFor="location-alexandria">Alexandria</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Dammam" id="location-dammam" />
-                  <Label htmlFor="location-dammam">Dammam</Label>
+                  <RadioGroupItem value="Luxor" id="location-luxor" />
+                  <Label htmlFor="location-luxor">Luxor</Label>
                 </div>
               </RadioGroup>
             </div>

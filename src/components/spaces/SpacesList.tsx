@@ -1,4 +1,3 @@
-
 import { SpaceFilter, Space } from "@/types/space";
 import SpaceCard from "./SpaceCard";
 import { useMemo } from "react";
@@ -11,11 +10,11 @@ interface SpacesListProps {
 const mockSpaces: Space[] = [
   {
     id: "1",
-    name: "King Abdulaziz Public Library - Youth Section",
+    name: "Alexandria Library - Youth Section",
     type: "library",
-    address: "King Fahd Rd, Olaya District",
-    city: "Riyadh",
-    owner: "King Abdulaziz Foundation",
+    address: "El-Chatby, Alexandria",
+    city: "Alexandria",
+    owner: "Bibliotheca Alexandrina",
     description: "A bright, modern space with dedicated areas for tech activities and learning.",
     images: [
       "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
@@ -26,8 +25,8 @@ const mockSpaces: Space[] = [
     pricePerHour: 75,
     rating: 4.8,
     coordinates: {
-      lat: 24.7136,
-      lng: 46.6753
+      lat: 31.2089,
+      lng: 29.9092
     },
     availability: {
       days: ["Friday", "Saturday"],
@@ -36,11 +35,11 @@ const mockSpaces: Space[] = [
   },
   {
     id: "2",
-    name: "Mawhiba Innovation Center",
+    name: "Cairo Innovation Hub",
     type: "makerspace",
-    address: "Prince Turki St, Al Malqa",
-    city: "Riyadh",
-    owner: "Mawhiba Foundation",
+    address: "Smart Village, 6th of October",
+    city: "Cairo",
+    owner: "Ministry of Communications",
     description: "A dedicated makerspace with advanced equipment for STEM activities.",
     images: [
       "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
@@ -50,8 +49,8 @@ const mockSpaces: Space[] = [
     pricePerHour: 100,
     rating: 4.9,
     coordinates: {
-      lat: 24.8105,
-      lng: 46.6527
+      lat: 30.0874,
+      lng: 31.3425
     },
     availability: {
       days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
@@ -60,11 +59,11 @@ const mockSpaces: Space[] = [
   },
   {
     id: "3",
-    name: "Jeddah Innovation Hub",
+    name: "Luxor Learning Center",
     type: "coworking",
-    address: "Al Andalus, King Abdullah Rd",
-    city: "Jeddah",
-    owner: "Jeddah Municipality",
+    address: "East Bank, Near Luxor Temple",
+    city: "Luxor",
+    owner: "Luxor Governorate",
     description: "A collaborative space designed for innovation and tech education.",
     images: [
       "https://images.unsplash.com/photo-1487958449943-2429e8be8625",
@@ -75,8 +74,8 @@ const mockSpaces: Space[] = [
     pricePerHour: 120,
     rating: 4.6,
     coordinates: {
-      lat: 21.5433,
-      lng: 39.1728
+      lat: 25.6872,
+      lng: 32.6396
     },
     availability: {
       days: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday"],

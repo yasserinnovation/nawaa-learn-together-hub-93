@@ -17,7 +17,7 @@ const SpacesHero = () => {
         </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Discover Spaces</h1>
         <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
-          Explore community-shared locations for hands-on tech training across Saudi Arabia
+          Explore community-shared locations for hands-on tech training across Egypt
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4 max-w-lg mx-auto">
           <div className="relative flex-1">
