@@ -5,8 +5,11 @@ import TrainersList from "@/components/trainers/TrainersList";
 import TrainersHero from "@/components/trainers/TrainersHero";
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const FindTrainers = () => {
+  const { t } = useLanguage();
+
   return (
     <Layout>
       <TrainersHero />
@@ -16,7 +19,7 @@ const FindTrainers = () => {
           <Button asChild className="flex items-center gap-2">
             <Link to="/trainer-signup">
               <User className="h-4 w-4" />
-              Become a Trainer
+              {t('common.becomeTrainer')}
             </Link>
           </Button>
         </div>

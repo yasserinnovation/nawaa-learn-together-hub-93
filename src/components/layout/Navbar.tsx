@@ -2,10 +2,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
+  const { t } = useLanguage();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -70,33 +73,34 @@ const Navbar = () => {
         {/* Desktop navigation */}
         <nav className="hidden lg:flex items-center gap-6">
           <Link to="/" className="text-gray-700 hover:text-yellow-600">
-            Home
+            {t('nav.home')}
           </Link>
           <Link to="/courses" className="text-gray-700 hover:text-yellow-600">
-            Courses
+            {t('nav.courses')}
           </Link>
           <Link to="/find-trainers" className="text-gray-700 hover:text-yellow-600">
-            Find Trainers
+            {t('nav.findTrainers')}
           </Link>
           <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600">
-            Discover Spaces
+            {t('nav.discoverSpaces')}
           </Link>
           <Link to="/access-tools" className="text-gray-700 hover:text-yellow-600">
-            Access Tools
+            {t('nav.accessTools')}
           </Link>
           <Link to="/build-bundle" className="text-gray-700 hover:text-yellow-600">
-            Build Bundle
+            {t('nav.buildBundle')}
           </Link>
           <Link to="/contact" className="text-gray-700 hover:text-yellow-600">
-            Contact
+            {t('nav.contact')}
           </Link>
         </nav>
 
-        {/* Auth buttons */}
+        {/* Auth buttons and language switcher */}
         <div className="hidden lg:flex items-center gap-4">
-          <Button variant="outline">Sign in</Button>
+          <LanguageSwitcher />
+          <Button variant="outline">{t('nav.signIn')}</Button>
           <Button className="bg-yellow-500 hover:bg-yellow-600">
-            Sign up
+            {t('nav.signUp')}
           </Button>
         </div>
 
@@ -109,56 +113,59 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                {t('nav.home')}
               </Link>
               <Link
                 to="/courses"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Courses
+                {t('nav.courses')}
               </Link>
               <Link
                 to="/find-trainers"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Find Trainers
+                {t('nav.findTrainers')}
               </Link>
               <Link
                 to="/discover-spaces"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Discover Spaces
+                {t('nav.discoverSpaces')}
               </Link>
               <Link
                 to="/access-tools"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Access Tools
+                {t('nav.accessTools')}
               </Link>
               <Link
                 to="/build-bundle"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Build Bundle
+                {t('nav.buildBundle')}
               </Link>
               <Link
                 to="/contact"
                 className="text-gray-700 hover:text-yellow-600 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                {t('nav.contact')}
               </Link>
+              <div className="flex items-center justify-between">
+                <LanguageSwitcher />
+              </div>
               <div className="flex flex-col gap-2 mt-2">
                 <Button variant="outline" className="w-full">
-                  Sign in
+                  {t('nav.signIn')}
                 </Button>
                 <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
-                  Sign up
+                  {t('nav.signUp')}
                 </Button>
               </div>
             </div>

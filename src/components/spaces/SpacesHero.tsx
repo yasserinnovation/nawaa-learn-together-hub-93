@@ -1,7 +1,10 @@
 
 import { MapPin, Search } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SpacesHero = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 py-16 relative overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-10">
@@ -15,7 +18,7 @@ const SpacesHero = () => {
         <div className="flex justify-center mb-4">
           <MapPin className="h-12 w-12 text-yellow-500" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Discover Spaces</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">{t('nav.discoverSpaces')}</h1>
         <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
           Explore community-shared locations for hands-on tech training across Egypt
         </p>
@@ -24,12 +27,12 @@ const SpacesHero = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search by city, neighborhood, or space name"
+              placeholder={t('common.searchPlaceholder')}
               className="pl-10 pr-4 py-3 w-full rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
             />
           </div>
           <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-            Search Spaces
+            {t('common.searchSpaces')}
           </button>
         </div>
       </div>
