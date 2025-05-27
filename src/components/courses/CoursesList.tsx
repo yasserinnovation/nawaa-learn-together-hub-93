@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { getAllCourses } from "@/lib/course-utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface CoursesListProps {
   categoryFilter?: string;
@@ -13,6 +14,7 @@ interface CoursesListProps {
 
 const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
   const [activeTab, setActiveTab] = useState(categoryFilter);
+  const { t } = useLanguage();
   
   const courses = getAllCourses();
 
@@ -24,16 +26,16 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Our Course Catalog</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">{t('courses.title')}</h2>
           
           {!categoryFilter && (
             <div className="mb-8">
               <Tabs defaultValue="all" onValueChange={setActiveTab}>
                 <TabsList className="flex justify-center mb-6">
-                  <TabsTrigger value="all">All Courses</TabsTrigger>
-                  <TabsTrigger value="technology">Technology</TabsTrigger>
-                  <TabsTrigger value="science">Science</TabsTrigger>
-                  <TabsTrigger value="math">Mathematics</TabsTrigger>
+                  <TabsTrigger value="all">{t('courses.allCourses')}</TabsTrigger>
+                  <TabsTrigger value="technology">{t('courses.technology')}</TabsTrigger>
+                  <TabsTrigger value="science">{t('courses.science')}</TabsTrigger>
+                  <TabsTrigger value="math">{t('courses.mathematics')}</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -45,7 +47,7 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="outline" className="bg-yellow-50 text-yellow-700 hover:bg-yellow-100">
-                      Ages {course.ageGroup}
+                      {t('courses.ages')} {course.ageGroup}
                     </Badge>
                     <Badge variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-100">
                       {course.duration}
@@ -60,18 +62,18 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
                 <CardContent className="flex-grow">
                   <div className="space-y-2">
                     <div>
-                      <h4 className="font-semibold text-sm text-yellow-700">STEM Focus</h4>
+                      <h4 className="font-semibold text-sm text-yellow-700">{t('courses.stemFocus')}</h4>
                       <p className="text-sm text-gray-600">{course.stemFocus}</p>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm text-yellow-700">Life Skills</h4>
+                      <h4 className="font-semibold text-sm text-yellow-700">{t('courses.lifeSkills')}</h4>
                       <p className="text-sm text-gray-600">{course.lifeSkills}</p>
                     </div>
                   </div>
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full bg-yellow-500 hover:bg-yellow-600" asChild>
-                    <Link to={`/courses/${course.id}`}>View Details</Link>
+                    <Link to={`/courses/${course.id}`}>{t('courses.viewDetails')}</Link>
                   </Button>
                 </CardFooter>
               </Card>
@@ -79,32 +81,32 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
           </div>
 
           <div className="mt-12 text-center">
-            <h3 className="text-2xl font-bold mb-4">Resources Included</h3>
+            <h3 className="text-2xl font-bold mb-4">{t('courses.resourcesTitle')}</h3>
             <ul className="max-w-2xl mx-auto text-gray-700 space-y-2 mb-6">
               <li className="flex items-center gap-2 justify-center">
                 <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
-                Teacher guides with step-by-step instructions
+                {t('courses.teacherGuides')}
               </li>
               <li className="flex items-center gap-2 justify-center">
                 <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
-                Student reflection journals
+                {t('courses.studentJournals')}
               </li>
               <li className="flex items-center gap-2 justify-center">
                 <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
-                Worksheets and activity templates
+                {t('courses.worksheets')}
               </li>
               <li className="flex items-center gap-2 justify-center">
                 <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
-                Assessment rubrics (creativity, collaboration, technical execution)
+                {t('courses.assessmentRubrics')}
               </li>
               <li className="flex items-center gap-2 justify-center">
                 <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
-                Optional: Online platform for project sharing
+                {t('courses.onlinePlatform')}
               </li>
             </ul>
 
             <Button asChild className="bg-yellow-500 hover:bg-yellow-600 mt-4">
-              <Link to="/discover-spaces">Find a Space for Your Course</Link>
+              <Link to="/discover-spaces">{t('courses.findSpace')}</Link>
             </Button>
           </div>
         </div>

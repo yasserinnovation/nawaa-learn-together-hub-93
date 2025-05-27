@@ -45,6 +45,24 @@ const translations = {
     'features.customCourses': 'Custom Courses',
     'features.customCoursesDesc': 'Choose from our catalog or let trainers create custom learning experiences.',
     
+    // Courses
+    'courses.title': 'Our Course Catalog',
+    'courses.allCourses': 'All Courses',
+    'courses.technology': 'Technology',
+    'courses.science': 'Science',
+    'courses.mathematics': 'Mathematics',
+    'courses.viewDetails': 'View Details',
+    'courses.ages': 'Ages',
+    'courses.stemFocus': 'STEM Focus',
+    'courses.lifeSkills': 'Life Skills',
+    'courses.resourcesTitle': 'Resources Included',
+    'courses.teacherGuides': 'Teacher guides with step-by-step instructions',
+    'courses.studentJournals': 'Student reflection journals',
+    'courses.worksheets': 'Worksheets and activity templates',
+    'courses.assessmentRubrics': 'Assessment rubrics (creativity, collaboration, technical execution)',
+    'courses.onlinePlatform': 'Optional: Online platform for project sharing',
+    'courses.findSpace': 'Find a Space for Your Course',
+    
     // Common
     'common.getStarted': 'Get Started',
     'common.learnMore': 'Learn More',
@@ -84,6 +102,24 @@ const translations = {
     'features.accessToolsDesc': 'استأجر أو اشتر الأدوات المناسبة من السوق المشترك للدورات.',
     'features.customCourses': 'دورات مخصصة',
     'features.customCoursesDesc': 'اختر من كتالوجنا أو دع المدربين ينشئون تجارب تعليمية مخصصة.',
+    
+    // Courses
+    'courses.title': 'كتالوج دوراتنا',
+    'courses.allCourses': 'جميع الدورات',
+    'courses.technology': 'التكنولوجيا',
+    'courses.science': 'العلوم',
+    'courses.mathematics': 'الرياضيات',
+    'courses.viewDetails': 'عرض التفاصيل',
+    'courses.ages': 'الأعمار',
+    'courses.stemFocus': 'التركيز على العلوم والتكنولوجيا',
+    'courses.lifeSkills': 'المهارات الحياتية',
+    'courses.resourcesTitle': 'الموارد المشمولة',
+    'courses.teacherGuides': 'أدلة المعلم مع تعليمات خطوة بخطوة',
+    'courses.studentJournals': 'مجلات تأمل الطلاب',
+    'courses.worksheets': 'أوراق العمل وقوالب الأنشطة',
+    'courses.assessmentRubrics': 'نماذج التقييم (الإبداع، التعاون، التنفيذ التقني)',
+    'courses.onlinePlatform': 'اختياري: منصة إلكترونية لمشاركة المشاريع',
+    'courses.findSpace': 'ابحث عن مكان لدورتك',
     
     // Common
     'common.getStarted': 'ابدأ الآن',
