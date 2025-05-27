@@ -9,9 +9,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Calendar, Users, Clock, Target, CircuitBoard, Wind, Lightbulb } from "lucide-react";
 import { getCourseById } from "@/lib/course-utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CourseDetail = () => {
   const { courseId } = useParams();
+  const { t } = useLanguage();
   const course = getCourseById(parseInt(courseId || "1"));
 
   if (!course) {
@@ -19,15 +21,20 @@ const CourseDetail = () => {
       <Layout>
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl font-bold mb-6">Course not found</h1>
+            <h1 className="text-3xl font-bold mb-6">{t('courseDetail.courseNotFound')}</h1>
             <Button asChild>
-              <Link to="/courses">Back to Courses</Link>
+              <Link to="/courses">{t('courseDetail.backToCourses')}</Link>
             </Button>
           </div>
         </div>
       </Layout>
     );
   }
+
+  // Get translated course content
+  const getCourseTranslation = (key: string) => {
+    return t(`course.${course.id}.${key}`) || course[key as keyof typeof course];
+  };
 
   return (
     <Layout>
@@ -38,7 +45,7 @@ const CourseDetail = () => {
               <div className="md:w-2/3">
                 <div className="flex items-center gap-3 mb-4">
                   <Badge variant="outline" className="bg-yellow-100 text-yellow-800">
-                    {course.category.charAt(0).toUpperCase() + course.category.slice(1)}
+                    {t(`courses.${course.category}`)}
                   </Badge>
                   {course.level && (
                     <Badge variant="outline" className="bg-blue-100 text-blue-800">
@@ -49,13 +56,13 @@ const CourseDetail = () => {
                 
                 <h1 className="text-4xl font-bold mb-4 flex items-center gap-3">
                   <course.icon className="h-8 w-8 text-yellow-500" />
-                  {course.title}
+                  {getCourseTranslation('title')}
                 </h1>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-6 mb-8">
                   <div className="flex items-center gap-2 text-gray-700">
                     <Users className="h-5 w-5 text-yellow-500" />
-                    <span>Ages {course.ageGroup}</span>
+                    <span>{t('courses.ages')} {course.ageGroup}</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-700">
                     <Clock className="h-5 w-5 text-yellow-500" />
@@ -64,7 +71,7 @@ const CourseDetail = () => {
                   {course.maxGroupSize && (
                     <div className="flex items-center gap-2 text-gray-700">
                       <Users className="h-5 w-5 text-yellow-500" />
-                      <span>Max {course.maxGroupSize} students</span>
+                      <span>{t('courseDetail.maxStudents')} {course.maxGroupSize} {t('courseDetail.students')}</span>
                     </div>
                   )}
                   {course.totalDuration && (
@@ -76,10 +83,10 @@ const CourseDetail = () => {
                 </div>
                 
                 <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-                  <h2 className="text-2xl font-semibold mb-4">Course Overview</h2>
-                  <p className="text-gray-700 mb-6">{course.description || course.project}</p>
+                  <h2 className="text-2xl font-semibold mb-4">{t('courseDetail.courseOverview')}</h2>
+                  <p className="text-gray-700 mb-6">{getCourseTranslation('project')}</p>
                   
-                  <h3 className="text-xl font-semibold mb-3">Learning Outcomes</h3>
+                  <h3 className="text-xl font-semibold mb-3">{t('courseDetail.learningOutcomes')}</h3>
                   <div className="pl-5 mb-6">
                     {course.outcomes.split(". ").map((outcome, index) => (
                       outcome ? (
@@ -95,12 +102,12 @@ const CourseDetail = () => {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-yellow-700 mb-2">STEM Focus</h3>
-                      <p className="text-gray-700">{course.stemFocus}</p>
+                      <h3 className="text-lg font-semibold text-yellow-700 mb-2">{t('courses.stemFocus')}</h3>
+                      <p className="text-gray-700">{getCourseTranslation('stemFocus')}</p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-yellow-700 mb-2">Life Skills</h3>
-                      <p className="text-gray-700">{course.lifeSkills}</p>
+                      <h3 className="text-lg font-semibold text-yellow-700 mb-2">{t('courses.lifeSkills')}</h3>
+                      <p className="text-gray-700">{getCourseTranslation('lifeSkills')}</p>
                     </div>
                   </div>
                 </div>
@@ -118,30 +125,30 @@ const CourseDetail = () => {
                         </div>
                       </Skeleton>
                     </AspectRatio>
-                    <h2 className="text-xl font-bold mb-2">Ready to Enroll?</h2>
-                    <p className="text-gray-600 mb-4">Reserve a spot for your child in this exciting learning adventure.</p>
+                    <h2 className="text-xl font-bold mb-2">{t('courseDetail.readyToEnroll')}</h2>
+                    <p className="text-gray-600 mb-4">{t('courseDetail.enrollmentDesc')}</p>
                     <Button className="w-full bg-yellow-500 hover:bg-yellow-600 mb-3">
-                      Start Enrollment
+                      {t('courseDetail.startEnrollment')}
                     </Button>
                     <Button variant="outline" className="w-full border-yellow-500 text-yellow-700 hover:bg-yellow-50">
-                      Request Information
+                      {t('courseDetail.requestInfo')}
                     </Button>
                   </div>
                   
                   <div className="border-t pt-4">
-                    <h3 className="font-semibold mb-3">Key Technologies Used</h3>
+                    <h3 className="font-semibold mb-3">{t('courseDetail.keyTechnologies')}</h3>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="bg-gray-100">
                         <CircuitBoard className="h-3.5 w-3.5 mr-1" /> 
-                        Electronics
+                        {t('courseDetail.electronics')}
                       </Badge>
                       <Badge variant="secondary" className="bg-gray-100">
                         <Wind className="h-3.5 w-3.5 mr-1" /> 
-                        Renewable Energy
+                        {t('courseDetail.renewableEnergy')}
                       </Badge>
                       <Badge variant="secondary" className="bg-gray-100">
                         <Lightbulb className="h-3.5 w-3.5 mr-1" /> 
-                        Robotics
+                        {t('courseDetail.robotics')}
                       </Badge>
                     </div>
                   </div>
@@ -151,16 +158,16 @@ const CourseDetail = () => {
             
             {course.days && course.days.length > 0 && (
               <div className="mt-8 mb-12">
-                <h2 className="text-2xl font-bold mb-6">Curriculum Outline</h2>
+                <h2 className="text-2xl font-bold mb-6">{t('courseDetail.curriculumOutline')}</h2>
                 <div className="overflow-x-auto">
                   <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
                     <thead className="bg-yellow-50">
                       <tr>
-                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">Day</th>
-                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">Module Title</th>
-                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">Hours</th>
-                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">Activities</th>
-                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">Key Skills</th>
+                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">{t('courseDetail.day')}</th>
+                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">{t('courseDetail.moduleTitle')}</th>
+                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">{t('courseDetail.hours')}</th>
+                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">{t('courseDetail.activities')}</th>
+                        <th className="py-3 px-4 text-left font-semibold text-gray-700 border-b">{t('courseDetail.keySkills')}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -181,7 +188,7 @@ const CourseDetail = () => {
             
             <div className="flex justify-center mb-8">
               <Button asChild className="bg-yellow-500 hover:bg-yellow-600">
-                <Link to="/build-bundle">Build a Course Bundle</Link>
+                <Link to="/build-bundle">{t('courseDetail.buildBundle')}</Link>
               </Button>
             </div>
           </div>

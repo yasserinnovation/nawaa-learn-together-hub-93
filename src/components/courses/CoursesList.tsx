@@ -22,6 +22,11 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
     ? courses 
     : courses.filter(course => course.category === activeTab);
 
+  // Get translated course content
+  const getCourseTranslation = (courseId: number, key: string, fallback: string) => {
+    return t(`course.${courseId}.${key}`) || fallback;
+  };
+
   return (
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
@@ -55,19 +60,19 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
                   </div>
                   <CardTitle className="flex items-center gap-2">
                     <course.icon className="h-6 w-6 text-yellow-500" />
-                    {course.title}
+                    {getCourseTranslation(course.id, 'title', course.title)}
                   </CardTitle>
-                  <CardDescription>{course.project}</CardDescription>
+                  <CardDescription>{getCourseTranslation(course.id, 'project', course.project)}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <div className="space-y-2">
                     <div>
                       <h4 className="font-semibold text-sm text-yellow-700">{t('courses.stemFocus')}</h4>
-                      <p className="text-sm text-gray-600">{course.stemFocus}</p>
+                      <p className="text-sm text-gray-600">{getCourseTranslation(course.id, 'stemFocus', course.stemFocus)}</p>
                     </div>
                     <div>
                       <h4 className="font-semibold text-sm text-yellow-700">{t('courses.lifeSkills')}</h4>
-                      <p className="text-sm text-gray-600">{course.lifeSkills}</p>
+                      <p className="text-sm text-gray-600">{getCourseTranslation(course.id, 'lifeSkills', course.lifeSkills)}</p>
                     </div>
                   </div>
                 </CardContent>
