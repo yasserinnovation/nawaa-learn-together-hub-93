@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -31,9 +30,15 @@ const CourseDetail = () => {
     );
   }
 
-  // Get translated course content
-  const getCourseTranslation = (key: string) => {
-    return t(`course.${course.id}.${key}`) || course[key as keyof typeof course];
+  // Get translated course content - ensure we return strings only
+  const getCourseTranslation = (key: string): string => {
+    const translation = t(`course.${course.id}.${key}`);
+    if (translation && typeof translation === 'string') {
+      return translation;
+    }
+    // Fallback to course property as string
+    const fallback = course[key as keyof typeof course];
+    return typeof fallback === 'string' ? fallback : '';
   };
 
   return (
