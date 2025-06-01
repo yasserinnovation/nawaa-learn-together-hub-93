@@ -1,57 +1,68 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Lightbulb, Users, Wrench, Rocket } from "lucide-react";
 
 const HowItWorks = () => {
   const steps = [
     {
       number: "01",
-      title: "Choose Your Components",
-      description: "Select trainers, spaces, tools, courses, and set your audience preferences.",
+      title: "Submit Your Idea",
+      description: "Share your innovative concept or choose from our curated templates across Green Tech, Smart Toys, and Assistive Devices.",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop",
+      icon: Lightbulb,
+      color: "text-yellow-500"
     },
     {
       number: "02",
-      title: "Preview Your Bundle",
-      description: "Review your selections and get AI recommendations to optimize your learning package.",
+      title: "Get Matched & Build",
+      description: "Our smart engine connects you with expert trainers, nearby spaces, and required tools. Follow guided timelines to learn and build.",
       image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=800&auto=format&fit=crop",
+      icon: Users,
+      color: "text-blue-500"
     },
     {
       number: "03",
-      title: "Book & Learn",
-      description: "Confirm your bundle, make payment, and start your hands-on learning journey.",
+      title: "Launch Your MVP",
+      description: "Complete your prototype, create a pitch deck, and showcase in our Innovation Gallery for feedback and opportunities.",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop",
+      icon: Rocket,
+      color: "text-purple-500"
     },
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            How Nawaa Works
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-            Building your learning bundle is as simple as 1-2-3.
-          </p>
-        </div>
+    <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              How Nawaa Works
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              From idea to MVP in three simple steps. Our platform guides you through 
+              the entire innovation journey.
+            </p>
+          </div>
 
-        <div className="mt-16">
           <div className="relative">
             {/* Connecting line */}
-            <div className="hidden md:block absolute top-14 left-[15%] right-[15%] h-1 bg-nawaa-yellow" aria-hidden="true"></div>
+            <div className="hidden md:block absolute top-14 left-[15%] right-[15%] h-1 bg-yellow-400" aria-hidden="true"></div>
 
             {/* Steps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
               {steps.map((step, index) => (
                 <div key={index} className="relative">
                   <div className="flex flex-col items-center">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-nawaa-yellow bg-white text-nawaa-yellow text-xl font-bold z-10">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-yellow-400 bg-white text-yellow-600 text-xl font-bold z-10 mb-2">
                       {step.number}
                     </div>
-                    <h3 className="mt-6 text-xl font-semibold text-gray-900">{step.title}</h3>
-                    <p className="mt-2 text-base text-gray-500 text-center">{step.description}</p>
-                    <div className="mt-8 h-48 w-full bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="bg-white rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-md">
+                      <step.icon className={`h-6 w-6 ${step.color}`} />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center">{step.title}</h3>
+                    <p className="text-gray-600 text-center mb-6 leading-relaxed">{step.description}</p>
+                    <div className="h-48 w-full bg-gray-100 rounded-lg overflow-hidden">
                       <img 
                         src={step.image} 
                         alt={`Step ${step.number}: ${step.title}`}
@@ -64,9 +75,9 @@ const HowItWorks = () => {
             </div>
           </div>
 
-          <div className="mt-16 flex justify-center">
-            <Button className="px-8 py-6 text-lg" asChild>
-              <Link to="/build-bundle">Start Building Your Bundle</Link>
+          <div className="mt-16 text-center">
+            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600" asChild>
+              <Link to="/build-bundle">Start Your MVP Journey</Link>
             </Button>
           </div>
         </div>
