@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { User, MapPin, Languages, Star, Clock, Calendar } from "lucide-react";
@@ -12,8 +11,8 @@ import { Trainer } from "@/types/trainer";
 const mockTrainers: Trainer[] = [
   {
     id: "1",
-    name: "Fatima Al-Zahrani",
-    location: "Riyadh",
+    name: "Yasmin Al-Mahmoud",
+    location: "Cairo",
     languages: ["Arabic", "English"],
     expertise: ["Robotics", "Electronics"],
     gender: "Female",
@@ -29,8 +28,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "2",
-    name: "Ahmed Al-Dosari",
-    location: "Jeddah",
+    name: "Khalid Al-Harbi",
+    location: "Riyadh",
     languages: ["Arabic", "English"],
     expertise: ["3D Printing", "Coding for Kids"],
     gender: "Male",
@@ -46,8 +45,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "3",
-    name: "Norah Alsharhan",
-    location: "Dammam",
+    name: "Dina El-Sherbiny",
+    location: "Alexandria",
     languages: ["Arabic", "English", "French"],
     expertise: ["AI for Kids", "Electronics"],
     gender: "Female",
@@ -63,8 +62,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "4",
-    name: "Mohammad Al-Harbi",
-    location: "Riyadh",
+    name: "Ahmed Al-Dosari",
+    location: "Jeddah",
     languages: ["Arabic", "English"],
     expertise: ["Robotics", "Coding for Kids"],
     gender: "Male",
@@ -127,16 +126,20 @@ const TrainersList = () => {
                   <Label htmlFor="location-all">All Locations</Label>
                 </div>
                 <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="Cairo" id="location-cairo" />
+                  <Label htmlFor="location-cairo">Cairo</Label>
+                </div>
+                <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Riyadh" id="location-riyadh" />
                   <Label htmlFor="location-riyadh">Riyadh</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Jeddah" id="location-jeddah" />
-                  <Label htmlFor="location-jeddah">Jeddah</Label>
+                  <RadioGroupItem value="Alexandria" id="location-alexandria" />
+                  <Label htmlFor="location-alexandria">Alexandria</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Dammam" id="location-dammam" />
-                  <Label htmlFor="location-dammam">Dammam</Label>
+                  <RadioGroupItem value="Jeddah" id="location-jeddah" />
+                  <Label htmlFor="location-jeddah">Jeddah</Label>
                 </div>
               </RadioGroup>
             </div>

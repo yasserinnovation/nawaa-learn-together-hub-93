@@ -15,7 +15,7 @@ const FindTrainers = () => {
       <TrainersHero />
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold">Find Expert Trainers in Egypt</h1>
+          <h1 className="text-2xl font-bold">Find Expert Trainers in Egypt & Saudi Arabia</h1>
           <Button asChild className="flex items-center gap-2">
             <Link to="/trainer-signup">
               <User className="h-4 w-4" />

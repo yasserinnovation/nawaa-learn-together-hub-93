@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { 
@@ -22,8 +21,8 @@ import { Trainer } from "@/types/trainer";
 const mockTrainers: Trainer[] = [
   {
     id: "1",
-    name: "Fatima Al-Zahrani",
-    location: "Riyadh",
+    name: "Yasmin Al-Mahmoud",
+    location: "Cairo",
     languages: ["Arabic", "English"],
     expertise: ["Robotics", "Electronics"],
     gender: "Female",
@@ -39,8 +38,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "2",
-    name: "Ahmed Al-Dosari",
-    location: "Jeddah",
+    name: "Khalid Al-Harbi",
+    location: "Riyadh",
     languages: ["Arabic", "English"],
     expertise: ["3D Printing", "Coding for Kids"],
     gender: "Male",
@@ -56,8 +55,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "3",
-    name: "Norah Alsharhan",
-    location: "Dammam",
+    name: "Dina El-Sherbiny",
+    location: "Alexandria",
     languages: ["Arabic", "English", "French"],
     expertise: ["AI for Kids", "Electronics"],
     gender: "Female",
@@ -73,8 +72,8 @@ const mockTrainers: Trainer[] = [
   },
   {
     id: "4",
-    name: "Mohammad Al-Harbi",
-    location: "Riyadh",
+    name: "Ahmed Al-Dosari",
+    location: "Jeddah",
     languages: ["Arabic", "English"],
     expertise: ["Robotics", "Coding for Kids"],
     gender: "Male",
@@ -95,16 +94,16 @@ const mockReviews = [
   {
     id: 1,
     trainerId: "1",
-    name: "Sara K.",
+    name: "Nour K.",
     rating: 5,
     date: "2023-08-15",
-    comment: "My daughter loved learning robotics with Fatima. She made complex concepts easy to understand and fun to learn.",
+    comment: "My daughter loved learning robotics with Yasmin. She made complex concepts easy to understand and fun to learn.",
     course: "Introduction to Robotics"
   },
   {
     id: 2,
     trainerId: "1",
-    name: "Mohammed A.",
+    name: "Hassan A.",
     rating: 4,
     date: "2023-07-22",
     comment: "Great teaching style, very patient with the children. Would definitely recommend for beginners.",
@@ -116,7 +115,7 @@ const mockReviews = [
     name: "Layla M.",
     rating: 5,
     date: "2023-06-10",
-    comment: "Fatima is an exceptional teacher. My 10-year-old daughter was initially intimidated by robotics, but Fatima's approach made it accessible and enjoyable.",
+    comment: "Yasmin is an exceptional teacher. My 10-year-old daughter was initially intimidated by robotics, but Yasmin's approach made it accessible and enjoyable.",
     course: "Robotics Competition Prep"
   }
 ];

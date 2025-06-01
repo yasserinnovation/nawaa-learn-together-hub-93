@@ -5,17 +5,17 @@ const Testimonials = () => {
   const testimonials = [
     {
       quote: "Nawaa has transformed how my child learns about robotics. The ability to find great trainers and appropriate spaces near us is invaluable.",
-      author: "Sarah Johnson",
+      author: "Amira Hassan",
       role: "Parent",
     },
     {
       quote: "As a trainer, I can focus on teaching while Nawaa helps me find the right spaces and tools. It's revolutionized my educational approach.",
-      author: "Michael Chen",
+      author: "Omar Al-Rashid",
       role: "Technology Trainer",
     },
     {
       quote: "Our library has welcomed so many new young learners since we listed our space on Nawaa. It's wonderful to see our resources being utilized.",
-      author: "Lisa Rodriguez",
+      author: "Fatma El-Sayed",
       role: "Community Space Provider",
     },
   ];
