@@ -8,12 +8,14 @@ import CTASection from "@/components/home/CTASection";
 import BundleSection from "@/components/home/BundleSection";
 import LogoShowcase from "@/components/home/LogoShowcase";
 import AssessmentSection from "@/components/home/AssessmentSection";
+import IdeaToMVPSection from "@/components/home/IdeaToMVPSection";
 
 const Index = () => {
   return (
     <Layout>
       <Hero />
       <LogoShowcase />
+      <IdeaToMVPSection />
       <AssessmentSection />
       <FeaturesSection />
       <BundleSection />
