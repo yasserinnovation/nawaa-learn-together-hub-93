@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -83,6 +84,33 @@ const translations = {
     'assessment.courseMatchingDesc': 'Get personalized recommendations for the perfect learning path',
     'assessment.startAssessment': 'Start Smart Assessment',
     'assessment.duration': 'Takes only 5-10 minutes • 100% Free',
+    
+    // Bundle Section
+    'bundle.title': 'Build Your Learning Bundle',
+    'bundle.subtitle': 'Mix and match the perfect combination of trainer, tools, space, and content — all tailored to your goals.',
+    'bundle.chooseTrainer': 'Choose Trainer',
+    'bundle.chooseTrainerDesc': 'Find expert trainers specializing in robotics, coding, 3D design, and more.',
+    'bundle.chooseTrainerAction': 'Start here →',
+    'bundle.pickSpace': 'Pick a Space',
+    'bundle.pickSpaceDesc': 'Select from libraries, co-working spaces, and makerspaces perfect for learning.',
+    'bundle.pickSpaceAction': 'Explore spaces →',
+    'bundle.selectTools': 'Select Tools',
+    'bundle.selectToolsDesc': 'Choose from Arduino kits, 3D pens, robots, and more for your session.',
+    'bundle.selectToolsAction': 'Browse tools →',
+    'bundle.pickCourse': 'Pick a Course',
+    'bundle.pickCourseDesc': 'Choose from curated courses or let your trainer define a custom one.',
+    'bundle.pickCourseAction': 'See courses →',
+    'bundle.setPreferences': 'Set Preferences',
+    'bundle.setPreferencesDesc': 'Customize for your audience with language, age range, and schedule options.',
+    'bundle.setPreferencesAction': 'Configure →',
+    'bundle.reviewBundle': 'Review Bundle',
+    'bundle.reviewBundleDesc': 'Preview your complete learning package before confirming and booking.',
+    'bundle.reviewBundleAction': 'Finalize →',
+    'bundle.startBuilding': 'Start Building Your Bundle',
+    
+    // Logo Showcase Section
+    'logoShowcase.title': 'Empowering the Next Generation of Innovators',
+    'logoShowcase.description': 'At Nawaa, we bring children together with technology, fostering creativity, innovation, and hands-on learning experiences through our unique spiral approach to education.',
     
     // Testimonials
     'testimonials.title': 'What Our Community Says',
@@ -205,6 +233,10 @@ const translations = {
     'bundle.reviewBundleDesc': 'اعرض حزمة التعلم الكاملة قبل التأكيد والحجز.',
     'bundle.reviewBundleAction': 'اكمل →',
     'bundle.startBuilding': 'ابدأ ببناء حزمتك',
+    
+    // Logo Showcase Section
+    'logoShowcase.title': 'تمكين الجيل القادم من المبدعين',
+    'logoShowcase.description': 'في نواة، نجمع الأطفال مع التكنولوجيا، ونعزز الإبداع والابتكار وتجارب التعلم العملية من خلال نهجنا الحلزوني الفريد في التعليم.',
     
     // Testimonials
     'testimonials.title': 'ماذا يقول مجتمعنا',

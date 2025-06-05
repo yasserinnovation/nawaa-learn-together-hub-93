@@ -1,7 +1,9 @@
 
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const LogoShowcase = () => {
+  const { t } = useLanguage();
   const [illustrationLoaded, setIllustrationLoaded] = useState(false);
 
   const handleIllustrationLoad = () => {
@@ -18,7 +20,7 @@ const LogoShowcase = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-            Empowering the Next Generation of Innovators
+            {t('logoShowcase.title')}
           </h2>
           
           <div className="w-full max-w-4xl mx-auto">
@@ -40,8 +42,7 @@ const LogoShowcase = () => {
           </div>
           
           <p className="mt-8 text-lg text-gray-700 max-w-3xl mx-auto text-center">
-            At Nawaa, we bring children together with technology, fostering creativity, 
-            innovation, and hands-on learning experiences through our unique spiral approach to education.
+            {t('logoShowcase.description')}
           </p>
         </div>
       </div>
