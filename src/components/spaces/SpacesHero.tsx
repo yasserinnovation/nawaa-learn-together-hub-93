@@ -16,9 +16,9 @@ const SpacesHero = () => {
       </div>
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="flex justify-center mb-4">
-          <MapPin className="h-12 w-12 text-yellow-500" />
+          <MapPin className="h-12 w-12 text-black" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">{t('nav.discoverSpaces')}</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-black">{t('nav.discoverSpaces')}</h1>
         <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
           Explore community-shared locations for hands-on tech training across Egypt
         </p>
@@ -28,10 +28,10 @@ const SpacesHero = () => {
             <input
               type="text"
               placeholder={t('common.searchPlaceholder')}
-              className="pl-10 pr-4 py-3 w-full rounded-lg focus:ring-yellow-500 focus:border-yellow-500"
+              className="pl-10 pr-4 py-3 w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
             />
           </div>
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg transition-colors">
             {t('common.searchSpaces')}
           </button>
         </div>
