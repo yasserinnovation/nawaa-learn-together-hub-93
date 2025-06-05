@@ -7,19 +7,19 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      quote: "Nawaa has transformed how my child learns about robotics. The ability to find great trainers and appropriate spaces near us is invaluable.",
-      author: "Amira Hassan",
-      role: "Parent",
+      quote: t('testimonials.quote1'),
+      author: t('testimonials.author1'),
+      role: t('testimonials.role1'),
     },
     {
-      quote: "As a trainer, I can focus on teaching while Nawaa helps me find the right spaces and tools. It's revolutionized my educational approach.",
-      author: "Omar Al-Rashid",
-      role: "Technology Trainer",
+      quote: t('testimonials.quote2'),
+      author: t('testimonials.author2'),
+      role: t('testimonials.role2'),
     },
     {
-      quote: "Our library has welcomed so many new young learners since we listed our space on Nawaa. It's wonderful to see our resources being utilized.",
-      author: "Fatma El-Sayed",
-      role: "Community Space Provider",
+      quote: t('testimonials.quote3'),
+      author: t('testimonials.author3'),
+      role: t('testimonials.role3'),
     },
   ];
 

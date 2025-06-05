@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -88,6 +87,15 @@ const translations = {
     // Testimonials
     'testimonials.title': 'What Our Community Says',
     'testimonials.subtitle': 'Join the growing community of innovators, trainers, and space providers.',
+    'testimonials.quote1': 'Nawaa has transformed how my child learns about robotics. The ability to find great trainers and appropriate spaces near us is invaluable.',
+    'testimonials.author1': 'Amira Hassan',
+    'testimonials.role1': 'Parent',
+    'testimonials.quote2': 'As a trainer, I can focus on teaching while Nawaa helps me find the right spaces and tools. It\'s revolutionized my educational approach.',
+    'testimonials.author2': 'Omar Al-Rashid',
+    'testimonials.role2': 'Technology Trainer',
+    'testimonials.quote3': 'Our library has welcomed so many new young learners since we listed our space on Nawaa. It\'s wonderful to see our resources being utilized.',
+    'testimonials.author3': 'Fatma El-Sayed',
+    'testimonials.role3': 'Community Space Provider',
     
     // CTA Section
     'cta.title': 'Ready to Build Your MVP?',
@@ -201,6 +209,15 @@ const translations = {
     // Testimonials
     'testimonials.title': 'ماذا يقول مجتمعنا',
     'testimonials.subtitle': 'انضم إلى المجتمع المتنامي من المبتكرين والمدربين ومقدمي المساحات.',
+    'testimonials.quote1': 'لقد غيّرت نواة طريقة تعلم طفلي للروبوتات. القدرة على العثور على مدربين رائعين ومساحات مناسبة بالقرب منا لا تقدر بثمن.',
+    'testimonials.author1': 'أميرة حسن',
+    'testimonials.role1': 'والد',
+    'testimonials.quote2': 'كمدرب، يمكنني التركيز على التدريس بينما تساعدني نواة في العثور على المساحات والأدوات المناسبة. لقد أحدثت ثورة في نهجي التعليمي.',
+    'testimonials.author2': 'عمر الراشد',
+    'testimonials.role2': 'مدرب تكنولوجيا',
+    'testimonials.quote3': 'رحبت مكتبتنا بالعديد من المتعلمين الشباب الجدد منذ أن أدرجنا مساحتنا في نواة. من الرائع رؤية مواردنا يتم استغلالها.',
+    'testimonials.author3': 'فاطمة السيد',
+    'testimonials.role3': 'مقدم مساحة مجتمعية',
     
     // CTA Section
     'cta.title': 'مستعد لبناء نموذجك الأولي؟',
