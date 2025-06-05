@@ -72,6 +72,18 @@ const translations = {
     'ideaToMvp.startJourney': 'Start Your MVP Journey',
     'ideaToMvp.exploreEcosystem': 'Explore Our Ecosystem',
     
+    // Assessment Section
+    'assessment.title': 'Smart Child Assessment',
+    'assessment.subtitle': 'Not sure which course is perfect for your child? Our AI-powered assessment analyzes their strengths, interests, and learning style to recommend the ideal tech course.',
+    'assessment.multipleIntelligences': 'Multiple Intelligences',
+    'assessment.multipleIntelligencesDesc': 'Discover your child\'s unique learning strengths and cognitive preferences',
+    'assessment.personalityAnalysis': 'Personality Analysis',
+    'assessment.personalityAnalysisDesc': 'Understand their behavior patterns and social learning preferences',
+    'assessment.courseMatching': 'Course Matching',
+    'assessment.courseMatchingDesc': 'Get personalized recommendations for the perfect learning path',
+    'assessment.startAssessment': 'Start Smart Assessment',
+    'assessment.duration': 'Takes only 5-10 minutes • 100% Free',
+    
     // Testimonials
     'testimonials.title': 'What Our Community Says',
     'testimonials.subtitle': 'Join the growing community of innovators, trainers, and space providers.',
@@ -149,6 +161,18 @@ const translations = {
     'ideaToMvp.readyToTurnDesc': 'انضم إلى منصتنا واحصل على إرشادات الخبراء والأدوات المتطورة والمساحات التعاونية المصممة لمساعدتك في بناء وإطلاق نموذجك الأولي بنجاح.',
     'ideaToMvp.startJourney': 'ابدأ رحلة نموذجك الأولي',
     'ideaToMvp.exploreEcosystem': 'استكشف نظامنا البيئي',
+    
+    // Assessment Section
+    'assessment.title': 'التقييم الذكي للطفل',
+    'assessment.subtitle': 'غير متأكد من الدورة المثالية لطفلك؟ تقييمنا المدعوم بالذكاء الاصطناعي يحلل نقاط قوته واهتماماته وأسلوب تعلمه لتوصية الدورة التقنية المثالية.',
+    'assessment.multipleIntelligences': 'الذكاءات المتعددة',
+    'assessment.multipleIntelligencesDesc': 'اكتشف نقاط القوة التعليمية الفريدة لطفلك وتفضيلاته المعرفية',
+    'assessment.personalityAnalysis': 'تحليل الشخصية',
+    'assessment.personalityAnalysisDesc': 'فهم أنماط سلوكه وتفضيلاته في التعلم الاجتماعي',
+    'assessment.courseMatching': 'مطابقة الدورات',
+    'assessment.courseMatchingDesc': 'احصل على توصيات شخصية لمسار التعلم المثالي',
+    'assessment.startAssessment': 'ابدأ التقييم الذكي',
+    'assessment.duration': 'يستغرق فقط 5-10 دقائق • مجاني 100%',
     
     // Testimonials
     'testimonials.title': 'ماذا يقول مجتمعنا',

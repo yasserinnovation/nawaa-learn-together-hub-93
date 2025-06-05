@@ -14,10 +14,10 @@ const AssessmentSection = () => {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Brain className="h-12 w-12 text-purple-500" />
-              <h2 className="text-3xl md:text-4xl font-bold">Smart Child Assessment</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">{t('assessment.title')}</h2>
             </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Not sure which course is perfect for your child? Our AI-powered assessment analyzes their strengths, interests, and learning style to recommend the ideal tech course.
+              {t('assessment.subtitle')}
             </p>
           </div>
 
@@ -26,32 +26,32 @@ const AssessmentSection = () => {
               <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-md">
                 <Target className="h-8 w-8 text-purple-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Multiple Intelligences</h3>
-              <p className="text-gray-600">Discover your child's unique learning strengths and cognitive preferences</p>
+              <h3 className="text-xl font-semibold mb-2">{t('assessment.multipleIntelligences')}</h3>
+              <p className="text-gray-600">{t('assessment.multipleIntelligencesDesc')}</p>
             </div>
             <div className="text-center">
               <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-md">
                 <Brain className="h-8 w-8 text-blue-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Personality Analysis</h3>
-              <p className="text-gray-600">Understand their behavior patterns and social learning preferences</p>
+              <h3 className="text-xl font-semibold mb-2">{t('assessment.personalityAnalysis')}</h3>
+              <p className="text-gray-600">{t('assessment.personalityAnalysisDesc')}</p>
             </div>
             <div className="text-center">
               <div className="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 shadow-md">
                 <BookOpen className="h-8 w-8 text-green-500" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Course Matching</h3>
-              <p className="text-gray-600">Get personalized recommendations for the perfect learning path</p>
+              <h3 className="text-xl font-semibold mb-2">{t('assessment.courseMatching')}</h3>
+              <p className="text-gray-600">{t('assessment.courseMatchingDesc')}</p>
             </div>
           </div>
 
           <div className="text-center">
             <Button size="lg" className="bg-purple-500 hover:bg-purple-600" asChild>
               <Link to="/smart-assessment">
-                Start Smart Assessment
+                {t('assessment.startAssessment')}
               </Link>
             </Button>
-            <p className="text-sm text-gray-500 mt-4">Takes only 5-10 minutes • 100% Free</p>
+            <p className="text-sm text-gray-500 mt-4">{t('assessment.duration')}</p>
           </div>
         </div>
       </div>
