@@ -13,22 +13,21 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center gap-8">
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Transform Ideas into Real Prototypes
+              {t('hero.title')}
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8">
-              Connect with expert trainers, access cutting-edge tools, and use real makerspaces 
-              to build your MVP. From idea to launch in one comprehensive platform.
+              {t('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
               <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600" asChild>
                 <Link to="/build-bundle" className="flex items-center gap-2">
-                  Start Your MVP Journey
+                  {t('hero.startBuilding')}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link to="/smart-assessment" className="flex items-center gap-2">
-                  Take Smart Assessment
+                  {t('hero.smartAssessment')}
                   <Brain className="h-5 w-5" />
                 </Link>
               </Button>
@@ -37,12 +36,12 @@ const Hero = () => {
               <Button variant="link" className="text-yellow-600 p-0" asChild>
                 <Link to="/discover-spaces" className="flex items-center gap-1">
                   <MapPin className="h-4 w-4" />
-                  Explore 150+ Spaces
+                  {t('hero.exploreSpaces')}
                 </Link>
               </Button>
               <Button variant="link" className="text-yellow-600 p-0" asChild>
                 <Link to="/share-your-space">
-                  Share Your Space
+                  {t('hero.shareSpace')}
                 </Link>
               </Button>
             </div>
@@ -58,7 +57,7 @@ const Hero = () => {
               </div>
               <div className="absolute -bottom-4 -right-4 bg-yellow-500 rounded-lg p-4 shadow-lg">
                 <p className="text-xl font-bold text-white">
-                  150+ Spaces Available
+                  {t('hero.spacesAvailable')}
                 </p>
               </div>
             </div>

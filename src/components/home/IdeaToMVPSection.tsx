@@ -7,82 +7,85 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const IdeaToMVPSection = () => {
   const { t } = useLanguage();
 
-  const steps = [
-    {
-      icon: Lightbulb,
-      title: "Submit Your Idea",
-      description: "Share your innovative idea or choose from our curated templates across themes like Green Tech, Smart Toys, and Assistive Devices.",
-      color: "text-yellow-500"
-    },
-    {
-      icon: Users,
-      title: "Get Matched with Experts",
-      description: "Our smart matching engine connects you with the right trainers, tools, and spaces based on your location and project needs.",
-      color: "text-blue-500"
-    },
-    {
-      icon: Wrench,
-      title: "Build & Learn",
-      description: "Follow a guided project timeline, learn required skills, and access real tools and workspace to bring your idea to life.",
-      color: "text-green-500"
-    },
-    {
-      icon: Rocket,
-      title: "Launch Your MVP",
-      description: "Upload your prototype, create a pitch deck, and showcase your innovation in our public Innovation Gallery.",
-      color: "text-purple-500"
-    }
-  ];
-
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              From Idea to MVP in One Platform
+              {t('ideaToMvp.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transform your innovative ideas into real prototypes with our comprehensive ecosystem. 
-              Get matched with expert trainers, access tools and spaces, and launch your MVP with confidence.
+              {t('ideaToMvp.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {steps.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="relative mb-6">
-                  <div className="bg-gray-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
-                    <step.icon className={`h-10 w-10 ${step.color}`} />
-                  </div>
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-10 left-full w-full">
-                      <ArrowRight className="h-6 w-6 text-gray-300 mx-auto" />
-                    </div>
-                  )}
+            <div className="text-center">
+              <div className="relative mb-6">
+                <div className="bg-gray-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                  <Lightbulb className="h-10 w-10 text-yellow-500" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                <div className="hidden lg:block absolute top-10 left-full w-full">
+                  <ArrowRight className="h-6 w-6 text-gray-300 mx-auto" />
+                </div>
               </div>
-            ))}
+              <h3 className="text-xl font-semibold mb-3">{t('ideaToMvp.submitIdea')}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{t('ideaToMvp.submitIdeaDesc')}</p>
+            </div>
+
+            <div className="text-center">
+              <div className="relative mb-6">
+                <div className="bg-gray-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                  <Users className="h-10 w-10 text-blue-500" />
+                </div>
+                <div className="hidden lg:block absolute top-10 left-full w-full">
+                  <ArrowRight className="h-6 w-6 text-gray-300 mx-auto" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3">{t('ideaToMvp.getMatched')}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{t('ideaToMvp.getMatchedDesc')}</p>
+            </div>
+
+            <div className="text-center">
+              <div className="relative mb-6">
+                <div className="bg-gray-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                  <Wrench className="h-10 w-10 text-green-500" />
+                </div>
+                <div className="hidden lg:block absolute top-10 left-full w-full">
+                  <ArrowRight className="h-6 w-6 text-gray-300 mx-auto" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3">{t('ideaToMvp.buildLearn')}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{t('ideaToMvp.buildLearnDesc')}</p>
+            </div>
+
+            <div className="text-center">
+              <div className="relative mb-6">
+                <div className="bg-gray-50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+                  <Rocket className="h-10 w-10 text-purple-500" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3">{t('ideaToMvp.launchMvp')}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{t('ideaToMvp.launchMvpDesc')}</p>
+            </div>
           </div>
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">Ready to Turn Your Idea into Reality?</h3>
+            <h3 className="text-2xl font-bold mb-4">{t('ideaToMvp.readyToTurn')}</h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Join our platform and get access to expert guidance, cutting-edge tools, 
-              and collaborative spaces designed to help you build and launch your MVP successfully.
+              {t('ideaToMvp.readyToTurnDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-blue-500 hover:bg-blue-600" asChild>
                 <Link to="/build-bundle" className="flex items-center gap-2">
-                  Start Your MVP Journey
+                  {t('ideaToMvp.startJourney')}
                   <Rocket className="h-5 w-5" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link to="/discover-spaces">
-                  Explore Our Ecosystem
+                  {t('ideaToMvp.exploreEcosystem')}
                 </Link>
               </Button>
             </div>
