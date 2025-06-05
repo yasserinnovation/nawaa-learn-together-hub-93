@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -153,7 +154,7 @@ const SpaceSelection = ({ bundle, updateBundle }: SpaceSelectionProps) => {
                 className="w-full h-full object-cover"
               />
               <Badge className="absolute top-3 right-3 bg-yellow-500">
-                EGP {space.pricePerHour}/hour
+                {space.pricePerHour} جنيه/ساعة
               </Badge>
             </div>
             <CardContent className="pt-4">

@@ -132,7 +132,7 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
             <span>Up to {space.capacity} people</span>
           </div>
           <div className="font-semibold">
-            {space.pricePerHour} SAR/hour
+            {space.pricePerHour} جنيه/ساعة
           </div>
         </div>
       </CardContent>

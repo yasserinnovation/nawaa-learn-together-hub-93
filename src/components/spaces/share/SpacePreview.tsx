@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Calendar, Clock, CheckCircle } from "lucide-react";
 import { SpaceFormData } from "@/pages/ShareYourSpace";
@@ -25,7 +26,7 @@ const SpacePreview = ({ spaceData, onEdit, onSubmit }: SpacePreviewProps) => {
       case "free":
         return "Free (Community Contribution)";
       case "fixed":
-        return `${price} SAR per hour`;
+        return `${price} جنيه per hour`;
       case "donation":
         return "Donation Based (Pay What You Can)";
       default:
