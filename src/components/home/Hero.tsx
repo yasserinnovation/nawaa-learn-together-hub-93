@@ -15,7 +15,7 @@ const Hero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black">
               {t('hero.title')}
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8">
+            <p className="text-lg md:text-xl text-black mb-8">
               {t('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
@@ -32,14 +32,14 @@ const Hero = () => {
                 </Link>
               </Button>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-600">
-              <Button variant="link" className="text-gray-800 p-0" asChild>
+            <div className="flex flex-col sm:flex-row gap-4 text-sm text-black">
+              <Button variant="link" className="text-black p-0" asChild>
                 <Link to="/discover-spaces" className="flex items-center gap-1">
                   <MapPin className="h-4 w-4" />
                   {t('hero.exploreSpaces')}
                 </Link>
               </Button>
-              <Button variant="link" className="text-gray-800 p-0" asChild>
+              <Button variant="link" className="text-black p-0" asChild>
                 <Link to="/share-your-space">
                   {t('hero.shareSpace')}
                 </Link>

@@ -11,10 +11,10 @@ const BundleSection = () => {
     <section className="py-16 bg-gradient-to-r from-yellow-50 to-yellow-100">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
             {t('bundle.title')}
           </h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {t('bundle.subtitle')}
           </p>
         </div>
@@ -24,8 +24,8 @@ const BundleSection = () => {
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
               <Users size={24} />
             </div>
-            <h3 className="text-xl font-semibold mb-2">1. {t('bundle.chooseTrainer')}</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-black">1. {t('bundle.chooseTrainer')}</h3>
+            <p className="text-black mb-4">
               {t('bundle.chooseTrainerDesc')}
             </p>
             <Link to="/build-bundle?step=trainer">
@@ -39,8 +39,8 @@ const BundleSection = () => {
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
               <MapPin size={24} />
             </div>
-            <h3 className="text-xl font-semibold mb-2">2. {t('bundle.pickSpace')}</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-black">2. {t('bundle.pickSpace')}</h3>
+            <p className="text-black mb-4">
               {t('bundle.pickSpaceDesc')}
             </p>
             <Link to="/build-bundle?step=space">
@@ -54,8 +54,8 @@ const BundleSection = () => {
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
               <Hammer size={24} />
             </div>
-            <h3 className="text-xl font-semibold mb-2">3. {t('bundle.selectTools')}</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-black">3. {t('bundle.selectTools')}</h3>
+            <p className="text-black mb-4">
               {t('bundle.selectToolsDesc')}
             </p>
             <Link to="/build-bundle?step=tools">
@@ -69,8 +69,8 @@ const BundleSection = () => {
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
               <Book size={24} />
             </div>
-            <h3 className="text-xl font-semibold mb-2">4. {t('bundle.pickCourse')}</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-black">4. {t('bundle.pickCourse')}</h3>
+            <p className="text-black mb-4">
               {t('bundle.pickCourseDesc')}
             </p>
             <Link to="/build-bundle?step=course">
@@ -84,8 +84,8 @@ const BundleSection = () => {
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
               <SlidersHorizontal size={24} />
             </div>
-            <h3 className="text-xl font-semibold mb-2">5. {t('bundle.setPreferences')}</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-black">5. {t('bundle.setPreferences')}</h3>
+            <p className="text-black mb-4">
               {t('bundle.setPreferencesDesc')}
             </p>
             <Link to="/build-bundle?step=audience">
@@ -99,8 +99,8 @@ const BundleSection = () => {
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600 mb-4">
               <ClipboardCheck size={24} />
             </div>
-            <h3 className="text-xl font-semibold mb-2">6. {t('bundle.reviewBundle')}</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-black">6. {t('bundle.reviewBundle')}</h3>
+            <p className="text-black mb-4">
               {t('bundle.reviewBundleDesc')}
             </p>
             <Link to="/build-bundle?step=preview">
@@ -113,7 +113,7 @@ const BundleSection = () => {
         
         <div className="text-center">
           <Link to="/build-bundle">
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-lg px-8 py-6 h-auto">
+            <Button className="bg-yellow-500 hover:bg-yellow-600 text-black text-lg px-8 py-6 h-auto">
               {t('bundle.startBuilding')}
             </Button>
           </Link>

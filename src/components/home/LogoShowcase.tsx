@@ -19,7 +19,7 @@ const LogoShowcase = () => {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-black">
             {t('logoShowcase.title')}
           </h2>
           
@@ -28,7 +28,7 @@ const LogoShowcase = () => {
             <div className="bg-white rounded-lg overflow-hidden shadow-lg">
               {!illustrationLoaded && (
                 <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
-                  <p className="text-gray-500">Loading illustration...</p>
+                  <p className="text-black">Loading illustration...</p>
                 </div>
               )}
               <img 
@@ -41,7 +41,7 @@ const LogoShowcase = () => {
             </div>
           </div>
           
-          <p className="mt-8 text-lg text-gray-700 max-w-3xl mx-auto text-center">
+          <p className="mt-8 text-lg text-black max-w-3xl mx-auto text-center">
             {t('logoShowcase.description')}
           </p>
         </div>

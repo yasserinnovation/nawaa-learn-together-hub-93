@@ -11,7 +11,7 @@ const ToolsHero = () => {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
             Access Learning Tools
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 mb-8">
+          <p className="text-lg md:text-xl text-black mb-8">
             Find, rent, or buy the tech learning tools you need from our community marketplace.
             Share your own tools to help others learn.
           </p>
@@ -22,7 +22,7 @@ const ToolsHero = () => {
                 <Hammer className="h-10 w-10 text-black" />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-black">Quality Tools</h3>
-              <p className="text-gray-600">
+              <p className="text-black">
                 Access a variety of educational tech tools without the high cost of purchasing new.
               </p>
             </div>
@@ -32,7 +32,7 @@ const ToolsHero = () => {
                 <Search className="h-10 w-10 text-black" />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-black">Find What You Need</h3>
-              <p className="text-gray-600">
+              <p className="text-black">
                 Filter by age group, tool type, price range, and location to find exactly what you need.
               </p>
             </div>
@@ -42,7 +42,7 @@ const ToolsHero = () => {
                 <Tag className="h-10 w-10 text-black" />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-black">Affordable Options</h3>
-              <p className="text-gray-600">
+              <p className="text-black">
                 Rent tools for a fraction of the purchase price or find gently used items at great rates.
               </p>
             </div>
