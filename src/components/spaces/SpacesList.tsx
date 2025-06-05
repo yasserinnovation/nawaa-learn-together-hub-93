@@ -380,7 +380,7 @@ const mockSpaces: Space[] = [
     owner: "Fantasia Academy",
     description: "تقدم برامج في الروبوتات والبرمجة مع التركيز على مهارات العرض والتقديم وشاركت في بطولات دولية للأطفال 5-17 سنة",
     images: [
-      "/lovable-uploads/a727a0a8-9b6d-4f33-aeb7-32dd21c44aae.png"
+      "/lovable-uploads/8a4851c0-946b-4890-88c1-a1f4371febc3.png"
     ],
     equipment: ["Robotics Kits", "Programming Tools", "Presentation Tools", "AI Tools"],
     capacity: 22,
