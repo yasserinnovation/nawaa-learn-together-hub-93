@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -173,6 +174,29 @@ const translations = {
     'assessment.courseMatchingDesc': 'احصل على توصيات شخصية لمسار التعلم المثالي',
     'assessment.startAssessment': 'ابدأ التقييم الذكي',
     'assessment.duration': 'يستغرق فقط 5-10 دقائق • مجاني 100%',
+    
+    // Bundle Section
+    'bundle.title': 'ابن حزمة التعلم الخاصة بك',
+    'bundle.subtitle': 'امزج واختر المزيج المثالي من المدرب والأدوات والمساحة والمحتوى — كل ذلك مصمم خصيصاً لأهدافك.',
+    'bundle.chooseTrainer': 'اختر المدرب',
+    'bundle.chooseTrainerDesc': 'ابحث عن مدربين خبراء متخصصين في الروبوتات والبرمجة والتصميم ثلاثي الأبعاد والمزيد.',
+    'bundle.chooseTrainerAction': 'ابدأ من هنا →',
+    'bundle.pickSpace': 'اختر المساحة',
+    'bundle.pickSpaceDesc': 'اختر من المكتبات ومساحات العمل المشتركة ومساحات الصناع المثالية للتعلم.',
+    'bundle.pickSpaceAction': 'استكشف المساحات →',
+    'bundle.selectTools': 'اختر الأدوات',
+    'bundle.selectToolsDesc': 'اختر من مجموعات الأردوينو والأقلام ثلاثية الأبعاد والروبوتات والمزيد لجلستك.',
+    'bundle.selectToolsAction': 'تصفح الأدوات →',
+    'bundle.pickCourse': 'اختر الدورة',
+    'bundle.pickCourseDesc': 'اختر من الدورات المنسقة أو دع مدربك يحدد دورة مخصصة.',
+    'bundle.pickCourseAction': 'شاهد الدورات →',
+    'bundle.setPreferences': 'اضبط التفضيلات',
+    'bundle.setPreferencesDesc': 'خصص لجمهورك مع خيارات اللغة والفئة العمرية والجدولة.',
+    'bundle.setPreferencesAction': 'اضبط →',
+    'bundle.reviewBundle': 'راجع الحزمة',
+    'bundle.reviewBundleDesc': 'اعرض حزمة التعلم الكاملة قبل التأكيد والحجز.',
+    'bundle.reviewBundleAction': 'اكمل →',
+    'bundle.startBuilding': 'ابدأ ببناء حزمتك',
     
     // Testimonials
     'testimonials.title': 'ماذا يقول مجتمعنا',
