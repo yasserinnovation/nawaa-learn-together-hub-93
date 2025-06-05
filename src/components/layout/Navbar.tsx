@@ -22,12 +22,16 @@ const Navbar = () => {
     console.error("Failed to load logo");
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className="border-b bg-white sticky top-0 z-50">
+    <header className="border-b bg-white sticky top-0 z-50" role="banner">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2" aria-label="Nawaa home page">
           <div className="bg-black rounded-md p-1 h-12 w-auto flex items-center justify-center">
-            {!logoLoaded && <div className="h-8 w-8 bg-gray-800"></div>}
+            {!logoLoaded && <div className="h-8 w-8 bg-gray-800" aria-hidden="true"></div>}
             <img 
               src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
               alt="Nawaa Logo"
@@ -36,14 +40,15 @@ const Navbar = () => {
               onError={handleLogoError}
             />
           </div>
-          <span className="font-bold text-xl">Nawaa</span>
+          <span className="font-bold text-xl text-black">Nawaa</span>
         </Link>
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden text-gray-700"
+          className="lg:hidden text-gray-700 p-2"
           onClick={toggleMenu}
-          aria-label="Toggle menu"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,6 +56,7 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             className="w-6 h-6"
+            aria-hidden="true"
           >
             {isMenuOpen ? (
               <path
@@ -71,36 +77,38 @@ const Navbar = () => {
         </button>
 
         {/* Desktop navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
-          <Link to="/" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.home')}
+        <nav className="hidden lg:flex items-center gap-6" role="navigation" aria-label="Main navigation">
+          <Link to="/" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.home') || 'Home'}
           </Link>
-          <Link to="/courses" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.courses')}
+          <Link to="/courses" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.courses') || 'Courses'}
           </Link>
-          <Link to="/find-trainers" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.findTrainers')}
+          <Link to="/find-trainers" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.findTrainers') || 'Find Trainers'}
           </Link>
-          <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.discoverSpaces')}
+          <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.discoverSpaces') || 'Discover Spaces'}
           </Link>
-          <Link to="/access-tools" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.accessTools')}
+          <Link to="/access-tools" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.accessTools') || 'Access Tools'}
           </Link>
-          <Link to="/build-bundle" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.buildBundle')}
+          <Link to="/build-bundle" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.buildBundle') || 'Build Bundle'}
           </Link>
-          <Link to="/contact" className="text-gray-700 hover:text-yellow-600">
-            {t('nav.contact')}
+          <Link to="/contact" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.contact') || 'Contact'}
           </Link>
         </nav>
 
         {/* Auth buttons and language switcher */}
         <div className="hidden lg:flex items-center gap-4">
           <LanguageSwitcher />
-          <Button variant="outline">{t('nav.signIn')}</Button>
-          <Button className="bg-yellow-500 hover:bg-yellow-600">
-            {t('nav.signUp')}
+          <Button variant="outline" className="text-black border-black hover:bg-gray-100">
+            {t('nav.signIn') || 'Sign In'}
+          </Button>
+          <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
+            {t('nav.signUp') || 'Sign Up'}
           </Button>
         </div>
 
@@ -110,62 +118,62 @@ const Navbar = () => {
             <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
               <Link
                 to="/"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.home')}
+                {t('nav.home') || 'Home'}
               </Link>
               <Link
                 to="/courses"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.courses')}
+                {t('nav.courses') || 'Courses'}
               </Link>
               <Link
                 to="/find-trainers"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.findTrainers')}
+                {t('nav.findTrainers') || 'Find Trainers'}
               </Link>
               <Link
                 to="/discover-spaces"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.discoverSpaces')}
+                {t('nav.discoverSpaces') || 'Discover Spaces'}
               </Link>
               <Link
                 to="/access-tools"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.accessTools')}
+                {t('nav.accessTools') || 'Access Tools'}
               </Link>
               <Link
                 to="/build-bundle"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.buildBundle')}
+                {t('nav.buildBundle') || 'Build Bundle'}
               </Link>
               <Link
                 to="/contact"
-                className="text-gray-700 hover:text-yellow-600 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
               >
-                {t('nav.contact')}
+                {t('nav.contact') || 'Contact'}
               </Link>
               <div className="flex items-center justify-between">
                 <LanguageSwitcher />
               </div>
               <div className="flex flex-col gap-2 mt-2">
-                <Button variant="outline" className="w-full">
-                  {t('nav.signIn')}
+                <Button variant="outline" className="w-full text-black border-black hover:bg-gray-100">
+                  {t('nav.signIn') || 'Sign In'}
                 </Button>
-                <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
-                  {t('nav.signUp')}
+                <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-black">
+                  {t('nav.signUp') || 'Sign Up'}
                 </Button>
               </div>
             </div>
