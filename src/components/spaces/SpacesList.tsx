@@ -1,4 +1,3 @@
-
 import { SpaceFilter, Space } from "@/types/space";
 import SpaceCard from "./SpaceCard";
 import { useMemo } from "react";
@@ -381,7 +380,7 @@ const mockSpaces: Space[] = [
     owner: "Fantasia Academy",
     description: "تقدم برامج في الروبوتات والبرمجة مع التركيز على مهارات العرض والتقديم وشاركت في بطولات دولية للأطفال 5-17 سنة",
     images: [
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7"
+      "/lovable-uploads/a727a0a8-9b6d-4f33-aeb7-32dd21c44aae.png"
     ],
     equipment: ["Robotics Kits", "Programming Tools", "Presentation Tools", "AI Tools"],
     capacity: 22,
