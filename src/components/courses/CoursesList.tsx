@@ -22,9 +22,12 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
     ? courses 
     : courses.filter(course => course.category === activeTab);
 
-  // Get translated course content
+  // Get translated course content - fallback to course data since course translations aren't available yet
   const getCourseTranslation = (courseId: number, key: string, fallback: string) => {
-    return t(`course.${courseId}.${key}`) || fallback;
+    const translationKey = `course.${courseId}.${key}`;
+    const translation = t(translationKey);
+    // If translation doesn't exist (returns the key), return the fallback
+    return translation === translationKey ? fallback : translation;
   };
 
   return (

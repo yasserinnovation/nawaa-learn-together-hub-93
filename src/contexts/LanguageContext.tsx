@@ -108,6 +108,24 @@ const translations = {
     'cta.startBuilding': 'Start Building Now',
     'cta.contactUs': 'Contact Us',
     
+    // Courses
+    'courses.title': 'Our Learning Programs',
+    'courses.allCourses': 'All Courses',
+    'courses.technology': 'Technology',
+    'courses.science': 'Science',
+    'courses.mathematics': 'Mathematics',
+    'courses.ages': 'Ages',
+    'courses.stemFocus': 'STEM Focus',
+    'courses.lifeSkills': 'Life Skills',
+    'courses.viewDetails': 'View Details',
+    'courses.resourcesTitle': 'Everything You Need to Succeed',
+    'courses.teacherGuides': 'Complete teacher guides with step-by-step instructions',
+    'courses.studentJournals': 'Interactive student journals for reflection and documentation',
+    'courses.worksheets': 'Printable worksheets and activity templates',
+    'courses.assessmentRubrics': 'Assessment rubrics and progress tracking tools',
+    'courses.onlinePlatform': 'Online platform access with video tutorials',
+    'courses.findSpace': 'Find a Space to Learn',
+
     // Common
     'common.getStarted': 'Get Started',
     'common.learnMore': 'Learn More',
@@ -211,6 +229,24 @@ const translations = {
     'cta.startBuilding': 'ابدأ البناء الآن',
     'cta.contactUs': 'تواصل معنا',
     
+    // Courses
+    'courses.title': 'برامجنا التعليمية',
+    'courses.allCourses': 'جميع الدورات',
+    'courses.technology': 'التكنولوجيا',
+    'courses.science': 'العلوم',
+    'courses.mathematics': 'الرياضيات',
+    'courses.ages': 'الأعمار',
+    'courses.stemFocus': 'تركيز العلوم والتكنولوجيا',
+    'courses.lifeSkills': 'مهارات الحياة',
+    'courses.viewDetails': 'عرض التفاصيل',
+    'courses.resourcesTitle': 'كل ما تحتاجه للنجاح',
+    'courses.teacherGuides': 'أدلة المعلمين الكاملة مع تعليمات خطوة بخطوة',
+    'courses.studentJournals': 'مجلات الطلاب التفاعلية للتأمل والتوثيق',
+    'courses.worksheets': 'أوراق العمل القابلة للطباعة وقوالب الأنشطة',
+    'courses.assessmentRubrics': 'معايير التقييم وأدوات تتبع التقدم',
+    'courses.onlinePlatform': 'الوصول إلى المنصة الإلكترونية مع دروس الفيديو',
+    'courses.findSpace': 'ابحث عن مكان للتعلم',
+
     // Common
     'common.getStarted': 'ابدأ الآن',
     'common.learnMore': 'تعلم المزيد',
