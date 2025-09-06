@@ -5,6 +5,8 @@ import { MapPin, Users, Clock, Wifi } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import SpaceCard from "./SpaceCard";
 import { SpaceFilter, Space } from "@/types/space";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import ScrollReveal from "@/components/common/ScrollReveal";
 
 interface SpacesListProps {
   filters: SpaceFilter;
@@ -86,37 +88,53 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="text-lg">Loading spaces...</div>
+        <LoadingSpinner size="lg" text="Loading spaces..." />
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Available Spaces ({filteredSpaces.length})</h2>
-        <select className="py-2 px-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500">
-          <option>Sort by: Recommended</option>
-          <option>Sort by: Price (Low to High)</option>
-          <option>Sort by: Rating</option>
-          <option>Sort by: Capacity</option>
-        </select>
-      </div>
+    <ScrollReveal>
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">
+            Available Spaces ({filteredSpaces.length})
+          </h2>
+          <select className="py-2 px-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 bg-white shadow-sm hover:shadow-md">
+            <option>Sort by: Recommended</option>
+            <option>Sort by: Price (Low to High)</option>
+            <option>Sort by: Rating</option>
+            <option>Sort by: Capacity</option>
+          </select>
+        </div>
 
-      {filteredSpaces.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredSpaces.map(space => (
-            <SpaceCard key={space.id} space={space} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12">
-          <p className="text-lg text-gray-500">
-            No spaces match your current filters. Try adjusting your criteria.
-          </p>
-        </div>
-      )}
-    </div>
+        {filteredSpaces.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {filteredSpaces.map((space, index) => (
+              <ScrollReveal key={space.id} delay={index * 100}>
+                <SpaceCard space={space} />
+              </ScrollReveal>
+            ))}
+          </div>
+        ) : (
+          <ScrollReveal>
+            <div className="text-center py-16 bg-gray-50 rounded-2xl">
+              <div className="max-w-md mx-auto">
+                <div className="mb-4">
+                  <MapPin className="h-16 w-16 text-gray-300 mx-auto" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                  No spaces found
+                </h3>
+                <p className="text-gray-500">
+                  No spaces match your current filters. Try adjusting your criteria to see more results.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
+      </div>
+    </ScrollReveal>
   );
 };
 
