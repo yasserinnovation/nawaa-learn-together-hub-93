@@ -22,7 +22,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   const fetchSpaces = async () => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('spaces')
         .select('*')
         .order('created_at', { ascending: false });

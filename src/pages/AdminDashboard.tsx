@@ -46,7 +46,7 @@ const AdminDashboard = () => {
 
   const fetchSpaces = async () => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('spaces')
         .select('*')
         .order('created_at', { ascending: false });
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
 
   const handleAddSpace = async (newSpaceData: any) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('spaces')
         .insert([{
           name: newSpaceData.name,
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
 
   const handleEditSpace = async (updatedSpaceData: any) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('spaces')
         .update({
           name: updatedSpaceData.name,
@@ -138,7 +138,7 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this space?')) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('spaces')
         .delete()
         .eq('id', spaceId);
@@ -289,7 +289,7 @@ const AdminDashboard = () => {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleEditSpace(space)}
+                          onClick={() => setEditingSpace(space)}
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
