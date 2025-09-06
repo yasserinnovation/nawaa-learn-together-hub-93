@@ -84,9 +84,6 @@ const Navbar = () => {
           <Link to="/courses" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.courses') || 'Courses'}
           </Link>
-          <Link to="/find-trainers" className="text-gray-700 hover:text-yellow-600 transition-colors">
-            {t('nav.findTrainers') || 'Find Trainers'}
-          </Link>
           <Link to="/discover-spaces" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.discoverSpaces') || 'Discover Spaces'}
           </Link>
@@ -135,13 +132,6 @@ const Navbar = () => {
                 onClick={closeMenu}
               >
                 {t('nav.courses') || 'Courses'}
-              </Link>
-              <Link
-                to="/find-trainers"
-                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
-                onClick={closeMenu}
-              >
-                {t('nav.findTrainers') || 'Find Trainers'}
               </Link>
               <Link
                 to="/discover-spaces"
