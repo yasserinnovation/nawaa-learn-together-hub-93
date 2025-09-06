@@ -5,7 +5,6 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import HowItWorks from "@/components/home/HowItWorks";
 import Testimonials from "@/components/home/Testimonials";
 import CTASection from "@/components/home/CTASection";
-import BundleSection from "@/components/home/BundleSection";
 import LogoShowcase from "@/components/home/LogoShowcase";
 import AssessmentSection from "@/components/home/AssessmentSection";
 import IdeaToMVPSection from "@/components/home/IdeaToMVPSection";
@@ -18,7 +17,6 @@ const Index = () => {
       <IdeaToMVPSection />
       <AssessmentSection />
       <FeaturesSection />
-      <BundleSection />
       <HowItWorks />
       <Testimonials />
       <CTASection />

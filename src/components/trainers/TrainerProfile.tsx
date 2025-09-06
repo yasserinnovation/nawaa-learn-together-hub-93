@@ -7,7 +7,6 @@ import {
   Star, MapPin, Calendar, Award, Languages, Users, 
   Mail, Phone, Clock, Briefcase, GraduationCap 
 } from "lucide-react";
-import BundleNavigation from "@/components/bundle/BundleNavigation";
 
 // Mock data for a single trainer
 const mockTrainer = {
@@ -235,7 +234,7 @@ const TrainerProfile = () => {
           </div>
           
           <div className="space-y-6">
-            {/* Contact & Bundle Builder */}
+            {/* Contact Trainer */}
             <div className="bg-white shadow rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4">Contact {trainer.name}</h2>
               <div className="space-y-3 mb-6">
@@ -249,14 +248,10 @@ const TrainerProfile = () => {
                 </Button>
               </div>
               
-              <Link to={`/build-bundle?step=trainer&trainerId=${trainer.id}`}>
-                <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
-                  Add to Your Bundle
-                </Button>
-              </Link>
+              <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
+                Book Training Session
+              </Button>
             </div>
-            
-            <BundleNavigation compact currentStepId="trainer" />
           </div>
         </div>
       </div>

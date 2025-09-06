@@ -193,7 +193,7 @@ const CourseDetail = () => {
             
             <div className="flex justify-center mb-8">
               <Button asChild className="bg-yellow-500 hover:bg-yellow-600">
-                <Link to="/build-bundle">{t('courseDetail.buildBundle')}</Link>
+                <Link to="/smart-assessment">{t('courseDetail.takeAssessment') || 'Take Assessment'}</Link>
               </Button>
             </div>
           </div>

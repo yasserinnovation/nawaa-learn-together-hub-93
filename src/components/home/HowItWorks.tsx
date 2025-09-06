@@ -89,8 +89,8 @@ const HowItWorks = () => {
           </div>
 
           <div className="mt-16 text-center">
-            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600" asChild>
-              <Link to="/build-bundle">{t('howItWorks.startJourney')}</Link>
+          <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600" asChild>
+            <Link to="/smart-assessment">{t('howItWorks.startAssessment') || 'Start Assessment'}</Link>
             </Button>
           </div>
         </div>

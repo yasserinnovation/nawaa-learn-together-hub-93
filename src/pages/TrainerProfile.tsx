@@ -212,7 +212,7 @@ const TrainerProfile = () => {
                 
                 <div className="mt-6 space-y-3">
                   <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
-                    Add to Bundle
+                    Contact Trainer
                   </Button>
                   <Button variant="outline" className="w-full">
                     Contact Trainer
@@ -333,7 +333,7 @@ const TrainerProfile = () => {
                         <p className="mt-2">A beginner-friendly introduction to robotics using LEGO EV3 kits. Students will learn basic programming concepts and build their first working robot.</p>
                         <div className="mt-3 flex justify-between items-center">
                           <span className="font-medium">SAR 850</span>
-                          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">Add to Bundle</Button>
+                          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">Enroll Now</Button>
                         </div>
                       </div>
                       
@@ -343,7 +343,7 @@ const TrainerProfile = () => {
                         <p className="mt-2">Learn the fundamentals of electronic circuits with hands-on projects including LED lights, buzzers, and sensors.</p>
                         <div className="mt-3 flex justify-between items-center">
                           <span className="font-medium">SAR 650</span>
-                          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">Add to Bundle</Button>
+                          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">Enroll Now</Button>
                         </div>
                       </div>
                       
@@ -353,7 +353,7 @@ const TrainerProfile = () => {
                         <p className="mt-2">Prepare for regional robotics competitions with advanced techniques, strategy development, and team collaboration.</p>
                         <div className="mt-3 flex justify-between items-center">
                           <span className="font-medium">SAR 1200</span>
-                          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">Add to Bundle</Button>
+                          <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">Enroll Now</Button>
                         </div>
                       </div>
                     </div>
@@ -371,9 +371,9 @@ const TrainerProfile = () => {
                       <Clock className="h-10 w-10 mx-auto text-gray-400 mb-2" />
                       <h3 className="text-lg font-medium mb-2">Calendar Booking</h3>
                       <p className="text-gray-500 mb-4">
-                        To view detailed availability and book specific time slots, please add this trainer to your bundle or contact them directly.
+                        To view detailed availability and book specific time slots, please contact the trainer directly.
                       </p>
-                      <Button className="bg-yellow-500 hover:bg-yellow-600">Add to Bundle</Button>
+                      <Button className="bg-yellow-500 hover:bg-yellow-600">Contact Trainer</Button>
                     </div>
                   </CardContent>
                 </Card>

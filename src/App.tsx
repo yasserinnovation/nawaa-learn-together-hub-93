@@ -12,7 +12,6 @@ import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import SmartAssessment from "./pages/SmartAssessment";
 import AccessTools from "./pages/AccessTools";
-import BuildBundle from "./pages/BuildBundle";
 import FindTrainers from "./pages/FindTrainers";
 import TrainerProfile from "./pages/TrainerProfile";
 import ShareYourSpace from "./pages/ShareYourSpace";
@@ -37,7 +36,6 @@ const App = () => (
             <Route path="/courses/:courseId" element={<CourseDetail />} />
             <Route path="/smart-assessment" element={<SmartAssessment />} />
             <Route path="/access-tools" element={<AccessTools />} />
-            <Route path="/build-bundle" element={<BuildBundle />} />
             <Route path="/find-trainers" element={<FindTrainers />} />
             <Route path="/trainers/:id" element={<TrainerProfile />} />
             <Route path="/share-your-space" element={<ShareYourSpace />} />

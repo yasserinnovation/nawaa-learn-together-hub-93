@@ -77,11 +77,11 @@ const IdeaToMVPSection = () => {
               {t('ideaToMvp.readyToTurnDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-500 hover:bg-blue-600" asChild>
-                <Link to="/build-bundle" className="flex items-center gap-2">
-                  {t('ideaToMvp.startJourney')}
-                  <Rocket className="h-5 w-5" />
-                </Link>
+            <Button size="lg" className="bg-blue-500 hover:bg-blue-600" asChild>
+              <Link to="/smart-assessment" className="flex items-center gap-2">
+                {t('ideaToMvp.takeAssessment') || 'Take Assessment'}
+                <Rocket className="h-5 w-5" />
+              </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link to="/discover-spaces">

@@ -19,11 +19,11 @@ const Hero = () => {
               {t('hero.subtitle') || 'Connect with expert trainers, access cutting-edge tools, and find collaborative spaces to bring your innovative ideas to life.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
-              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black" asChild>
-                <Link to="/build-bundle" className="flex items-center gap-2" aria-label="Start building your learning bundle">
-                  {t('hero.startBuilding') || 'Start Building'}
-                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                </Link>
+            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black" asChild>
+              <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take smart assessment">
+                {t('hero.startAssessment') || 'Take Assessment'}
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-black text-black hover:bg-gray-100" asChild>
                 <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take smart assessment">

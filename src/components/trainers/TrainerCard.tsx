@@ -88,9 +88,9 @@ const TrainerCard = ({ trainer }: TrainerCardProps) => {
             <Button 
               variant="outline" 
               className="w-full"
-              onClick={() => navigate(`/build-bundle?trainerId=${trainer.id}`)}
+              onClick={() => navigate(`/courses`)}
             >
-              Add to Bundle
+              View Courses
             </Button>
           </div>
         </div>

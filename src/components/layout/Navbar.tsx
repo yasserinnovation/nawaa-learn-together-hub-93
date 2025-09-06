@@ -93,8 +93,8 @@ const Navbar = () => {
           <Link to="/access-tools" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.accessTools') || 'Access Tools'}
           </Link>
-          <Link to="/build-bundle" className="text-gray-700 hover:text-yellow-600 transition-colors">
-            {t('nav.buildBundle') || 'Build Bundle'}
+          <Link to="/smart-assessment" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            {t('nav.smartAssessment') || 'Smart Assessment'}
           </Link>
           <Link to="/contact" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.contact') || 'Contact'}
@@ -152,11 +152,11 @@ const Navbar = () => {
                 {t('nav.accessTools') || 'Access Tools'}
               </Link>
               <Link
-                to="/build-bundle"
+                to="/smart-assessment"
                 className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
                 onClick={closeMenu}
               >
-                {t('nav.buildBundle') || 'Build Bundle'}
+                {t('nav.smartAssessment') || 'Smart Assessment'}
               </Link>
               <Link
                 to="/contact"

@@ -18,11 +18,11 @@ const CTASection = () => {
             {t('cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-yellow-500 text-black hover:bg-yellow-600" asChild>
-              <Link to="/build-bundle" className="flex items-center gap-2">
-                {t('cta.startBuilding')}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
+          <Button size="lg" className="bg-yellow-500 text-black hover:bg-yellow-600" asChild>
+            <Link to="/smart-assessment" className="flex items-center gap-2">
+              {t('cta.takeAssessment') || 'Take Assessment'}
+              <ArrowRight className="h-5 w-5" />
+            </Link>
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black" asChild>
               <Link to="/contact" className="flex items-center gap-2">
