@@ -99,6 +99,9 @@ const Navbar = () => {
           <Link to="/contact" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.contact') || 'Contact'}
           </Link>
+          <Link to="/admin" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            Admin
+          </Link>
         </nav>
 
         {/* Auth buttons and language switcher */}
@@ -164,6 +167,13 @@ const Navbar = () => {
                 onClick={closeMenu}
               >
                 {t('nav.contact') || 'Contact'}
+              </Link>
+              <Link
+                to="/admin"
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
+              >
+                Admin
               </Link>
               <div className="flex items-center justify-between">
                 <LanguageSwitcher />

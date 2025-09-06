@@ -16,6 +16,7 @@ import FindTrainers from "./pages/FindTrainers";
 import TrainerProfile from "./pages/TrainerProfile";
 import ShareYourSpace from "./pages/ShareYourSpace";
 import AddTool from "./pages/AddTool";
+import AdminDashboard from "./pages/AdminDashboard";
 import TrainerSignup from "./pages/TrainerSignup";
 import TrainerDashboard from "./pages/TrainerDashboard";
 
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/add-tool" element={<AddTool />} />
             <Route path="/trainer-signup" element={<TrainerSignup />} />
             <Route path="/trainer-dashboard" element={<TrainerDashboard />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
