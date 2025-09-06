@@ -93,6 +93,9 @@ const Navbar = () => {
           <Link to="/access-tools" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.accessTools') || 'Access Tools'}
           </Link>
+          <Link to="/competitions-guide" className="text-gray-700 hover:text-yellow-600 transition-colors">
+            دليل المسابقات
+          </Link>
           <Link to="/smart-assessment" className="text-gray-700 hover:text-yellow-600 transition-colors">
             {t('nav.smartAssessment') || 'Smart Assessment'}
           </Link>
@@ -153,6 +156,13 @@ const Navbar = () => {
                 onClick={closeMenu}
               >
                 {t('nav.accessTools') || 'Access Tools'}
+              </Link>
+              <Link
+                to="/competitions-guide"
+                className="text-gray-700 hover:text-yellow-600 py-2 transition-colors"
+                onClick={closeMenu}
+              >
+                دليل المسابقات
               </Link>
               <Link
                 to="/smart-assessment"
