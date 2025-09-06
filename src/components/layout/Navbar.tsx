@@ -1,16 +1,18 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, Users, BookOpen, MapPin, Wrench, Trophy, Brain, MessageSquare, Shield } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { t } = useLanguage();
+  const [showAdminMenu, setShowAdminMenu] = useState(false);
+  const { t, language } = useLanguage();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,6 +28,7 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setShowAdminMenu(false);
   };
 
   // Handle scroll effect
@@ -38,160 +41,257 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  const isActivePath = (path: string) => location.pathname === path;
+
+  const navItems = [
+    { 
+      path: "/", 
+      label: t('nav.home') || 'Home', 
+      icon: BookOpen,
+      isActive: isActivePath("/")
+    },
+    { 
+      path: "/courses", 
+      label: t('nav.courses') || 'Courses', 
+      icon: BookOpen,
+      isActive: isActivePath("/courses")
+    },
+    { 
+      path: "/discover-spaces", 
+      label: t('nav.discoverSpaces') || 'Discover Spaces', 
+      icon: MapPin,
+      isActive: isActivePath("/discover-spaces")
+    },
+    { 
+      path: "/access-tools", 
+      label: t('nav.accessTools') || 'Access Tools', 
+      icon: Wrench,
+      isActive: isActivePath("/access-tools")
+    }
+  ];
+
+  const secondaryItems = [
+    { 
+      path: "/competitions-guide", 
+      label: language === 'ar' ? 'دليل المسابقات' : 'Competitions Guide', 
+      icon: Trophy,
+      isActive: isActivePath("/competitions-guide")
+    },
+    { 
+      path: "/smart-assessment", 
+      label: t('nav.smartAssessment') || 'Smart Assessment', 
+      icon: Brain,
+      isActive: isActivePath("/smart-assessment")
+    },
+    { 
+      path: "/contact", 
+      label: t('nav.contact') || 'Contact', 
+      icon: MessageSquare,
+      isActive: isActivePath("/contact")
+    }
+  ];
+
   return (
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-          : 'bg-white border-b border-gray-100'
+          ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-100' 
+          : 'bg-white/90 backdrop-blur-sm border-b border-gray-100'
       }`} 
       role="banner"
     >
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-3 group" aria-label="Nawaa home page">
-          <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-2 h-12 w-auto flex items-center justify-center shadow-md group-hover:shadow-glow transition-all duration-300">
-            {!logoLoaded && <div className="h-8 w-8 bg-primary-700 rounded-md" aria-hidden="true"></div>}
-            <img 
-              src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
-              alt="Nawaa Logo"
-              className={`h-8 w-auto transition-opacity duration-300 ${!logoLoaded ? 'opacity-0' : 'opacity-100'}`}
-              onLoad={handleLogoLoad}
-              onError={handleLogoError}
-            />
+      <div className="container mx-auto px-4 lg:px-6">
+        <div className="flex justify-between items-center h-16 lg:h-18">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group hover:scale-105 transition-all duration-200" 
+            aria-label="Nawaa home page"
+          >
+            <div className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-xl p-2.5 h-11 w-auto flex items-center justify-center shadow-lg group-hover:shadow-yellow transition-all duration-300">
+              {!logoLoaded && <div className="h-6 w-6 bg-yellow-600 rounded-md animate-pulse" aria-hidden="true"></div>}
+              <img 
+                src="/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png" 
+                alt="Nawaa Logo"
+                className={`h-6 w-auto transition-opacity duration-300 ${!logoLoaded ? 'opacity-0' : 'opacity-100'}`}
+                onLoad={handleLogoLoad}
+                onError={handleLogoError}
+              />
+            </div>
+            <span className="font-bold text-xl text-gray-900 group-hover:text-yellow-600 transition-colors font-poppins">
+              Nawaa
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center" role="navigation" aria-label="Main navigation">
+            {/* Primary Navigation */}
+            <div className="flex items-center gap-1 mr-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 group flex items-center gap-2 ${
+                    item.isActive
+                      ? 'text-yellow-600 bg-yellow-50 shadow-sm'
+                      : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50/50'
+                  }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.label}
+                  {item.isActive && (
+                    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-500 rounded-full"></span>
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            {/* Secondary Navigation */}
+            <div className="flex items-center gap-1 mr-8">
+              {secondaryItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 group flex items-center gap-2 ${
+                    item.isActive
+                      ? 'text-yellow-600 bg-yellow-50'
+                      : 'text-gray-600 hover:text-yellow-600 hover:bg-yellow-50/50'
+                  }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Admin Menu (Hidden by default) */}
+            <div className="relative mr-6">
+              <button
+                onClick={() => setShowAdminMenu(!showAdminMenu)}
+                className="flex items-center gap-1 px-3 py-2 text-xs text-gray-500 hover:text-yellow-600 transition-colors duration-200"
+                aria-expanded={showAdminMenu}
+              >
+                <Shield className="w-3 h-3" />
+                <ChevronDown className="w-3 h-3" />
+              </button>
+              
+              {showAdminMenu && (
+                <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[120px] animate-fade-in-up">
+                  <Link
+                    to="/admin"
+                    onClick={() => setShowAdminMenu(false)}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition-colors duration-200"
+                  >
+                    Admin Panel
+                  </Link>
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-3">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
+            {/* Auth Buttons - Desktop */}
+            <div className="hidden lg:flex items-center gap-3">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-medium"
+              >
+                {t('nav.signIn') || 'Sign In'}
+              </Button>
+              <Button 
+                size="sm"
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+              >
+                {t('nav.signUp') || 'Sign Up'}
+              </Button>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-yellow-600 transition-all duration-200"
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
           </div>
-          <span className="font-bold text-xl text-gray-900 group-hover:text-primary-600 transition-colors">Nawaa</span>
-        </Link>
-
-        {/* Mobile menu button */}
-        <button
-          className="lg:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
-        </button>
-
-        {/* Desktop navigation */}
-        <nav className="hidden lg:flex items-center gap-8" role="navigation" aria-label="Main navigation">
-          <Link to="/" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            {t('nav.home') || 'Home'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/courses" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            {t('nav.courses') || 'Courses'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/discover-spaces" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            {t('nav.discoverSpaces') || 'Discover Spaces'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/access-tools" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            {t('nav.accessTools') || 'Access Tools'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/competitions-guide" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            دليل المسابقات
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/smart-assessment" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            {t('nav.smartAssessment') || 'Smart Assessment'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/contact" className="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative group">
-            {t('nav.contact') || 'Contact'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
-          </Link>
-          <Link to="/admin" className="text-primary-600 hover:text-primary-700 transition-colors duration-200 font-medium">
-            Admin
-          </Link>
-        </nav>
-
-        {/* Auth buttons and language switcher */}
-        <div className="hidden lg:flex items-center gap-4">
-          <LanguageSwitcher />
-          <Button variant="ghost" className="text-gray-700 hover:text-gray-900">
-            {t('nav.signIn') || 'Sign In'}
-          </Button>
-          <Button size="default" className="shadow-md">
-            {t('nav.signUp') || 'Sign Up'}
-          </Button>
         </div>
 
-        {/* Mobile menu */}
+        {/* Enhanced Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b shadow-lg animate-slide-down">
-            <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              <Link
-                to="/"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                {t('nav.home') || 'Home'}
-              </Link>
-              <Link
-                to="/courses"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                {t('nav.courses') || 'Courses'}
-              </Link>
-              <Link
-                to="/discover-spaces"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                {t('nav.discoverSpaces') || 'Discover Spaces'}
-              </Link>
-              <Link
-                to="/access-tools"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                {t('nav.accessTools') || 'Access Tools'}
-              </Link>
-              <Link
-                to="/competitions-guide"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                دليل المسابقات
-              </Link>
-              <Link
-                to="/smart-assessment"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                {t('nav.smartAssessment') || 'Smart Assessment'}
-              </Link>
-              <Link
-                to="/contact"
-                className="text-gray-700 hover:text-primary-600 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                {t('nav.contact') || 'Contact'}
-              </Link>
-              <Link
-                to="/admin"
-                className="text-primary-600 hover:text-primary-700 py-3 transition-colors font-medium border-b border-gray-100 last:border-b-0"
-                onClick={closeMenu}
-              >
-                Admin
-              </Link>
-              
-              <div className="flex items-center justify-between pt-4 border-t">
-                <LanguageSwitcher />
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b shadow-xl animate-slide-in-right">
+            <div className="container mx-auto px-4 py-6">
+              {/* Primary Navigation */}
+              <div className="space-y-1 mb-6">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide px-3 mb-3">
+                  Main Navigation
+                </h3>
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
+                      item.isActive
+                        ? 'text-yellow-600 bg-yellow-50'
+                        : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50/50'
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    <item.icon className="w-5 h-5" />
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Secondary Navigation */}
+              <div className="space-y-1 mb-6 border-t border-gray-100 pt-6">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide px-3 mb-3">
+                  More
+                </h3>
+                {secondaryItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
+                      item.isActive
+                        ? 'text-yellow-600 bg-yellow-50'
+                        : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50/50'
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    <item.icon className="w-5 h-5" />
+                    {item.label}
+                  </Link>
+                ))}
               </div>
               
-              <div className="flex flex-col gap-3 mt-4">
-                <Button variant="ghost" className="w-full justify-start text-gray-700 hover:text-gray-900">
+              {/* Auth Buttons - Mobile */}
+              <div className="space-y-3 border-t border-gray-100 pt-6">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-medium h-12"
+                >
+                  <Users className="w-5 h-5 mr-3" />
                   {t('nav.signIn') || 'Sign In'}
                 </Button>
-                <Button className="w-full shadow-md">
+                <Button 
+                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold shadow-md h-12"
+                >
                   {t('nav.signUp') || 'Sign Up'}
                 </Button>
               </div>

@@ -15,10 +15,13 @@ const LanguageSwitcher = () => {
       variant="ghost"
       size="sm"
       onClick={toggleLanguage}
-      className="flex items-center gap-2"
+      className="flex items-center gap-2 text-gray-600 hover:text-yellow-600 hover:bg-yellow-50 transition-all duration-200 rounded-lg px-3 py-2 font-medium"
+      aria-label={`Switch to ${language === 'en' ? 'Arabic' : 'English'}`}
     >
       <Globe className="h-4 w-4" />
-      <span>{language === 'en' ? 'العربية' : 'English'}</span>
+      <span className="text-sm">
+        {language === 'en' ? 'العربية' : 'English'}
+      </span>
     </Button>
   );
 };
