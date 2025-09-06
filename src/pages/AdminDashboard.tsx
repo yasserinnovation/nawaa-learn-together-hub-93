@@ -46,6 +46,7 @@ const AdminDashboard = () => {
 
   const fetchSpaces = async () => {
     try {
+      // Fetch all spaces from the database
       const { data, error } = await (supabase as any)
         .from('spaces')
         .select('*')

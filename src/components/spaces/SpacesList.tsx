@@ -22,6 +22,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   const fetchSpaces = async () => {
     try {
+      // Query the spaces table from Supabase
       const { data, error } = await (supabase as any)
         .from('spaces')
         .select('*')
