@@ -207,17 +207,20 @@ const AdminDashboard = () => {
       
       if (error) throw error;
       
+      // Type the response properly
+      const statsData = data as any;
+      
       setStats({
-        totalUsers: data.total_users || 0,
-        totalSpaces: data.total_spaces || 0,
-        totalCourses: data.total_courses || 0,
-        totalTools: data.total_tools || 0,
-        totalCompetitions: data.total_competitions || 0,
-        avgUserRating: Number((data.avg_user_rating || 0).toFixed(1)),
-        avgSpaceRating: Number((data.avg_space_rating || 0).toFixed(1)),
-        totalReviews: data.total_reviews || 0,
-        activeUsersLast30Days: data.active_users_last_30_days || 0,
-        estimatedRevenue: Number((data.estimated_revenue || 0).toFixed(2)),
+        totalUsers: statsData.total_users || 0,
+        totalSpaces: statsData.total_spaces || 0,
+        totalCourses: statsData.total_courses || 0,
+        totalTools: statsData.total_tools || 0,
+        totalCompetitions: statsData.total_competitions || 0,
+        avgUserRating: Number((statsData.avg_user_rating || 0).toFixed(1)),
+        avgSpaceRating: Number((statsData.avg_space_rating || 0).toFixed(1)),
+        totalReviews: statsData.total_reviews || 0,
+        activeUsersLast30Days: statsData.active_users_last_30_days || 0,
+        estimatedRevenue: Number((statsData.estimated_revenue || 0).toFixed(2)),
       });
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);
@@ -237,7 +240,15 @@ const AdminDashboard = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setSpaces(data || []);
+      
+      // Type cast the data to match our Space interface
+      const spacesData: Space[] = (data || []).map((space: any) => ({
+        ...space,
+        coordinates: (space.coordinates as any) || { lat: 0, lng: 0 },
+        availability: (space.availability as any) || { days: [], hours: "" }
+      }));
+      
+      setSpaces(spacesData);
     } catch (error) {
       console.error('Error fetching spaces:', error);
       toast({
@@ -250,7 +261,7 @@ const AdminDashboard = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('courses')
         .select('*')
         .order('created_at', { ascending: false });
@@ -259,13 +270,17 @@ const AdminDashboard = () => {
       setCourses(data || []);
     } catch (error) {
       console.error('Error fetching courses:', error);
-      toast.error('Failed to fetch courses');
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch courses",
+        description: "Could not load courses data. Please try again.",
+      });
     }
   };
 
   const fetchTools = async () => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('tools')
         .select('*')
         .order('created_at', { ascending: false });
@@ -274,22 +289,37 @@ const AdminDashboard = () => {
       setTools(data || []);
     } catch (error) {
       console.error('Error fetching tools:', error);
-      toast.error('Failed to fetch tools');
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch tools",
+        description: "Could not load tools data. Please try again.",
+      });
     }
   };
 
   const fetchCompetitions = async () => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('competitions')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setCompetitions(data || []);
+      
+      // Type cast the data to match our Competition interface
+      const competitionsData: Competition[] = (data || []).map((comp: any) => ({
+        ...comp,
+        prizes: (comp.prizes as any) || []
+      }));
+      
+      setCompetitions(competitionsData);
     } catch (error) {
       console.error('Error fetching competitions:', error);
-      toast.error('Failed to fetch competitions');
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch competitions",
+        description: "Could not load competitions data. Please try again.",
+      });
     } finally {
       setLoading(false);
     }
@@ -297,7 +327,7 @@ const AdminDashboard = () => {
 
   const fetchProfiles = async () => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('profiles')
         .select('*')
         .order('created_at', { ascending: false });
@@ -306,13 +336,17 @@ const AdminDashboard = () => {
       setProfiles(data || []);
     } catch (error) {
       console.error('Error fetching profiles:', error);
-      toast.error('Failed to fetch profiles');
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch profiles",
+        description: "Could not load user profiles. Please try again.",
+      });
     }
   };
 
   const handleAddSpace = async (newSpaceData: any) => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('spaces')
         .insert([{
           name: newSpaceData.name,
@@ -336,18 +370,32 @@ const AdminDashboard = () => {
 
       if (error) throw error;
 
-      setSpaces([data, ...spaces]);
+      // Type cast the new space data properly  
+      const newSpace: Space = {
+        ...data,
+        coordinates: (data.coordinates as any) || { lat: 0, lng: 0 },
+        availability: (data.availability as any) || { days: [], hours: "" }
+      };
+
+      setSpaces([newSpace, ...spaces]);
       setShowAddForm(false);
-      toast.success('Space added successfully!');
+      toast({
+        title: "Success",
+        description: "Space added successfully!",
+      });
     } catch (error) {
       console.error('Error adding space:', error);
-      toast.error('Failed to add space');
+      toast({
+        variant: "destructive",
+        title: "Failed to add space",
+        description: "Could not add the space. Please try again.",
+      });
     }
   };
 
   const handleEditSpace = async (updatedSpaceData: any) => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('spaces')
         .update({
           name: updatedSpaceData.name,
@@ -372,14 +420,28 @@ const AdminDashboard = () => {
 
       if (error) throw error;
 
+      // Type cast the updated space data properly
+      const updatedSpace: Space = {
+        ...data,
+        coordinates: (data.coordinates as any) || { lat: 0, lng: 0 },
+        availability: (data.availability as any) || { days: [], hours: "" }
+      };
+
       setSpaces(spaces.map(space => 
-        space.id === updatedSpaceData.id ? data : space
+        space.id === updatedSpaceData.id ? updatedSpace : space
       ));
       setEditingSpace(null);
-      toast.success('Space updated successfully!');
+      toast({
+        title: "Success",
+        description: "Space updated successfully!",
+      });
     } catch (error) {
       console.error('Error updating space:', error);
-      toast.error('Failed to update space');
+      toast({
+        variant: "destructive",
+        title: "Failed to update space",
+        description: "Could not update the space. Please try again.",
+      });
     }
   };
 
@@ -387,7 +449,7 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this space?')) return;
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('spaces')
         .delete()
         .eq('id', spaceId);
@@ -395,17 +457,24 @@ const AdminDashboard = () => {
       if (error) throw error;
 
       setSpaces(spaces.filter(space => space.id !== spaceId));
-      toast.success('Space deleted successfully!');
+      toast({
+        title: "Success",
+        description: "Space deleted successfully!",
+      });
     } catch (error) {
       console.error('Error deleting space:', error);
-      toast.error('Failed to delete space');
+      toast({
+        variant: "destructive",
+        title: "Failed to delete space",
+        description: "Could not delete the space. Please try again.",
+      });
     }
   };
 
   // Course handlers
   const handleAddCourse = async (courseData: any) => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('courses')
         .insert([courseData])
         .select()
@@ -415,10 +484,17 @@ const AdminDashboard = () => {
 
       setCourses([data, ...courses]);
       setShowAddCourseForm(false);
-      toast.success('Course added successfully!');
+      toast({
+        title: "Success",
+        description: "Course added successfully!",
+      });
     } catch (error) {
       console.error('Error adding course:', error);
-      toast.error('Failed to add course');
+      toast({
+        variant: "destructive",
+        title: "Failed to add course",
+        description: "Could not add the course. Please try again.",
+      });
     }
   };
 
@@ -426,7 +502,7 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this course?')) return;
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('courses')
         .delete()
         .eq('id', courseId);
@@ -434,17 +510,24 @@ const AdminDashboard = () => {
       if (error) throw error;
 
       setCourses(courses.filter(course => course.id !== courseId));
-      toast.success('Course deleted successfully!');
+      toast({
+        title: "Success",
+        description: "Course deleted successfully!",
+      });
     } catch (error) {
       console.error('Error deleting course:', error);
-      toast.error('Failed to delete course');
+      toast({
+        variant: "destructive",
+        title: "Failed to delete course",
+        description: "Could not delete the course. Please try again.",
+      });
     }
   };
 
   // Tool handlers
   const handleAddTool = async (toolData: any) => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('tools')
         .insert([toolData])
         .select()
@@ -454,10 +537,17 @@ const AdminDashboard = () => {
 
       setTools([data, ...tools]);
       setShowAddToolForm(false);
-      toast.success('Tool added successfully!');
+      toast({
+        title: "Success",
+        description: "Tool added successfully!",
+      });
     } catch (error) {
       console.error('Error adding tool:', error);
-      toast.error('Failed to add tool');
+      toast({
+        variant: "destructive",
+        title: "Failed to add tool",
+        description: "Could not add the tool. Please try again.",
+      });
     }
   };
 
@@ -465,7 +555,7 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this tool?')) return;
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('tools')
         .delete()
         .eq('id', toolId);
@@ -473,17 +563,24 @@ const AdminDashboard = () => {
       if (error) throw error;
 
       setTools(tools.filter(tool => tool.id !== toolId));
-      toast.success('Tool deleted successfully!');
+      toast({
+        title: "Success",
+        description: "Tool deleted successfully!",
+      });
     } catch (error) {
       console.error('Error deleting tool:', error);
-      toast.error('Failed to delete tool');
+      toast({
+        variant: "destructive",
+        title: "Failed to delete tool",
+        description: "Could not delete the tool. Please try again.",
+      });
     }
   };
 
   // Competition handlers
   const handleAddCompetition = async (competitionData: any) => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('competitions')
         .insert([competitionData])
         .select()
@@ -491,12 +588,25 @@ const AdminDashboard = () => {
 
       if (error) throw error;
 
-      setCompetitions([data, ...competitions]);
+      // Type cast the new competition data properly
+      const newCompetition: Competition = {
+        ...data,
+        prizes: (data.prizes as any) || []
+      };
+
+      setCompetitions([newCompetition, ...competitions]);
       setShowAddCompetitionForm(false);
-      toast.success('Competition added successfully!');
+      toast({
+        title: "Success",
+        description: "Competition added successfully!",
+      });
     } catch (error) {
       console.error('Error adding competition:', error);
-      toast.error('Failed to add competition');
+      toast({
+        variant: "destructive",
+        title: "Failed to add competition",
+        description: "Could not add the competition. Please try again.",
+      });
     }
   };
 
@@ -504,7 +614,7 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this competition?')) return;
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('competitions')
         .delete()
         .eq('id', competitionId);
@@ -512,10 +622,17 @@ const AdminDashboard = () => {
       if (error) throw error;
 
       setCompetitions(competitions.filter(comp => comp.id !== competitionId));
-      toast.success('Competition deleted successfully!');
+      toast({
+        title: "Success",
+        description: "Competition deleted successfully!",
+      });
     } catch (error) {
       console.error('Error deleting competition:', error);
-      toast.error('Failed to delete competition');
+      toast({
+        variant: "destructive",
+        title: "Failed to delete competition",
+        description: "Could not delete the competition. Please try again.",
+      });
     }
   };
 
@@ -1172,19 +1289,18 @@ const AdminDashboard = () => {
           />
          )}
 
-          {/* Edit Space Modal */}
-          {editingSpace && (
-            <EditSpaceForm
-              space={editingSpace}
-              onClose={() => setEditingSpace(null)}
-              onSubmit={handleEditSpace}
-            />
-          )}
-        </Tabs>
-      </main>
-    </Layout>
-  </>
-);
+         {/* Edit Space Modal */}
+         {editingSpace && (
+           <EditSpaceForm
+             space={editingSpace}
+             onClose={() => setEditingSpace(null)}
+             onSubmit={handleEditSpace}
+           />
+         )}
+       </main>
+     </Layout>
+   </>
+ );
 };
 
 export default AdminDashboard;
