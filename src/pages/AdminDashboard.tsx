@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Edit, Trash2, MapPin, Users, Star } from "lucide-react";
+import { Plus, Edit, Trash2, MapPin, Users, Star, BookOpen, Wrench, Trophy } from "lucide-react";
 import AddSpaceForm from "@/components/admin/AddSpaceForm";
 import EditSpaceForm from "@/components/admin/EditSpaceForm";
+import AddCourseForm from "@/components/admin/AddCourseForm";
+import AddToolForm from "@/components/admin/AddToolForm";
+import AddCompetitionForm from "@/components/admin/AddCompetitionForm";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -32,21 +35,85 @@ interface Space {
   created_at?: string;
 }
 
+interface Course {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  age_group: string;
+  duration_weeks: number;
+  price: number;
+  level: string;
+  image_url?: string;
+  requirements: string[];
+  learning_outcomes: string[];
+  created_at?: string;
+}
+
+interface Tool {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  rental_price_per_day: number;
+  purchase_price?: number;
+  availability_status: string;
+  condition: string;
+  images: string[];
+  location?: string;
+  owner_contact?: string;
+  created_at?: string;
+}
+
+interface Competition {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  age_group: string;
+  registration_start_date: string;
+  registration_end_date: string;
+  competition_date: string;
+  max_participants?: number;
+  entry_fee: number;
+  prizes: any[];
+  rules?: string;
+  requirements: string[];
+  status: string;
+  image_url?: string;
+  location?: string;
+  created_at?: string;
+}
+
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showAddCourseForm, setShowAddCourseForm] = useState(false);
+  const [showAddToolForm, setShowAddToolForm] = useState(false);
+  const [showAddCompetitionForm, setShowAddCompetitionForm] = useState(false);
   const [editingSpace, setEditingSpace] = useState<Space | null>(null);
   const [spaces, setSpaces] = useState<Space[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [tools, setTools] = useState<Tool[]>([]);
+  const [competitions, setCompetitions] = useState<Competition[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchSpaces();
+    fetchAllData();
   }, []);
+
+  const fetchAllData = async () => {
+    await Promise.all([
+      fetchSpaces(),
+      fetchCourses(),
+      fetchTools(),
+      fetchCompetitions()
+    ]);
+  };
 
   const fetchSpaces = async () => {
     try {
-      // Fetch all spaces from the database
       const { data, error } = await (supabase as any)
         .from('spaces')
         .select('*')
@@ -57,6 +124,51 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error('Error fetching spaces:', error);
       toast.error('Failed to fetch spaces');
+    }
+  };
+
+  const fetchCourses = async () => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('courses')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setCourses(data || []);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+      toast.error('Failed to fetch courses');
+    }
+  };
+
+  const fetchTools = async () => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('tools')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setTools(data || []);
+    } catch (error) {
+      console.error('Error fetching tools:', error);
+      toast.error('Failed to fetch tools');
+    }
+  };
+
+  const fetchCompetitions = async () => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('competitions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setCompetitions(data || []);
+    } catch (error) {
+      console.error('Error fetching competitions:', error);
+      toast.error('Failed to fetch competitions');
     } finally {
       setLoading(false);
     }
@@ -154,6 +266,123 @@ const AdminDashboard = () => {
     }
   };
 
+  // Course handlers
+  const handleAddCourse = async (courseData: any) => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('courses')
+        .insert([courseData])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setCourses([data, ...courses]);
+      setShowAddCourseForm(false);
+      toast.success('Course added successfully!');
+    } catch (error) {
+      console.error('Error adding course:', error);
+      toast.error('Failed to add course');
+    }
+  };
+
+  const handleDeleteCourse = async (courseId: string) => {
+    if (!confirm('Are you sure you want to delete this course?')) return;
+
+    try {
+      const { error } = await (supabase as any)
+        .from('courses')
+        .delete()
+        .eq('id', courseId);
+
+      if (error) throw error;
+
+      setCourses(courses.filter(course => course.id !== courseId));
+      toast.success('Course deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting course:', error);
+      toast.error('Failed to delete course');
+    }
+  };
+
+  // Tool handlers
+  const handleAddTool = async (toolData: any) => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('tools')
+        .insert([toolData])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setTools([data, ...tools]);
+      setShowAddToolForm(false);
+      toast.success('Tool added successfully!');
+    } catch (error) {
+      console.error('Error adding tool:', error);
+      toast.error('Failed to add tool');
+    }
+  };
+
+  const handleDeleteTool = async (toolId: string) => {
+    if (!confirm('Are you sure you want to delete this tool?')) return;
+
+    try {
+      const { error } = await (supabase as any)
+        .from('tools')
+        .delete()
+        .eq('id', toolId);
+
+      if (error) throw error;
+
+      setTools(tools.filter(tool => tool.id !== toolId));
+      toast.success('Tool deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting tool:', error);
+      toast.error('Failed to delete tool');
+    }
+  };
+
+  // Competition handlers
+  const handleAddCompetition = async (competitionData: any) => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('competitions')
+        .insert([competitionData])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setCompetitions([data, ...competitions]);
+      setShowAddCompetitionForm(false);
+      toast.success('Competition added successfully!');
+    } catch (error) {
+      console.error('Error adding competition:', error);
+      toast.error('Failed to add competition');
+    }
+  };
+
+  const handleDeleteCompetition = async (competitionId: string) => {
+    if (!confirm('Are you sure you want to delete this competition?')) return;
+
+    try {
+      const { error } = await (supabase as any)
+        .from('competitions')
+        .delete()
+        .eq('id', competitionId);
+
+      if (error) throw error;
+
+      setCompetitions(competitions.filter(comp => comp.id !== competitionId));
+      toast.success('Competition deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting competition:', error);
+      toast.error('Failed to delete competition');
+    }
+  };
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
@@ -177,50 +406,52 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{spaces.length}</div>
-              <p className="text-xs text-muted-foreground">Real-time count</p>
+              <p className="text-xs text-muted-foreground">Active learning spaces</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
+              <BookOpen className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">1,234</div>
-              <p className="text-xs text-muted-foreground">+18% from last month</p>
+              <div className="text-2xl font-bold">{courses.length}</div>
+              <p className="text-xs text-muted-foreground">Learning programs</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Avg Rating</CardTitle>
-              <Star className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Total Tools</CardTitle>
+              <Wrench className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">4.6</div>
-              <p className="text-xs text-muted-foreground">+0.2 from last month</p>
+              <div className="text-2xl font-bold">{tools.length}</div>
+              <p className="text-xs text-muted-foreground">Equipment & resources</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-              <div className="h-4 w-4 text-muted-foreground">$</div>
+              <CardTitle className="text-sm font-medium">Competitions</CardTitle>
+              <Trophy className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$12,345</div>
-              <p className="text-xs text-muted-foreground">+25% from last month</p>
+              <div className="text-2xl font-bold">{competitions.length}</div>
+              <p className="text-xs text-muted-foreground">Active competitions</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="spaces">Manage Spaces</TabsTrigger>
-            <TabsTrigger value="users">Users</TabsTrigger>
+            <TabsTrigger value="spaces">Spaces</TabsTrigger>
+            <TabsTrigger value="courses">Courses</TabsTrigger>
+            <TabsTrigger value="tools">Tools</TabsTrigger>
+            <TabsTrigger value="competitions">Competitions</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
 
@@ -346,6 +577,30 @@ const AdminDashboard = () => {
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Add Course Modal */}
+        {showAddCourseForm && (
+          <AddCourseForm
+            onClose={() => setShowAddCourseForm(false)}
+            onSubmit={handleAddCourse}
+          />
+        )}
+
+        {/* Add Tool Modal */}
+        {showAddToolForm && (
+          <AddToolForm
+            onClose={() => setShowAddToolForm(false)}
+            onSubmit={handleAddTool}
+          />
+        )}
+
+        {/* Add Competition Modal */}
+        {showAddCompetitionForm && (
+          <AddCompetitionForm
+            onClose={() => setShowAddCompetitionForm(false)}
+            onSubmit={handleAddCompetition}
+          />
+        )}
 
         {/* Add Space Modal */}
         {showAddForm && (

@@ -14,6 +14,120 @@ export type Database = {
   }
   public: {
     Tables: {
+      competitions: {
+        Row: {
+          age_group: string
+          category: string
+          competition_date: string
+          created_at: string
+          description: string
+          entry_fee: number | null
+          id: string
+          image_url: string | null
+          location: string | null
+          max_participants: number | null
+          prizes: Json | null
+          registration_end_date: string
+          registration_start_date: string
+          requirements: string[] | null
+          rules: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          age_group: string
+          category: string
+          competition_date: string
+          created_at?: string
+          description: string
+          entry_fee?: number | null
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          max_participants?: number | null
+          prizes?: Json | null
+          registration_end_date: string
+          registration_start_date: string
+          requirements?: string[] | null
+          rules?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          age_group?: string
+          category?: string
+          competition_date?: string
+          created_at?: string
+          description?: string
+          entry_fee?: number | null
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          max_participants?: number | null
+          prizes?: Json | null
+          registration_end_date?: string
+          registration_start_date?: string
+          requirements?: string[] | null
+          rules?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      courses: {
+        Row: {
+          age_group: string
+          category: string
+          created_at: string
+          description: string
+          duration_weeks: number
+          id: string
+          image_url: string | null
+          learning_outcomes: string[] | null
+          level: string
+          price: number
+          requirements: string[] | null
+          syllabus: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          age_group: string
+          category: string
+          created_at?: string
+          description: string
+          duration_weeks?: number
+          id?: string
+          image_url?: string | null
+          learning_outcomes?: string[] | null
+          level?: string
+          price?: number
+          requirements?: string[] | null
+          syllabus?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          age_group?: string
+          category?: string
+          created_at?: string
+          description?: string
+          duration_weeks?: number
+          id?: string
+          image_url?: string | null
+          learning_outcomes?: string[] | null
+          level?: string
+          price?: number
+          requirements?: string[] | null
+          syllabus?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       spaces: {
         Row: {
           address: string
@@ -67,6 +181,57 @@ export type Database = {
           price_per_hour?: number
           rating?: number | null
           type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tools: {
+        Row: {
+          availability_status: string
+          category: string
+          condition: string
+          created_at: string
+          description: string
+          id: string
+          images: string[] | null
+          location: string | null
+          name: string
+          owner_contact: string | null
+          purchase_price: number | null
+          rental_price_per_day: number
+          specifications: Json | null
+          updated_at: string
+        }
+        Insert: {
+          availability_status?: string
+          category: string
+          condition?: string
+          created_at?: string
+          description: string
+          id?: string
+          images?: string[] | null
+          location?: string | null
+          name: string
+          owner_contact?: string | null
+          purchase_price?: number | null
+          rental_price_per_day?: number
+          specifications?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          availability_status?: string
+          category?: string
+          condition?: string
+          created_at?: string
+          description?: string
+          id?: string
+          images?: string[] | null
+          location?: string | null
+          name?: string
+          owner_contact?: string | null
+          purchase_price?: number | null
+          rental_price_per_day?: number
+          specifications?: Json | null
           updated_at?: string
         }
         Relationships: []
