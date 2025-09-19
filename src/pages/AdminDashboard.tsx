@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Edit, Trash2, MapPin, Users, Star, BookOpen, Wrench, Trophy } from "lucide-react";
+import { Plus, Edit, Trash2, MapPin, Users, Star, BookOpen, Wrench, Trophy, Map } from "lucide-react";
 import AddSpaceForm from "@/components/admin/AddSpaceForm";
 import EditSpaceForm from "@/components/admin/EditSpaceForm";
 import AddCourseForm from "@/components/admin/AddCourseForm";
 import AddToolForm from "@/components/admin/AddToolForm";
 import AddCompetitionForm from "@/components/admin/AddCompetitionForm";
+import LocationMap from "@/components/admin/LocationMap";
+import { useMapboxToken } from "@/hooks/useMapboxToken";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -18,6 +20,7 @@ interface Space {
   name: string;
   type: string;
   city: string;
+  address: string;
   owner?: string;
   description?: string;
   capacity?: number;
@@ -121,6 +124,10 @@ const AdminDashboard = () => {
     avgRating: 0,
     totalRevenue: 0
   });
+  const [showMapView, setShowMapView] = useState(false);
+
+  // Get Mapbox token
+  const { token: mapboxToken, loading: tokenLoading, error: tokenError } = useMapboxToken();
 
   useEffect(() => {
     fetchAllData();
@@ -544,68 +551,93 @@ const AdminDashboard = () => {
           <TabsContent value="spaces" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Manage Spaces</h2>
-              <Button onClick={() => setShowAddForm(true)} className="bg-yellow-500 hover:bg-yellow-600">
-                <Plus className="h-4 w-4 mr-2" />
-                Add New Space
-              </Button>
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowMapView(!showMapView)}
+                  className="bg-blue-50 hover:bg-blue-100"
+                >
+                  <Map className="h-4 w-4 mr-2" />
+                  {showMapView ? 'List View' : 'Map View'}
+                </Button>
+                <Button onClick={() => setShowAddForm(true)} className="bg-yellow-500 hover:bg-yellow-600">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add New Space
+                </Button>
+              </div>
             </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>All Spaces</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {loading ? (
-                  <div className="flex justify-center items-center min-h-[200px]">
-                    <div className="text-lg">Loading spaces...</div>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {spaces.map((space) => (
-                    <div key={space.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <h3 className="font-medium">{space.name}</h3>
+            {showMapView ? (
+              <LocationMap 
+                spaces={spaces} 
+                mapboxToken={mapboxToken}
+                onSpaceSelect={(space) => {
+                  console.log('Selected space:', space);
+                }}
+              />
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle>All Spaces</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {loading ? (
+                    <div className="flex justify-center items-center min-h-[200px]">
+                      <div className="text-lg">Loading spaces...</div>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {spaces.map((space) => (
+                      <div key={space.id} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <h3 className="font-medium">{space.name}</h3>
+                              <p className="text-sm text-gray-600">
+                                {space.type} • {space.city} {space.capacity && `• ${space.capacity} capacity`}
+                              </p>
+                              {space.coordinates.lat && space.coordinates.lng && (
+                                <p className="text-xs text-blue-600">
+                                  📍 {space.coordinates.lat.toFixed(4)}, {space.coordinates.lng.toFixed(4)}
+                                </p>
+                              )}
+                            </div>
+                            <Badge variant="default">
+                              Active
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="text-right mr-4">
+                            {space.price_per_hour && (
+                              <p className="font-medium">{space.price_per_hour} EGP/hr</p>
+                            )}
                             <p className="text-sm text-gray-600">
-                              {space.type} • {space.city} {space.capacity && `• ${space.capacity} capacity`}
+                              {space.equipment.length} equipment items
                             </p>
                           </div>
-                          <Badge variant="default">
-                            Active
-                          </Badge>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setEditingSpace(space)}
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleDeleteSpace(space.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="text-right mr-4">
-                          {space.price_per_hour && (
-                            <p className="font-medium">{space.price_per_hour} EGP/hr</p>
-                          )}
-                          <p className="text-sm text-gray-600">
-                            {space.equipment.length} equipment items
-                          </p>
-                        </div>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setEditingSpace(space)}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleDeleteSpace(space.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
+                      ))}
                     </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                  )}
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           <TabsContent value="courses" className="space-y-6">
