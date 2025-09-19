@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -198,212 +199,294 @@ const CompetitionsGuide = () => {
 
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string } = {
-      "Robotics": "bg-blue-100 text-blue-800",
-      "Programming": "bg-green-100 text-green-800",
-      "AI": "bg-purple-100 text-purple-800",
-      "Electronics": "bg-orange-100 text-orange-800",
-      "Innovation": "bg-pink-100 text-pink-800",
-      "Space Tech": "bg-indigo-100 text-indigo-800"
+      "Robotics": "bg-primary-100 text-primary-700 border-primary-200",
+      "Programming": "bg-green-100 text-green-700 border-green-200",
+      "AI": "bg-purple-100 text-purple-700 border-purple-200",
+      "Electronics": "bg-orange-100 text-orange-700 border-orange-200",
+      "Innovation": "bg-pink-100 text-pink-700 border-pink-200",
+      "Space Tech": "bg-indigo-100 text-indigo-700 border-indigo-200"
     };
-    return colors[category] || "bg-gray-100 text-gray-800";
+    return colors[category] || "bg-muted text-muted-foreground border-border";
   };
 
   return (
-    <Layout>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            دليل مسابقات التكنولوجيا في مصر 2025
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Egypt Technology Competitions Guide 2025
-          </p>
-          <p className="text-lg max-w-3xl mx-auto opacity-80">
-            دليل شامل لجميع مسابقات التكنولوجيا والروبوتات والبرمجة في مصر لعام 2025
-          </p>
-        </div>
-      </section>
-
-      {/* Competitions Grid */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {competitions.map((competition) => (
-              <Card key={competition.id} className="h-full hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-2">
-                    <Badge className={getCategoryColor(competition.category)}>
-                      {competition.category}
-                    </Badge>
-                    <span className="text-sm text-gray-500">#{competition.id}</span>
-                  </div>
-                  <CardTitle className="text-lg mb-2">{competition.title}</CardTitle>
-                  {competition.titleEn && (
-                    <p className="text-sm text-gray-600">{competition.titleEn}</p>
-                  )}
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  {competition.ages && (
-                    <div className="flex items-center text-sm">
-                      <Users className="h-4 w-4 mr-2 text-blue-600" />
-                      <span>{competition.ages}</span>
-                    </div>
-                  )}
-
-                  <p className="text-sm text-gray-700">{competition.description}</p>
-
-                  {competition.date && (
-                    <div className="flex items-center text-sm">
-                      <Calendar className="h-4 w-4 mr-2 text-green-600" />
-                      <span>{competition.date}</span>
-                    </div>
-                  )}
-
-                  {competition.dates && (
-                    <div className="flex items-start text-sm">
-                      <Calendar className="h-4 w-4 mr-2 mt-0.5 text-green-600" />
-                      <span>{competition.dates}</span>
-                    </div>
-                  )}
-
-                  {competition.deadline && (
-                    <div className="flex items-center text-sm">
-                      <Calendar className="h-4 w-4 mr-2 text-red-600" />
-                      <span>{competition.deadline}</span>
-                    </div>
-                  )}
-
-                  {competition.finalDate && (
-                    <div className="flex items-start text-sm">
-                      <Calendar className="h-4 w-4 mr-2 mt-0.5 text-purple-600" />
-                      <span>{competition.finalDate}</span>
-                    </div>
-                  )}
-
-                  {competition.location && (
-                    <div className="flex items-start text-sm">
-                      <MapPin className="h-4 w-4 mr-2 mt-0.5 text-red-600" />
-                      <span>{competition.location}</span>
-                    </div>
-                  )}
-
-                  {competition.address && (
-                    <div className="flex items-start text-sm">
-                      <MapPin className="h-4 w-4 mr-2 mt-0.5 text-red-600" />
-                      <span>{competition.address}</span>
-                    </div>
-                  )}
-
-                  {/* Contact Information */}
-                  <div className="space-y-2 pt-2 border-t">
-                    {competition.phone && (
-                      <div className="flex items-center text-sm">
-                        <Phone className="h-4 w-4 mr-2 text-green-600" />
-                        <a href={`tel:${competition.phone}`} className="text-blue-600 hover:underline">
-                          {competition.phone}
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.email && (
-                      <div className="flex items-center text-sm">
-                        <Mail className="h-4 w-4 mr-2 text-gray-600" />
-                        <a href={`mailto:${competition.email}`} className="text-blue-600 hover:underline">
-                          {competition.email}
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.website && (
-                      <div className="flex items-center text-sm">
-                        <Globe className="h-4 w-4 mr-2 text-blue-600" />
-                        <a href={competition.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                          الموقع الرسمي
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.websiteEgypt && (
-                      <div className="flex items-center text-sm">
-                        <Globe className="h-4 w-4 mr-2 text-blue-600" />
-                        <a href={competition.websiteEgypt} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                          موقع مصر
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.websiteCairo && (
-                      <div className="flex items-center text-sm">
-                        <Globe className="h-4 w-4 mr-2 text-blue-600" />
-                        <a href={competition.websiteCairo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                          موقع القاهرة
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.facebook && (
-                      <div className="flex items-center text-sm">
-                        <Facebook className="h-4 w-4 mr-2 text-blue-600" />
-                        <a href={competition.facebook} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                          فيسبوك
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.instagram && (
-                      <div className="flex items-center text-sm">
-                        <Instagram className="h-4 w-4 mr-2 text-pink-600" />
-                        <a href={competition.instagram} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                          إنستغرام
-                        </a>
-                      </div>
-                    )}
-
-                    {competition.youtube && (
-                      <div className="flex items-center text-sm">
-                        <Youtube className="h-4 w-4 mr-2 text-red-600" />
-                        <a href={competition.youtube} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                          يوتيوب
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+    <>
+      <Helmet>
+        <title>Egypt Technology Competitions Guide 2025 | Nawaa - Complete Directory</title>
+        <meta name="description" content="Complete guide to technology competitions in Egypt 2025. Find robotics, programming, AI competitions, dates, locations and registration details. دليل مسابقات التكنولوجيا في مصر" />
+        <meta name="keywords" content="technology competitions Egypt, robotics contests, programming competitions, AI challenges, STEM competitions, مسابقات التكنولوجيا, مسابقات الروبوتات" />
+        <meta property="og:title" content="Egypt Technology Competitions Guide 2025 | Nawaa" />
+        <meta property="og:description" content="Complete guide to technology competitions in Egypt 2025. Find robotics, programming, AI competitions and more." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="/competitions-guide" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Egypt Technology Competitions Guide 2025",
+            "description": "Complete directory of technology competitions in Egypt including robotics, programming, and AI challenges",
+            "url": "/competitions-guide",
+            "mainEntity": {
+              "@type": "ItemList",
+              "numberOfItems": competitions.length,
+              "itemListElement": competitions.map((comp, index) => ({
+                "@type": "Event",
+                "position": index + 1,
+                "name": comp.title,
+                "description": comp.description,
+                "url": comp.website || "",
+                "eventAttendanceMode": "OfflineEventAttendanceMode"
+              }))
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "Nawaa"
+            }
+          })}
+        </script>
+      </Helmet>
+      <Layout>
+        {/* Hero Section */}
+        <header className="bg-gradient-to-br from-primary-400 to-primary-600 text-primary-foreground py-20" role="banner">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              دليل مسابقات التكنولوجيا في مصر 2025
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 opacity-90">
+              Egypt Technology Competitions Guide 2025
+            </p>
+            <p className="text-lg max-w-3xl mx-auto opacity-80">
+              دليل شامل لجميع مسابقات التكنولوجيا والروبوتات والبرمجة في مصر لعام 2025
+            </p>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* Additional Info */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">معلومات إضافية</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">الروبوتات</h3>
-              <p className="text-gray-600">
-                8 مسابقات متخصصة في الروبوتات والتحكم الآلي
-              </p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-green-600">البرمجة</h3>
-              <p className="text-gray-600">
-                4 مسابقات في البرمجة والخوارزميات
-              </p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-600">الذكاء الاصطناعي</h3>
-              <p className="text-gray-600">
-                2 مسابقة متخصصة في الذكاء الاصطناعي
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-    </Layout>
+        <main>
+          {/* Competitions Grid */}
+          <section className="py-16 bg-muted/30" aria-label="Technology competitions directory">
+            <div className="container mx-auto px-4">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3" role="list">
+                {competitions.map((competition) => (
+                  <Card key={competition.id} className="h-full hover:shadow-lg transition-all duration-300 border-border" role="listitem">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-2">
+                        <Badge className={`${getCategoryColor(competition.category)} border`} aria-label={`Category: ${competition.category}`}>
+                          {competition.category}
+                        </Badge>
+                        <span className="text-sm text-muted-foreground" aria-label={`Competition number ${competition.id}`}>#{competition.id}</span>
+                      </div>
+                      <CardTitle className="text-lg mb-2 text-card-foreground">{competition.title}</CardTitle>
+                      {competition.titleEn && (
+                        <p className="text-sm text-muted-foreground">{competition.titleEn}</p>
+                      )}
+                    </CardHeader>
+                    
+                    <CardContent className="space-y-4">
+                      {competition.ages && (
+                        <div className="flex items-center text-sm" role="group" aria-label="Age requirements">
+                          <Users className="h-4 w-4 mr-2 text-primary" aria-hidden="true" />
+                          <span>{competition.ages}</span>
+                        </div>
+                      )}
+
+                      <p className="text-sm text-muted-foreground">{competition.description}</p>
+
+                      {competition.date && (
+                        <div className="flex items-center text-sm" role="group" aria-label="Competition date">
+                          <Calendar className="h-4 w-4 mr-2 text-green-600" aria-hidden="true" />
+                          <span>{competition.date}</span>
+                        </div>
+                      )}
+
+                      {competition.dates && (
+                        <div className="flex items-start text-sm" role="group" aria-label="Important dates">
+                          <Calendar className="h-4 w-4 mr-2 mt-0.5 text-green-600" aria-hidden="true" />
+                          <span>{competition.dates}</span>
+                        </div>
+                      )}
+
+                      {competition.deadline && (
+                        <div className="flex items-center text-sm" role="group" aria-label="Registration deadline">
+                          <Calendar className="h-4 w-4 mr-2 text-destructive" aria-hidden="true" />
+                          <span>{competition.deadline}</span>
+                        </div>
+                      )}
+
+                      {competition.finalDate && (
+                        <div className="flex items-start text-sm" role="group" aria-label="Finals date">
+                          <Calendar className="h-4 w-4 mr-2 mt-0.5 text-purple-600" aria-hidden="true" />
+                          <span>{competition.finalDate}</span>
+                        </div>
+                      )}
+
+                      {competition.location && (
+                        <div className="flex items-start text-sm" role="group" aria-label="Location">
+                          <MapPin className="h-4 w-4 mr-2 mt-0.5 text-destructive" aria-hidden="true" />
+                          <span>{competition.location}</span>
+                        </div>
+                      )}
+
+                      {competition.address && (
+                        <div className="flex items-start text-sm" role="group" aria-label="Address">
+                          <MapPin className="h-4 w-4 mr-2 mt-0.5 text-destructive" aria-hidden="true" />
+                          <span>{competition.address}</span>
+                        </div>
+                      )}
+
+                      {/* Contact Information */}
+                      <div className="space-y-2 pt-2 border-t border-border" role="group" aria-label="Contact information">
+                        {competition.phone && (
+                          <div className="flex items-center text-sm">
+                            <Phone className="h-4 w-4 mr-2 text-green-600" aria-hidden="true" />
+                            <a 
+                              href={`tel:${competition.phone}`} 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Call ${competition.phone}`}
+                            >
+                              {competition.phone}
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.email && (
+                          <div className="flex items-center text-sm">
+                            <Mail className="h-4 w-4 mr-2 text-muted-foreground" aria-hidden="true" />
+                            <a 
+                              href={`mailto:${competition.email}`} 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Email ${competition.email}`}
+                            >
+                              {competition.email}
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.website && (
+                          <div className="flex items-center text-sm">
+                            <Globe className="h-4 w-4 mr-2 text-primary" aria-hidden="true" />
+                            <a 
+                              href={competition.website} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Visit official website for ${competition.title} (opens in new tab)`}
+                            >
+                              الموقع الرسمي
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.websiteEgypt && (
+                          <div className="flex items-center text-sm">
+                            <Globe className="h-4 w-4 mr-2 text-primary" aria-hidden="true" />
+                            <a 
+                              href={competition.websiteEgypt} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Visit Egypt website for ${competition.title} (opens in new tab)`}
+                            >
+                              موقع مصر
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.websiteCairo && (
+                          <div className="flex items-center text-sm">
+                            <Globe className="h-4 w-4 mr-2 text-primary" aria-hidden="true" />
+                            <a 
+                              href={competition.websiteCairo} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Visit Cairo website for ${competition.title} (opens in new tab)`}
+                            >
+                              موقع القاهرة
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.facebook && (
+                          <div className="flex items-center text-sm">
+                            <Facebook className="h-4 w-4 mr-2 text-primary" aria-hidden="true" />
+                            <a 
+                              href={competition.facebook} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Visit ${competition.title} Facebook page (opens in new tab)`}
+                            >
+                              فيسبوك
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.instagram && (
+                          <div className="flex items-center text-sm">
+                            <Instagram className="h-4 w-4 mr-2 text-pink-600" aria-hidden="true" />
+                            <a 
+                              href={competition.instagram} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Visit ${competition.title} Instagram page (opens in new tab)`}
+                            >
+                              إنستغرام
+                            </a>
+                          </div>
+                        )}
+
+                        {competition.youtube && (
+                          <div className="flex items-center text-sm">
+                            <Youtube className="h-4 w-4 mr-2 text-destructive" aria-hidden="true" />
+                            <a 
+                              href={competition.youtube} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                              aria-label={`Visit ${competition.title} YouTube channel (opens in new tab)`}
+                            >
+                              يوتيوب
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Additional Info */}
+          <section className="py-16 bg-background" aria-label="Competition statistics">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-3xl font-bold mb-8 text-foreground">معلومات إضافية</h2>
+              <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto" role="list">
+                <Card className="p-6 border-border hover:shadow-lg transition-shadow duration-300" role="listitem">
+                  <h3 className="text-xl font-semibold mb-4 text-primary">الروبوتات</h3>
+                  <p className="text-muted-foreground">
+                    8 مسابقات متخصصة في الروبوتات والتحكم الآلي
+                  </p>
+                </Card>
+                <Card className="p-6 border-border hover:shadow-lg transition-shadow duration-300" role="listitem">
+                  <h3 className="text-xl font-semibold mb-4 text-green-600">البرمجة</h3>
+                  <p className="text-muted-foreground">
+                    4 مسابقات في البرمجة والخوارزميات
+                  </p>
+                </Card>
+                <Card className="p-6 border-border hover:shadow-lg transition-shadow duration-300" role="listitem">
+                  <h3 className="text-xl font-semibold mb-4 text-purple-600">الذكاء الاصطناعي</h3>
+                  <p className="text-muted-foreground">
+                    2 مسابقة متخصصة في الذكاء الاصطناعي
+                  </p>
+                </Card>
+              </div>
+            </div>
+          </section>
+        </main>
+      </Layout>
+    </>
   );
 };
 
