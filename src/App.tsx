@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import DiscoverSpaces from "./pages/DiscoverSpaces";
+import SpaceDetail from "./pages/SpaceDetail";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import SmartAssessment from "./pages/SmartAssessment";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/discover-spaces" element={<DiscoverSpaces />} />
+            <Route path="/spaces/:spaceId" element={<SpaceDetail />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:courseId" element={<CourseDetail />} />
             <Route path="/smart-assessment" element={<SmartAssessment />} />

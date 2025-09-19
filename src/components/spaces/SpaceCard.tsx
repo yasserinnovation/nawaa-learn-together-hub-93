@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Space } from "@/types/space";
 import { MapPin, Users, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface SpaceCardProps {
@@ -10,7 +11,12 @@ interface SpaceCardProps {
 }
 
 const SpaceCard = ({ space }: SpaceCardProps) => {
+  const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleViewDetails = () => {
+    navigate(`/spaces/${space.id}`);
+  };
 
   // Enhance the image URLs with real images based on space types
   const getEnhancedImageUrl = (index: number) => {
@@ -138,7 +144,10 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
       </CardContent>
       
       <CardFooter className="pt-0">
-        <Button className="w-full bg-yellow-500 hover:bg-yellow-600">
+        <Button 
+          onClick={handleViewDetails}
+          className="w-full bg-yellow-500 hover:bg-yellow-600"
+        >
           View Details
         </Button>
       </CardFooter>
