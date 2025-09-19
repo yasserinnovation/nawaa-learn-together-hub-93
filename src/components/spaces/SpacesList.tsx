@@ -22,7 +22,6 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   const fetchSpaces = async () => {
     try {
-      console.log('Fetching spaces from database...');
       // Query the spaces table from Supabase
       const { data, error } = await (supabase as any)
         .from('spaces')
@@ -33,9 +32,6 @@ const SpacesList = ({ filters }: SpacesListProps) => {
         console.error('Supabase error:', error);
         throw error;
       }
-      
-      console.log('Raw spaces data:', data);
-      console.log('Number of spaces fetched:', data?.length || 0);
       
       // Convert database format to expected format
       const convertedSpaces: Space[] = (data || []).map(space => ({
@@ -61,7 +57,6 @@ const SpacesList = ({ filters }: SpacesListProps) => {
         }
       }));
       
-      console.log('Converted spaces:', convertedSpaces);
       setSpaces(convertedSpaces);
     } catch (error) {
       console.error('Error fetching spaces:', error);
@@ -117,17 +112,10 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   };
 
   const filteredSpaces = useMemo(() => {
-    console.log('=== FILTERING SPACES ===');
-    console.log('Total spaces:', spaces.length);
-    console.log('Current filters:', filters);
-    
     const result = spaces.filter(space => {
-      console.log(`Checking space: ${space.name}`);
-      
       // Search text filter
       if (filters.searchText) {
         const searchTerms = expandSearchTerms(filters.searchText);
-        console.log(`Search terms: [${searchTerms.join(', ')}]`);
         
         let matchesSearch = false;
         
@@ -141,22 +129,17 @@ const SpacesList = ({ filters }: SpacesListProps) => {
           
           if (matchesName || matchesDescription || matchesAddress || matchesCity || matchesOwner) {
             matchesSearch = true;
-            console.log(`✓ Space "${space.name}" matches term "${term}"`);
             break;
           }
         }
         
-        console.log(`Space "${space.name}" search result:`, matchesSearch);
-        
         if (!matchesSearch) {
-          console.log(`❌ Space "${space.name}" filtered out by search`);
           return false;
         }
       }
 
       // Capacity filter
       if (filters.capacity && space.capacity < filters.capacity) {
-        console.log(`❌ Space "${space.name}" filtered out by capacity (${space.capacity} < ${filters.capacity})`);
         return false;
       }
 
@@ -166,18 +149,12 @@ const SpacesList = ({ filters }: SpacesListProps) => {
           space.equipment.includes(item)
         );
         if (!hasRequiredEquipment) {
-          console.log(`❌ Space "${space.name}" filtered out by equipment`);
           return false;
         }
       }
 
-      console.log(`✅ Space "${space.name}" passed all filters`);
       return true;
     });
-    
-    console.log('=== FILTER RESULTS ===');
-    console.log('Filtered spaces count:', result.length);
-    console.log('Filtered spaces:', result.map(s => s.name));
     
     return result;
   }, [spaces, filters]);
@@ -194,10 +171,13 @@ const SpacesList = ({ filters }: SpacesListProps) => {
     <ScrollReveal>
       <div>
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 id="spaces-results-heading" className="text-2xl font-bold text-foreground">
             Available Spaces ({filteredSpaces.length})
           </h2>
-          <select className="py-2 px-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 bg-white shadow-sm hover:shadow-md">
+          <select 
+            className="py-2 px-4 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 bg-background shadow-sm hover:shadow-md text-foreground"
+            aria-label="Sort spaces by different criteria"
+          >
             <option>Sort by: Recommended</option>
             <option>Sort by: Price (Low to High)</option>
             <option>Sort by: Rating</option>
@@ -215,15 +195,15 @@ const SpacesList = ({ filters }: SpacesListProps) => {
           </div>
         ) : (
           <ScrollReveal>
-            <div className="text-center py-16 bg-gray-50 rounded-2xl">
+            <div className="text-center py-16 bg-muted/30 rounded-2xl">
               <div className="max-w-md mx-auto">
                 <div className="mb-4">
-                  <MapPin className="h-16 w-16 text-gray-300 mx-auto" />
+                  <MapPin className="h-16 w-16 text-muted-foreground mx-auto" aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                <h3 className="text-xl font-semibold text-muted-foreground mb-2">
                   No spaces found
                 </h3>
-                <p className="text-gray-500">
+                <p className="text-muted-foreground">
                   No spaces match your current filters. Try adjusting your criteria to see more results.
                 </p>
               </div>

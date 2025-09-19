@@ -7,6 +7,23 @@ import SpacesFilters from "@/components/spaces/SpacesFilters";
 import { useState } from "react";
 import { SpaceFilter } from "@/types/space";
 
+const spacesStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Learning Spaces in Egypt",
+  "description": "Discover makerspaces, libraries, and collaborative learning environments across Egypt",
+  "url": "https://nawaa-mix-match-your-learning-bundle.lovable.app/discover-spaces",
+  "numberOfItems": "150+",
+  "itemListElement": [
+    {
+      "@type": "Place",
+      "name": "Learning Spaces Directory",
+      "description": "Community-shared locations for hands-on tech training",
+      "addressCountry": "EG"
+    }
+  ]
+};
+
 const DiscoverSpaces = () => {
   const [filters, setFilters] = useState<SpaceFilter>({
     searchText: '',
@@ -22,20 +39,28 @@ const DiscoverSpaces = () => {
 
   return (
     <Layout>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(spacesStructuredData),
+        }}
+      />
+      
       <SpacesHero filters={filters} onFilterChange={handleFilterChange} />
-      <div className="container mx-auto px-4 py-8" data-results-section>
+      <main className="container mx-auto px-4 py-8" data-results-section>
         <div className="flex flex-col lg:flex-row gap-6">
-          <div className="lg:w-1/3">
+          <aside className="lg:w-1/3" role="complementary" aria-label="Search filters">
             <SpacesFilters filters={filters} onFilterChange={handleFilterChange} />
-          </div>
-          <div className="lg:w-2/3">
+          </aside>
+          <section className="lg:w-2/3" aria-labelledby="spaces-results-heading">
             <div className="mb-6">
               <SpaceMap filters={filters} />
             </div>
             <SpacesList filters={filters} />
-          </div>
+          </section>
         </div>
-      </div>
+      </main>
     </Layout>
   );
 };

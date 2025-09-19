@@ -248,22 +248,22 @@ const SpaceMap = ({ filters }: SpaceMapProps) => {
       <div className="aspect-video bg-gray-100" ref={mapContainer} />
       
       {/* Map overlay with stats */}
-      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
+      <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-border">
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-1">
-            <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-            <span className="text-gray-600">Libraries</span>
+            <span className="w-3 h-3 bg-blue-500 rounded-full" aria-hidden="true"></span>
+            <span className="text-card-foreground">Libraries</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-            <span className="text-gray-600">Makerspaces</span>
+            <span className="w-3 h-3 bg-red-500 rounded-full" aria-hidden="true"></span>
+            <span className="text-card-foreground">Makerspaces</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span className="text-gray-600">Coworking</span>
+            <span className="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+            <span className="text-card-foreground">Coworking</span>
           </div>
         </div>
-        <div className="mt-2 text-xs text-gray-500">
+        <div className="mt-2 text-xs text-muted-foreground">
           {spaces.filter(s => s.coordinates?.lat && s.coordinates?.lng).length} of {spaces.length} spaces mapped
         </div>
       </div>

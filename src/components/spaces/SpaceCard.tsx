@@ -61,43 +61,45 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
   };
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 bg-card border-border">
       <div className="relative">
-        <div className="aspect-[16/9] bg-gray-100 relative overflow-hidden">
+        <div className="aspect-[16/9] bg-muted relative overflow-hidden">
           <img 
             src={getEnhancedImageUrl(currentImageIndex)}
-            alt={space.name}
+            alt={`${space.name} - ${space.type} in ${space.city}`}
             className="w-full h-full object-cover transition-transform duration-500"
+            loading="lazy"
           />
           
           {space.images.length > 1 && (
             <>
               <button 
                 onClick={prevImage}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50"
-                aria-label="Previous image"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
+                aria-label={`Previous image of ${space.name}`}
               >
                 ‹
               </button>
               <button 
                 onClick={nextImage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50"
-                aria-label="Next image"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
+                aria-label={`Next image of ${space.name}`}
               >
                 ›
               </button>
-              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1" role="group" aria-label="Image indicators">
                 {space.images.map((_, idx) => (
                   <span 
                     key={idx} 
                     className={`block h-2 w-2 rounded-full ${idx === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
+                    aria-hidden="true"
                   ></span>
                 ))}
               </div>
             </>
           )}
           
-          <div className="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs font-semibold rounded">
+          <div className="absolute top-2 left-2 bg-primary text-primary-foreground px-2 py-1 text-xs font-semibold rounded">
             {space.type.charAt(0).toUpperCase() + space.type.slice(1)}
           </div>
         </div>
@@ -105,40 +107,40 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
       
       <CardContent className="pt-4">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="font-semibold text-lg line-clamp-1">{space.name}</h3>
+          <h3 className="font-semibold text-lg line-clamp-1 text-card-foreground">{space.name}</h3>
           <div className="flex items-center">
-            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-            <span className="ml-1 text-sm font-medium">{space.rating}</span>
+            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" aria-hidden="true" />
+            <span className="ml-1 text-sm font-medium text-card-foreground">{space.rating}</span>
           </div>
         </div>
         
-        <div className="flex items-center text-sm text-gray-500 mb-3">
-          <MapPin className="w-4 h-4 mr-1" />
+        <div className="flex items-center text-sm text-muted-foreground mb-3">
+          <MapPin className="w-4 h-4 mr-1" aria-hidden="true" />
           <span className="line-clamp-1">{space.address}, {space.city}</span>
         </div>
         
-        <p className="text-sm text-gray-600 line-clamp-2 mb-3">{space.description}</p>
+        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{space.description}</p>
         
-        <div className="flex flex-wrap gap-1 mb-3">
+        <div className="flex flex-wrap gap-1 mb-3" role="list" aria-label="Available equipment">
           {space.equipment.slice(0, 3).map((item) => (
-            <span key={item} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+            <span key={item} className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded">
               {item}
             </span>
           ))}
           {space.equipment.length > 3 && (
-            <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+            <span className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded">
               +{space.equipment.length - 3} more
             </span>
           )}
         </div>
         
         <div className="flex items-center justify-between mt-2 text-sm">
-          <div className="flex items-center">
-            <Users className="w-4 h-4 mr-1" />
+          <div className="flex items-center text-muted-foreground">
+            <Users className="w-4 h-4 mr-1" aria-hidden="true" />
             <span>Up to {space.capacity} people</span>
           </div>
-          <div className="font-semibold">
-            {space.pricePerHour} جنيه/ساعة
+          <div className="font-semibold text-card-foreground">
+            {space.pricePerHour} EGP/hour
           </div>
         </div>
       </CardContent>
@@ -146,7 +148,8 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
       <CardFooter className="pt-0">
         <Button 
           onClick={handleViewDetails}
-          className="w-full bg-yellow-500 hover:bg-yellow-600"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+          aria-label={`View details for ${space.name}`}
         >
           View Details
         </Button>

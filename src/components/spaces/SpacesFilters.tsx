@@ -44,10 +44,10 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
   };
 
   return (
-    <Card className="sticky top-4">
+    <Card className="sticky top-4 border border-border">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2">
-          <Filter className="h-5 w-5" />
+        <CardTitle className="flex items-center gap-2 text-card-foreground">
+          <Filter className="h-5 w-5 text-primary" aria-hidden="true" />
           Filters
         </CardTitle>
       </CardHeader>
@@ -55,25 +55,25 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
         <div className="space-y-6">
           {/* Search filter */}
           <div>
-            <Label className="text-base font-medium">البحث في المساحات</Label>
+            <Label className="text-base font-medium text-card-foreground">Search Spaces</Label>
             <div className="relative mt-2">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" aria-hidden="true" />
               <Input
                 type="text"
-                placeholder="ابحث عن المساحات بالاسم أو المكان أو الوصف..."
+                placeholder="Search by name, location, or description..."
                 value={filters.searchText}
                 onChange={(e) => {
-                  console.log('Search input changed:', e.target.value);
                   onFilterChange({ searchText: e.target.value });
                 }}
-                className="pl-10"
+                className="pl-10 bg-background border-border"
+                aria-label="Filter spaces by name, location, or description"
               />
             </div>
           </div>
 
           {/* Distance filter */}
           <div>
-            <Label className="text-base font-medium">Distance (km)</Label>
+            <Label className="text-base font-medium text-card-foreground">Distance (km)</Label>
             <div className="mt-2">
               <Slider
                 defaultValue={[filters.distance]}
@@ -81,6 +81,7 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
                 step={1}
                 onValueChange={(values) => onFilterChange({ distance: values[0] })}
                 className="mb-2"
+                aria-label="Maximum distance filter"
               />
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>0 km</span>
@@ -92,7 +93,7 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
 
           {/* Capacity filter */}
           <div>
-            <Label className="text-base font-medium">Minimum Capacity</Label>
+            <Label className="text-base font-medium text-card-foreground">Minimum Capacity</Label>
             <div className="mt-2">
               <Slider
                 defaultValue={[filters.capacity]}
@@ -100,6 +101,7 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
                 step={5}
                 onValueChange={(values) => onFilterChange({ capacity: values[0] })}
                 className="mb-2"
+                aria-label="Minimum capacity filter"
               />
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>0</span>
@@ -111,18 +113,19 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
 
           {/* Equipment filter */}
           <div>
-            <Label className="text-base font-medium">Equipment</Label>
-            <div className="mt-2 grid grid-cols-2 gap-2">
+            <Label className="text-base font-medium text-card-foreground">Equipment</Label>
+            <div className="mt-2 grid grid-cols-1 gap-2" role="group" aria-labelledby="equipment-filter">
               {equipmentOptions.map((equipment) => (
                 <div key={equipment} className="flex items-center space-x-2">
                   <Checkbox 
                     id={`equipment-${equipment}`}
                     checked={filters.equipment.includes(equipment)}
                     onCheckedChange={() => handleEquipmentChange(equipment)}
+                    aria-describedby={`equipment-${equipment}-desc`}
                   />
                   <label
                     htmlFor={`equipment-${equipment}`}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-card-foreground cursor-pointer"
                   >
                     {equipment}
                   </label>
@@ -133,12 +136,13 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
 
           {/* Availability filter */}
           <div>
-            <Label className="text-base font-medium mb-2 block">Availability</Label>
+            <Label className="text-base font-medium mb-2 block text-card-foreground">Availability</Label>
             <Calendar
               mode="single"
               selected={date}
               onSelect={handleDateChange}
-              className="border rounded-md"
+              className="border border-border rounded-md bg-background"
+              aria-label="Select availability date"
             />
           </div>
         </div>
