@@ -5,8 +5,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Download, Loader2 } from "lucide-react";
 import { getAllCourses } from "@/lib/course-utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useCourseDownload } from "@/hooks/useCourseDownload";
 
 interface CoursesListProps {
   categoryFilter?: string;
@@ -15,6 +17,7 @@ interface CoursesListProps {
 const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
   const [activeTab, setActiveTab] = useState(categoryFilter);
   const { t } = useLanguage();
+  const { downloadCourseAsWord, isDownloading } = useCourseDownload();
   
   const courses = getAllCourses();
 
@@ -79,9 +82,23 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <Button className="w-full bg-yellow-500 hover:bg-yellow-600" asChild>
+                <CardFooter className="gap-2">
+                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600" asChild>
                     <Link to={`/courses/${course.id}`}>{t('courses.viewDetails')}</Link>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => downloadCourseAsWord(course.id, course.title)}
+                    disabled={isDownloading}
+                    className="border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                    title="Download as Word document"
+                  >
+                    {isDownloading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Download className="h-4 w-4" />
+                    )}
                   </Button>
                 </CardFooter>
               </Card>
