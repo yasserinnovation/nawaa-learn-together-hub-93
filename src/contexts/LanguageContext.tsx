@@ -196,6 +196,10 @@ const translations = {
     'spaces.subtitle': 'Find makerspaces, libraries, and collaborative environments perfect for hands-on tech training across Egypt.',
     'spaces.searchSpaces': 'Search Spaces',
     'spaces.searchPlaceholder': 'Search by city, neighborhood, or space name',
+    'spaces.availableLabel': 'Spaces Available',
+
+    // Hero image alt text
+    'hero.imageAlt': 'Students collaborating and learning technology in a modern makerspace environment',
 
     // Authentication
     'auth.signIn': 'Sign In',
@@ -385,6 +389,10 @@ const translations = {
     'spaces.subtitle': 'ابحث عن مساحات العمل والمكتبات والبيئات التعاونية المثالية للتدريب التقني العملي في جميع أنحاء مصر.',
     'spaces.searchSpaces': 'البحث في المساحات',
     'spaces.searchPlaceholder': 'ابحث بالمدينة أو الحي أو اسم المساحة',
+    'spaces.availableLabel': 'مساحة متاحة',
+
+    // Hero image alt text
+    'hero.imageAlt': 'طلاب يتعاونون ويتعلمون التكنولوجيا في بيئة مساحة عمل حديثة',
 
     // Authentication  
     'auth.signIn': 'تسجيل الدخول',
