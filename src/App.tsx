@@ -22,6 +22,8 @@ import CompetitionsGuide from "./pages/CompetitionsGuide";
 import TrainerSignup from "./pages/TrainerSignup";
 import TrainerDashboard from "./pages/TrainerDashboard";
 import Auth from "./pages/Auth";
+import VerifyEmail from "./pages/VerifyEmail";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
                 <Route path="/trainer-signup" element={<TrainerSignup />} />
                 <Route path="/trainer-dashboard" element={<TrainerDashboard />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/auth/verify-email" element={<VerifyEmail />} />
+                <Route path="/auth/reset-password" element={<ResetPassword />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/competitions-guide" element={<CompetitionsGuide />} />
                 <Route path="*" element={<NotFound />} />
