@@ -28,7 +28,9 @@ const DiscoverSpaces = () => {
             <SpacesFilters filters={filters} onFilterChange={handleFilterChange} />
           </div>
           <div className="lg:w-2/3">
-            <SpaceMap filters={filters} />
+            <div className="mb-6">
+              <SpaceMap filters={filters} />
+            </div>
             <SpacesList filters={filters} />
           </div>
         </div>

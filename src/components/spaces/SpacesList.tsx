@@ -22,13 +22,20 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   const fetchSpaces = async () => {
     try {
+      console.log('Fetching spaces from database...');
       // Query the spaces table from Supabase
       const { data, error } = await (supabase as any)
         .from('spaces')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      
+      console.log('Raw spaces data:', data);
+      console.log('Number of spaces fetched:', data?.length || 0);
       
       // Convert database format to expected format
       const convertedSpaces: Space[] = (data || []).map(space => ({
@@ -54,6 +61,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
         }
       }));
       
+      console.log('Converted spaces:', convertedSpaces);
       setSpaces(convertedSpaces);
     } catch (error) {
       console.error('Error fetching spaces:', error);
