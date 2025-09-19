@@ -353,8 +353,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Save language to localStorage when it changes
   useEffect(() => {
     localStorage.setItem('language', language);
-    // Set document direction
-    document.dir = language === 'ar' ? 'rtl' : 'ltr';
+    // Set document direction to ltr for both languages
+    document.dir = 'ltr';
   }, [language]);
 
   const t = (key: string): string => {
