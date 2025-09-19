@@ -3,15 +3,18 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/components/auth/AuthProvider";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
-import { Menu, X, ChevronDown, Users, BookOpen, MapPin, Wrench, Trophy, Brain, MessageSquare, Shield } from "lucide-react";
+import { Menu, X, ChevronDown, Users, BookOpen, MapPin, Wrench, Trophy, Brain, MessageSquare, Shield, LogOut } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showAdminMenu, setShowAdminMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const { t, language } = useLanguage();
+  const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -29,6 +32,7 @@ const Navbar = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
     setShowAdminMenu(false);
+    setShowUserMenu(false);
   };
 
   // Handle scroll effect
@@ -169,29 +173,33 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Admin Menu (Hidden by default) */}
-            <div className="relative mr-6">
-              <button
-                onClick={() => setShowAdminMenu(!showAdminMenu)}
-                className="flex items-center gap-1 px-3 py-2 text-xs text-gray-500 hover:text-yellow-600 transition-colors duration-200"
-                aria-expanded={showAdminMenu}
-              >
-                <Shield className="w-3 h-3" />
-                <ChevronDown className="w-3 h-3" />
-              </button>
-              
-              {showAdminMenu && (
-                <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[120px] animate-fade-in-up">
-                  <Link
-                    to="/admin"
-                    onClick={() => setShowAdminMenu(false)}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition-colors duration-200"
-                  >
-                    Admin Panel
-                  </Link>
-                </div>
-              )}
-            </div>
+            {/* Admin Menu (Only visible to admins) */}
+            {isAdmin && (
+              <div className="relative mr-6">
+                <button
+                  onClick={() => setShowAdminMenu(!showAdminMenu)}
+                  className="flex items-center gap-1 px-3 py-2 text-xs text-muted-foreground hover:text-primary transition-colors duration-200 rounded-lg hover:bg-muted/50"
+                  aria-expanded={showAdminMenu}
+                  aria-label="Admin menu"
+                >
+                  <Shield className="w-3 h-3" />
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+                
+                {showAdminMenu && (
+                  <div className="absolute top-full right-0 mt-1 bg-background rounded-lg shadow-lg border border-border py-1 min-w-[140px] animate-fade-in-up z-50">
+                    <Link
+                      to="/admin"
+                      onClick={() => setShowAdminMenu(false)}
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors duration-200"
+                    >
+                      <Shield className="w-4 h-4" />
+                      Admin Panel
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
           </nav>
 
           {/* Right Side Actions */}
@@ -199,22 +207,65 @@ const Navbar = () => {
             {/* Language Switcher */}
             <LanguageSwitcher />
             
-            {/* Auth Buttons - Desktop */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-medium"
-              >
-                {t('nav.signIn') || 'Sign In'}
-              </Button>
-              <Button 
-                size="sm"
-                className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200"
-              >
-                {t('nav.signUp') || 'Sign Up'}
-              </Button>
-            </div>
+            {/* User Authentication */}
+            {user ? (
+              <div className="hidden lg:flex items-center gap-3">
+                <div className="relative">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50 transition-colors duration-200"
+                    aria-expanded={showUserMenu}
+                    aria-label="User menu"
+                  >
+                    <div className="h-8 w-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-primary-foreground font-semibold text-sm">
+                      {user.email?.charAt(0).toUpperCase()}
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                  </button>
+                  
+                  {showUserMenu && (
+                    <div className="absolute top-full right-0 mt-1 bg-background rounded-lg shadow-lg border border-border py-2 min-w-[180px] animate-fade-in-up z-50">
+                      <div className="px-4 py-2 border-b border-border">
+                        <p className="text-sm font-medium text-foreground truncate">{user.email}</p>
+                        {isAdmin && (
+                          <p className="text-xs text-primary font-medium">Administrator</p>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => {
+                          signOut();
+                          setShowUserMenu(false);
+                        }}
+                        className="flex items-center gap-2 w-full px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-destructive transition-colors duration-200"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="hidden lg:flex items-center gap-3">
+                <Link to="/auth">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-foreground hover:text-primary hover:bg-muted font-medium"
+                  >
+                    {t('nav.signIn') || 'Sign In'}
+                  </Button>
+                </Link>
+                <Link to="/auth">
+                  <Button 
+                    size="sm"
+                    className="btn-primary"
+                  >
+                    {t('nav.signUp') || 'Sign Up'}
+                  </Button>
+                </Link>
+              </div>
+            )}
 
             {/* Mobile menu button */}
             <button
@@ -280,20 +331,55 @@ const Navbar = () => {
                 ))}
               </div>
               
-              {/* Auth Buttons - Mobile */}
-              <div className="space-y-3 border-t border-gray-100 pt-6">
-                <Button 
-                  variant="ghost" 
-                  className="w-full justify-start text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-medium h-12"
-                >
-                  <Users className="w-5 h-5 mr-3" />
-                  {t('nav.signIn') || 'Sign In'}
-                </Button>
-                <Button 
-                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold shadow-md h-12"
-                >
-                  {t('nav.signUp') || 'Sign Up'}
-                </Button>
+              {/* User Menu - Mobile */}
+              <div className="space-y-3 border-t border-border pt-6">
+                {user ? (
+                  <>
+                    <div className="px-3 py-2">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="h-10 w-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-primary-foreground font-semibold">
+                          {user.email?.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-foreground truncate">{user.email}</p>
+                          {isAdmin && (
+                            <p className="text-xs text-primary font-medium">Administrator</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <Button 
+                      onClick={() => {
+                        signOut();
+                        closeMenu();
+                      }}
+                      variant="ghost" 
+                      className="w-full justify-start text-foreground hover:text-destructive hover:bg-muted font-medium h-12"
+                    >
+                      <LogOut className="w-5 h-5 mr-3" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth" onClick={closeMenu}>
+                      <Button 
+                        variant="ghost" 
+                        className="w-full justify-start text-foreground hover:text-primary hover:bg-muted font-medium h-12"
+                      >
+                        <Users className="w-5 h-5 mr-3" />
+                        {t('nav.signIn') || 'Sign In'}
+                      </Button>
+                    </Link>
+                    <Link to="/auth" onClick={closeMenu}>
+                      <Button 
+                        className="w-full btn-primary h-12"
+                      >
+                        {t('nav.signUp') || 'Sign Up'}
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

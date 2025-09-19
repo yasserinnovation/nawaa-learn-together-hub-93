@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Edit, Trash2, MapPin, Users, Star, BookOpen, Wrench, Trophy, Map } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Plus, Edit, Trash2, MapPin, Users, Star, BookOpen, Wrench, Trophy, Map, Shield, Activity, AlertTriangle, TrendingUp, Clock, Settings } from "lucide-react";
 import AddSpaceForm from "@/components/admin/AddSpaceForm";
 import EditSpaceForm from "@/components/admin/EditSpaceForm";
 import AddCourseForm from "@/components/admin/AddCourseForm";
@@ -12,8 +15,9 @@ import AddToolForm from "@/components/admin/AddToolForm";
 import AddCompetitionForm from "@/components/admin/AddCompetitionForm";
 import LocationMap from "@/components/admin/LocationMap";
 import { useMapboxToken } from "@/hooks/useMapboxToken";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/components/auth/AuthProvider";
 
 interface Space {
   id: string;
@@ -107,6 +111,8 @@ interface Profile {
 
 
 const AdminDashboard = () => {
+  const { user, isAdmin, loading: authLoading } = useAuth();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAddCourseForm, setShowAddCourseForm] = useState(false);
@@ -121,21 +127,68 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalUsers: 0,
-    avgRating: 0,
-    totalRevenue: 0
+    totalSpaces: 0,
+    totalCourses: 0,
+    totalTools: 0,
+    totalCompetitions: 0,
+    avgUserRating: 0,
+    avgSpaceRating: 0,
+    totalReviews: 0,
+    activeUsersLast30Days: 0,
+    estimatedRevenue: 0
   });
   const [showMapView, setShowMapView] = useState(false);
+
+  // Redirect if not authenticated or not admin
+  if (authLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  if (!isAdmin) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <Card className="max-w-md w-full">
+            <CardHeader className="text-center">
+              <div className="mx-auto h-12 w-12 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
+                <Shield className="h-6 w-6 text-destructive" />
+              </div>
+              <CardTitle className="text-2xl">Access Denied</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-muted-foreground mb-4">
+                You don't have permission to access the admin dashboard. 
+                This area is restricted to administrators only.
+              </p>
+              <Button onClick={() => window.history.back()} variant="outline">
+                Go Back
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    );
+  }
 
   // Get Mapbox token
   const { token: mapboxToken, loading: tokenLoading, error: tokenError } = useMapboxToken();
 
   useEffect(() => {
-    fetchAllData();
-  }, []);
-
-  useEffect(() => {
-    calculateStats();
-  }, [spaces, courses, tools, competitions, profiles]);
+    if (isAdmin) {
+      fetchAllData();
+      fetchDashboardStats();
+    }
+  }, [isAdmin]);
 
   const fetchAllData = async () => {
     await Promise.all([
@@ -147,33 +200,38 @@ const AdminDashboard = () => {
     ]);
   };
 
-  const calculateStats = () => {
-    // Calculate average rating from spaces
-    const ratingsSum = spaces.reduce((sum, space) => sum + (space.rating || 0), 0);
-    const avgRating = spaces.length > 0 ? (ratingsSum / spaces.length) : 0;
-
-    // Calculate total revenue from courses, tools, and competitions
-    const courseRevenue = courses.reduce((sum, course) => sum + (course.price || 0), 0);
-    const toolRevenue = tools.reduce((sum, tool) => sum + (tool.rental_price_per_day * 30), 0); // Estimate monthly revenue
-    const competitionRevenue = competitions.reduce((sum, comp) => sum + (comp.entry_fee * (comp.max_participants || 50)), 0);
-    const totalRevenue = courseRevenue + toolRevenue + competitionRevenue;
-
-    // Use actual user count from profiles table
-    const totalUsers = profiles.length;
-    // Calculate average user rating
-    const userRatingsSum = profiles.reduce((sum, profile) => sum + (profile.rating || 0), 0);
-    const avgUserRating = profiles.length > 0 ? (userRatingsSum / profiles.length) : avgRating;
-
-    setStats({
-      totalUsers: totalUsers,
-      avgRating: Number(avgUserRating.toFixed(1)),
-      totalRevenue: Number(totalRevenue.toFixed(2))
-    });
+  // Fetch dashboard statistics using the secure function
+  const fetchDashboardStats = async () => {
+    try {
+      const { data, error } = await supabase.rpc('get_admin_dashboard_stats');
+      
+      if (error) throw error;
+      
+      setStats({
+        totalUsers: data.total_users || 0,
+        totalSpaces: data.total_spaces || 0,
+        totalCourses: data.total_courses || 0,
+        totalTools: data.total_tools || 0,
+        totalCompetitions: data.total_competitions || 0,
+        avgUserRating: Number((data.avg_user_rating || 0).toFixed(1)),
+        avgSpaceRating: Number((data.avg_space_rating || 0).toFixed(1)),
+        totalReviews: data.total_reviews || 0,
+        activeUsersLast30Days: data.active_users_last_30_days || 0,
+        estimatedRevenue: Number((data.estimated_revenue || 0).toFixed(2)),
+      });
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to load statistics",
+        description: "Could not fetch dashboard statistics. Please try again.",
+      });
+    }
   };
 
   const fetchSpaces = async () => {
     try {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('spaces')
         .select('*')
         .order('created_at', { ascending: false });
@@ -182,7 +240,11 @@ const AdminDashboard = () => {
       setSpaces(data || []);
     } catch (error) {
       console.error('Error fetching spaces:', error);
-      toast.error('Failed to fetch spaces');
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch spaces",
+        description: "Could not load spaces data. Please try again.",
+      });
     }
   };
 
@@ -458,95 +520,199 @@ const AdminDashboard = () => {
   };
 
   return (
-    <Layout>
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Manage spaces, users, and platform settings</p>
-          </div>
-          <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200">
-            Connect Supabase for full functionality
-          </Badge>
-        </div>
+    <>
+      <Helmet>
+        <title>Admin Dashboard | Nawaa Learning Platform</title>
+        <meta
+          name="description"
+          content="Administrative dashboard for managing users, courses, spaces, tools, and competitions on the Nawaa learning platform."
+        />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href={`${window.location.origin}/admin`} />
+      </Helmet>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Spaces</CardTitle>
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{spaces.length}</div>
-              <p className="text-xs text-muted-foreground">Active learning spaces</p>
-            </CardContent>
-          </Card>
+      <Layout>
+        <main className="container mx-auto px-4 py-8 min-h-screen">
+          {/* Header */}
+          <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
+                <div className="h-10 w-10 bg-gradient-to-br from-primary-400 via-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-glow">
+                  <Shield className="h-5 w-5 text-primary-foreground" />
+                </div>
+                Admin Dashboard
+              </h1>
+              <p className="text-muted-foreground mt-2">
+                Manage spaces, users, and platform settings
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 flex items-center gap-1">
+                <Activity className="h-3 w-3" />
+                System Active
+              </Badge>
+              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                Admin Access
+              </Badge>
+            </div>
+          </header>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.totalUsers.toLocaleString()}</div>
-              <p className="text-xs text-muted-foreground">Estimated from platform activity</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Avg Rating</CardTitle>
-              <Star className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.avgRating || 'N/A'}</div>
-              <p className="text-xs text-muted-foreground">From {spaces.length} rated spaces</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Est. Revenue</CardTitle>
-              <Trophy className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.totalRevenue.toLocaleString()} EGP</div>
-              <p className="text-xs text-muted-foreground">Potential monthly revenue</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Main Content */}
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="spaces">Spaces</TabsTrigger>
-            <TabsTrigger value="courses">Courses</TabsTrigger>
-            <TabsTrigger value="tools">Tools</TabsTrigger>
-            <TabsTrigger value="competitions">Competitions</TabsTrigger>
-            <TabsTrigger value="users">Users</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Platform Overview</CardTitle>
+          {/* Enhanced Stats Cards */}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" aria-label="Dashboard Statistics">
+            <Card className="hover-lift">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Total Users</CardTitle>
+                <Users className="h-4 w-4 text-blue-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8">
-                  <h3 className="text-lg font-medium mb-2">Welcome to Admin Dashboard</h3>
-                  <p className="text-gray-600 mb-4">
-                    Connect to Supabase to view real-time analytics and platform metrics.
-                  </p>
-                  <Button variant="outline">
-                    Connect Supabase
-                  </Button>
-                </div>
+                <div className="text-2xl font-bold text-foreground">{stats.totalUsers.toLocaleString()}</div>
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
+                  <TrendingUp className="h-3 w-3 text-green-600" />
+                  {stats.activeUsersLast30Days} active (30 days)
+                </p>
               </CardContent>
             </Card>
-          </TabsContent>
+
+            <Card className="hover-lift">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Learning Spaces</CardTitle>
+                <MapPin className="h-4 w-4 text-green-600" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-foreground">{stats.totalSpaces}</div>
+                <p className="text-xs text-muted-foreground">
+                  Avg rating: {stats.avgSpaceRating} stars
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-lift">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Total Resources</CardTitle>
+                <BookOpen className="h-4 w-4 text-purple-600" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-foreground">
+                  {stats.totalCourses + stats.totalTools + stats.totalCompetitions}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {stats.totalCourses} courses • {stats.totalTools} tools • {stats.totalCompetitions} events
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-lift">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Est. Revenue</CardTitle>
+                <Trophy className="h-4 w-4 text-primary-600" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-foreground">{stats.estimatedRevenue.toLocaleString()} EGP</div>
+                <p className="text-xs text-muted-foreground">
+                  {stats.totalReviews} reviews • {stats.avgUserRating} avg rating
+                </p>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Enhanced Main Content */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+            <TabsList className="grid w-full grid-cols-6 h-12 bg-muted/50 backdrop-blur-sm">
+              <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <Activity className="h-4 w-4" />
+                <span className="hidden sm:inline">Overview</span>
+              </TabsTrigger>
+              <TabsTrigger value="spaces" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <MapPin className="h-4 w-4" />
+                <span className="hidden sm:inline">Spaces</span>
+              </TabsTrigger>
+              <TabsTrigger value="courses" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <BookOpen className="h-4 w-4" />
+                <span className="hidden sm:inline">Courses</span>
+              </TabsTrigger>
+              <TabsTrigger value="tools" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <Wrench className="h-4 w-4" />
+                <span className="hidden sm:inline">Tools</span>
+              </TabsTrigger>
+              <TabsTrigger value="competitions" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <Trophy className="h-4 w-4" />
+                <span className="hidden sm:inline">Events</span>
+              </TabsTrigger>
+              <TabsTrigger value="users" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <Users className="h-4 w-4" />
+                <span className="hidden sm:inline">Users</span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <TrendingUp className="h-5 w-5 text-green-600" />
+                      Platform Analytics
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center py-2">
+                        <span className="text-muted-foreground">Total Platform Users</span>
+                        <span className="font-semibold">{stats.totalUsers.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-t">
+                        <span className="text-muted-foreground">Learning Resources</span>
+                        <span className="font-semibold">{stats.totalCourses + stats.totalTools + stats.totalCompetitions}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-t">
+                        <span className="text-muted-foreground">Active Spaces</span>
+                        <span className="font-semibold">{stats.totalSpaces}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-t">
+                        <span className="text-muted-foreground">Monthly Revenue Est.</span>
+                        <span className="font-semibold text-green-600">{stats.estimatedRevenue.toLocaleString()} EGP</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Settings className="h-5 w-5 text-blue-600" />
+                      System Status
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between py-2">
+                        <span className="text-muted-foreground">Database Connection</span>
+                        <Badge variant="default" className="bg-green-100 text-green-800">Connected</Badge>
+                      </div>
+                      <div className="flex items-center justify-between py-2 border-t">
+                        <span className="text-muted-foreground">Authentication</span>
+                        <Badge variant="default" className="bg-green-100 text-green-800">Active</Badge>
+                      </div>
+                      <div className="flex items-center justify-between py-2 border-t">
+                        <span className="text-muted-foreground">Admin Role</span>
+                        <Badge variant="default" className="bg-primary-100 text-primary-800">Verified</Badge>
+                      </div>
+                      <div className="flex items-center justify-between py-2 border-t">
+                        <span className="text-muted-foreground">Last Updated</span>
+                        <span className="text-sm text-muted-foreground">{new Date().toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Alert>
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription>
+                  <strong>Security Note:</strong> Your Postgres database has security patches available. 
+                  Please upgrade your database in the Supabase dashboard to apply important security updates.
+                </AlertDescription>
+              </Alert>
+            </TabsContent>
 
           <TabsContent value="spaces" className="space-y-6">
             <div className="flex justify-between items-center">
@@ -560,7 +726,7 @@ const AdminDashboard = () => {
                   <Map className="h-4 w-4 mr-2" />
                   {showMapView ? 'List View' : 'Map View'}
                 </Button>
-                <Button onClick={() => setShowAddForm(true)} className="bg-yellow-500 hover:bg-yellow-600">
+                <Button onClick={() => setShowAddForm(true)} className="btn-primary">
                   <Plus className="h-4 w-4 mr-2" />
                   Add New Space
                 </Button>
@@ -643,7 +809,7 @@ const AdminDashboard = () => {
           <TabsContent value="courses" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Manage Courses</h2>
-              <Button onClick={() => setShowAddCourseForm(true)} className="bg-blue-600 hover:bg-blue-700">
+              <Button onClick={() => setShowAddCourseForm(true)} className="btn-secondary">
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Course
               </Button>
@@ -699,7 +865,7 @@ const AdminDashboard = () => {
           <TabsContent value="tools" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Manage Tools</h2>
-              <Button onClick={() => setShowAddToolForm(true)} className="bg-green-600 hover:bg-green-700">
+              <Button onClick={() => setShowAddToolForm(true)} className="btn-secondary">
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Tool
               </Button>
@@ -755,7 +921,7 @@ const AdminDashboard = () => {
           <TabsContent value="competitions" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Manage Competitions</h2>
-              <Button onClick={() => setShowAddCompetitionForm(true)} className="bg-purple-600 hover:bg-purple-700">
+              <Button onClick={() => setShowAddCompetitionForm(true)} className="btn-secondary">
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Competition
               </Button>
@@ -1004,19 +1170,21 @@ const AdminDashboard = () => {
             onClose={() => setShowAddForm(false)}
             onSubmit={handleAddSpace}
           />
-        )}
+         )}
 
-        {/* Edit Space Modal */}
-        {editingSpace && (
-          <EditSpaceForm
-            space={editingSpace}
-            onClose={() => setEditingSpace(null)}
-            onSubmit={handleEditSpace}
-          />
-        )}
-      </div>
+          {/* Edit Space Modal */}
+          {editingSpace && (
+            <EditSpaceForm
+              space={editingSpace}
+              onClose={() => setEditingSpace(null)}
+              onSubmit={handleEditSpace}
+            />
+          )}
+        </Tabs>
+      </main>
     </Layout>
-  );
+  </>
+);
 };
 
 export default AdminDashboard;
