@@ -34,10 +34,10 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
   };
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-background" aria-labelledby="courses-list-heading">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">{t('courses.title')}</h2>
+          <h2 id="courses-list-heading" className="text-3xl font-bold mb-8 text-center text-foreground">{t('courses.title')}</h2>
           
           {!categoryFilter && (
             <div className="mb-8">
@@ -54,50 +54,51 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (
-              <Card key={course.id} className="h-full flex flex-col shadow-md hover:shadow-lg transition-shadow">
+              <Card key={course.id} className="h-full flex flex-col shadow-md hover:shadow-xl transition-all duration-300 bg-card border-border">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" className="bg-yellow-50 text-yellow-700 hover:bg-yellow-100">
+                    <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
                       {t('courses.ages')} {course.ageGroup}
                     </Badge>
-                    <Badge variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-100">
+                    <Badge variant="outline" className="bg-secondary text-secondary-foreground">
                       {course.duration}
                     </Badge>
                   </div>
-                  <CardTitle className="flex items-center gap-2">
-                    <course.icon className="h-6 w-6 text-yellow-500" />
+                  <CardTitle className="flex items-center gap-2 text-card-foreground">
+                    <course.icon className="h-6 w-6 text-primary" aria-hidden="true" />
                     {getCourseTranslation(course.id, 'title', course.title)}
                   </CardTitle>
-                  <CardDescription>{getCourseTranslation(course.id, 'project', course.project)}</CardDescription>
+                  <CardDescription className="text-muted-foreground">{getCourseTranslation(course.id, 'project', course.project)}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <div className="space-y-2">
                     <div>
-                      <h4 className="font-semibold text-sm text-yellow-700">{t('courses.stemFocus')}</h4>
-                      <p className="text-sm text-gray-600">{getCourseTranslation(course.id, 'stemFocus', course.stemFocus)}</p>
+                      <h4 className="font-semibold text-sm text-primary">{t('courses.stemFocus')}</h4>
+                      <p className="text-sm text-muted-foreground">{getCourseTranslation(course.id, 'stemFocus', course.stemFocus)}</p>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm text-yellow-700">{t('courses.lifeSkills')}</h4>
-                      <p className="text-sm text-gray-600">{getCourseTranslation(course.id, 'lifeSkills', course.lifeSkills)}</p>
+                      <h4 className="font-semibold text-sm text-primary">{t('courses.lifeSkills')}</h4>
+                      <p className="text-sm text-muted-foreground">{getCourseTranslation(course.id, 'lifeSkills', course.lifeSkills)}</p>
                     </div>
                   </div>
                 </CardContent>
                 <CardFooter className="gap-2">
-                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600" asChild>
-                    <Link to={`/courses/${course.id}`}>{t('courses.viewDetails')}</Link>
+                  <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+                    <Link to={`/courses/${course.id}`} aria-label={`View details for ${course.title}`}>{t('courses.viewDetails')}</Link>
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => downloadCourseAsWord(course.id, course.title)}
                     disabled={isDownloading}
-                    className="border-yellow-500 text-yellow-600 hover:bg-yellow-50"
-                    title="Download as Word document"
+                    className="border-primary text-primary hover:bg-primary/10"
+                    title="Download course as Word document"
+                    aria-label={`Download ${course.title} as Word document`}
                   >
                     {isDownloading ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
                     ) : (
-                      <Download className="h-4 w-4" />
+                      <Download className="h-4 w-4" aria-hidden="true" />
                     )}
                   </Button>
                 </CardFooter>
@@ -106,32 +107,32 @@ const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
           </div>
 
           <div className="mt-12 text-center">
-            <h3 className="text-2xl font-bold mb-4">{t('courses.resourcesTitle')}</h3>
-            <ul className="max-w-2xl mx-auto text-gray-700 space-y-2 mb-6">
+            <h3 className="text-2xl font-bold mb-4 text-foreground">{t('courses.resourcesTitle')}</h3>
+            <ul className="max-w-2xl mx-auto text-muted-foreground space-y-2 mb-6" role="list">
               <li className="flex items-center gap-2 justify-center">
-                <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
+                <span className="rounded-full bg-primary/10 w-6 h-6 inline-flex items-center justify-center text-primary" aria-hidden="true">✓</span>
                 {t('courses.teacherGuides')}
               </li>
               <li className="flex items-center gap-2 justify-center">
-                <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
+                <span className="rounded-full bg-primary/10 w-6 h-6 inline-flex items-center justify-center text-primary" aria-hidden="true">✓</span>
                 {t('courses.studentJournals')}
               </li>
               <li className="flex items-center gap-2 justify-center">
-                <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
+                <span className="rounded-full bg-primary/10 w-6 h-6 inline-flex items-center justify-center text-primary" aria-hidden="true">✓</span>
                 {t('courses.worksheets')}
               </li>
               <li className="flex items-center gap-2 justify-center">
-                <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
+                <span className="rounded-full bg-primary/10 w-6 h-6 inline-flex items-center justify-center text-primary" aria-hidden="true">✓</span>
                 {t('courses.assessmentRubrics')}
               </li>
               <li className="flex items-center gap-2 justify-center">
-                <span className="rounded-full bg-yellow-100 w-6 h-6 inline-flex items-center justify-center text-yellow-700">✓</span>
+                <span className="rounded-full bg-primary/10 w-6 h-6 inline-flex items-center justify-center text-primary" aria-hidden="true">✓</span>
                 {t('courses.onlinePlatform')}
               </li>
             </ul>
 
-            <Button asChild className="bg-yellow-500 hover:bg-yellow-600 mt-4">
-              <Link to="/discover-spaces">{t('courses.findSpace')}</Link>
+            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground mt-4">
+              <Link to="/discover-spaces" aria-label="Find a learning space to take these courses">{t('courses.findSpace')}</Link>
             </Button>
           </div>
         </div>
