@@ -86,6 +86,22 @@ interface Competition {
   created_at?: string;
 }
 
+interface Profile {
+  id: string;
+  email: string;
+  full_name: string;
+  avatar_url?: string;
+  phone?: string;
+  city?: string;
+  interests: string[];
+  rating: number;
+  total_courses_completed: number;
+  total_hours_learned: number;
+  account_status: string;
+  user_type: string;
+  created_at?: string;
+}
+
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -98,6 +114,7 @@ const AdminDashboard = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [tools, setTools] = useState<Tool[]>([]);
   const [competitions, setCompetitions] = useState<Competition[]>([]);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -111,14 +128,15 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     calculateStats();
-  }, [spaces, courses, tools, competitions]);
+  }, [spaces, courses, tools, competitions, profiles]);
 
   const fetchAllData = async () => {
     await Promise.all([
       fetchSpaces(),
       fetchCourses(),
       fetchTools(),
-      fetchCompetitions()
+      fetchCompetitions(),
+      fetchProfiles()
     ]);
   };
 
@@ -133,12 +151,15 @@ const AdminDashboard = () => {
     const competitionRevenue = competitions.reduce((sum, comp) => sum + (comp.entry_fee * (comp.max_participants || 50)), 0);
     const totalRevenue = courseRevenue + toolRevenue + competitionRevenue;
 
-    // Estimate active users based on total content available (placeholder calculation)
-    const estimatedUsers = Math.floor((spaces.length * 15) + (courses.length * 25) + (tools.length * 8) + (competitions.length * 12));
+    // Use actual user count from profiles table
+    const totalUsers = profiles.length;
+    // Calculate average user rating
+    const userRatingsSum = profiles.reduce((sum, profile) => sum + (profile.rating || 0), 0);
+    const avgUserRating = profiles.length > 0 ? (userRatingsSum / profiles.length) : avgRating;
 
     setStats({
-      totalUsers: estimatedUsers,
-      avgRating: Number(avgRating.toFixed(1)),
+      totalUsers: totalUsers,
+      avgRating: Number(avgUserRating.toFixed(1)),
       totalRevenue: Number(totalRevenue.toFixed(2))
     });
   };
@@ -202,6 +223,21 @@ const AdminDashboard = () => {
       toast.error('Failed to fetch competitions');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchProfiles = async () => {
+    try {
+      const { data, error } = await (supabase as any)
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProfiles(data || []);
+    } catch (error) {
+      console.error('Error fetching profiles:', error);
+      toast.error('Failed to fetch profiles');
     }
   };
 
@@ -483,7 +519,7 @@ const AdminDashboard = () => {
             <TabsTrigger value="courses">Courses</TabsTrigger>
             <TabsTrigger value="tools">Tools</TabsTrigger>
             <TabsTrigger value="competitions">Competitions</TabsTrigger>
-            <TabsTrigger value="settings">Settings</TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -740,6 +776,153 @@ const AdminDashboard = () => {
             </Card>
           </TabsContent>
 
+          <TabsContent value="users" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-semibold">Manage Users</h2>
+              <div className="flex gap-2">
+                <Badge variant="outline" className="bg-blue-50 text-blue-700">
+                  {profiles.length} Total Users
+                </Badge>
+                <Badge variant="outline" className="bg-green-50 text-green-700">
+                  Avg Rating: {profiles.length > 0 ? (profiles.reduce((sum, p) => sum + (p.rating || 0), 0) / profiles.length).toFixed(1) : 'N/A'}
+                </Badge>
+              </div>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>All Users ({profiles.length})</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {loading ? (
+                  <div className="flex justify-center items-center min-h-[200px]">
+                    <div className="text-lg">Loading users...</div>
+                  </div>
+                ) : profiles.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-600 mb-4">No users found.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {profiles.map((profile) => (
+                      <div key={profile.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold">
+                              {profile.full_name.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                              <h3 className="font-medium text-lg">{profile.full_name}</h3>
+                              <p className="text-sm text-gray-600">
+                                {profile.email} • {profile.city} • {profile.user_type}
+                              </p>
+                              <div className="flex gap-2 mt-1">
+                                {profile.interests.slice(0, 3).map((interest, idx) => (
+                                  <Badge key={idx} variant="secondary" className="text-xs">
+                                    {interest}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-6">
+                          <div className="text-center">
+                            <div className="flex items-center gap-1">
+                              <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                              <span className="font-semibold text-lg">{profile.rating.toFixed(1)}</span>
+                            </div>
+                            <p className="text-xs text-gray-500">Rating</p>
+                          </div>
+                          <div className="text-center">
+                            <div className="font-semibold text-lg text-blue-600">{profile.total_courses_completed}</div>
+                            <p className="text-xs text-gray-500">Courses</p>
+                          </div>
+                          <div className="text-center">
+                            <div className="font-semibold text-lg text-green-600">{profile.total_hours_learned}h</div>
+                            <p className="text-xs text-gray-500">Hours</p>
+                          </div>
+                          <Badge variant={profile.account_status === 'active' ? 'default' : 'secondary'}>
+                            {profile.account_status}
+                          </Badge>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* User Statistics */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm font-medium">User Types</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {['student', 'trainer', 'admin', 'parent'].map(type => {
+                      const count = profiles.filter(p => p.user_type === type).length;
+                      const percentage = profiles.length > 0 ? ((count / profiles.length) * 100).toFixed(1) : '0';
+                      return (
+                        <div key={type} className="flex justify-between items-center">
+                          <span className="capitalize">{type}</span>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{count}</span>
+                            <span className="text-xs text-gray-500">({percentage}%)</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm font-medium">Top Cities</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {Array.from(new Set(profiles.map(p => p.city).filter(Boolean)))
+                      .slice(0, 5)
+                      .map(city => {
+                        const count = profiles.filter(p => p.city === city).length;
+                        return (
+                          <div key={city} className="flex justify-between items-center">
+                            <span>{city}</span>
+                            <span className="font-medium">{count}</span>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm font-medium">Rating Distribution</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {[5, 4, 3, 2, 1].map(rating => {
+                      const count = profiles.filter(p => Math.floor(p.rating) === rating).length;
+                      return (
+                        <div key={rating} className="flex justify-between items-center">
+                          <div className="flex items-center gap-1">
+                            <Star className="h-3 w-3 text-yellow-500 fill-current" />
+                            <span>{rating}</span>
+                          </div>
+                          <span className="font-medium">{count}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
           <TabsContent value="settings" className="space-y-6">
             <Card>
               <CardHeader>
@@ -748,7 +931,7 @@ const AdminDashboard = () => {
               <CardContent>
                 <div className="text-center py-8">
                   <p className="text-gray-600 mb-4">
-                    Platform settings will be available after connecting to Supabase.
+                    Platform settings and configuration options.
                   </p>
                   <Button variant="outline">
                     Configure Settings

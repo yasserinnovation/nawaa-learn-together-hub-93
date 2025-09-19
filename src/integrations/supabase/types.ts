@@ -128,6 +128,66 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          account_status: string | null
+          avatar_url: string | null
+          city: string | null
+          created_at: string
+          date_of_birth: string | null
+          email: string
+          full_name: string
+          gender: string | null
+          id: string
+          interests: string[] | null
+          phone: string | null
+          rating: number | null
+          total_courses_completed: number | null
+          total_hours_learned: number | null
+          updated_at: string
+          user_id: string | null
+          user_type: string | null
+        }
+        Insert: {
+          account_status?: string | null
+          avatar_url?: string | null
+          city?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          email: string
+          full_name: string
+          gender?: string | null
+          id?: string
+          interests?: string[] | null
+          phone?: string | null
+          rating?: number | null
+          total_courses_completed?: number | null
+          total_hours_learned?: number | null
+          updated_at?: string
+          user_id?: string | null
+          user_type?: string | null
+        }
+        Update: {
+          account_status?: string | null
+          avatar_url?: string | null
+          city?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string
+          full_name?: string
+          gender?: string | null
+          id?: string
+          interests?: string[] | null
+          phone?: string | null
+          rating?: number | null
+          total_courses_completed?: number | null
+          total_hours_learned?: number | null
+          updated_at?: string
+          user_id?: string | null
+          user_type?: string | null
+        }
+        Relationships: []
+      }
       spaces: {
         Row: {
           address: string
@@ -235,6 +295,54 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      user_reviews: {
+        Row: {
+          course_id: string | null
+          created_at: string
+          id: string
+          rating: number
+          review_text: string | null
+          reviewed_user_id: string
+          reviewer_id: string
+          space_id: string | null
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string
+          id?: string
+          rating: number
+          review_text?: string | null
+          reviewed_user_id: string
+          reviewer_id: string
+          space_id?: string | null
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string
+          id?: string
+          rating?: number
+          review_text?: string | null
+          reviewed_user_id?: string
+          reviewer_id?: string
+          space_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_reviews_reviewed_user_id_fkey"
+            columns: ["reviewed_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_reviews_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
