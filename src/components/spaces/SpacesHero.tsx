@@ -1,9 +1,32 @@
 
 import { MapPin, Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SpaceFilter } from "@/types/space";
+import { useState } from "react";
 
-const SpacesHero = () => {
+interface SpacesHeroProps {
+  filters: SpaceFilter;
+  onFilterChange: (filters: Partial<SpaceFilter>) => void;
+}
+
+const SpacesHero = ({ filters, onFilterChange }: SpacesHeroProps) => {
   const { t } = useLanguage();
+  const [heroSearchText, setHeroSearchText] = useState('');
+
+  const handleHeroSearch = () => {
+    onFilterChange({ searchText: heroSearchText });
+    // Scroll to results section
+    const resultsSection = document.querySelector('[data-results-section]');
+    if (resultsSection) {
+      resultsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleHeroSearch();
+    }
+  };
 
   return (
     <div className="bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 py-16 relative overflow-hidden">
@@ -28,10 +51,16 @@ const SpacesHero = () => {
             <input
               type="text"
               placeholder={t('common.searchPlaceholder')}
+              value={heroSearchText}
+              onChange={(e) => setHeroSearchText(e.target.value)}
+              onKeyPress={handleKeyPress}
               className="pl-10 pr-4 py-3 w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-black"
             />
           </div>
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg transition-colors">
+          <button 
+            onClick={handleHeroSearch}
+            className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg transition-colors"
+          >
             {t('common.searchSpaces')}
           </button>
         </div>

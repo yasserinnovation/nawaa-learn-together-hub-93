@@ -22,8 +22,8 @@ const DiscoverSpaces = () => {
 
   return (
     <Layout>
-      <SpacesHero />
-      <div className="container mx-auto px-4 py-8">
+      <SpacesHero filters={filters} onFilterChange={handleFilterChange} />
+      <div className="container mx-auto px-4 py-8" data-results-section>
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="lg:w-1/3">
             <SpacesFilters filters={filters} onFilterChange={handleFilterChange} />
