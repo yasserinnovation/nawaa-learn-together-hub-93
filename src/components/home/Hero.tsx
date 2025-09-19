@@ -92,18 +92,22 @@ const Hero = () => {
           <div className="lg:w-1/2">
             <div className="relative animate-fade-in" style={{ animationDelay: '0.8s' }}>
               <div className="relative hover-lift">
-                <div className="bg-white rounded-2xl shadow-large overflow-hidden border border-gray-100">
+                <div className="bg-white rounded-2xl shadow-large overflow-hidden border border-gray-100 min-h-[400px] flex items-center justify-center">
                   <img
-                    src="https://images.unsplash.com/photo-1567057469246-03bf63afa843?w=800&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&auto=format&fit=crop&q=80"
                     alt={t('hero.imageAlt')}
                     className="w-full h-auto aspect-[4/3] object-cover transition-transform duration-500 hover:scale-105"
-                    loading="lazy"
+                    loading="eager"
+                    onError={(e) => {
+                      console.log('Image failed to load:', e.currentTarget.src);
+                      e.currentTarget.src = 'https://via.placeholder.com/800x600/FFD600/000000?text=Learning+Spaces';
+                    }}
                   />
                 </div>
                 
                 {/* Floating stats card */}
                 <div 
-                  className={`absolute -bottom-6 ${isRTL ? '-left-6' : '-right-6'} bg-gradient-to-r from-primary to-primary-600 rounded-xl p-4 shadow-glow text-white animate-bounce-in min-w-[140px]`} 
+                  className={`absolute -bottom-6 ${isRTL ? '-left-6' : '-right-6'} bg-gradient-to-r from-primary to-primary-600 rounded-xl p-4 shadow-glow text-white animate-bounce-in min-w-[140px] z-10`} 
                   style={{ animationDelay: '1.2s' }}
                 >
                   <div className="flex items-center gap-3">
@@ -123,11 +127,11 @@ const Hero = () => {
               </div>
               
               {/* Floating elements */}
-              <div className={`absolute -top-4 ${isRTL ? '-right-4' : '-left-4'} bg-white rounded-full p-3 shadow-medium animate-pulse-scale`}>
+              <div className={`absolute -top-4 ${isRTL ? '-right-4' : '-left-4'} bg-white rounded-full p-3 shadow-medium animate-pulse-scale z-10`}>
                 <Brain className="h-6 w-6 text-primary-500" />
               </div>
               
-              <div className={`absolute top-1/4 ${isRTL ? '-left-6' : '-right-6'} bg-white rounded-full p-2 shadow-medium animate-bounce-gentle`} style={{ animationDelay: '1s' }}>
+              <div className={`absolute top-1/4 ${isRTL ? '-left-6' : '-right-6'} bg-white rounded-full p-2 shadow-medium animate-bounce-gentle z-10`} style={{ animationDelay: '1s' }}>
                 <Sparkles className="h-4 w-4 text-primary-500" />
               </div>
             </div>
