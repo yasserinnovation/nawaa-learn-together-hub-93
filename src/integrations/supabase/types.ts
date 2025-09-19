@@ -50,6 +50,44 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          ip_address: unknown | null
+          metadata: Json | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          metadata?: Json | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          metadata?: Json | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       competitions: {
         Row: {
           age_group: string
@@ -410,14 +448,103 @@ export type Database = {
         }
         Relationships: []
       }
+      user_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          ip_address: unknown | null
+          revoked: boolean
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          ip_address?: unknown | null
+          revoked?: boolean
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          ip_address?: unknown | null
+          revoked?: boolean
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          auth_provider: Database["public"]["Enums"]["auth_provider_type"]
+          avatar_url: string | null
+          created_at: string
+          email: string
+          email_verified_at: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          auth_provider?: Database["public"]["Enums"]["auth_provider_type"]
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          email_verified_at?: string | null
+          id: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          auth_provider?: Database["public"]["Enums"]["auth_provider_type"]
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          email_verified_at?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      create_user_session: {
+        Args: { _ip_address?: unknown; _user_agent?: string }
+        Returns: string
+      }
       get_admin_dashboard_stats: {
         Args: Record<PropertyKey, never>
         Returns: Json
+      }
+      get_user_profile: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          active_sessions: number
+          auth_provider: Database["public"]["Enums"]["auth_provider_type"]
+          avatar_url: string
+          created_at: string
+          email: string
+          email_verified_at: string
+          id: string
+          name: string
+          updated_at: string
+        }[]
       }
       has_role: {
         Args: {
@@ -439,9 +566,23 @@ export type Database = {
         }
         Returns: undefined
       }
+      log_user_action: {
+        Args: {
+          _action: string
+          _ip_address?: unknown
+          _metadata?: Json
+          _user_agent?: string
+        }
+        Returns: undefined
+      }
+      revoke_user_session: {
+        Args: { _session_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      auth_provider_type: "password" | "google" | "linked"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -570,6 +711,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      auth_provider_type: ["password", "google", "linked"],
     },
   },
 } as const
