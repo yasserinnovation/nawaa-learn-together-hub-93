@@ -21,6 +21,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   }, []);
 
   const fetchSpaces = async () => {
+    console.log('SpacesList: Starting to fetch spaces...');
     try {
       // Query the spaces table from Supabase
       const { data, error } = await (supabase as any)
@@ -32,6 +33,9 @@ const SpacesList = ({ filters }: SpacesListProps) => {
         console.error('Supabase error:', error);
         throw error;
       }
+      
+      console.log('SpacesList: Raw data from Supabase:', data);
+      console.log('SpacesList: Number of spaces:', data?.length || 0);
       
       // Convert database format to expected format
       const convertedSpaces: Space[] = (data || []).map(space => ({
@@ -166,6 +170,8 @@ const SpacesList = ({ filters }: SpacesListProps) => {
       </div>
     );
   }
+
+  console.log('SpacesList render - spaces:', spaces.length, 'filteredSpaces:', filteredSpaces.length);
 
   return (
     <ScrollReveal>
