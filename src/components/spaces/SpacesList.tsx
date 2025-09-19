@@ -70,6 +70,52 @@ const SpacesList = ({ filters }: SpacesListProps) => {
     }
   };
 
+  // Helper function to expand search terms with Arabic/English equivalents
+  const expandSearchTerms = (searchText: string): string[] => {
+    const terms = [searchText];
+    const lowerSearch = searchText.toLowerCase();
+    
+    // Arabic-English location mappings
+    const locationMappings: { [key: string]: string[] } = {
+      'الهرم': ['giza', 'pyramids', 'pyramid', 'الجيزة'],
+      'الجيزة': ['giza', 'pyramids', 'pyramid', 'الهرم'],
+      'giza': ['الجيزة', 'الهرم', 'pyramids', 'pyramid'],
+      'pyramids': ['الهرم', 'الجيزة', 'giza'],
+      'pyramid': ['الهرم', 'الجيزة', 'giza'],
+      'القاهرة': ['cairo', 'قاهرة'],
+      'cairo': ['القاهرة', 'قاهرة'],
+      'الإسكندرية': ['alexandria', 'اسكندرية'],
+      'اسكندرية': ['alexandria', 'الإسكندرية'],
+      'alexandria': ['الإسكندرية', 'اسكندرية'],
+      'أسوان': ['aswan'],
+      'aswan': ['أسوان'],
+      'المنصورة': ['mansoura'],
+      'mansoura': ['المنصورة'],
+      'الشرقية': ['sharqiya', 'eastern'],
+      'أكاديمية': ['academy', 'اكاديمية'],
+      'academy': ['أكاديمية', 'اكاديمية'],
+      'مدرسة': ['school'],
+      'school': ['مدرسة'],
+      'روبوت': ['robot', 'robotics'],
+      'robotics': ['روبوت', 'روبوتات'],
+      'robot': ['روبوت'],
+      'برمجة': ['programming', 'coding', 'code'],
+      'programming': ['برمجة'],
+      'coding': ['برمجة'],
+      'تدريب': ['training', 'education'],
+      'training': ['تدريب'],
+    };
+    
+    // Add mapped terms
+    Object.keys(locationMappings).forEach(key => {
+      if (lowerSearch.includes(key)) {
+        terms.push(...locationMappings[key]);
+      }
+    });
+    
+    return [...new Set(terms)]; // Remove duplicates
+  };
+
   const filteredSpaces = useMemo(() => {
     console.log('=== FILTERING SPACES ===');
     console.log('Total spaces:', spaces.length);
@@ -80,25 +126,27 @@ const SpacesList = ({ filters }: SpacesListProps) => {
       
       // Search text filter
       if (filters.searchText) {
-        const searchText = filters.searchText.toLowerCase();
-        console.log(`Search text: "${searchText}"`);
+        const searchTerms = expandSearchTerms(filters.searchText);
+        console.log(`Search terms: [${searchTerms.join(', ')}]`);
         
-        const matchesName = space.name.toLowerCase().includes(searchText);
-        const matchesDescription = space.description.toLowerCase().includes(searchText);
-        const matchesAddress = space.address.toLowerCase().includes(searchText);
-        const matchesCity = space.city.toLowerCase().includes(searchText);
-        const matchesOwner = space.owner.toLowerCase().includes(searchText);
+        let matchesSearch = false;
         
-        const matchesSearch = matchesName || matchesDescription || matchesAddress || matchesCity || matchesOwner;
+        for (const term of searchTerms) {
+          const lowerTerm = term.toLowerCase();
+          const matchesName = space.name.toLowerCase().includes(lowerTerm);
+          const matchesDescription = space.description.toLowerCase().includes(lowerTerm);
+          const matchesAddress = space.address.toLowerCase().includes(lowerTerm);
+          const matchesCity = space.city.toLowerCase().includes(lowerTerm);
+          const matchesOwner = space.owner.toLowerCase().includes(lowerTerm);
+          
+          if (matchesName || matchesDescription || matchesAddress || matchesCity || matchesOwner) {
+            matchesSearch = true;
+            console.log(`✓ Space "${space.name}" matches term "${term}"`);
+            break;
+          }
+        }
         
-        console.log(`Space "${space.name}" search matches:`, {
-          name: matchesName,
-          description: matchesDescription,
-          address: matchesAddress,
-          city: matchesCity,
-          owner: matchesOwner,
-          overall: matchesSearch
-        });
+        console.log(`Space "${space.name}" search result:`, matchesSearch);
         
         if (!matchesSearch) {
           console.log(`❌ Space "${space.name}" filtered out by search`);
