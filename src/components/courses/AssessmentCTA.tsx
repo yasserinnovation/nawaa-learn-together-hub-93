@@ -15,19 +15,26 @@ const AssessmentCTA = () => {
             <Brain className="h-8 w-8" />
           </div>
           <div>
-            <h3 id="assessment-cta-heading" className="text-xl font-bold mb-1">Not sure which course is right for your child?</h3>
-            <p className="text-primary-foreground/80">Take our Smart Assessment to get personalized course recommendations</p>
+            <h3 id="assessment-cta-heading" className="text-xl font-bold mb-1">
+              {t('assessment.title')}
+            </h3>
+            <p className="text-primary-foreground/90 leading-relaxed">
+              {t('assessment.subtitle')}
+            </p>
           </div>
         </div>
-        <Button 
-          className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 shrink-0" 
-          asChild
-        >
-          <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take our smart assessment for personalized course recommendations">
-            Take Assessment
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </Button>
+            <Button 
+              variant="cta"
+              size="lg" 
+              asChild
+              aria-label="Take our smart assessment for personalized course recommendations"
+            >
+              <Link to="/smart-assessment" className="flex items-center gap-3">
+                <Brain className="h-5 w-5" aria-hidden="true" />
+                {t('assessment.startAssessment')}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
       </div>
     </div>
   );

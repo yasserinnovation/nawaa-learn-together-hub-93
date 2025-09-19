@@ -253,15 +253,15 @@ const Navbar = () => {
                     size="sm"
                     className="text-foreground hover:text-primary hover:bg-muted font-medium"
                   >
-                    {t('nav.signIn') || 'Sign In'}
+                    {t('auth.signIn')}
                   </Button>
                 </Link>
                 <Link to="/auth">
                   <Button 
+                    variant="cta"
                     size="sm"
-                    className="btn-primary"
                   >
-                    {t('nav.signUp') || 'Sign Up'}
+                    {t('auth.signUp')}
                   </Button>
                 </Link>
               </div>
@@ -368,14 +368,15 @@ const Navbar = () => {
                         className="w-full justify-start text-foreground hover:text-primary hover:bg-muted font-medium h-12"
                       >
                         <Users className="w-5 h-5 mr-3" />
-                        {t('nav.signIn') || 'Sign In'}
+                        {t('auth.signIn')}
                       </Button>
                     </Link>
                     <Link to="/auth" onClick={closeMenu}>
                       <Button 
-                        className="w-full btn-primary h-12"
+                        variant="cta"
+                        className="w-full h-12"
                       >
-                        {t('nav.signUp') || 'Sign Up'}
+                        {t('auth.signUp')}
                       </Button>
                     </Link>
                   </>

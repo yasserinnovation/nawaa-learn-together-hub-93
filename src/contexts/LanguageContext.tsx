@@ -178,6 +178,31 @@ const translations = {
     'newsletter.invalidEmail': 'Please enter a valid email address',
     'newsletter.thankYou': 'Thank You!',
     'newsletter.confirmationMessage': 'You\'ve been successfully subscribed to our newsletter. Check your email for confirmation.',
+
+    // Tools section
+    'tools.title': 'Access Learning Tools',
+    'tools.subtitle': 'Find, rent, or purchase quality educational tools and equipment. Connect with our community to access everything you need for hands-on learning.',
+    'tools.qualityTools': 'Quality Tools',
+    'tools.qualityToolsDesc': 'Verified educational equipment from trusted sources',
+    'tools.findWhatYouNeed': 'Find What You Need',
+    'tools.findWhatYouNeedDesc': 'Advanced search and filtering to match your course requirements',
+    'tools.affordableOptions': 'Affordable Options',
+    'tools.affordableOptionsDesc': 'Rent, buy, or access free tools within your budget',
+    'tools.exploreAll': 'Explore All Tools',
+    'tools.addYourTool': 'Add Your Tool',
+
+    // Spaces section
+    'spaces.title': 'Discover Learning Spaces',
+    'spaces.subtitle': 'Find makerspaces, libraries, and collaborative environments perfect for hands-on tech training across Egypt.',
+    'spaces.searchSpaces': 'Search Spaces',
+    'spaces.searchPlaceholder': 'Search by city, neighborhood, or space name',
+
+    // Authentication
+    'auth.signIn': 'Sign In',
+    'auth.signUp': 'Sign Up',
+    'auth.createAccount': 'Create Account',
+    'auth.forgotPassword': 'Forgot Password?',
+    'auth.backToLogin': 'Back to Login',
   },
   ar: {
     // Navigation
@@ -271,9 +296,9 @@ const translations = {
     'testimonials.role3': 'مقدم مساحة مجتمعية',
     
     // CTA Section
-    'cta.title': 'مستعد لبناء نموذجك الأولي؟',
-    'cta.subtitle': 'انضم إلى آلاف المبتكرين الذين حولوا أفكارهم إلى نماذج أولية حقيقية. ابدأ رحلتك اليوم.',
-    'cta.startBuilding': 'ابدأ البناء الآن',
+    'cta.title': 'مستعد لتحويل أفكارك إلى حقيقة؟',
+    'cta.subtitle': 'انضم إلى آلاف المبتكرين الذين بنوا نماذج أولية ناجحة. ابدأ رحلتك اليوم.',
+    'cta.takeAssessment': 'خذ التقييم الذكي',
     'cta.contactUs': 'تواصل معنا',
     
     // Courses
@@ -342,6 +367,31 @@ const translations = {
     'newsletter.invalidEmail': 'يرجى إدخال عنوان بريد إلكتروني صحيح',
     'newsletter.thankYou': 'شكراً لك!',
     'newsletter.confirmationMessage': 'تم اشتراكك بنجاح في نشرتنا الإخبارية. تحقق من بريدك الإلكتروني للتأكيد.',
+
+    // Tools section
+    'tools.title': 'الوصول لأدوات التعلم',
+    'tools.subtitle': 'ابحث واستأجر أو اشتري أدوات ومعدات تعليمية عالية الجودة. تواصل مع مجتمعنا للوصول إلى كل ما تحتاجه للتعلم العملي.',
+    'tools.qualityTools': 'أدوات عالية الجودة',
+    'tools.qualityToolsDesc': 'معدات تعليمية معتمدة من مصادر موثوقة',
+    'tools.findWhatYouNeed': 'اعثر على ما تحتاجه',
+    'tools.findWhatYouNeedDesc': 'بحث وتصفية متقدمة لتلبية متطلبات دورتك',
+    'tools.affordableOptions': 'خيارات ميسورة التكلفة',
+    'tools.affordableOptionsDesc': 'استأجر أو اشتري أو احصل على أدوات مجانية ضمن ميزانيتك',
+    'tools.exploreAll': 'استكشف جميع الأدوات',
+    'tools.addYourTool': 'أضف أداتك',
+
+    // Spaces section
+    'spaces.title': 'اكتشف مساحات التعلم',
+    'spaces.subtitle': 'ابحث عن مساحات العمل والمكتبات والبيئات التعاونية المثالية للتدريب التقني العملي في جميع أنحاء مصر.',
+    'spaces.searchSpaces': 'البحث في المساحات',
+    'spaces.searchPlaceholder': 'ابحث بالمدينة أو الحي أو اسم المساحة',
+
+    // Authentication  
+    'auth.signIn': 'تسجيل الدخول',
+    'auth.signUp': 'إنشاء حساب',
+    'auth.createAccount': 'إنشاء حساب جديد',
+    'auth.forgotPassword': 'نسيت كلمة المرور؟',
+    'auth.backToLogin': 'العودة للدخول',
   }
 };
 

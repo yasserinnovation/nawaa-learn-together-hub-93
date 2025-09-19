@@ -20,6 +20,10 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline hover:text-primary-600",
         gradient: "bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 text-primary-foreground hover:from-primary-500 hover:via-primary-600 hover:to-primary-700 shadow-glow hover:shadow-glow-lg",
         glassmorphism: "backdrop-blur-md bg-white/10 border border-white/20 text-white hover:bg-white/20 shadow-lg hover:shadow-xl",
+        // Enhanced CTA variants for proper hierarchy
+        cta: "bg-gradient-to-r from-primary-400 to-primary-500 text-primary-foreground hover:from-primary-500 hover:to-primary-600 shadow-lg hover:shadow-glow font-bold border-0 hover:scale-110",
+        ctaSecondary: "border-2 border-primary text-primary bg-transparent hover:bg-primary/5 hover:text-primary font-semibold hover:scale-105 shadow-md hover:shadow-lg",
+        ctaOutline: "border-2 border-white text-white bg-transparent hover:bg-white hover:text-gray-900 font-semibold hover:scale-105 shadow-md hover:shadow-xl"
       },
       size: {
         default: "h-11 px-6 py-2",
