@@ -71,24 +71,44 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   };
 
   const filteredSpaces = useMemo(() => {
-    return spaces.filter(space => {
+    console.log('=== FILTERING SPACES ===');
+    console.log('Total spaces:', spaces.length);
+    console.log('Current filters:', filters);
+    
+    const result = spaces.filter(space => {
+      console.log(`Checking space: ${space.name}`);
+      
       // Search text filter
       if (filters.searchText) {
         const searchText = filters.searchText.toLowerCase();
-        const matchesSearch = 
-          space.name.toLowerCase().includes(searchText) ||
-          space.description.toLowerCase().includes(searchText) ||
-          space.address.toLowerCase().includes(searchText) ||
-          space.city.toLowerCase().includes(searchText) ||
-          space.owner.toLowerCase().includes(searchText);
+        console.log(`Search text: "${searchText}"`);
+        
+        const matchesName = space.name.toLowerCase().includes(searchText);
+        const matchesDescription = space.description.toLowerCase().includes(searchText);
+        const matchesAddress = space.address.toLowerCase().includes(searchText);
+        const matchesCity = space.city.toLowerCase().includes(searchText);
+        const matchesOwner = space.owner.toLowerCase().includes(searchText);
+        
+        const matchesSearch = matchesName || matchesDescription || matchesAddress || matchesCity || matchesOwner;
+        
+        console.log(`Space "${space.name}" search matches:`, {
+          name: matchesName,
+          description: matchesDescription,
+          address: matchesAddress,
+          city: matchesCity,
+          owner: matchesOwner,
+          overall: matchesSearch
+        });
         
         if (!matchesSearch) {
+          console.log(`❌ Space "${space.name}" filtered out by search`);
           return false;
         }
       }
 
       // Capacity filter
       if (filters.capacity && space.capacity < filters.capacity) {
+        console.log(`❌ Space "${space.name}" filtered out by capacity (${space.capacity} < ${filters.capacity})`);
         return false;
       }
 
@@ -98,15 +118,20 @@ const SpacesList = ({ filters }: SpacesListProps) => {
           space.equipment.includes(item)
         );
         if (!hasRequiredEquipment) {
+          console.log(`❌ Space "${space.name}" filtered out by equipment`);
           return false;
         }
       }
 
-      // Note: Distance and availability filters would require more complex logic
-      // For now, we're showing all spaces that match search, capacity and equipment
-
+      console.log(`✅ Space "${space.name}" passed all filters`);
       return true;
     });
+    
+    console.log('=== FILTER RESULTS ===');
+    console.log('Filtered spaces count:', result.length);
+    console.log('Filtered spaces:', result.map(s => s.name));
+    
+    return result;
   }, [spaces, filters]);
 
   if (loading) {

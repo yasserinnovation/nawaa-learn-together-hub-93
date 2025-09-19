@@ -62,7 +62,10 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
                 type="text"
                 placeholder="ابحث عن المساحات بالاسم أو المكان أو الوصف..."
                 value={filters.searchText}
-                onChange={(e) => onFilterChange({ searchText: e.target.value })}
+                onChange={(e) => {
+                  console.log('Search input changed:', e.target.value);
+                  onFilterChange({ searchText: e.target.value });
+                }}
                 className="pl-10"
               />
             </div>
