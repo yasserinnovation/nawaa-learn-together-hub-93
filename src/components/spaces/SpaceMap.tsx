@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface SpaceMapProps {
-  filters: SpaceFilter;
+  filters?: SpaceFilter;
 }
 
 interface Space {

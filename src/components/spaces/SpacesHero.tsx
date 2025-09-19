@@ -6,8 +6,8 @@ import { SpaceFilter } from "@/types/space";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SpacesHeroProps {
-  filters: SpaceFilter;
-  onFilterChange: (filters: Partial<SpaceFilter>) => void;
+  filters?: SpaceFilter;
+  onFilterChange?: (filters: Partial<SpaceFilter>) => void;
 }
 
 const SpacesHero = ({ filters, onFilterChange }: SpacesHeroProps) => {
@@ -15,7 +15,7 @@ const SpacesHero = ({ filters, onFilterChange }: SpacesHeroProps) => {
   const { t } = useLanguage();
 
   const handleHeroSearch = () => {
-    onFilterChange({ searchText: heroSearchText });
+    onFilterChange?.({ searchText: heroSearchText });
     // Scroll to results section
     const resultsSection = document.querySelector('[data-results-section]');
     if (resultsSection) {

@@ -9,7 +9,7 @@ import LoadingSpinner from "@/components/common/LoadingSpinner";
 import ScrollReveal from "@/components/common/ScrollReveal";
 
 interface SpacesListProps {
-  filters: SpaceFilter;
+  filters?: SpaceFilter;
 }
 
 const SpacesList = ({ filters }: SpacesListProps) => {
@@ -116,6 +116,8 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   };
 
   const filteredSpaces = useMemo(() => {
+    if (!filters) return spaces;
+    
     const result = spaces.filter(space => {
       // Search text filter
       if (filters.searchText) {
