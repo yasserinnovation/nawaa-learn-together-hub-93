@@ -34,17 +34,18 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <Button size="xl" className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" asChild>
+              <Button size="xl" className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-semibold" asChild>
                 <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Start your smart assessment to find the perfect learning path">
-                  {t('hero.startAssessment') || 'Take Smart Assessment'}
+                  <Brain className="h-5 w-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
+                  {t('hero.smartAssessment')}
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </Link>
               </Button>
               
-              <Button size="lg" variant="outline" className="group border-border hover:bg-accent hover:text-accent-foreground" asChild>
+              <Button size="xl" variant="outline" className="group border-primary text-primary hover:bg-primary/10 hover:text-primary font-semibold" asChild>
                 <Link to="/discover-spaces" className="flex items-center gap-2" aria-label="Discover learning spaces near you">
                   <MapPin className="h-5 w-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                  {t('hero.exploreSpaces') || 'Explore Spaces'}
+                  {t('hero.exploreSpaces')}
                 </Link>
               </Button>
             </div>
@@ -78,16 +79,16 @@ const Hero = () => {
                 </div>
                 
                 {/* Floating stats card */}
-                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-primary-400 to-primary-500 rounded-xl p-6 shadow-glow text-white animate-bounce-in" style={{ animationDelay: '1.2s' }}>
+                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-primary to-primary-600 rounded-xl p-6 shadow-glow text-white animate-bounce-in" style={{ animationDelay: '1.2s' }}>
                   <div className="flex items-center gap-3">
                     <div className="bg-white/20 rounded-lg p-2">
                       <MapPin className="h-6 w-6" />
                     </div>
                     <div>
                       <p className="text-2xl font-bold">
-                        {t('hero.spacesAvailable') || '50+'}
+                        {t('hero.spacesAvailable')}
                       </p>
-                      <p className="text-sm opacity-90">Spaces Available</p>
+                      <p className="text-sm font-medium">مساحة متاحة</p>
                     </div>
                   </div>
                 </div>

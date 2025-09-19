@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Brain } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const CTASection = () => {
@@ -18,16 +18,17 @@ const CTASection = () => {
             {t('cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" asChild>
-            <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take our smart assessment to get personalized recommendations">
-              {t('cta.takeAssessment') || 'Take Assessment'}
-              <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-200" asChild>
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-semibold" asChild>
+             <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take our smart assessment to get personalized recommendations">
+               <Brain className="h-5 w-5" aria-hidden="true" />
+               {t('cta.takeAssessment')}
+               <ArrowRight className="h-5 w-5" aria-hidden="true" />
+             </Link>
+             </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-200 font-semibold" asChild>
               <Link to="/contact" className="flex items-center gap-2" aria-label="Contact us for support and questions">
-                {t('cta.contactUs')}
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                {t('cta.contactUs')}
               </Link>
             </Button>
           </div>

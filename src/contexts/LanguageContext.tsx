@@ -29,11 +29,14 @@ const translations = {
     // Hero section
     'hero.title': 'Empowering Institutions and Trainers to Deliver Global Educational Value',
     'hero.subtitle': 'Connect with expert trainers, get the latest tools, and use real workspaces to build your prototype. From idea to launch in one comprehensive platform.',
+    'hero.badge': 'Transform Your Ideas',
     'hero.startBuilding': 'Start Your MVP Journey',
     'hero.smartAssessment': 'Take Smart Assessment',
-    'hero.exploreSpaces': 'Explore 150+ Spaces',
+    'hero.startAssessment': 'Take Smart Assessment',
+    'hero.exploreSpaces': 'Explore Spaces',
+    'hero.browseCourses': 'Browse Courses',
     'hero.shareSpace': 'Share Your Space',
-    'hero.spacesAvailable': '150+ Spaces Available',
+    'hero.spacesAvailable': '150+',
     
     // Features
     'features.title': 'Everything You Need to Build Your MVP',
@@ -104,9 +107,9 @@ const translations = {
     'testimonials.role3': 'Community Space Provider',
     
     // CTA Section
-    'cta.title': 'Ready to Build Your MVP?',
-    'cta.subtitle': 'Join thousands of innovators who have transformed their ideas into real prototypes. Start your journey today.',
-    'cta.startBuilding': 'Start Building Now',
+    'cta.title': 'Ready to Transform Your Ideas into Reality?',
+    'cta.subtitle': 'Join thousands of innovators who have built successful prototypes. Start your journey today.',
+    'cta.takeAssessment': 'Take Smart Assessment',
     'cta.contactUs': 'Contact Us',
     
     // Courses
@@ -192,11 +195,14 @@ const translations = {
     // Hero section
     'hero.title': 'تمكين المؤسسات والمدربين من تقديم قيمة تعليمية ذات طابع عالمي',
     'hero.subtitle': 'تواصل مع مدربين خبراء، واحصل على أحدث الأدوات، واستخدم مساحات العمل الحقيقية لبناء نموذجك الأولي. من الفكرة إلى الإطلاق في منصة واحدة شاملة.',
+    'hero.badge': 'حول أفكارك إلى واقع',
     'hero.startBuilding': 'ابدأ رحلة بناء نموذجك الأولي',
     'hero.smartAssessment': 'خذ التقييم الذكي',
-    'hero.exploreSpaces': 'استكشف أكثر من 150 مساحة',
+    'hero.startAssessment': 'خذ التقييم الذكي',
+    'hero.exploreSpaces': 'استكشف المساحات',
+    'hero.browseCourses': 'تصفح الدورات',
     'hero.shareSpace': 'شارك مساحتك',
-    'hero.spacesAvailable': 'أكثر من 150 مساحة متاحة',
+    'hero.spacesAvailable': '150+',
     
     // Features
     'features.expertTrainers': 'مدربون خبراء',
