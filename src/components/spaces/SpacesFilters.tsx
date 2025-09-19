@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
-import { Filter } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { SpaceFilter } from "@/types/space";
 import { useState } from "react";
 
@@ -52,6 +53,21 @@ const SpacesFilters = ({ filters, onFilterChange }: SpacesFiltersProps) => {
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
+          {/* Search filter */}
+          <div>
+            <Label className="text-base font-medium">البحث في المساحات</Label>
+            <div className="relative mt-2">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="ابحث عن المساحات بالاسم أو المكان أو الوصف..."
+                value={filters.searchText}
+                onChange={(e) => onFilterChange({ searchText: e.target.value })}
+                className="pl-10"
+              />
+            </div>
+          </div>
+
           {/* Distance filter */}
           <div>
             <Label className="text-base font-medium">Distance (km)</Label>

@@ -23,6 +23,7 @@ export interface Space {
 }
 
 export interface SpaceFilter {
+  searchText: string;
   distance: number;
   capacity: number;
   equipment: string[];

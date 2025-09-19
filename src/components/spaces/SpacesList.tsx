@@ -72,6 +72,21 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   const filteredSpaces = useMemo(() => {
     return spaces.filter(space => {
+      // Search text filter
+      if (filters.searchText) {
+        const searchText = filters.searchText.toLowerCase();
+        const matchesSearch = 
+          space.name.toLowerCase().includes(searchText) ||
+          space.description.toLowerCase().includes(searchText) ||
+          space.address.toLowerCase().includes(searchText) ||
+          space.city.toLowerCase().includes(searchText) ||
+          space.owner.toLowerCase().includes(searchText);
+        
+        if (!matchesSearch) {
+          return false;
+        }
+      }
+
       // Capacity filter
       if (filters.capacity && space.capacity < filters.capacity) {
         return false;
@@ -88,7 +103,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
       }
 
       // Note: Distance and availability filters would require more complex logic
-      // For now, we're showing all spaces that match capacity and equipment
+      // For now, we're showing all spaces that match search, capacity and equipment
 
       return true;
     });

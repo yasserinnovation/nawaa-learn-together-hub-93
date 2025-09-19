@@ -9,6 +9,7 @@ import { SpaceFilter } from "@/types/space";
 
 const DiscoverSpaces = () => {
   const [filters, setFilters] = useState<SpaceFilter>({
+    searchText: '',
     distance: 10,
     capacity: 0,
     equipment: [],
