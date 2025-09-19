@@ -13,6 +13,16 @@ interface SpacesListProps {
 }
 
 const SpacesList = ({ filters }: SpacesListProps) => {
+  // Provide default filters when none are passed
+  const defaultFilters: SpaceFilter = {
+    searchText: '',
+    distance: 50,
+    capacity: 0,
+    equipment: [],
+    availability: null,
+  };
+  
+  const activeFilters = filters || defaultFilters;
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -116,12 +126,10 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   };
 
   const filteredSpaces = useMemo(() => {
-    if (!filters) return spaces;
-    
     const result = spaces.filter(space => {
       // Search text filter
-      if (filters.searchText) {
-        const searchTerms = expandSearchTerms(filters.searchText);
+      if (activeFilters.searchText) {
+        const searchTerms = expandSearchTerms(activeFilters.searchText);
         
         let matchesSearch = false;
         
@@ -145,13 +153,13 @@ const SpacesList = ({ filters }: SpacesListProps) => {
       }
 
       // Capacity filter
-      if (filters.capacity && space.capacity < filters.capacity) {
+      if (activeFilters.capacity && space.capacity < activeFilters.capacity) {
         return false;
       }
 
       // Equipment filter
-      if (filters.equipment.length > 0) {
-        const hasRequiredEquipment = filters.equipment.every(item => 
+      if (activeFilters.equipment.length > 0) {
+        const hasRequiredEquipment = activeFilters.equipment.every(item => 
           space.equipment.includes(item)
         );
         if (!hasRequiredEquipment) {
@@ -163,7 +171,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
     });
     
     return result;
-  }, [spaces, filters]);
+  }, [spaces, activeFilters]);
 
   if (loading) {
     return (
