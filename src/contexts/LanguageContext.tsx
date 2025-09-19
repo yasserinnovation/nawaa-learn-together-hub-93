@@ -134,6 +134,47 @@ const translations = {
     'common.viewDetails': 'View Details',
     'common.searchSpaces': 'Search Spaces',
     'common.searchPlaceholder': 'Search by city, neighborhood, or space name',
+
+    // Stats Section
+    'stats.title': 'Empowering Innovation Across Egypt',
+    'stats.subtitle': 'Join thousands of innovators who are transforming their ideas into reality',
+    'stats.activeUsers': 'Active Users',
+    'stats.activeUsersDesc': 'Students and trainers actively using the platform',
+    'stats.spaces': 'Learning Spaces',
+    'stats.spacesDesc': 'Makerspaces and workshops across Egypt',
+    'stats.courses': 'STEM Courses', 
+    'stats.coursesDesc': 'Hands-on courses for all skill levels',
+    'stats.satisfaction': 'Satisfaction Rate',
+    'stats.satisfactionDesc': 'Students rate their experience as excellent',
+
+    // Interactive Demo
+    'demo.title': 'Explore Our Platform',
+    'demo.subtitle': 'See how our platform can help you turn your ideas into reality',
+    'demo.spaces': 'Discover Spaces',
+    'demo.spacesDesc': 'Find makerspaces and workshops near you',
+    'demo.courses': 'STEM Courses',
+    'demo.coursesDesc': 'Hands-on learning experiences for all ages',
+    'demo.tools': 'Access Tools',
+    'demo.toolsDesc': 'Rent professional equipment and tools',
+    'demo.trainers': 'Expert Trainers',
+    'demo.trainersDesc': 'Connect with skilled mentors and coaches',
+    'demo.explore': 'Explore Now',
+
+    // Newsletter
+    'newsletter.title': 'Get the Latest Updates',
+    'newsletter.subtitle': 'Subscribe to our newsletter and be the first to know about new courses, spaces, and innovation opportunities.',
+    'newsletter.badge': 'Stay Updated',
+    'newsletter.emailPlaceholder': 'Enter your email address',
+    'newsletter.subscribe': 'Subscribe',
+    'newsletter.subscribing': 'Subscribing...',
+    'newsletter.privacy': 'We respect your privacy. Unsubscribe at any time.',
+    'newsletter.benefit1': 'Weekly updates',
+    'newsletter.benefit2': 'Exclusive content',
+    'newsletter.benefit3': 'Early access',
+    'newsletter.success': 'Successfully subscribed to newsletter!',
+    'newsletter.invalidEmail': 'Please enter a valid email address',
+    'newsletter.thankYou': 'Thank You!',
+    'newsletter.confirmationMessage': 'You\'ve been successfully subscribed to our newsletter. Check your email for confirmation.',
   },
   ar: {
     // Navigation
@@ -254,6 +295,47 @@ const translations = {
     'common.viewDetails': 'عرض التفاصيل',
     'common.searchSpaces': 'البحث في المساحات',
     'common.searchPlaceholder': 'ابحث بالمدينة أو الحي أو اسم المساحة',
+
+    // Stats Section
+    'stats.title': 'تمكين الابتكار في جميع أنحاء مصر',
+    'stats.subtitle': 'انضم إلى آلاف المبتكرين الذين يحولون أفكارهم إلى حقيقة',
+    'stats.activeUsers': 'المستخدمون النشطون',
+    'stats.activeUsersDesc': 'الطلاب والمدربون الذين يستخدمون المنصة بنشاط',
+    'stats.spaces': 'مساحات التعلم',
+    'stats.spacesDesc': 'مساحات العمل وورش العمل في جميع أنحاء مصر',
+    'stats.courses': 'دورات STEM',
+    'stats.coursesDesc': 'دورات عملية لجميع المستويات',
+    'stats.satisfaction': 'معدل الرضا',
+    'stats.satisfactionDesc': 'الطلاب يقيمون تجربتهم كممتازة',
+
+    // Interactive Demo
+    'demo.title': 'استكشف منصتنا',
+    'demo.subtitle': 'اكتشف كيف يمكن لمنصتنا أن تساعدك في تحويل أفكارك إلى واقع',
+    'demo.spaces': 'اكتشاف الأماكن',
+    'demo.spacesDesc': 'ابحث عن مساحات العمل وورش العمل بالقرب منك',
+    'demo.courses': 'دورات STEM',
+    'demo.coursesDesc': 'تجارب تعلم عملية لجميع الأعمار',
+    'demo.tools': 'الوصول للأدوات',
+    'demo.toolsDesc': 'استأجر المعدات والأدوات المهنية',
+    'demo.trainers': 'المدربون الخبراء',
+    'demo.trainersDesc': 'تواصل مع الموجهين والمدربين المهرة',
+    'demo.explore': 'استكشف الآن',
+
+    // Newsletter
+    'newsletter.title': 'احصل على آخر التحديثات',
+    'newsletter.subtitle': 'اشترك في نشرتنا الإخبارية وكن أول من يعرف عن الدورات والمساحات والفرص الجديدة للابتكار.',
+    'newsletter.badge': 'ابق على اطلاع',
+    'newsletter.emailPlaceholder': 'أدخل عنوان بريدك الإلكتروني',
+    'newsletter.subscribe': 'اشتراك',
+    'newsletter.subscribing': 'جاري الاشتراك...',
+    'newsletter.privacy': 'نحن نحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت.',
+    'newsletter.benefit1': 'تحديثات أسبوعية',
+    'newsletter.benefit2': 'محتوى حصري',
+    'newsletter.benefit3': 'وصول مبكر',
+    'newsletter.success': 'تم الاشتراك بنجاح في النشرة الإخبارية!',
+    'newsletter.invalidEmail': 'يرجى إدخال عنوان بريد إلكتروني صحيح',
+    'newsletter.thankYou': 'شكراً لك!',
+    'newsletter.confirmationMessage': 'تم اشتراكك بنجاح في نشرتنا الإخبارية. تحقق من بريدك الإلكتروني للتأكيد.',
   }
 };
 

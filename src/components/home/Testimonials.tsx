@@ -1,6 +1,8 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Star, Quote } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ScrollReveal from "@/components/common/ScrollReveal";
 
 const Testimonials = () => {
   const { t } = useLanguage();
@@ -10,50 +12,71 @@ const Testimonials = () => {
       quote: t('testimonials.quote1'),
       author: t('testimonials.author1'),
       role: t('testimonials.role1'),
+      rating: 5,
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
     },
     {
       quote: t('testimonials.quote2'),
       author: t('testimonials.author2'),
       role: t('testimonials.role2'),
+      rating: 5,
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
     },
     {
       quote: t('testimonials.quote3'),
       author: t('testimonials.author3'),
       role: t('testimonials.role3'),
+      rating: 5,
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
     },
   ];
 
   return (
-    <section className="py-16 bg-nawaa-yellow">
+    <section className="py-16 bg-primary-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-            {t('testimonials.title')}
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-white/80">
-            {t('testimonials.subtitle')}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+              {t('testimonials.title')}
+            </h2>
+            <p className="mt-4 max-w-2xl mx-auto text-xl text-white/80">
+              {t('testimonials.subtitle')}
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white border-0 rounded-xl shadow-lg">
-              <CardContent className="p-8">
-                <svg className="h-8 w-8 text-nawaa-yellow mb-4" fill="currentColor" viewBox="0 0 32 32">
-                  <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                </svg>
-                <p className="text-gray-700 mb-6">{testimonial.quote}</p>
-                <div className="flex items-center">
-                  <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-semibold">
-                    {testimonial.author[0]}
+            <ScrollReveal key={index} delay={index * 200}>
+              <Card className="bg-white border-0 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="p-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <Quote className="h-8 w-8 text-primary-400" />
+                    <div className="flex items-center gap-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                      ))}
+                    </div>
                   </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">{testimonial.author}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  
+                  <p className="text-gray-700 mb-6 leading-relaxed italic">
+                    "{testimonial.quote}"
+                  </p>
+                  
+                  <div className="flex items-center">
+                    <img 
+                      src={testimonial.avatar}
+                      alt={testimonial.author}
+                      className="h-12 w-12 rounded-full object-cover border-2 border-primary-200"
+                    />
+                    <div className="ml-4">
+                      <p className="text-sm font-semibold text-gray-900">{testimonial.author}</p>
+                      <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </div>

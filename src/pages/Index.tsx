@@ -6,6 +6,9 @@ import Testimonials from "@/components/home/Testimonials";
 import CTASection from "@/components/home/CTASection";
 import LogoShowcase from "@/components/home/LogoShowcase";
 import AssessmentSection from "@/components/home/AssessmentSection";
+import StatsSection from "@/components/home/StatsSection";
+import InteractiveDemo from "@/components/home/InteractiveDemo";
+import NewsletterSection from "@/components/home/NewsletterSection";
 import PageTransition from "@/components/common/PageTransition";
 
 const Index = () => {
@@ -14,9 +17,12 @@ const Index = () => {
       <PageTransition>
         <Hero />
         <LogoShowcase />
-        <AssessmentSection />
+        <StatsSection />
         <FeaturesSection />
+        <InteractiveDemo />
+        <AssessmentSection />
         <Testimonials />
+        <NewsletterSection />
         <CTASection />
       </PageTransition>
     </Layout>

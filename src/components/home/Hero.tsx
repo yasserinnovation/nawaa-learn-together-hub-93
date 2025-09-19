@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Brain, Sparkles } from "lucide-react";
+import { ArrowRight, MapPin, Brain, Sparkles, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
@@ -46,18 +46,18 @@ const Hero = () => {
               </Button>
               
               <Button size="xl" variant="outline" className="group" asChild>
-                <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Smart assessment">
-                  <Brain className="h-5 w-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                  {t('hero.smartAssessment') || 'Smart Assessment'}
+                <Link to="/discover-spaces" className="flex items-center gap-2" aria-label="Discover learning spaces">
+                  <MapPin className="h-5 w-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
+                  {t('hero.exploreSpaces') || 'Explore Spaces'}
                 </Link>
               </Button>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-6 text-sm text-gray-600 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               <Button variant="link" className="text-gray-600 p-0 h-auto hover:text-primary-600 group" asChild>
-                <Link to="/discover-spaces" className="flex items-center gap-2" aria-label="Explore available spaces">
-                  <MapPin className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                  {t('hero.exploreSpaces') || 'Explore Spaces'}
+                <Link to="/courses" className="flex items-center gap-2" aria-label="Browse available courses">
+                  <BookOpen className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
+                  {t('hero.browseCourses') || 'Browse Courses'}
                 </Link>
               </Button>
               
