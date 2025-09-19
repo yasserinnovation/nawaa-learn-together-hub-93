@@ -1,0 +1,78 @@
+-- Insert comprehensive set of learning spaces across Egypt (fixed types)
+INSERT INTO public.spaces (name, type, address, city, owner, description, images, equipment, capacity, price_per_hour, rating, coordinates, availability) VALUES
+
+-- Cairo Spaces
+('Cairo Innovation Hub', 'makerspace', '15 Tahrir Square, Downtown', 'Cairo', 'Tech Innovation Center', 'Modern makerspace with cutting-edge technology and collaborative workspace for innovators and entrepreneurs.', ARRAY['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800'], ARRAY['3D Printer', 'Laser Cutter', 'Arduino Kits', 'Soldering Station', 'Computers', 'Wi-Fi', 'Projector'], 25, 75, 4.8, '{"lat": 30.0444, "lng": 31.2357}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 10:00 PM"}'),
+
+('Zamalek Creative Studio', 'coworking', '8 26th July Street, Zamalek', 'Cairo', 'Creative Collective', 'Inspiring coworking space in the heart of Zamalek with artistic atmosphere and modern amenities.', ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800'], ARRAY['Wi-Fi', 'Projector', 'Audio Equipment', 'Video Equipment', 'Computers'], 30, 60, 4.6, '{"lat": 30.0626, "lng": 31.2197}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 8:00 PM"}'),
+
+('Heliopolis Tech Library', 'library', '45 Baghdad Street, Heliopolis', 'Cairo', 'Cairo Education Foundation', 'Modern digital library specializing in technology and engineering resources with quiet study areas.', ARRAY['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800'], ARRAY['Computers', 'Wi-Fi', 'Projector', 'Audio Equipment'], 50, 25, 4.5, '{"lat": 30.0904, "lng": 31.3157}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "hours": "7:00 AM - 11:00 PM"}'),
+
+('Maadi Learning Center', 'classroom', '12 Road 9, Maadi', 'Cairo', 'International Education Group', 'Well-equipped classroom facility with modern teaching technology and flexible seating arrangements.', ARRAY['https://images.unsplash.com/photo-1562774053-701939374585?w=800'], ARRAY['Projector', 'Wi-Fi', 'Audio Equipment', 'Computers'], 40, 45, 4.4, '{"lat": 29.9609, "lng": 31.2497}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 6:00 PM"}'),
+
+('New Cairo Convention Hall', 'hall', 'AUC Avenue, New Cairo', 'Cairo', 'AUC Events', 'Large convention hall perfect for conferences, workshops, and major educational events.', ARRAY['https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'], ARRAY['Projector', 'Audio Equipment', 'Video Equipment', 'Wi-Fi'], 200, 150, 4.7, '{"lat": 30.0131, "lng": 31.5034}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 11:00 PM"}'),
+
+-- Alexandria Spaces
+('Alexandria Makerspace', 'makerspace', '25 Corniche Road, Alexandria', 'Alexandria', 'Mediterranean Makers', 'Waterfront makerspace with sea views, equipped with professional fabrication tools and collaborative areas.', ARRAY['https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800'], ARRAY['3D Printer', 'Laser Cutter', 'CNC Machine', 'Soldering Station', 'Robotics Kits', 'Wi-Fi'], 35, 70, 4.6, '{"lat": 31.2156, "lng": 29.9553}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 9:00 PM"}'),
+
+('Bibliotheca Alexandrina Digital Lab', 'library', 'El-Shatby, Alexandria', 'Alexandria', 'Bibliotheca Alexandrina', 'World-class digital library and research facility with extensive technology resources.', ARRAY['https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800'], ARRAY['Computers', 'Wi-Fi', 'Projector', 'Audio Equipment', 'Video Equipment'], 80, 30, 4.9, '{"lat": 31.2084, "lng": 29.9097}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "hours": "9:00 AM - 7:00 PM"}'),
+
+('Sidi Gaber Learning Hub', 'coworking', '15 Ahmed Shawky Street, Sidi Gaber', 'Alexandria', 'Alex Learning Network', 'Modern coworking space designed for students and professionals with flexible workspace options.', ARRAY['https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=800'], ARRAY['Wi-Fi', 'Computers', 'Projector', 'Audio Equipment'], 25, 55, 4.3, '{"lat": 31.2420, "lng": 29.9617}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 10:00 PM"}'),
+
+-- Giza Spaces
+('Pyramids Innovation Center', 'makerspace', '5 Al Haram Street, Giza', 'Giza', 'Giza Tech Foundation', 'Historic location meets modern technology in this unique makerspace near the pyramids.', ARRAY['https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=800'], ARRAY['3D Printer', 'Arduino Kits', 'Robotics Kits', 'Computers', 'Wi-Fi', 'Projector'], 30, 65, 4.5, '{"lat": 29.9792, "lng": 31.1342}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 8:00 PM"}'),
+
+('Dokki Study Center', 'library', '22 Mesaha Square, Dokki', 'Giza', 'Cairo University Extension', 'Quiet study facility popular with university students, featuring group study rooms and individual workstations.', ARRAY['https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800'], ARRAY['Wi-Fi', 'Computers', 'Projector'], 60, 20, 4.2, '{"lat": 30.0392, "lng": 31.2110}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "hours": "6:00 AM - 12:00 AM"}'),
+
+-- Aswan Spaces
+('Aswan Cultural Center', 'hall', 'Corniche El Nil, Aswan', 'Aswan', 'Aswan Cultural Authority', 'Beautiful cultural center overlooking the Nile, perfect for conferences and cultural events.', ARRAY['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800'], ARRAY['Projector', 'Audio Equipment', 'Video Equipment', 'Wi-Fi'], 150, 120, 4.4, '{"lat": 24.0889, "lng": 32.8998}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 10:00 PM"}'),
+
+('Aswan Tech Academy', 'classroom', '15 Saad Zaghloul Street, Aswan', 'Aswan', 'Upper Egypt Education', 'Modern classroom facility focused on technology education and digital skills training.', ARRAY['https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800'], ARRAY['Computers', 'Projector', 'Wi-Fi', 'Audio Equipment'], 25, 40, 4.3, '{"lat": 24.0969, "lng": 32.8977}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 6:00 PM"}'),
+
+-- Luxor Spaces
+('Luxor Innovation Lab', 'makerspace', '8 Television Street, Luxor', 'Luxor', 'Southern Innovators', 'Innovative makerspace combining traditional crafts with modern technology in historic Luxor.', ARRAY['https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800'], ARRAY['3D Printer', 'Laser Cutter', 'Traditional Tools', 'Computers', 'Wi-Fi'], 20, 55, 4.4, '{"lat": 25.6872, "lng": 32.6396}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 7:00 PM"}'),
+
+-- Mansoura Spaces
+('Mansoura Digital Library', 'library', '35 Gomhoria Street, Mansoura', 'Mansoura', 'Mansoura University', 'Comprehensive digital library serving the Delta region with extensive online and offline resources.', ARRAY['https://images.unsplash.com/photo-1568667256549-094345857637?w=800'], ARRAY['Computers', 'Wi-Fi', 'Projector', 'Audio Equipment'], 45, 25, 4.5, '{"lat": 31.0409, "lng": 31.3785}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "hours": "7:00 AM - 11:00 PM"}'),
+
+('Delta Coworking Space', 'coworking', '12 El Thawra Street, Mansoura', 'Mansoura', 'Delta Entrepreneurs', 'Professional coworking environment supporting startups and freelancers in the Delta region.', ARRAY['https://images.unsplash.com/photo-1497366812748-7b5800b65f1e?w=800'], ARRAY['Wi-Fi', 'Computers', 'Projector', 'Audio Equipment'], 35, 50, 4.2, '{"lat": 31.0375, "lng": 31.3808}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 9:00 PM"}'),
+
+-- Suez Spaces
+('Suez Maritime Academy', 'classroom', '25 Port Said Street, Suez', 'Suez', 'Suez Canal Authority Education', 'Specialized training facility focusing on maritime and logistics education with modern equipment.', ARRAY['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800'], ARRAY['Projector', 'Computers', 'Wi-Fi', 'Audio Equipment', 'Video Equipment'], 40, 60, 4.3, '{"lat": 29.9668, "lng": 32.5498}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 6:00 PM"}'),
+
+-- Ismailia Spaces
+('Ismailia Tech Hub', 'makerspace', '18 Tahrir Street, Ismailia', 'Ismailia', 'Canal Tech Initiative', 'Modern tech hub serving the Suez Canal region with focus on logistics and engineering innovation.', ARRAY['https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=800'], ARRAY['3D Printer', 'Arduino Kits', 'Robotics Kits', 'Computers', 'Wi-Fi', 'Projector'], 30, 65, 4.5, '{"lat": 30.5965, "lng": 32.2715}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 8:00 PM"}'),
+
+-- Tanta Spaces
+('Tanta Learning Center', 'classroom', '42 El Galaa Street, Tanta', 'Tanta', 'Gharbia Education Network', 'Well-established learning center offering various courses and workshops for different age groups.', ARRAY['https://images.unsplash.com/photo-1562774053-701939374585?w=800'], ARRAY['Projector', 'Wi-Fi', 'Audio Equipment', 'Computers'], 35, 45, 4.1, '{"lat": 30.7865, "lng": 31.0004}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 7:00 PM"}'),
+
+-- Port Said Spaces
+('Port Said Maritime Lab', 'makerspace', '8 23rd July Street, Port Said', 'Port Said', 'Port Said University', 'Specialized makerspace focusing on maritime engineering and marine technology development.', ARRAY['https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=800'], ARRAY['3D Printer', 'CNC Machine', 'Marine Simulation', 'Computers', 'Wi-Fi'], 25, 70, 4.6, '{"lat": 31.2653, "lng": 32.3019}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "9:00 AM - 6:00 PM"}'),
+
+-- Damanhur Spaces
+('Beheira Innovation Center', 'coworking', '15 Station Square, Damanhur', 'Damanhur', 'Beheira Entrepreneurs', 'Regional innovation center supporting agricultural technology and rural development initiatives.', ARRAY['https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=800'], ARRAY['Wi-Fi', 'Computers', 'Projector', 'Agricultural Sensors'], 20, 40, 4.0, '{"lat": 31.0341, "lng": 30.4682}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 8:00 PM"}'),
+
+-- Zagazig Spaces
+('Zagazig University Hub', 'library', '25 University Street, Zagazig', 'Zagazig', 'Zagazig University', 'Modern university library with extensive digital resources and collaborative study spaces.', ARRAY['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800'], ARRAY['Computers', 'Wi-Fi', 'Projector', 'Audio Equipment'], 70, 30, 4.4, '{"lat": 30.5877, "lng": 31.5022}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "hours": "7:00 AM - 11:00 PM"}'),
+
+-- Beni Suef Spaces
+('Beni Suef Innovation Center', 'makerspace', '10 Corniche Street, Beni Suef', 'Beni Suef', 'Upper Egypt Innovation', 'Regional makerspace supporting technology education and entrepreneurship in Upper Egypt.', ARRAY['https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800'], ARRAY['3D Printer', 'Arduino Kits', 'Computers', 'Wi-Fi', 'Projector'], 25, 50, 4.2, '{"lat": 29.0661, "lng": 31.0994}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 7:00 PM"}'),
+
+-- Minya Spaces
+('Minya Cultural Hall', 'hall', '20 Gomhoria Street, Minya', 'Minya', 'Minya Governorate', 'Large cultural hall hosting educational conferences, workshops, and community events.', ARRAY['https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'], ARRAY['Projector', 'Audio Equipment', 'Video Equipment', 'Wi-Fi'], 180, 100, 4.3, '{"lat": 28.1099, "lng": 30.7503}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 10:00 PM"}'),
+
+-- Sohag Spaces
+('Sohag Learning Academy', 'classroom', '15 El Mahatta Street, Sohag', 'Sohag', 'Sohag Education Foundation', 'Modern educational facility offering technology courses and skill development programs.', ARRAY['https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800'], ARRAY['Computers', 'Projector', 'Wi-Fi', 'Audio Equipment'], 30, 35, 4.1, '{"lat": 26.5569, "lng": 31.6948}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 6:00 PM"}'),
+
+-- Qena Spaces
+('Qena Tech Center', 'coworking', '8 Railway Street, Qena', 'Qena', 'South Valley Tech', 'Technology-focused coworking space serving the southern regions with modern facilities.', ARRAY['https://images.unsplash.com/photo-1497366812748-7b5800b65f1e?w=800'], ARRAY['Wi-Fi', 'Computers', 'Projector', 'Audio Equipment'], 25, 45, 4.0, '{"lat": 26.1551, "lng": 32.7160}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 8:00 PM"}'),
+
+-- Red Sea Governorate
+('Hurghada Innovation Lab', 'makerspace', '12 Sheraton Road, Hurghada', 'Hurghada', 'Red Sea Innovation', 'Unique makerspace combining marine technology with tourism innovation in Red Sea resort city.', ARRAY['https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=800'], ARRAY['3D Printer', 'Marine Equipment', 'Computers', 'Wi-Fi', 'Projector'], 20, 80, 4.5, '{"lat": 27.2574, "lng": 33.8129}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "9:00 AM - 9:00 PM"}'),
+
+-- Specialized Spaces
+('Cairo Robotics Workshop', 'makerspace', '30 Orabi Street, Cairo', 'Cairo', 'Egyptian Robotics Society', 'Specialized robotics workshop with advanced equipment for AI and robotics development.', ARRAY['https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=800'], ARRAY['Robotics Kits', 'Arduino Kits', '3D Printer', 'Soldering Station', 'Computers', 'Wi-Fi'], 15, 100, 4.8, '{"lat": 30.0518, "lng": 31.2420}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "hours": "10:00 AM - 8:00 PM"}'),
+
+('Alexandria Marine Research Center', 'classroom', 'Stanley Bridge, Alexandria', 'Alexandria', 'Marine Research Institute', 'State-of-the-art marine research facility with equipment for oceanographic studies and marine biology.', ARRAY['https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800'], ARRAY['Marine Equipment', 'Microscopes', 'Computers', 'Wi-Fi', 'Projector'], 20, 90, 4.7, '{"lat": 31.2200, "lng": 29.9187}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "8:00 AM - 5:00 PM"}'),
+
+('Giza Archaeology Studio', 'classroom', '5 Pyramids Road, Giza', 'Giza', 'Egyptian Heritage Foundation', 'Specialized learning space for archaeology and heritage studies with authentic artifacts and tools.', ARRAY['https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800'], ARRAY['Archaeological Tools', 'Computers', 'Wi-Fi', 'Projector', 'Audio Equipment'], 25, 60, 4.6, '{"lat": 29.9765, "lng": 31.1313}', '{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "hours": "9:00 AM - 5:00 PM"}');
