@@ -81,6 +81,12 @@ const Navbar = () => {
 
   const secondaryItems = [
     { 
+      path: "/all-spaces", 
+      label: language === 'ar' ? 'جميع الأماكن' : 'All Spaces', 
+      icon: MapPin,
+      isActive: isActivePath("/all-spaces")
+    },
+    { 
       path: "/competitions-guide", 
       label: language === 'ar' ? 'دليل المسابقات' : 'Competitions Guide', 
       icon: Trophy,

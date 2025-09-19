@@ -19,6 +19,7 @@ import ShareYourSpace from "./pages/ShareYourSpace";
 import AddTool from "./pages/AddTool";
 import AdminDashboard from "./pages/AdminDashboard";
 import CompetitionsGuide from "./pages/CompetitionsGuide";
+import AllSpaces from "./pages/AllSpaces";
 import TrainerSignup from "./pages/TrainerSignup";
 import TrainerDashboard from "./pages/TrainerDashboard";
 import Auth from "./pages/Auth";
@@ -54,6 +55,7 @@ const App = () => (
                 <Route path="/auth/reset-password" element={<ResetPassword />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/competitions-guide" element={<CompetitionsGuide />} />
+                <Route path="/all-spaces" element={<AllSpaces />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
