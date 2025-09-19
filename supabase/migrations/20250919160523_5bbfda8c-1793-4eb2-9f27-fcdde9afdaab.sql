@@ -1,0 +1,14 @@
+-- Add some sample spaces with real coordinates for Egypt using valid types
+INSERT INTO public.spaces (name, type, city, address, owner, description, capacity, price_per_hour, equipment, coordinates, availability, images) VALUES
+('Cairo Innovation Hub', 'makerspace', 'Cairo', '123 Tahrir Square, Cairo, Egypt', 'Innovation Egypt', 'A modern makerspace in the heart of Cairo with 3D printers, electronics lab, and coworking area.', 25, 150.00, ARRAY['3D Printer', 'Electronics Lab', 'Laser Cutter', 'Soldering Station'], '{"lat": 30.0444, "lng": 31.2357}'::jsonb, '{"days": ["monday", "tuesday", "wednesday", "thursday", "friday"], "hours": "9:00-18:00"}'::jsonb, ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c']),
+
+('Alexandria Tech Center', 'coworking', 'Alexandria', '456 Corniche Road, Alexandria, Egypt', 'Tech Alexandria', 'Waterfront coworking space with stunning Mediterranean views and modern facilities.', 40, 100.00, ARRAY['High-Speed Internet', 'Meeting Rooms', 'Projectors', 'Whiteboard'], '{"lat": 31.2001, "lng": 29.9187}'::jsonb, '{"days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"], "hours": "8:00-20:00"}'::jsonb, ARRAY['https://images.unsplash.com/photo-1497366811353-6870744d04b2']),
+
+('Giza Robotics Lab', 'library', 'Giza', '789 Pyramids Street, Giza, Egypt', 'Giza University', 'Advanced robotics laboratory near the pyramids with cutting-edge equipment.', 15, 200.00, ARRAY['Robot Kits', 'Arduino Boards', 'Sensors', 'Programming Stations'], '{"lat": 30.0131, "lng": 31.2089}'::jsonb, '{"days": ["tuesday", "wednesday", "thursday", "friday", "saturday"], "hours": "10:00-16:00"}'::jsonb, ARRAY['https://images.unsplash.com/photo-1518709268805-4e9042af2176']),
+
+('Mansoura Makerspace', 'makerspace', 'Mansoura', '321 University Street, Mansoura, Egypt', 'Mansoura Makers', 'Community-driven makerspace focusing on sustainable technology and innovation.', 30, 80.00, ARRAY['3D Printer', 'Woodworking Tools', 'Textile Station', 'Electronics'], '{"lat": 31.0364, "lng": 31.3807}'::jsonb, '{"days": ["monday", "wednesday", "friday", "saturday", "sunday"], "hours": "14:00-22:00"}'::jsonb, ARRAY['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158']),
+
+('Aswan Innovation Center', 'coworking', 'Aswan', '654 Nile View Street, Aswan, Egypt', 'Upper Egypt Development', 'Innovation center promoting tech entrepreneurship in Upper Egypt.', 20, 120.00, ARRAY['Meeting Rooms', 'Presentation Equipment', 'High-Speed Internet', 'Mentorship Programs'], '{"lat": 24.0889, "lng": 32.8998}'::jsonb, '{"days": ["sunday", "monday", "tuesday", "wednesday", "thursday"], "hours": "9:00-17:00"}'::jsonb, ARRAY['https://images.unsplash.com/photo-1497366754035-f200968a6e72']);
+
+-- Update rating for all spaces to have some ratings
+UPDATE public.spaces SET rating = 4.2 + (random() * 0.8) WHERE rating IS NULL OR rating = 0;
