@@ -158,8 +158,6 @@ const translations = {
     'hero.spacesAvailable': 'أكثر من 150 مساحة متاحة',
     
     // Features
-    'features.title': 'كل ما تحتاجه لبناء نموذجك الأولي',
-    'features.subtitle': 'نظامنا البيئي الشامل يوفر جميع الموارد والإرشادات والدعم اللازم لتحويل أفكارك المبتكرة إلى نماذج أولية حقيقية وعملية.',
     'features.expertTrainers': 'مدربون خبراء',
     'features.expertTrainersDesc': 'تواصل مع موجهين ذوي خبرة ومتخصصين في الصناعة يرشدونك خلال كل خطوة في رحلة الابتكار.',
     'features.realMakerspaces': 'مساحات عمل حقيقية',
