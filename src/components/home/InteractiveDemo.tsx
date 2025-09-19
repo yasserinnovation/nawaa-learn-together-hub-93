@@ -51,14 +51,14 @@ const InteractiveDemo = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-muted/30" aria-labelledby="demo-heading">
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 id="demo-heading" className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
               {t('demo.title') || 'Explore Our Platform'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               {t('demo.subtitle') || 'See how our platform can help you turn your ideas into reality'}
             </p>
           </div>
@@ -87,10 +87,10 @@ const InteractiveDemo = () => {
                       }`}>
                         <section.icon className="h-6 w-6" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold mb-1">{section.title}</h3>
-                        <p className="text-gray-600 text-sm">{section.description}</p>
-                      </div>
+                       <div className="flex-1">
+                         <h3 className="text-lg font-semibold mb-1 text-card-foreground">{section.title}</h3>
+                         <p className="text-muted-foreground text-sm">{section.description}</p>
+                       </div>
                       {activeTab === index && (
                         <Play className="h-5 w-5 text-primary-500" />
                       )}
@@ -119,28 +119,28 @@ const InteractiveDemo = () => {
               </div>
               
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">
-                  {demoSections[activeTab].title}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {demoSections[activeTab].description}
-                </p>
+                 <h3 className="text-xl font-bold mb-3 text-card-foreground">
+                   {demoSections[activeTab].title}
+                 </h3>
+                 <p className="text-muted-foreground mb-4">
+                   {demoSections[activeTab].description}
+                 </p>
                 
-                <div className="grid grid-cols-2 gap-2 mb-6">
-                  {demoSections[activeTab].features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary-400 rounded-full" />
-                      <span className="text-sm text-gray-600">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                 <div className="grid grid-cols-2 gap-2 mb-6">
+                   {demoSections[activeTab].features.map((feature, index) => (
+                     <div key={index} className="flex items-center gap-2">
+                       <div className="w-2 h-2 bg-primary rounded-full" aria-hidden="true" />
+                       <span className="text-sm text-muted-foreground">{feature}</span>
+                     </div>
+                   ))}
+                 </div>
                 
-                <Button className="w-full group" asChild>
-                  <Link to={demoSections[activeTab].cta}>
-                    {t('demo.explore') || 'Explore Now'}
-                    <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
+                 <Button className="w-full group" asChild>
+                   <Link to={demoSections[activeTab].cta} aria-label={`Explore ${demoSections[activeTab].title} section`}>
+                     {t('demo.explore') || 'Explore Now'}
+                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                   </Link>
+                 </Button>
               </CardContent>
             </Card>
           </ScrollReveal>

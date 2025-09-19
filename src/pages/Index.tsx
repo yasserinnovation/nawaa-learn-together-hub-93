@@ -10,10 +10,19 @@ import StatsSection from "@/components/home/StatsSection";
 import InteractiveDemo from "@/components/home/InteractiveDemo";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import PageTransition from "@/components/common/PageTransition";
+import { organizationSchema, websiteSchema, educationalOrganizationSchema } from "@/lib/structured-data";
 
 const Index = () => {
   return (
     <Layout>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([organizationSchema, websiteSchema, educationalOrganizationSchema]),
+        }}
+      />
+      
       <PageTransition>
         <Hero />
         <LogoShowcase />

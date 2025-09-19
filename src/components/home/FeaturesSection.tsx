@@ -51,15 +51,15 @@ const FeaturesSection = () => {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-background" aria-labelledby="features-heading">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 id="features-heading" className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
                 {t('features.title')}
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 {t('features.subtitle')}
               </p>
             </div>
@@ -68,27 +68,27 @@ const FeaturesSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <ScrollReveal key={index} delay={index * 100}>
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50 group hover:-translate-y-2">
-                  <CardHeader className="text-center pb-4">
-                    <div className={`mx-auto mb-4 w-16 h-16 bg-gradient-to-br ${getColorClasses(feature.color)} rounded-full flex items-center justify-center shadow-glow transition-all duration-300 group-hover:shadow-glow-lg group-hover:scale-110`}>
-                      <feature.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <CardTitle className="text-xl font-semibold group-hover:text-primary-600 transition-colors">
-                      {feature.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <CardDescription className="text-gray-600 leading-relaxed mb-4">
-                      {feature.description}
-                    </CardDescription>
-                    <Button variant="ghost" size="sm" className="group/btn hover:bg-primary-50 hover:text-primary-600" asChild>
-                      <Link to={feature.link} className="flex items-center gap-2">
-                        Learn More
-                        <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
+                 <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-muted/20 group hover:-translate-y-2">
+                   <CardHeader className="text-center pb-4">
+                     <div className={`mx-auto mb-4 w-16 h-16 bg-gradient-to-br ${getColorClasses(feature.color)} rounded-full flex items-center justify-center shadow-glow transition-all duration-300 group-hover:shadow-glow-lg group-hover:scale-110`} role="img" aria-label={`${feature.title} icon`}>
+                       <feature.icon className="h-8 w-8 text-white" aria-hidden="true" />
+                     </div>
+                     <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors">
+                       {feature.title}
+                     </CardTitle>
+                   </CardHeader>
+                   <CardContent className="text-center">
+                     <CardDescription className="text-muted-foreground leading-relaxed mb-4">
+                       {feature.description}
+                     </CardDescription>
+                     <Button variant="ghost" size="sm" className="group/btn hover:bg-primary/10 hover:text-primary" asChild>
+                       <Link to={feature.link} className="flex items-center gap-2" aria-label={`Learn more about ${feature.title}`}>
+                         Learn More
+                         <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
+                       </Link>
+                     </Button>
+                   </CardContent>
+                 </Card>
               </ScrollReveal>
             ))}
           </div>

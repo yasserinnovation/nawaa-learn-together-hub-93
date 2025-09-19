@@ -8,7 +8,7 @@ const Hero = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="relative py-20 md:py-32 bg-gradient-to-br from-primary-50 via-white to-primary-100 overflow-hidden">
+    <main className="relative py-20 md:py-32 bg-gradient-to-br from-primary-50 via-background to-primary-100 overflow-hidden" role="main" aria-labelledby="hero-heading">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float"></div>
@@ -23,46 +23,42 @@ const Hero = () => {
               {t('hero.badge') || 'Transform Your Ideas'}
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-gray-900 leading-tight">
+            <h1 id="hero-heading" className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-foreground leading-tight">
               <span className="text-gradient animate-fade-in">
-                {t('hero.title') || 'Transform Ideas into'}
-              </span>
-              <br />
-              <span className="animate-slide-up">
-                Real Prototypes
+                {t('hero.title') || 'Transform Ideas into Real Prototypes'}
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               {t('hero.subtitle') || 'Connect with expert trainers, access cutting-edge tools, and find collaborative spaces to bring your innovative ideas to life.'}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <Button size="xl" className="group" asChild>
-                <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take smart assessment">
-                  {t('hero.startAssessment') || 'Take Assessment'}
+              <Button size="xl" className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" asChild>
+                <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Start your smart assessment to find the perfect learning path">
+                  {t('hero.startAssessment') || 'Take Smart Assessment'}
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </Link>
               </Button>
               
-              <Button size="xl" variant="outline" className="group" asChild>
-                <Link to="/discover-spaces" className="flex items-center gap-2" aria-label="Discover learning spaces">
+              <Button size="lg" variant="outline" className="group border-border hover:bg-accent hover:text-accent-foreground" asChild>
+                <Link to="/discover-spaces" className="flex items-center gap-2" aria-label="Discover learning spaces near you">
                   <MapPin className="h-5 w-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
                   {t('hero.exploreSpaces') || 'Explore Spaces'}
                 </Link>
               </Button>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-6 text-sm text-gray-600 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <Button variant="link" className="text-gray-600 p-0 h-auto hover:text-primary-600 group" asChild>
-                <Link to="/courses" className="flex items-center gap-2" aria-label="Browse available courses">
+            <div className="flex flex-col sm:flex-row gap-6 text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              <Button variant="link" className="text-muted-foreground p-0 h-auto hover:text-primary group" asChild>
+                <Link to="/courses" className="flex items-center gap-2" aria-label="Browse available STEM courses and learning materials">
                   <BookOpen className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
                   {t('hero.browseCourses') || 'Browse Courses'}
                 </Link>
               </Button>
               
-              <Button variant="link" className="text-gray-600 p-0 h-auto hover:text-primary-600" asChild>
-                <Link to="/share-your-space" aria-label="Share your space with the community">
+              <Button variant="link" className="text-muted-foreground p-0 h-auto hover:text-primary" asChild>
+                <Link to="/share-your-space" aria-label="Share your makerspace or workshop with the community">
                   {t('hero.shareSpace') || 'Share Your Space'}
                 </Link>
               </Button>
@@ -109,7 +105,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
