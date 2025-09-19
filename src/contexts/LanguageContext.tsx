@@ -27,8 +27,8 @@ const translations = {
     'nav.signUp': 'Sign up',
     
     // Hero section
-    'hero.title': 'Transform Ideas into Real Prototypes',
-    'hero.subtitle': 'Connect with expert trainers, access cutting-edge tools, and use real makerspaces to build your MVP. From idea to launch in one comprehensive platform.',
+    'hero.title': 'Empowering Institutions and Trainers to Deliver Global Educational Value',
+    'hero.subtitle': 'Connect with expert trainers, get the latest tools, and use real workspaces to build your prototype. From idea to launch in one comprehensive platform.',
     'hero.startBuilding': 'Start Your MVP Journey',
     'hero.smartAssessment': 'Take Smart Assessment',
     'hero.exploreSpaces': 'Explore 150+ Spaces',
