@@ -1,62 +1,65 @@
 
-import { Hammer, Search, Filter, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Hammer, Search, Tag } from "lucide-react";
 import AddToolButton from "./AddToolButton";
 
 const ToolsHero = () => {
   return (
-    <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 py-12 md:py-16">
+    <section className="bg-gradient-to-br from-primary-50 to-primary-100 py-16" role="banner">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-            Access Learning Tools
-          </h1>
-          <p className="text-lg md:text-xl text-black mb-8">
-            Find, rent, or buy the tech learning tools you need from our community marketplace.
-            Share your own tools to help others learn.
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">Access Learning Tools</h1>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Find, rent, or purchase quality educational tools and equipment. 
+            Connect with our community to access everything you need for hands-on learning.
           </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <div className="flex justify-center mb-3">
-                <Hammer className="h-10 w-10 text-black" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-black">Quality Tools</h3>
-              <p className="text-black">
-                Access a variety of educational tech tools without the high cost of purchasing new.
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <Card className="border-primary-200 shadow-md hover:shadow-lg transition-all duration-300">
+            <CardContent className="p-6 text-center">
+              <Hammer className="h-12 w-12 text-primary mx-auto mb-4" aria-hidden="true" />
+              <h2 className="font-semibold mb-2 text-card-foreground">Quality Tools</h2>
+              <p className="text-muted-foreground text-sm">
+                Verified educational equipment from trusted sources
               </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <div className="flex justify-center mb-3">
-                <Search className="h-10 w-10 text-black" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-black">Find What You Need</h3>
-              <p className="text-black">
-                Filter by age group, tool type, price range, and location to find exactly what you need.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <div className="flex justify-center mb-3">
-                <Tag className="h-10 w-10 text-black" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-black">Affordable Options</h3>
-              <p className="text-black">
-                Rent tools for a fraction of the purchase price or find gently used items at great rates.
-              </p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
-              Explore All Tools
-            </Button>
-            <AddToolButton />
-          </div>
+          <Card className="border-primary-200 shadow-md hover:shadow-lg transition-all duration-300">
+            <CardContent className="p-6 text-center">
+              <Search className="h-12 w-12 text-primary mx-auto mb-4" aria-hidden="true" />
+              <h2 className="font-semibold mb-2 text-card-foreground">Find What You Need</h2>
+              <p className="text-muted-foreground text-sm">
+                Advanced search and filtering to match your course requirements
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-primary-200 shadow-md hover:shadow-lg transition-all duration-300">
+            <CardContent className="p-6 text-center">
+              <Tag className="h-12 w-12 text-primary mx-auto mb-4" aria-hidden="true" />
+              <h2 className="font-semibold mb-2 text-card-foreground">Affordable Options</h2>
+              <p className="text-muted-foreground text-sm">
+                Rent, buy, or access free tools within your budget
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button 
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8"
+            aria-label="Browse all available tools"
+          >
+            Explore All Tools
+          </Button>
+          <AddToolButton />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

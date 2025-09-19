@@ -31,10 +31,10 @@ const ContributorCTA = () => {
   ];
 
   return (
-    <Card className="mb-8 overflow-hidden border-yellow-200 shadow-md">
+    <Card className="mb-8 overflow-hidden border-primary-200 shadow-md hover:shadow-lg transition-all duration-300">
       <CardContent className="p-6">
-        <h3 className="text-xl font-bold mb-4">Join Our Tool Marketplace</h3>
-        <p className="text-gray-600 mb-4">
+        <h2 className="text-xl font-bold mb-4 text-card-foreground">Join Our Tool Marketplace</h2>
+        <p className="text-muted-foreground mb-4">
           Share your tech learning tools with the community - whether for rent, sale, or free sharing
         </p>
 
@@ -43,8 +43,10 @@ const ContributorCTA = () => {
             <Button
               key={type.id}
               variant={activeTab === type.id ? "default" : "outline"}
-              className={activeTab === type.id ? "bg-yellow-500 hover:bg-yellow-600" : ""}
+              className={activeTab === type.id ? "bg-primary hover:bg-primary/90 text-primary-foreground" : "border-primary/20 hover:border-primary/40"}
               onClick={() => setActiveTab(type.id)}
+              aria-pressed={activeTab === type.id}
+              aria-label={`Select ${type.name} contributor type`}
             >
               {type.icon}
               <span className="ml-2">{type.name}</span>
@@ -52,14 +54,14 @@ const ContributorCTA = () => {
           ))}
         </div>
 
-        <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+        <div className="mt-4 bg-muted p-4 rounded-lg">
           <div className="flex items-start gap-3">
-            {contributorTypes.find(t => t.id === activeTab)?.icon}
+            <span aria-hidden="true">{contributorTypes.find(t => t.id === activeTab)?.icon}</span>
             <div>
-              <h4 className="font-medium">
+              <h3 className="font-medium text-card-foreground">
                 {contributorTypes.find(t => t.id === activeTab)?.name}
-              </h4>
-              <p className="text-gray-600 text-sm mt-1">
+              </h3>
+              <p className="text-muted-foreground text-sm mt-1">
                 {contributorTypes.find(t => t.id === activeTab)?.description}
               </p>
             </div>
@@ -67,13 +69,14 @@ const ContributorCTA = () => {
         </div>
       </CardContent>
       
-      <CardFooter className="bg-gray-50 px-6 py-4">
+      <CardFooter className="bg-muted px-6 py-4">
         <Button 
-          className="bg-yellow-500 hover:bg-yellow-600 w-full sm:w-auto flex items-center justify-center gap-2"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto flex items-center justify-center gap-2 font-semibold"
           onClick={() => navigate('/add-tool')}
+          aria-label="Add your tool to marketplace"
         >
           Add Your Tool
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Button>
       </CardFooter>
     </Card>

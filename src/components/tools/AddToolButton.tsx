@@ -20,14 +20,15 @@ const AddToolButton = () => {
         <TooltipTrigger asChild>
           <Button 
             onClick={() => navigate('/add-tool')} 
-            className="bg-yellow-500 hover:bg-yellow-600 text-white flex items-center gap-2 relative"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 relative font-semibold transition-all duration-200"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            aria-label="Add your tool to the marketplace"
           >
             <Plus size={18} />
             <span>Add Your Tool</span>
             {isHovered && (
-              <ArrowRight className="absolute right-2 opacity-70" size={14} />
+              <ArrowRight className="absolute right-2 opacity-70" size={14} aria-hidden="true" />
             )}
           </Button>
         </TooltipTrigger>
