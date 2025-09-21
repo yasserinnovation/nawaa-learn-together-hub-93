@@ -22,20 +22,24 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
   const getEnhancedImageUrl = (index: number) => {
     const imageMap: Record<string, string[]> = {
       "makerspace": [
-        "https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=600"
+        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=800",
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800"
       ],
       "classroom": [
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600"
+        "https://images.unsplash.com/photo-1562774053-701939374585?w=800",
+        "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800"
       ],
-      "lab": [
-        "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600"
+      "library": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800"
       ],
-      "studio": [
-        "https://images.unsplash.com/photo-1593697821252-0c9137d9fc45?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?auto=format&fit=crop&q=80&w=600"
+      "coworking": [
+        "https://images.unsplash.com/photo-1497366812748-7b5800b65f1e?w=800",
+        "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=800"
+      ],
+      "hall": [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+        "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800"
       ]
     };
 
@@ -134,13 +138,10 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
           )}
         </div>
         
-        <div className="flex items-center justify-between mt-2 text-sm">
+        <div className="flex items-center mt-2 text-sm">
           <div className="flex items-center text-muted-foreground">
             <Users className="w-4 h-4 mr-1" aria-hidden="true" />
             <span>Up to {space.capacity} people</span>
-          </div>
-          <div className="font-semibold text-card-foreground">
-            {space.pricePerHour} EGP/hour
           </div>
         </div>
       </CardContent>
