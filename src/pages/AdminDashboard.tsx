@@ -137,6 +137,7 @@ const AdminDashboard = () => {
     activeUsersLast30Days: 0,
     estimatedRevenue: 0
   });
+  const [profileStats, setProfileStats] = useState<any>(null);
   const [showMapView, setShowMapView] = useState(false);
 
   // Redirect if not authenticated or not admin
@@ -1199,17 +1200,15 @@ const AdminDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    {Array.from(new Set(profiles.map(p => p.city).filter(Boolean)))
-                      .slice(0, 5)
-                      .map(city => {
-                        const count = profiles.filter(p => p.city === city).length;
-                        return (
-                          <div key={city} className="flex justify-between items-center">
-                            <span>{city}</span>
-                            <span className="font-medium">{count}</span>
-                          </div>
-                        );
-                      })}
+                    {profileStats?.top_cities ? 
+                      Object.entries(profileStats.top_cities).slice(0, 5).map(([city, count]) => (
+                        <div key={city} className="flex justify-between items-center">
+                          <span>{city}</span>
+                          <span className="font-medium">{count as number}</span>
+                        </div>
+                      )) : 
+                      <div className="text-sm text-muted-foreground">No data available</div>
+                    }
                   </div>
                 </CardContent>
               </Card>

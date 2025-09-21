@@ -532,6 +532,25 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: Json
       }
+      get_admin_profile_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      get_public_profile: {
+        Args: { profile_user_id: string }
+        Returns: {
+          avatar_url: string
+          city: string
+          created_at: string
+          full_name: string
+          id: string
+          interests: string[]
+          rating: number
+          total_courses_completed: number
+          total_hours_learned: number
+          user_type: string
+        }[]
+      }
       get_user_profile: {
         Args: Record<PropertyKey, never>
         Returns: {
