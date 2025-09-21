@@ -13,6 +13,8 @@ interface SpacesListProps {
 }
 
 const SpacesList = ({ filters }: SpacesListProps) => {
+  console.log('SpacesList component rendering...');
+  
   // Provide default filters when none are passed
   const defaultFilters: SpaceFilter = {
     searchText: '',
@@ -27,6 +29,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('SpacesList useEffect triggered');
     fetchSpaces();
   }, []);
 
@@ -187,6 +190,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   }, [spaces, activeFilters]);
 
   if (loading) {
+    console.log('SpacesList: Rendering loading state');
     return (
       <div className="flex justify-center items-center min-h-[400px]">
         <LoadingSpinner size="lg" text="Loading spaces..." />
@@ -196,9 +200,18 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   console.log('SpacesList render - spaces:', spaces.length, 'filteredSpaces:', filteredSpaces.length);
 
+  // Debug: Always show basic info
+  console.log('SpacesList: About to render', { spacesLength: spaces.length, filteredLength: filteredSpaces.length, activeFilters });
+
   return (
     <ScrollReveal>
       <div>
+        <div className="mb-4 p-4 bg-muted rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            Debug: Total spaces: {spaces.length}, Filtered: {filteredSpaces.length}
+          </p>
+        </div>
+        
         <div className="flex justify-between items-center mb-6">
           <h2 id="spaces-results-heading" className="text-2xl font-bold text-foreground">
             Available Spaces ({filteredSpaces.length})
