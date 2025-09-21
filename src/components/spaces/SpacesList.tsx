@@ -126,9 +126,21 @@ const SpacesList = ({ filters }: SpacesListProps) => {
   };
 
   const filteredSpaces = useMemo(() => {
+    // If no filters are provided or all filters are at default values, show all spaces
+    const hasActiveFilters = 
+      activeFilters.searchText && activeFilters.searchText.trim() !== '' ||
+      activeFilters.capacity > 0 ||
+      activeFilters.equipment.length > 0 ||
+      activeFilters.availability !== null;
+
+    if (!hasActiveFilters) {
+      console.log('SpacesList: No active filters, showing all spaces:', spaces.length);
+      return spaces;
+    }
+
     const result = spaces.filter(space => {
       // Search text filter
-      if (activeFilters.searchText) {
+      if (activeFilters.searchText && activeFilters.searchText.trim()) {
         const searchTerms = expandSearchTerms(activeFilters.searchText);
         
         let matchesSearch = false;
@@ -153,7 +165,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
       }
 
       // Capacity filter
-      if (activeFilters.capacity && space.capacity < activeFilters.capacity) {
+      if (activeFilters.capacity > 0 && space.capacity < activeFilters.capacity) {
         return false;
       }
 
@@ -170,6 +182,7 @@ const SpacesList = ({ filters }: SpacesListProps) => {
       return true;
     });
     
+    console.log('SpacesList: Filtered results:', result.length);
     return result;
   }, [spaces, activeFilters]);
 
