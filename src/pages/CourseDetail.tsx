@@ -1,12 +1,19 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
-import { Calendar, Users, Clock, Target, CircuitBoard, Wind, Lightbulb, MessageCircle } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import { Calendar, Users, Clock, Target, CircuitBoard, Wind, Lightbulb, MessageCircle, Home } from "lucide-react";
 import { getCourseById } from "@/lib/course-utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import EnrollmentModal from "@/components/courses/EnrollmentModal";
@@ -47,6 +54,34 @@ const CourseDetail = () => {
 
   return (
     <Layout>
+      {/* Breadcrumb Navigation */}
+      <div className="bg-muted/30 border-b border-border py-3">
+        <div className="container mx-auto px-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/" className="flex items-center gap-1">
+                    <Home className="h-4 w-4" />
+                    {t('nav.home') || 'Home'}
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/courses">{t('nav.courses') || 'Courses'}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{getCourseTranslation('title')}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
+
       <div className="bg-gradient-to-r from-primary-50 to-primary-100 py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">

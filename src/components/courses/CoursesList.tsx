@@ -12,18 +12,33 @@ import { useCourseDownload } from "@/hooks/useCourseDownload";
 
 interface CoursesListProps {
   categoryFilter?: string;
+  searchQuery?: string;
 }
 
-const CoursesList = ({ categoryFilter = "all" }: CoursesListProps) => {
+const CoursesList = ({ categoryFilter = "all", searchQuery = "" }: CoursesListProps) => {
   const [activeTab, setActiveTab] = useState(categoryFilter);
   const { t } = useLanguage();
   const { downloadCourseAsWord, isDownloading } = useCourseDownload();
   
   const courses = getAllCourses();
 
-  const filteredCourses = activeTab === "all" 
+  // Filter by category
+  const categoryFiltered = activeTab === "all" 
     ? courses 
     : courses.filter(course => course.category === activeTab);
+
+  // Filter by search query
+  const filteredCourses = searchQuery.trim()
+    ? categoryFiltered.filter(course => {
+        const query = searchQuery.toLowerCase();
+        return (
+          course.title.toLowerCase().includes(query) ||
+          course.project.toLowerCase().includes(query) ||
+          course.stemFocus.toLowerCase().includes(query) ||
+          course.lifeSkills.toLowerCase().includes(query)
+        );
+      })
+    : categoryFiltered;
 
   // Get translated course content - fallback to course data since course translations aren't available yet
   const getCourseTranslation = (courseId: number, key: string, fallback: string) => {

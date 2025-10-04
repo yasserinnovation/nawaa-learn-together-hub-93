@@ -5,6 +5,8 @@ import CoursesHero from "@/components/courses/CoursesHero";
 import AssessmentCTA from "@/components/courses/AssessmentCTA";
 import SEOHead from "@/components/common/SEOHead";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { courseCatalogSchema } from "@/lib/course-schema";
@@ -32,6 +34,7 @@ const coursesStructuredData = {
 
 const Courses = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const { t } = useLanguage();
 
   return (
@@ -50,8 +53,22 @@ const Courses = () => {
         <div className="container mx-auto px-4">
           <AssessmentCTA />
           
-          <section aria-labelledby="course-categories">
-            <Tabs defaultValue="all" onValueChange={setActiveCategory} className="max-w-4xl mx-auto mb-8">
+          <section aria-labelledby="course-categories" className="mb-8">
+            <div className="max-w-4xl mx-auto mb-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                <Input
+                  type="search"
+                  placeholder={t('courses.searchPlaceholder') || "Search courses by name, topic, or skill..."}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-12 text-base"
+                  aria-label="Search courses"
+                />
+              </div>
+            </div>
+            
+            <Tabs defaultValue="all" onValueChange={setActiveCategory} className="max-w-4xl mx-auto">
               <TabsList className="flex justify-center mb-6" role="tablist" aria-label="Course categories">
                 <TabsTrigger value="all" role="tab">{t('courses.allCourses')}</TabsTrigger>
                 <TabsTrigger value="technology" role="tab">{t('courses.technology')}</TabsTrigger>
@@ -61,7 +78,7 @@ const Courses = () => {
             </Tabs>
           </section>
           
-          <CoursesList categoryFilter={activeCategory} />
+          <CoursesList categoryFilter={activeCategory} searchQuery={searchQuery} />
         </div>
       </main>
     </Layout>
