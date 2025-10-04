@@ -6,14 +6,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Calendar, Users, Clock, Target, CircuitBoard, Wind, Lightbulb } from "lucide-react";
+import { Calendar, Users, Clock, Target, CircuitBoard, Wind, Lightbulb, MessageCircle } from "lucide-react";
 import { getCourseById } from "@/lib/course-utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import EnrollmentModal from "@/components/courses/EnrollmentModal";
+import { useState } from "react";
 
 const CourseDetail = () => {
   const { courseId } = useParams();
   const { t } = useLanguage();
   const course = getCourseById(parseInt(courseId || "1"));
+  const [enrollmentOpen, setEnrollmentOpen] = useState(false);
+  const [infoRequestOpen, setInfoRequestOpen] = useState(false);
 
   if (!course) {
     return (
@@ -130,13 +134,28 @@ const CourseDetail = () => {
                         </div>
                       </Skeleton>
                     </AspectRatio>
-                    <h2 className="text-xl font-bold mb-2 text-card-foreground">{t('courseDetail.readyToEnroll')}</h2>
-                    <p className="text-muted-foreground mb-4">{t('courseDetail.enrollmentDesc')}</p>
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-3">
-                      {t('courseDetail.startEnrollment')}
+                    <h2 className="text-xl font-bold mb-2 text-card-foreground">Ready to Start Learning?</h2>
+                    <p className="text-muted-foreground mb-4">
+                      Secure your spot in this course. Limited seats available.
+                    </p>
+                    <Button 
+                      onClick={() => setEnrollmentOpen(true)} 
+                      variant="cta"
+                      size="lg"
+                      className="w-full mb-3"
+                      aria-label="Enroll in this course"
+                    >
+                      Enroll Now
                     </Button>
-                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
-                      {t('courseDetail.requestInfo')}
+                    <Button 
+                      onClick={() => setInfoRequestOpen(true)}
+                      variant="outline" 
+                      size="lg"
+                      className="w-full border-primary text-primary hover:bg-primary/10"
+                      aria-label="Request more information about this course"
+                    >
+                      <MessageCircle className="h-4 w-4 mr-2" aria-hidden="true" />
+                      Get More Info
                     </Button>
                   </div>
                   
@@ -192,13 +211,34 @@ const CourseDetail = () => {
             )}
             
             <div className="flex justify-center mb-8">
-              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                <Link to="/smart-assessment" aria-label="Take our smart assessment to find courses matching your interests">{t('courseDetail.takeAssessment') || 'Take Assessment'}</Link>
+              <Button 
+                onClick={() => setEnrollmentOpen(true)}
+                variant="cta"
+                size="xl"
+                aria-label="Enroll in this course now"
+              >
+                Enroll in This Course
               </Button>
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Enrollment Modal */}
+      {course && (
+        <>
+          <EnrollmentModal
+            open={enrollmentOpen}
+            onOpenChange={setEnrollmentOpen}
+            course={course}
+          />
+          <EnrollmentModal
+            open={infoRequestOpen}
+            onOpenChange={setInfoRequestOpen}
+            course={course}
+          />
+        </>
+      )}
     </Layout>
   );
 };
