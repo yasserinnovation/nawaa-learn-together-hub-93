@@ -186,20 +186,27 @@ const Navbar = () => {
                   onClick={() => setShowAdminMenu(!showAdminMenu)}
                   className="flex items-center gap-1 px-3 py-2 text-xs text-muted-foreground hover:text-primary transition-colors duration-200 rounded-lg hover:bg-muted/50"
                   aria-expanded={showAdminMenu}
-                  aria-label="Admin menu"
+                  aria-haspopup="true"
+                  aria-label="Admin menu - Access administrative functions"
                 >
-                  <Shield className="w-3 h-3" />
-                  <ChevronDown className="w-3 h-3" />
+                  <Shield className="w-3 h-3" aria-hidden="true" />
+                  <span className="sr-only">Admin</span>
+                  <ChevronDown className="w-3 h-3" aria-hidden="true" />
                 </button>
                 
                 {showAdminMenu && (
-                  <div className="absolute top-full right-0 mt-1 bg-background rounded-lg shadow-lg border border-border py-1 min-w-[140px] animate-fade-in-up z-50">
+                  <div 
+                    className="absolute top-full right-0 mt-1 bg-popover rounded-lg shadow-lg border border-border py-1 min-w-[140px] animate-fade-in-up z-50"
+                    role="menu"
+                    aria-label="Admin menu options"
+                  >
                     <Link
                       to="/admin"
                       onClick={() => setShowAdminMenu(false)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors duration-200"
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-popover-foreground hover:bg-muted hover:text-primary transition-colors duration-200"
+                      role="menuitem"
                     >
-                      <Shield className="w-4 h-4" />
+                      <Shield className="w-4 h-4" aria-hidden="true" />
                       Admin Panel
                     </Link>
                   </div>
@@ -221,18 +228,23 @@ const Navbar = () => {
                     onClick={() => setShowUserMenu(!showUserMenu)}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50 transition-colors duration-200"
                     aria-expanded={showUserMenu}
-                    aria-label="User menu"
+                    aria-haspopup="true"
+                    aria-label={`User account menu for ${user.email}`}
                   >
-                    <div className="h-8 w-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-primary-foreground font-semibold text-sm">
+                    <div className="h-8 w-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-primary-foreground font-semibold text-sm" aria-hidden="true">
                       {user.email?.charAt(0).toUpperCase()}
                     </div>
-                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
                   </button>
                   
                   {showUserMenu && (
-                    <div className="absolute top-full right-0 mt-1 bg-background rounded-lg shadow-lg border border-border py-2 min-w-[180px] animate-fade-in-up z-50">
+                    <div 
+                      className="absolute top-full right-0 mt-1 bg-popover rounded-lg shadow-lg border border-border py-2 min-w-[180px] animate-fade-in-up z-50"
+                      role="menu"
+                      aria-label="User account options"
+                    >
                       <div className="px-4 py-2 border-b border-border">
-                        <p className="text-sm font-medium text-foreground truncate">{user.email}</p>
+                        <p className="text-sm font-medium text-popover-foreground truncate">{user.email}</p>
                         {isAdmin && (
                           <p className="text-xs text-primary font-medium">Administrator</p>
                         )}
@@ -242,9 +254,10 @@ const Navbar = () => {
                           signOut();
                           setShowUserMenu(false);
                         }}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-destructive transition-colors duration-200"
+                        className="flex items-center gap-2 w-full px-4 py-2 text-sm text-popover-foreground hover:bg-muted hover:text-destructive transition-colors duration-200"
+                        role="menuitem"
                       >
-                        <LogOut className="w-4 h-4" />
+                        <LogOut className="w-4 h-4" aria-hidden="true" />
                         Sign Out
                       </button>
                     </div>

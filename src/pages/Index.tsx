@@ -21,15 +21,17 @@ const Index = () => {
       />
       
       <PageTransition>
-        <Hero />
-        <LogoShowcase />
-        <StatsSection />
-        <FeaturesSection />
-        <InteractiveDemo />
-        <AssessmentSection />
-        <Testimonials />
-        <NewsletterSection />
-        <CTASection />
+        <div id="main-content">
+          <Hero />
+          <LogoShowcase />
+          <StatsSection />
+          <FeaturesSection />
+          <InteractiveDemo />
+          <AssessmentSection />
+          <Testimonials />
+          <NewsletterSection />
+          <CTASection />
+        </div>
       </PageTransition>
     </Layout>
   );

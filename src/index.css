@@ -50,6 +50,10 @@
     --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     --shadow-yellow: 0 20px 25px -5px rgba(255, 214, 0, 0.4), 0 10px 10px -5px rgba(255, 214, 0, 0.04);
+    
+    /* Focus ring styles for accessibility */
+    --focus-ring: 3px solid hsl(48 100% 50% / 0.6);
+    --focus-ring-offset: 2px;
   }
 
   .dark {
@@ -135,6 +139,68 @@
   /* Smooth transitions for all interactive elements */
   button, a, input, textarea, select {
     @apply transition-all duration-200 ease-out;
+  }
+  
+  /* Enhanced focus states for accessibility (WCAG 2.4.7) */
+  *:focus-visible {
+    outline: 3px solid hsl(48 100% 50%);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Remove default outline but keep for keyboard users */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
+  /* High contrast focus for links */
+  a:focus-visible {
+    outline: 3px solid hsl(48 100% 50%);
+    outline-offset: 4px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  
+  /* Button focus states */
+  button:focus-visible {
+    outline: 3px solid hsl(48 100% 50%);
+    outline-offset: 2px;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 214, 0, 0.3);
+  }
+  
+  /* Input focus states */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 3px solid hsl(48 100% 50%);
+    outline-offset: 0;
+    border-color: hsl(48 100% 50%);
+  }
+  
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  /* Screen reader only but focusable */
+  .sr-only-focusable:focus,
+  .sr-only-focusable:active {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
   }
 
   /* Custom scrollbar */

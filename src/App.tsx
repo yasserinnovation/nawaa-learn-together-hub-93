@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { lazy, Suspense } from "react";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
+import SkipToContent from "@/components/common/SkipToContent";
 
 // Eager load critical pages
 import Index from "./pages/Index";
@@ -40,6 +41,7 @@ const App = () => (
       <LanguageProvider>
         <AuthProvider>
           <TooltipProvider>
+            <SkipToContent />
             <Toaster />
             <Sonner />
             <BrowserRouter>
