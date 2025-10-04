@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Brain, Sparkles, BookOpen } from "lucide-react";
+import { ArrowRight, MapPin, Brain, Sparkles, BookOpen, Users, Award, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
@@ -26,7 +26,7 @@ const Hero = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-medium animate-bounce-gentle">
               <Sparkles className="h-4 w-4" />
-              <span className={isRTL ? 'font-arabic' : ''}>{t('hero.badge')}</span>
+              <span className={isRTL ? 'font-arabic' : ''}>🚀 Join 10,000+ Young Innovators</span>
             </div>
             
             {/* Main Headline */}
@@ -35,14 +35,36 @@ const Hero = () => {
               className={`text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight animate-fade-in ${isRTL ? 'font-arabic' : ''}`}
             >
               <span className="text-gradient">
-                {t('hero.title')}
+                Learn STEM Hands-On:
+              </span>
+              <br />
+              <span className="text-foreground">
+                Build Your First Model in 4 Weeks
               </span>
             </h1>
             
+            {/* Quick Steps */}
+            <div className={`flex flex-col sm:flex-row items-center justify-center ${isRTL ? 'lg:justify-end' : 'lg:justify-start'} gap-3 text-base text-muted-foreground animate-fade-in`} style={{ animationDelay: '0.2s' }}>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary" />
+                <span>Watch Lessons</span>
+              </div>
+              <ArrowRight className={`h-4 w-4 hidden sm:block ${isRTL ? 'rotate-180' : ''}`} />
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary" />
+                <span>Try Projects</span>
+              </div>
+              <ArrowRight className={`h-4 w-4 hidden sm:block ${isRTL ? 'rotate-180' : ''}`} />
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary" />
+                <span>Share Outcomes</span>
+              </div>
+            </div>
+            
             {/* Subtitle */}
             <p 
-              className={`text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in ${isRTL ? 'font-arabic' : ''}`} 
-              style={{ animationDelay: '0.2s' }}
+              className={`text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-fade-in ${isRTL ? 'font-arabic' : ''}`} 
+              style={{ animationDelay: '0.3s' }}
             >
               {t('hero.subtitle')}
             </p>
@@ -50,41 +72,47 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div 
               className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? 'lg:justify-end sm:flex-row-reverse' : 'lg:justify-start'} animate-fade-in`} 
-              style={{ animationDelay: '0.4s' }}
+              style={{ animationDelay: '0.5s' }}
             >
               <Button variant="cta" size="xl" asChild>
-                <Link to="/smart-assessment" className="flex items-center gap-3" aria-label="Start your smart assessment">
-                  <Brain className="h-5 w-5" aria-hidden="true" />
-                  <span className={isRTL ? 'font-arabic' : ''}>{t('hero.smartAssessment')}</span>
+                <Link to="/courses" className="flex items-center gap-3" aria-label="Start free course">
+                  <BookOpen className="h-5 w-5" aria-hidden="true" />
+                  <span className={isRTL ? 'font-arabic' : ''}>Start Free Course</span>
                   <ArrowRight className={`h-5 w-5 transition-transform ${isRTL ? 'rotate-180' : ''}`} aria-hidden="true" />
                 </Link>
               </Button>
               
               <Button variant="ctaSecondary" size="xl" asChild>
-                <Link to="/discover-spaces" className="flex items-center gap-3" aria-label="Discover learning spaces">
+                <Link to="/discover-spaces" className="flex items-center gap-3" aria-label="Find a learning space near you">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
-                  <span className={isRTL ? 'font-arabic' : ''}>{t('hero.exploreSpaces')}</span>
+                  <span className={isRTL ? 'font-arabic' : ''}>Find Spaces Near You</span>
                 </Link>
               </Button>
             </div>
             
-            {/* Secondary Links */}
+            {/* Trust Elements */}
             <div 
-              className={`flex flex-col sm:flex-row gap-6 text-sm text-muted-foreground justify-center ${isRTL ? 'lg:justify-end sm:flex-row-reverse' : 'lg:justify-start'} animate-fade-in`} 
-              style={{ animationDelay: '0.6s' }}
+              className={`flex flex-col sm:flex-row items-center gap-6 justify-center ${isRTL ? 'lg:justify-end' : 'lg:justify-start'} pt-4 border-t border-border/40 animate-fade-in`} 
+              style={{ animationDelay: '0.7s' }}
             >
-              <Button variant="link" className="text-muted-foreground p-0 h-auto hover:text-primary group" asChild>
-                <Link to="/courses" className="flex items-center gap-2" aria-label="Browse courses">
-                  <BookOpen className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                  <span className={isRTL ? 'font-arabic' : ''}>{t('hero.browseCourses')}</span>
-                </Link>
-              </Button>
-              
-              <Button variant="link" className="text-muted-foreground p-0 h-auto hover:text-primary" asChild>
-                <Link to="/share-your-space" aria-label="Share your space">
-                  <span className={isRTL ? 'font-arabic' : ''}>{t('hero.shareSpace')}</span>
-                </Link>
-              </Button>
+              <div className="flex items-center gap-2 text-sm">
+                <Users className="h-4 w-4 text-primary" />
+                <span className="text-muted-foreground">
+                  <strong className="text-foreground">10,000+</strong> active learners
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Award className="h-4 w-4 text-primary" />
+                <span className="text-muted-foreground">
+                  <strong className="text-foreground">500+</strong> projects completed
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span className="text-muted-foreground">
+                  <strong className="text-foreground">50+</strong> learning spaces
+                </span>
+              </div>
             </div>
           </div>
           
