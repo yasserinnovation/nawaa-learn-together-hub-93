@@ -1,12 +1,29 @@
 
-import { Helmet } from 'react-helmet-async';
 import Layout from "@/components/layout/Layout";
 import ToolsHero from "@/components/tools/ToolsHero";
 import ToolsList from "@/components/tools/ToolsList";
 import ToolsFilters from "@/components/tools/ToolsFilters";
 import ContributorCTA from "@/components/tools/ContributorCTA";
+import SEOHead from "@/components/common/SEOHead";
 import { useState } from "react";
 import { ToolFilter } from "@/types/tool";
+import { toolsBreadcrumb } from "@/lib/breadcrumb-schema";
+
+const toolsMarketplaceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Educational Tools & Equipment Marketplace",
+  "description": "Rent, buy, or share educational tools and equipment for STEM learning",
+  "url": "https://nawaa-mix-match-your-learning-bundle.lovable.app/access-tools",
+  "numberOfItems": "200+",
+  "itemListElement": [
+    {
+      "@type": "Product",
+      "name": "Educational Tools Directory",
+      "description": "Arduino kits, robotics sets, lab equipment, and more for hands-on learning"
+    }
+  ]
+};
 
 const AccessTools = () => {
   const [filters, setFilters] = useState<ToolFilter>({
@@ -23,30 +40,14 @@ const AccessTools = () => {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Access Learning Tools | Nawaa - Rent, Buy & Share Educational Equipment</title>
-        <meta name="description" content="Access quality educational tools and equipment in Egypt. Find Arduino kits, robotics sets, lab equipment for STEAM learning. Rent, buy or share with our community." />
-        <meta name="keywords" content="educational tools, learning equipment, arduino, robotics, STEAM, Egypt, rent tools, buy equipment" />
-        <meta property="og:title" content="Access Learning Tools | Nawaa" />
-        <meta property="og:description" content="Access quality educational tools and equipment in Egypt. Find Arduino kits, robotics sets, lab equipment for STEAM learning." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="/access-tools" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Marketplace",
-            "name": "Nawaa Tools Marketplace",
-            "description": "Educational tools and equipment marketplace for STEAM learning",
-            "url": "/access-tools",
-            "provider": {
-              "@type": "Organization",
-              "name": "Nawaa"
-            }
-          })}
-        </script>
-      </Helmet>
-      <Layout>
+    <Layout>
+      <SEOHead 
+        title="Educational Tools & Equipment - Rent, Buy & Share"
+        description="Access 200+ educational tools and equipment in Egypt. Find Arduino kits, robotics sets, 3D printers, and lab equipment. Rent, buy, or share with the community."
+        keywords="educational tools, learning equipment, arduino, robotics, 3D printers, STEAM, Egypt, rent tools, buy equipment, lab supplies"
+        url="https://nawaa-mix-match-your-learning-bundle.lovable.app/access-tools"
+        schema={[toolsMarketplaceSchema, toolsBreadcrumb]}
+      />
         <main>
           <ToolsHero />
           <section className="container mx-auto px-4 py-8" aria-label="Tools marketplace">
@@ -62,7 +63,6 @@ const AccessTools = () => {
           </section>
         </main>
       </Layout>
-    </>
   );
 };
 

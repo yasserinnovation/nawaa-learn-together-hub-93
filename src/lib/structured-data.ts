@@ -3,9 +3,19 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Nawaa",
-  "description": "An interactive web platform for teaching children technology through customizable learning experiences",
+  "description": "A hands-on STEM learning platform helping young innovators build real prototypes through structured courses and access to makerspaces",
   "url": "https://nawaa-mix-match-your-learning-bundle.lovable.app",
   "logo": "https://nawaa-mix-match-your-learning-bundle.lovable.app/lovable-uploads/15fb8a28-ecf5-48ee-b8c7-9d80f6320b52.png",
+  "foundingDate": "2024",
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": "50"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "EG",
+    "addressLocality": "Cairo"
+  },
   "sameAs": [
     "https://twitter.com/nawaa_edu",
     "https://facebook.com/nawaa",
@@ -14,19 +24,25 @@ export const organizationSchema = {
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "availableLanguage": ["English", "Arabic"]
+    "availableLanguage": ["English", "Arabic"],
+    "email": "contact@nawaa.app"
   }
 };
 
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Nawaa - Mix & Match Your Learning Bundle",
-  "description": "Transform ideas into real prototypes with expert trainers, cutting-edge tools, and collaborative spaces",
+  "name": "Nawaa - Learn STEM Hands-On",
+  "alternateName": "Nawaa",
+  "description": "Learn STEM hands-on and build your first model in 4 weeks. Join 10,000+ young innovators.",
   "url": "https://nawaa-mix-match-your-learning-bundle.lovable.app",
+  "inLanguage": ["en", "ar"],
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://nawaa-mix-match-your-learning-bundle.lovable.app/search?q={search_term_string}",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://nawaa-mix-match-your-learning-bundle.lovable.app/discover-spaces?search={search_term_string}"
+    },
     "query-input": "required name=search_term_string"
   }
 };

@@ -10,17 +10,14 @@ import StatsSection from "@/components/home/StatsSection";
 import InteractiveDemo from "@/components/home/InteractiveDemo";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import PageTransition from "@/components/common/PageTransition";
+import SEOHead from "@/components/common/SEOHead";
 import { organizationSchema, websiteSchema, educationalOrganizationSchema } from "@/lib/structured-data";
 
 const Index = () => {
   return (
     <Layout>
-      {/* Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([organizationSchema, websiteSchema, educationalOrganizationSchema]),
-        }}
+      <SEOHead 
+        schema={[organizationSchema, websiteSchema, educationalOrganizationSchema]}
       />
       
       <PageTransition>

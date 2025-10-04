@@ -3,9 +3,12 @@ import Layout from "@/components/layout/Layout";
 import CoursesList from "@/components/courses/CoursesList";
 import CoursesHero from "@/components/courses/CoursesHero";
 import AssessmentCTA from "@/components/courses/AssessmentCTA";
+import SEOHead from "@/components/common/SEOHead";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { courseCatalogSchema } from "@/lib/course-schema";
+import { coursesBreadcrumb } from "@/lib/breadcrumb-schema";
 
 const coursesStructuredData = {
   "@context": "https://schema.org",
@@ -33,12 +36,12 @@ const Courses = () => {
 
   return (
     <Layout>
-      {/* Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(coursesStructuredData),
-        }}
+      <SEOHead 
+        title="STEM Courses - Learn Robotics, 3D Printing, Coding & More"
+        description="Browse our catalog of hands-on STEM courses. From robotics to 3D printing, coding to electronics. Free courses for all ages. Start building real projects in 4 weeks."
+        keywords="STEM courses, robotics course, 3D printing, coding for kids, electronics, engineering courses, hands-on learning, free STEM education"
+        url="https://nawaa-mix-match-your-learning-bundle.lovable.app/courses"
+        schema={[courseCatalogSchema, coursesBreadcrumb]}
       />
       
       <CoursesHero />
