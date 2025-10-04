@@ -11,6 +11,7 @@ import InteractiveDemo from "@/components/home/InteractiveDemo";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import PageTransition from "@/components/common/PageTransition";
 import SEOHead from "@/components/common/SEOHead";
+import OnboardingModal from "@/components/onboarding/OnboardingModal";
 import { organizationSchema, websiteSchema, educationalOrganizationSchema } from "@/lib/structured-data";
 
 const Index = () => {
@@ -23,6 +24,7 @@ const Index = () => {
       <PageTransition>
         <div id="main-content">
           <Hero />
+          <OnboardingModal />
           <LogoShowcase />
           <StatsSection />
           <FeaturesSection />

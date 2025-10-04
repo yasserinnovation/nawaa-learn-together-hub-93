@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { SpaceFilter, Space } from "@/types/space";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
+import EmptyState from "@/components/common/EmptyState";
 import SpaceCard from "./SpaceCard";
+import { MapPin } from "lucide-react";
 
 interface SpacesListProps {
   filters?: SpaceFilter;
@@ -111,16 +113,19 @@ const SpacesList = ({ filters }: SpacesListProps) => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-muted/30 rounded-2xl">
-          <div className="max-w-md mx-auto">
-            <h3 className="text-xl font-semibold text-muted-foreground mb-2">
-              No spaces found
-            </h3>
-            <p className="text-muted-foreground">
-              No spaces are available at the moment.
-            </p>
-          </div>
-        </div>
+        <EmptyState
+          icon={MapPin}
+          title="No Learning Spaces Found"
+          description="We couldn't find any learning spaces matching your criteria. Try adjusting your filters or explore all available spaces."
+          action={{
+            label: "Browse All Spaces",
+            href: "/all-spaces"
+          }}
+          secondaryAction={{
+            label: "Share Your Space",
+            href: "/share-your-space"
+          }}
+        />
       )}
     </div>
   );

@@ -5,10 +5,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Download, Loader2 } from "lucide-react";
+import { Download, Loader2, PackageOpen } from "lucide-react";
 import { getAllCourses } from "@/lib/course-utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCourseDownload } from "@/hooks/useCourseDownload";
+import EmptyState from "@/components/common/EmptyState";
 
 interface CoursesListProps {
   categoryFilter?: string;
@@ -67,8 +68,9 @@ const CoursesList = ({ categoryFilter = "all", searchQuery = "" }: CoursesListPr
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCourses.map((course) => (
+          {filteredCourses.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredCourses.map((course) => (
               <Card key={course.id} className="h-full flex flex-col shadow-md hover:shadow-xl transition-all duration-300 bg-card border-border">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
@@ -120,6 +122,24 @@ const CoursesList = ({ categoryFilter = "all", searchQuery = "" }: CoursesListPr
               </Card>
             ))}
           </div>
+          ) : (
+            <EmptyState
+              icon={PackageOpen}
+              title="No Courses Found"
+              description={searchQuery ? 
+                `No courses match your search for "${searchQuery}". Try different keywords or browse all courses.` :
+                "We're currently updating our course catalog. Check back soon for new hands-on STEM learning opportunities!"
+              }
+              action={{
+                label: "Explore Learning Spaces",
+                href: "/discover-spaces"
+              }}
+              secondaryAction={{
+                label: "Contact Us",
+                href: "/contact"
+              }}
+            />
+          )}
 
           <div className="mt-12 text-center">
             <h3 className="text-2xl font-bold mb-4 text-foreground">{t('courses.resourcesTitle')}</h3>
