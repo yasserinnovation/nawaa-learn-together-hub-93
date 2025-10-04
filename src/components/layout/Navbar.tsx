@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   const handleLogoError = () => {
-    console.error("Failed to load logo");
+    // Silent error handling - fallback to text-only logo
   };
 
   const closeMenu = () => {

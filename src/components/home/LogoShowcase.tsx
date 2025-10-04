@@ -8,11 +8,10 @@ const LogoShowcase = () => {
 
   const handleIllustrationLoad = () => {
     setIllustrationLoaded(true);
-    console.log("Illustration loaded successfully");
   };
 
   const handleIllustrationError = () => {
-    console.error("Failed to load the illustration");
+    // Silent error handling - component will show fallback
   };
 
   return (

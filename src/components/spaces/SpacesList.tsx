@@ -21,20 +21,16 @@ const SpacesList = ({ filters }: SpacesListProps) => {
 
   const fetchSpaces = async () => {
     try {
-      console.log('Fetching spaces...');
       const { data, error } = await supabase
         .from('spaces')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Supabase error:', error);
         setError(error.message);
         return;
       }
 
-      console.log('Fetched spaces data:', data?.length || 0);
-      
       if (data) {
         const convertedSpaces: Space[] = data.map(space => ({
           id: space.id,
@@ -59,11 +55,9 @@ const SpacesList = ({ filters }: SpacesListProps) => {
           }
         }));
         
-        console.log('Converted spaces:', convertedSpaces.length);
         setSpaces(convertedSpaces);
       }
     } catch (err) {
-      console.error('Error fetching spaces:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);

@@ -856,7 +856,7 @@ const AdminDashboard = () => {
                 spaces={spaces} 
                 mapboxToken={mapboxToken}
                 onSpaceSelect={(space) => {
-                  console.log('Selected space:', space);
+                  // Handle space selection for future features
                 }}
               />
             ) : (

@@ -132,7 +132,7 @@ const Hero = () => {
                             https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&auto=format&fit=crop&q=80 800w"
                     sizes="(max-width: 640px) 400px, 800px"
                     onError={(e) => {
-                      console.log('Image failed to load:', e.currentTarget.src);
+                      // Fallback to placeholder
                       e.currentTarget.src = 'https://via.placeholder.com/800x600/FFD600/000000?text=Learning+Spaces';
                     }}
                   />
