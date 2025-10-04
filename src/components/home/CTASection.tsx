@@ -11,23 +11,23 @@ const CTASection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold text-white mb-6">
-            {t('cta.title')}
+            Ready to Build Your First Prototype?
           </h2>
-          <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
-            {t('cta.subtitle')}
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Join 10,000+ innovators turning ideas into reality. Get personalized guidance in under 5 minutes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-semibold" asChild>
-             <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Take our smart assessment to get personalized recommendations">
+            <Button size="lg" variant="cta" asChild>
+             <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Start your personalized assessment now">
                <Brain className="h-5 w-5" aria-hidden="true" />
-               {t('cta.takeAssessment')}
+               Start Your Assessment Now
                <ArrowRight className="h-5 w-5" aria-hidden="true" />
              </Link>
              </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-200 font-semibold" asChild>
-              <Link to="/contact" className="flex items-center gap-2" aria-label="Contact us for support and questions">
+            <Button size="lg" variant="ctaOutline" asChild>
+              <Link to="/contact" className="flex items-center gap-2" aria-label="Get expert help and support">
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                {t('cta.contactUs')}
+                Get Expert Help
               </Link>
             </Button>
           </div>

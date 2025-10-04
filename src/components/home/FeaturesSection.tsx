@@ -57,10 +57,10 @@ const FeaturesSection = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 id="features-heading" className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                {t('features.title')}
+                Everything You Need to Build Real Projects
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                {t('features.subtitle')}
+                From expert guidance to professional equipment—access the complete ecosystem for hands-on STEM learning.
               </p>
             </div>
           </ScrollReveal>
@@ -81,12 +81,15 @@ const FeaturesSection = () => {
                      <CardDescription className="text-muted-foreground leading-relaxed mb-4">
                        {feature.description}
                      </CardDescription>
-                     <Button variant="ghost" size="sm" className="group/btn hover:bg-primary/10 hover:text-primary" asChild>
-                       <Link to={feature.link} className="flex items-center gap-2" aria-label={`Learn more about ${feature.title}`}>
-                         Learn More
-                         <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
-                       </Link>
-                     </Button>
+                      <Button variant="ghost" size="sm" className="group/btn hover:bg-primary/10 hover:text-primary font-semibold" asChild>
+                        <Link to={feature.link} className="flex items-center gap-2" aria-label={`Explore ${feature.title.toLowerCase()}`}>
+                          {feature.link === '/find-trainers' && 'Find Trainers'}
+                          {feature.link === '/discover-spaces' && 'Browse Spaces'}
+                          {feature.link === '/access-tools' && 'View Tools'}
+                          {feature.link === '/courses' && 'Start Learning'}
+                          <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
+                        </Link>
+                      </Button>
                    </CardContent>
                  </Card>
               </ScrollReveal>

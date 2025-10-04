@@ -16,8 +16,14 @@ const NewsletterSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      toast.error(t('newsletter.invalidEmail') || 'Please enter a valid email address');
+    // Specific validation messages
+    if (!email) {
+      toast.error('Email address is required');
+      return;
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error('Please enter a valid email address (example: you@example.com)');
       return;
     }
 
@@ -27,7 +33,7 @@ const NewsletterSection = () => {
     setTimeout(() => {
       setIsSubscribed(true);
       setIsLoading(false);
-      toast.success(t('newsletter.success') || 'Successfully subscribed to newsletter!');
+      toast.success('Welcome aboard! Check your email to confirm your subscription.');
     }, 1500);
   };
 
@@ -73,11 +79,11 @@ const NewsletterSection = () => {
             </div>
             
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              {t('newsletter.title') || 'Get the Latest Updates'}
+              Join 10,000+ Innovators - Get Weekly STEM Updates
             </h2>
             
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              {t('newsletter.subtitle') || 'Subscribe to our newsletter and be the first to know about new courses, spaces, and innovation opportunities.'}
+              New courses, maker space openings, and exclusive opportunities delivered to your inbox every week.
             </p>
 
             <Card className="p-6 border-0 shadow-xl bg-white/95 backdrop-blur-sm">
@@ -96,37 +102,39 @@ const NewsletterSection = () => {
                 
                 <Button 
                   type="submit" 
-                  className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3"
+                  variant="cta"
+                  size="lg"
                   disabled={isLoading}
+                  aria-label="Subscribe to newsletter"
                 >
                   {isLoading ? (
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      {t('newsletter.subscribing') || 'Subscribing...'}
+                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" aria-hidden="true" />
+                      Subscribing...
                     </div>
                   ) : (
-                    t('newsletter.subscribe') || 'Subscribe'
+                    <>Subscribe Now</>
                   )}
                 </Button>
               </form>
               
-              <p className="text-sm text-gray-500 mt-4 text-center">
-                {t('newsletter.privacy') || 'We respect your privacy. Unsubscribe at any time.'}
+              <p className="text-sm text-muted-foreground mt-4 text-center">
+                100% free. Unsubscribe anytime. No spam, ever.
               </p>
             </Card>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-6 text-white/80 text-sm">
+            <div className="mt-8 flex flex-wrap justify-center gap-6 text-white/90 text-sm font-medium">
               <div className="flex items-center gap-2">
-                <Check className="h-4 w-4" />
-                {t('newsletter.benefit1') || 'Weekly updates'}
+                <Check className="h-4 w-4" aria-hidden="true" />
+                <span>Weekly project ideas</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="h-4 w-4" />
-                {t('newsletter.benefit2') || 'Exclusive content'}
+                <Check className="h-4 w-4" aria-hidden="true" />
+                <span>New space openings</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="h-4 w-4" />
-                {t('newsletter.benefit3') || 'Early access'}
+                <Check className="h-4 w-4" aria-hidden="true" />
+                <span>Early course access</span>
               </div>
             </div>
           </div>

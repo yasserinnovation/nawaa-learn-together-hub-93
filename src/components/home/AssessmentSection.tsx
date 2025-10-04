@@ -13,11 +13,11 @@ const AssessmentSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Brain className="h-12 w-12 text-purple-500" />
-              <h2 className="text-3xl md:text-4xl font-bold">{t('assessment.title')}</h2>
+              <Brain className="h-12 w-12 text-purple-500" aria-hidden="true" />
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">Find Your Perfect Learning Path in 5 Minutes</h2>
             </div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t('assessment.subtitle')}
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Take our smart assessment to discover which courses and spaces match your skills, interests, and learning style.
             </p>
           </div>
 
@@ -46,12 +46,15 @@ const AssessmentSection = () => {
           </div>
 
           <div className="text-center">
-            <Button size="lg" className="bg-purple-500 hover:bg-purple-600" asChild>
-              <Link to="/smart-assessment">
-                {t('assessment.startAssessment')}
+            <Button variant="cta" size="xl" asChild>
+              <Link to="/smart-assessment" className="flex items-center gap-2" aria-label="Start your personalized assessment">
+                <Brain className="h-5 w-5" aria-hidden="true" />
+                Take the Assessment Now
               </Link>
             </Button>
-            <p className="text-sm text-gray-500 mt-4">{t('assessment.duration')}</p>
+            <p className="text-sm text-muted-foreground mt-4">
+              ⏱️ Just 5 minutes · No signup required · Instant results
+            </p>
           </div>
         </div>
       </div>

@@ -20,11 +20,11 @@ const CoursesHero = () => {
           </div>
           
           <h1 id="courses-hero-heading" className="text-4xl md:text-5xl font-bold mb-6 text-foreground leading-tight">
-            {t('courses.title')}
+            Mix & Match Your Perfect Learning Experience
           </h1>
           
           <p className="text-xl mb-8 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Mix and match between STEM curricula, life skills, and emerging technologies to create the perfect learning experience.
+            Combine STEM courses, life skills, and emerging technologies to create your custom learning path. Start building real projects today.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -32,11 +32,11 @@ const CoursesHero = () => {
               variant="cta" 
               size="xl" 
               asChild 
-              aria-label="Find a learning space near you to start your courses"
+              aria-label="Find a learning space to start hands-on projects"
             >
               <Link to="/discover-spaces" className="flex items-center gap-3">
                 <MapPin className="h-5 w-5" aria-hidden="true" />
-                {t('courses.findSpace')}
+                Find Spaces Near You
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Link>
             </Button>
@@ -45,11 +45,11 @@ const CoursesHero = () => {
               variant="ctaSecondary" 
               size="xl" 
               asChild 
-              aria-label="Contact us for more information about our courses"
+              aria-label="Contact us for personalized course recommendations"
             >
               <Link to="/contact" className="flex items-center gap-3">
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                {t('cta.contactUs')}
+                Get Course Guidance
               </Link>
             </Button>
           </div>

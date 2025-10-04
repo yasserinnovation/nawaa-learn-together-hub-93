@@ -70,11 +70,11 @@ const ToolsHero = () => {
             asChild
             aria-label="Browse all available educational tools and equipment"
           >
-            <Link to="#tools-list" className="flex items-center gap-3">
-              <Search className="h-5 w-5" aria-hidden="true" />
-              {t('tools.exploreAll')}
-              <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </Link>
+              <Link to="#tools-list" className="flex items-center gap-3">
+                <Search className="h-5 w-5" aria-hidden="true" />
+                Browse All Tools
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
           </Button>
           
           <Button 
@@ -83,10 +83,10 @@ const ToolsHero = () => {
             asChild
             aria-label="Share your educational tools with the community"
           >
-            <Link to="/add-tool" className="flex items-center gap-3">
-              <Plus className="h-5 w-5" aria-hidden="true" />
-              {t('tools.addYourTool')}
-            </Link>
+              <Link to="/add-tool" className="flex items-center gap-3">
+                <Plus className="h-5 w-5" aria-hidden="true" />
+                List Your Tool
+              </Link>
           </Button>
         </div>
       </div>
