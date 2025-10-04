@@ -19,4 +19,32 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Enable code splitting
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split vendor code
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tabs'],
+          'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          'map-vendor': ['mapbox-gl'],
+        },
+      },
+    },
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000,
+    // Enable minification
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production',
+      },
+    },
+  },
+  // Enable compression
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+  },
 }));

@@ -1,0 +1,52 @@
+/*
+  # Security headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  
+  # Cache static assets
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  # Cache static assets for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+*.js
+  # Cache JavaScript files
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+
+*.css
+  # Cache CSS files
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
+
+*.woff2
+  # Cache fonts
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/woff2
+
+*.png
+  # Cache images
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/png
+
+*.jpg
+*.jpeg
+  # Cache images
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/jpeg
+
+*.webp
+  # Cache WebP images
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/webp
+
+/*.html
+  # Don't cache HTML
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  # Don't cache homepage
+  Cache-Control: public, max-age=0, must-revalidate

@@ -126,6 +126,11 @@ const Hero = () => {
                     alt={t('hero.imageAlt')}
                     className="w-full h-auto aspect-[4/3] object-cover transition-transform duration-500 hover:scale-105"
                     loading="eager"
+                    width={800}
+                    height={600}
+                    srcSet="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&auto=format&fit=crop&q=80 400w,
+                            https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&auto=format&fit=crop&q=80 800w"
+                    sizes="(max-width: 640px) 400px, 800px"
                     onError={(e) => {
                       console.log('Image failed to load:', e.currentTarget.src);
                       e.currentTarget.src = 'https://via.placeholder.com/800x600/FFD600/000000?text=Learning+Spaces';

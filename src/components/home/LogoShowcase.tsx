@@ -35,9 +35,12 @@ const LogoShowcase = () => {
                 src="/lovable-uploads/4feb6482-3a0a-45ec-8498-a2f75c92ecf7.png" 
                 alt="Spiral illustration showing children engaged in technology learning activities - using drones, robots, and laptops in a collaborative educational environment" 
                 className={`w-full h-auto ${!illustrationLoaded ? 'hidden' : ''}`}
+                width={1200}
+                height={800}
                 onLoad={handleIllustrationLoad}
                 onError={handleIllustrationError}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

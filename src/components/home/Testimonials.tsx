@@ -63,17 +63,21 @@ const Testimonials = () => {
                      "{testimonial.quote}"
                    </blockquote>
                    
-                   <div className="flex items-center">
-                     <img 
-                       src={testimonial.avatar}
-                       alt={`Profile photo of ${testimonial.author}`}
-                       className="h-12 w-12 rounded-full object-cover border-2 border-primary/20"
-                     />
-                     <div className="ml-4">
-                       <p className="text-sm font-semibold text-card-foreground">{testimonial.author}</p>
-                       <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                     </div>
-                   </div>
+                    <div className="flex items-center">
+                      <img 
+                        src={testimonial.avatar}
+                        alt={`Profile photo of ${testimonial.author}`}
+                        width={48}
+                        height={48}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-12 w-12 rounded-full object-cover border-2 border-primary/20"
+                      />
+                      <div className="ml-4">
+                        <p className="text-sm font-semibold text-card-foreground">{testimonial.author}</p>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      </div>
+                    </div>
                  </CardContent>
                </Card>
             </ScrollReveal>

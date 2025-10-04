@@ -108,6 +108,10 @@ const InteractiveDemo = () => {
                 <img 
                   src={demoSections[activeTab].image}
                   alt={demoSections[activeTab].title}
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-64 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
