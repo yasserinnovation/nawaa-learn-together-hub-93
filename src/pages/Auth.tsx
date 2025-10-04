@@ -8,13 +8,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Shield, User, Mail, Lock, LogIn, UserPlus, Eye, EyeOff } from "lucide-react";
+import { Shield, Mail, Lock, LogIn, UserPlus, Eye, EyeOff, CheckCircle2, XCircle } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { z } from "zod";
+
+// Validation schemas
+const emailSchema = z.string().email("Please enter a valid email address").max(255, "Email must be less than 255 characters");
+const passwordSchema = z.string()
+  .min(8, "Password must be at least 8 characters")
+  .max(100, "Password must be less than 100 characters")
+  .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+  .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+  .regex(/[0-9]/, "Password must contain at least one number");
 
 const Auth = () => {
   const { user, signIn, signUp, signInWithGoogle, loading } = useAuth();
   const [activeTab, setActiveTab] = useState("signin");
   const [showPassword, setShowPassword] = useState(false);
+  const [showSignUpPassword, setShowSignUpPassword] = useState(false);
   
   // Sign In State
   const [signInData, setSignInData] = useState({
@@ -26,11 +37,27 @@ const Auth = () => {
   const [signUpData, setSignUpData] = useState({
     email: "",
     password: "",
-    fullName: "",
-    confirmPassword: "",
   });
 
+  // Validation errors
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [signInEmailError, setSignInEmailError] = useState("");
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Password strength validation
+  const validatePasswordStrength = (password: string) => {
+    const requirements = {
+      minLength: password.length >= 8,
+      hasUppercase: /[A-Z]/.test(password),
+      hasLowercase: /[a-z]/.test(password),
+      hasNumber: /[0-9]/.test(password),
+    };
+    return requirements;
+  };
+
+  const passwordRequirements = validatePasswordStrength(signUpData.password);
 
   // Redirect if already authenticated
   if (user) {
@@ -39,23 +66,73 @@ const Auth = () => {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate email
+    try {
+      emailSchema.parse(signInData.email);
+      setSignInEmailError("");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setSignInEmailError(error.issues[0].message);
+        return;
+      }
+    }
+
     setIsSubmitting(true);
-    
     await signIn(signInData.email, signInData.password);
-    
     setIsSubmitting(false);
+  };
+
+  const validateEmailOnBlur = (email: string, setError: (error: string) => void) => {
+    try {
+      emailSchema.parse(email);
+      setError("");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setError(error.issues[0].message);
+      }
+    }
+  };
+
+  const validatePasswordOnBlur = (password: string) => {
+    try {
+      passwordSchema.parse(password);
+      setPasswordError("");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setPasswordError(error.issues[0].message);
+      }
+    }
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (signUpData.password !== signUpData.confirmPassword) {
-      return;
+    // Validate email
+    try {
+      emailSchema.parse(signUpData.email);
+      setEmailError("");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setEmailError(error.issues[0].message);
+        return;
+      }
+    }
+
+    // Validate password
+    try {
+      passwordSchema.parse(signUpData.password);
+      setPasswordError("");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setPasswordError(error.issues[0].message);
+        return;
+      }
     }
     
     setIsSubmitting(true);
     
-    const { error } = await signUp(signUpData.email, signUpData.password, signUpData.fullName);
+    const { error } = await signUp(signUpData.email, signUpData.password, "");
     
     if (!error) {
       // Redirect to verify email page with email parameter
@@ -150,11 +227,23 @@ const Auth = () => {
                           type="email"
                           placeholder="your.email@example.com"
                           value={signInData.email}
-                          onChange={(e) => setSignInData(prev => ({ ...prev, email: e.target.value }))}
+                          onChange={(e) => {
+                            setSignInData(prev => ({ ...prev, email: e.target.value }));
+                            setSignInEmailError("");
+                          }}
+                          onBlur={() => validateEmailOnBlur(signInData.email, setSignInEmailError)}
                           required
                           autoComplete="email"
-                          className="focus-ring"
+                          className={`focus-ring ${signInEmailError ? 'border-destructive' : ''}`}
+                          aria-invalid={!!signInEmailError}
+                          aria-describedby={signInEmailError ? "signin-email-error" : undefined}
                         />
+                        {signInEmailError && (
+                          <p id="signin-email-error" className="text-sm text-destructive flex items-center gap-1">
+                            <XCircle className="h-3 w-3" />
+                            {signInEmailError}
+                          </p>
+                        )}
                       </div>
                       
                       <div className="space-y-2">
@@ -264,23 +353,6 @@ const Auth = () => {
                   <TabsContent value="signup" className="space-y-4">
                     <form onSubmit={handleSignUp} className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="signup-name" className="flex items-center gap-2">
-                          <User className="h-4 w-4" />
-                          Full Name
-                        </Label>
-                        <Input
-                          id="signup-name"
-                          type="text"
-                          placeholder="Your full name"
-                          value={signUpData.fullName}
-                          onChange={(e) => setSignUpData(prev => ({ ...prev, fullName: e.target.value }))}
-                          required
-                          autoComplete="name"
-                          className="focus-ring"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
                         <Label htmlFor="signup-email" className="flex items-center gap-2">
                           <Mail className="h-4 w-4" />
                           Email Address
@@ -290,11 +362,23 @@ const Auth = () => {
                           type="email"
                           placeholder="your.email@example.com"
                           value={signUpData.email}
-                          onChange={(e) => setSignUpData(prev => ({ ...prev, email: e.target.value }))}
+                          onChange={(e) => {
+                            setSignUpData(prev => ({ ...prev, email: e.target.value }));
+                            setEmailError("");
+                          }}
+                          onBlur={() => validateEmailOnBlur(signUpData.email, setEmailError)}
                           required
                           autoComplete="email"
-                          className="focus-ring"
+                          className={`focus-ring ${emailError ? 'border-destructive' : ''}`}
+                          aria-invalid={!!emailError}
+                          aria-describedby={emailError ? "signup-email-error" : undefined}
                         />
+                        {emailError && (
+                          <p id="signup-email-error" className="text-sm text-destructive flex items-center gap-1">
+                            <XCircle className="h-3 w-3" />
+                            {emailError}
+                          </p>
+                        )}
                       </div>
                       
                       <div className="space-y-2">
@@ -302,43 +386,68 @@ const Auth = () => {
                           <Lock className="h-4 w-4" />
                           Password
                         </Label>
-                        <Input
-                          id="signup-password"
-                          type="password"
-                          placeholder="Create a strong password"
-                          value={signUpData.password}
-                          onChange={(e) => setSignUpData(prev => ({ ...prev, password: e.target.value }))}
-                          required
-                          autoComplete="new-password"
-                          className="focus-ring"
-                          minLength={6}
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="signup-confirm-password" className="flex items-center gap-2">
-                          <Lock className="h-4 w-4" />
-                          Confirm Password
-                        </Label>
-                        <Input
-                          id="signup-confirm-password"
-                          type="password"
-                          placeholder="Confirm your password"
-                          value={signUpData.confirmPassword}
-                          onChange={(e) => setSignUpData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                          required
-                          autoComplete="new-password"
-                          className="focus-ring"
-                        />
-                        {signUpData.password && signUpData.confirmPassword && signUpData.password !== signUpData.confirmPassword && (
-                          <p className="text-sm text-destructive">Passwords do not match</p>
+                        <div className="relative">
+                          <Input
+                            id="signup-password"
+                            type={showSignUpPassword ? "text" : "password"}
+                            placeholder="Create a strong password"
+                            value={signUpData.password}
+                            onChange={(e) => {
+                              setSignUpData(prev => ({ ...prev, password: e.target.value }));
+                              setPasswordError("");
+                            }}
+                            onBlur={() => validatePasswordOnBlur(signUpData.password)}
+                            required
+                            autoComplete="new-password"
+                            className={`focus-ring pr-10 ${passwordError ? 'border-destructive' : ''}`}
+                            aria-invalid={!!passwordError}
+                            aria-describedby="password-requirements"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowSignUpPassword(!showSignUpPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                            aria-label={showSignUpPassword ? "Hide password" : "Show password"}
+                          >
+                            {showSignUpPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
+                        
+                        {/* Password Requirements */}
+                        <div id="password-requirements" className="space-y-1 text-xs mt-2">
+                          <p className="text-muted-foreground font-medium mb-1">Password must contain:</p>
+                          <div className="space-y-0.5">
+                            <p className={`flex items-center gap-1 ${passwordRequirements.minLength ? 'text-green-600' : 'text-muted-foreground'}`}>
+                              {passwordRequirements.minLength ? <CheckCircle2 className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
+                              At least 8 characters
+                            </p>
+                            <p className={`flex items-center gap-1 ${passwordRequirements.hasUppercase ? 'text-green-600' : 'text-muted-foreground'}`}>
+                              {passwordRequirements.hasUppercase ? <CheckCircle2 className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
+                              One uppercase letter
+                            </p>
+                            <p className={`flex items-center gap-1 ${passwordRequirements.hasLowercase ? 'text-green-600' : 'text-muted-foreground'}`}>
+                              {passwordRequirements.hasLowercase ? <CheckCircle2 className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
+                              One lowercase letter
+                            </p>
+                            <p className={`flex items-center gap-1 ${passwordRequirements.hasNumber ? 'text-green-600' : 'text-muted-foreground'}`}>
+                              {passwordRequirements.hasNumber ? <CheckCircle2 className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
+                              One number
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {passwordError && (
+                          <p className="text-sm text-destructive flex items-center gap-1 mt-1">
+                            <XCircle className="h-3 w-3" />
+                            {passwordError}
+                          </p>
                         )}
                       </div>
                       
                       <Button
                         type="submit"
                         className="w-full btn-primary"
-                        disabled={isSubmitting || signUpData.password !== signUpData.confirmPassword}
+                        disabled={isSubmitting || !passwordRequirements.minLength || !passwordRequirements.hasUppercase || !passwordRequirements.hasLowercase || !passwordRequirements.hasNumber}
                       >
                         {isSubmitting ? (
                           <>
