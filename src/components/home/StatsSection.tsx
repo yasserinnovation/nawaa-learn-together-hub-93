@@ -9,27 +9,27 @@ const StatsSection = () => {
   const stats = [
     {
       icon: Users,
-      number: "2,500+",
-      label: t('stats.activeUsers') || "Active Users",
-      description: t('stats.activeUsersDesc') || "Students and trainers actively using the platform"
+      number: "300+",
+      label: t('stats.activeUsers') || "مدرب ومركز تدريب",
+      description: t('stats.activeUsersDesc') || "مدربون ومراكز تدريب يستخدمون المنصة بنشاط"
     },
     {
       icon: MapPin,
-      number: "150+", 
-      label: t('stats.spaces') || "Learning Spaces",
-      description: t('stats.spacesDesc') || "Makerspaces and workshops across Egypt"
+      number: "100+", 
+      label: t('stats.spaces') || "مركز في مختلف المناطق",
+      description: t('stats.spacesDesc') || "مراكز تدريب ومساحات عمل في جميع أنحاء مصر"
     },
     {
       icon: BookOpen,
       number: "50+",
-      label: t('stats.courses') || "STEM Courses",
-      description: t('stats.coursesDesc') || "Hands-on courses for all skill levels"
+      label: t('stats.courses') || "منهج ومورد تعليمي",
+      description: t('stats.coursesDesc') || "مناهج وموارد جاهزة لجميع المستويات"
     },
     {
       icon: Award,
-      number: "98%",
-      label: t('stats.satisfaction') || "Satisfaction Rate",
-      description: t('stats.satisfactionDesc') || "Students rate their experience as excellent"
+      number: "40+",
+      label: t('stats.satisfaction') || "مسابقة وفعالية سنوياً",
+      description: t('stats.satisfactionDesc') || "مسابقات وفعاليات تقنية لإلهام المتعلمين"
     }
   ];
 
@@ -39,10 +39,10 @@ const StatsSection = () => {
         <ScrollReveal>
           <div className="text-center mb-12">
             <h2 id="stats-heading" className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-              {t('stats.title') || 'Empowering Innovation Across Egypt'}
+              {t('stats.title') || 'تمكين مقدمي التعليم التقني في جميع أنحاء مصر'}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              {t('stats.subtitle') || 'Join thousands of innovators who are transforming their ideas into reality'}
+              {t('stats.subtitle') || 'انضم إلى مئات المدربين والمراكز الذين يرتقون بخدماتهم التعليمية'}
             </p>
           </div>
         </ScrollReveal>

@@ -11,10 +11,10 @@ const CTASection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Build Your First Prototype?
+            هل أنت مستعد لتطوير خدماتك التدريبية؟
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Join 10,000+ innovators turning ideas into reality. Get personalized guidance in under 5 minutes.
+            انضم إلى 300+ مدرب ومركز تدريب يقدمون تعليماً تقنياً بمعايير عالمية. احصل على التوجيه المناسب في أقل من 5 دقائق.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="cta" asChild>

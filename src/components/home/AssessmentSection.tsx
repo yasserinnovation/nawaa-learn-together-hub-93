@@ -14,10 +14,10 @@ const AssessmentSection = () => {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Brain className="h-12 w-12 text-purple-500" aria-hidden="true" />
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">Find Your Perfect Learning Path in 5 Minutes</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">اكتشف احتياجاتك التدريبية في 5 دقائق</h2>
             </div>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Take our smart assessment to discover which courses and spaces match your skills, interests, and learning style.
+              قم بالتقييم الذكي لاكتشاف المناهج والأدوات والموارد التي تناسب أهدافك كمدرب أو مركز تدريب.
             </p>
           </div>
 

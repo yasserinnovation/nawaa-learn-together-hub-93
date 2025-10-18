@@ -26,7 +26,7 @@ const Hero = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-medium animate-bounce-gentle">
               <Sparkles className="h-4 w-4" />
-              <span className={isRTL ? 'font-arabic' : ''}>🚀 Join 10,000+ Young Innovators</span>
+              <span className={isRTL ? 'font-arabic' : ''}>🚀 منصة متكاملة لمقدمي خدمات التعليم التقني</span>
             </div>
             
             {/* Main Headline */}
@@ -35,11 +35,11 @@ const Hero = () => {
               className={`text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight animate-fade-in ${isRTL ? 'font-arabic' : ''}`}
             >
               <span className="text-gradient">
-                Learn STEM Hands-On:
+                طوّر قدراتك كمدرب أو مركز تدريب
               </span>
               <br />
               <span className="text-foreground">
-                Build Your First Model in 4 Weeks
+                وقدّم تعليماً تقنياً بمعايير عالمية
               </span>
             </h1>
             
@@ -47,17 +47,17 @@ const Hero = () => {
             <div className={`flex flex-col sm:flex-row items-center justify-center ${isRTL ? 'lg:justify-end' : 'lg:justify-start'} gap-3 text-base text-muted-foreground animate-fade-in`} style={{ animationDelay: '0.2s' }}>
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Watch Lessons</span>
+                <span>اطلع على المسابقات</span>
               </div>
               <ArrowRight className={`h-4 w-4 hidden sm:block ${isRTL ? 'rotate-180' : ''}`} />
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Try Projects</span>
+                <span>استفد من المناهج</span>
               </div>
               <ArrowRight className={`h-4 w-4 hidden sm:block ${isRTL ? 'rotate-180' : ''}`} />
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Share Outcomes</span>
+                <span>اكتشف التمويل</span>
               </div>
             </div>
             
@@ -75,17 +75,17 @@ const Hero = () => {
               style={{ animationDelay: '0.5s' }}
             >
               <Button variant="cta" size="xl" asChild>
-                <Link to="/courses" className="flex items-center gap-3" aria-label="Start free course">
+                <Link to="/courses" className="flex items-center gap-3" aria-label="استكشف المناهج والموارد التعليمية">
                   <BookOpen className="h-5 w-5" aria-hidden="true" />
-                  <span className={isRTL ? 'font-arabic' : ''}>Start Free Course</span>
+                  <span className={isRTL ? 'font-arabic' : ''}>استكشف المناهج التعليمية</span>
                   <ArrowRight className={`h-5 w-5 transition-transform ${isRTL ? 'rotate-180' : ''}`} aria-hidden="true" />
                 </Link>
               </Button>
               
               <Button variant="ctaSecondary" size="xl" asChild>
-                <Link to="/discover-spaces" className="flex items-center gap-3" aria-label="Find a learning space near you">
+                <Link to="/discover-spaces" className="flex items-center gap-3" aria-label="تصفح مراكز التدريب المتاحة">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
-                  <span className={isRTL ? 'font-arabic' : ''}>Find Spaces Near You</span>
+                  <span className={isRTL ? 'font-arabic' : ''}>تصفح مراكز التدريب</span>
                 </Link>
               </Button>
             </div>
@@ -98,19 +98,19 @@ const Hero = () => {
               <div className="flex items-center gap-2 text-sm">
                 <Users className="h-4 w-4 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">10,000+</strong> active learners
+                  <strong className="text-foreground">300+</strong> مدرب ومركز تدريب
                 </span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Award className="h-4 w-4 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">500+</strong> projects completed
+                  <strong className="text-foreground">50+</strong> مسابقة وفعالية
                 </span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <MapPin className="h-4 w-4 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">50+</strong> learning spaces
+                  <strong className="text-foreground">100+</strong> مركز في مختلف المناطق
                 </span>
               </div>
             </div>

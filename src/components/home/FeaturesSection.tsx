@@ -57,10 +57,10 @@ const FeaturesSection = () => {
           <ScrollReveal>
             <div className="text-center mb-16">
               <h2 id="features-heading" className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                Everything You Need to Build Real Projects
+                كل ما تحتاجه لتقديم تعليم تقني متميز
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                From expert guidance to professional equipment—access the complete ecosystem for hands-on STEM learning.
+                من المناهج والأدوات إلى المسابقات والتمويل—منصة متكاملة لدعم المدربين والمراكز التدريبية لتقديم تعليم بمعايير عالمية.
               </p>
             </div>
           </ScrollReveal>
