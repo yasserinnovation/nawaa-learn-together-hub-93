@@ -21,7 +21,7 @@ export type Database = {
           created_at: string | null
           details: Json | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           resource_id: string | null
           resource_type: string
           user_agent: string | null
@@ -32,7 +32,7 @@ export type Database = {
           created_at?: string | null
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type: string
           user_agent?: string | null
@@ -43,7 +43,7 @@ export type Database = {
           created_at?: string | null
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type?: string
           user_agent?: string | null
@@ -55,7 +55,7 @@ export type Database = {
           action: string
           created_at: string
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           metadata: Json | null
           user_agent: string | null
           user_id: string | null
@@ -64,7 +64,7 @@ export type Database = {
           action: string
           created_at?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           metadata?: Json | null
           user_agent?: string | null
           user_id?: string | null
@@ -73,7 +73,7 @@ export type Database = {
           action?: string
           created_at?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           metadata?: Json | null
           user_agent?: string | null
           user_id?: string | null
@@ -453,7 +453,7 @@ export type Database = {
           created_at: string
           expires_at: string
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           revoked: boolean
           user_agent: string | null
           user_id: string
@@ -462,7 +462,7 @@ export type Database = {
           created_at?: string
           expires_at?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           revoked?: boolean
           user_agent?: string | null
           user_id: string
@@ -471,7 +471,7 @@ export type Database = {
           created_at?: string
           expires_at?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           revoked?: boolean
           user_agent?: string | null
           user_id?: string
@@ -528,14 +528,8 @@ export type Database = {
         Args: { _ip_address?: unknown; _user_agent?: string }
         Returns: string
       }
-      get_admin_dashboard_stats: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
-      get_admin_profile_stats: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
+      get_admin_dashboard_stats: { Args: never; Returns: Json }
+      get_admin_profile_stats: { Args: never; Returns: Json }
       get_public_profile: {
         Args: { profile_user_id: string }
         Returns: {
@@ -552,7 +546,7 @@ export type Database = {
         }[]
       }
       get_user_profile: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           active_sessions: number
           auth_provider: Database["public"]["Enums"]["auth_provider_type"]
@@ -572,10 +566,7 @@ export type Database = {
         }
         Returns: boolean
       }
-      is_admin: {
-        Args: { _user_id: string }
-        Returns: boolean
-      }
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
       log_admin_activity: {
         Args: {
           _action: string
@@ -594,10 +585,7 @@ export type Database = {
         }
         Returns: undefined
       }
-      revoke_user_session: {
-        Args: { _session_id: string }
-        Returns: undefined
-      }
+      revoke_user_session: { Args: { _session_id: string }; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
