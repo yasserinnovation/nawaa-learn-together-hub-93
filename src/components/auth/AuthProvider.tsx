@@ -74,7 +74,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const checkRole = async (userId: string) => {
+    const checkRole = async (userId: string): Promise<string> => {
       console.log("🔍 Checking role for user:", userId);
       
       try {
@@ -98,22 +98,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         if (error) {
           console.error("❌ Error fetching user role:", error);
-          setUserRole("user");
-          return;
+          return "user";
         }
 
         if (!data) {
           console.warn("⚠️ No role data found for user, defaulting to 'user'");
-          setUserRole("user");
-          return;
+          return "user";
         }
 
         const role = data?.role || "user";
-        console.log("✅ Setting user role to:", role);
-        setUserRole(role);
+        console.log("✅ Role determined:", role);
+        return role;
       } catch (error) {
         console.error("❌ Unexpected error checking user role:", error);
-        setUserRole("user");
+        return "user";
       }
     };
 
@@ -126,7 +124,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         // Check role immediately after state change
         if (session?.user) {
-          await checkRole(session.user.id);
+          const role = await checkRole(session.user.id);
+          setUserRole(role);
           
           // Create session for sign-in events
           if (event === 'SIGNED_IN') {
@@ -151,7 +150,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        await checkRole(session.user.id);
+        const role = await checkRole(session.user.id);
+        setUserRole(role);
       }
       
       // Set loading to false AFTER role check completes
