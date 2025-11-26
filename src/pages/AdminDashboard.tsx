@@ -13,8 +13,8 @@ import EditSpaceForm from "@/components/admin/EditSpaceForm";
 import AddCourseForm from "@/components/admin/AddCourseForm";
 import AddToolForm from "@/components/admin/AddToolForm";
 import AddCompetitionForm from "@/components/admin/AddCompetitionForm";
-import LocationMap from "@/components/admin/LocationMap";
-import { useMapboxToken } from "@/hooks/useMapboxToken";
+// import LocationMap from "@/components/admin/LocationMap"; // Temporarily disabled due to mapbox rendering issues
+// import { useMapboxToken } from "@/hooks/useMapboxToken";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -190,8 +190,8 @@ const AdminDashboard = () => {
     );
   }
 
-  // Get Mapbox token
-  const { token: mapboxToken, loading: tokenLoading, error: tokenError } = useMapboxToken();
+  // Get Mapbox token - temporarily disabled
+  // const { token: mapboxToken, loading: tokenLoading, error: tokenError } = useMapboxToken();
 
   useEffect(() => {
     if (isAdmin) {
@@ -862,14 +862,8 @@ const AdminDashboard = () => {
               </div>
             </div>
 
-            {/* Always show list view until map issue is resolved */}
-            {false && showMapView ? (
-              <LocationMap 
-                spaces={spaces} 
-                mapboxToken={mapboxToken}
-              />
-            ) : (
-              <Card>
+            {/* Map view temporarily disabled due to mapbox rendering issues */}
+            <Card>
                 <CardHeader>
                   <CardTitle>All Spaces</CardTitle>
                 </CardHeader>
@@ -930,7 +924,6 @@ const AdminDashboard = () => {
                   )}
                 </CardContent>
               </Card>
-            )}
           </TabsContent>
 
           <TabsContent value="courses" className="space-y-6">
