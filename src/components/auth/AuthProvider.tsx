@@ -80,12 +80,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         console.log("⏳ Starting user_roles query...");
         
-        const { data, error } = await supabase
+        // Add timeout wrapper
+        const queryPromise = supabase
           .from("user_roles")
           .select("role, is_active")
           .eq("user_id", userId)
           .eq("is_active", true)
           .maybeSingle();
+
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Query timeout after 5s')), 5000)
+        );
+
+        const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
 
         console.log("📊 Role query result:", { data, error, userId });
 
