@@ -123,7 +123,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.log("🔄 Auth state changed:", event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
-        setLoading(false);
 
         // Check role immediately after state change
         if (session?.user) {
@@ -139,6 +138,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         } else {
           setUserRole(null);
         }
+        
+        // Set loading to false AFTER role check completes
+        setLoading(false);
       }
     );
 
@@ -152,6 +154,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         await checkRole(session.user.id);
       }
       
+      // Set loading to false AFTER role check completes
       setLoading(false);
     });
 
