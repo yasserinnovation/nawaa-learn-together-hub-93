@@ -41,25 +41,32 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkUserRole = async () => {
     if (!user?.id) {
+      console.log("❌ No user ID found");
       setUserRole(null);
       return;
     }
 
+    console.log("🔍 Checking role for user:", user.id);
+
     try {
       const { data, error } = await supabase
         .from("user_roles")
-        .select("role")
+        .select("role, is_active")
         .eq("user_id", user.id)
         .eq("is_active", true)
         .single();
 
+      console.log("📊 Role query result:", { data, error });
+
       if (error && error.code !== "PGRST116") {
-        console.error("Error fetching user role:", error);
+        console.error("❌ Error fetching user role:", error);
       }
 
-      setUserRole(data?.role || "user");
+      const role = data?.role || "user";
+      console.log("✅ Setting user role to:", role);
+      setUserRole(role);
     } catch (error) {
-      console.error("Error checking user role:", error);
+      console.error("❌ Error checking user role:", error);
       setUserRole("user");
     }
   };
