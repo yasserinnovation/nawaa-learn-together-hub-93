@@ -74,13 +74,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const checkRole = async (userId: string): Promise<string> => {
-      console.log("🔍 Checking role for user:", userId);
+    let roleCache: { userId: string; role: string; timestamp: number } | null = null;
+    const CACHE_DURATION = 60000; // Cache for 1 minute
+    let isCheckingRole = false;
+
+    const checkRole = async (userId: string, retries = 3): Promise<string> => {
+      // Return cached role if available and fresh
+      if (roleCache && roleCache.userId === userId && Date.now() - roleCache.timestamp < CACHE_DURATION) {
+        console.log("✅ Using cached role:", roleCache.role);
+        return roleCache.role;
+      }
+
+      // Prevent concurrent role checks
+      if (isCheckingRole) {
+        console.log("⏳ Role check already in progress, waiting...");
+        await new Promise(resolve => setTimeout(resolve, 500));
+        return checkRole(userId, retries);
+      }
+
+      isCheckingRole = true;
+      console.log("🔍 Checking role for user:", userId, `(${retries} retries left)`);
       
       try {
-        // Use the secure RPC function that bypasses RLS with a timeout
+        // Shorter timeout with retry logic
         const timeoutPromise = new Promise<never>((_, reject) => 
-          setTimeout(() => reject(new Error('Role check timeout')), 5000)
+          setTimeout(() => reject(new Error('Role check timeout')), 3000)
         );
         
         const rpcPromise = supabase.rpc("get_current_user_role");
@@ -89,14 +107,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         if (error) {
           console.error("❌ Error fetching user role:", error);
-          return "user";
+          throw error;
         }
 
         const role = data || "user";
         console.log("✅ Role determined:", role);
+        
+        // Cache the successful result
+        roleCache = { userId, role, timestamp: Date.now() };
+        isCheckingRole = false;
+        
         return role;
       } catch (error) {
-        console.error("❌ Unexpected error checking user role:", error);
+        isCheckingRole = false;
+        
+        // Retry with exponential backoff
+        if (retries > 0) {
+          console.log(`🔄 Retrying role check (${retries} attempts remaining)...`);
+          await new Promise(resolve => setTimeout(resolve, (4 - retries) * 1000));
+          return checkRole(userId, retries - 1);
+        }
+        
+        console.error("❌ All retry attempts failed, defaulting to user role");
         return "user";
       }
     };
