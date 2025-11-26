@@ -521,7 +521,108 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_spaces: {
+        Row: {
+          address: string | null
+          availability: Json | null
+          capacity: number | null
+          city: string | null
+          coordinates: Json | null
+          created_at: string | null
+          description: string | null
+          equipment: string[] | null
+          id: string | null
+          images: string[] | null
+          name: string | null
+          price_per_hour: number | null
+          rating: number | null
+          type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string | null
+          availability?: Json | null
+          capacity?: number | null
+          city?: string | null
+          coordinates?: Json | null
+          created_at?: string | null
+          description?: string | null
+          equipment?: string[] | null
+          id?: string | null
+          images?: string[] | null
+          name?: string | null
+          price_per_hour?: number | null
+          rating?: number | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string | null
+          availability?: Json | null
+          capacity?: number | null
+          city?: string | null
+          coordinates?: Json | null
+          created_at?: string | null
+          description?: string | null
+          equipment?: string[] | null
+          id?: string | null
+          images?: string[] | null
+          name?: string | null
+          price_per_hour?: number | null
+          rating?: number | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      public_tools: {
+        Row: {
+          availability_status: string | null
+          category: string | null
+          condition: string | null
+          created_at: string | null
+          description: string | null
+          id: string | null
+          images: string[] | null
+          location: string | null
+          name: string | null
+          purchase_price: number | null
+          rental_price_per_day: number | null
+          specifications: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          availability_status?: string | null
+          category?: string | null
+          condition?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          images?: string[] | null
+          location?: string | null
+          name?: string | null
+          purchase_price?: number | null
+          rental_price_per_day?: number | null
+          specifications?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          availability_status?: string | null
+          category?: string | null
+          condition?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          images?: string[] | null
+          location?: string | null
+          name?: string | null
+          purchase_price?: number | null
+          rental_price_per_day?: number | null
+          specifications?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       create_user_session: {
