@@ -166,7 +166,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ spaces, mapboxToken, onSpaceS
     return () => {
       map.current?.remove();
     };
-  }, [spaces, mapboxToken, onSpaceSelect]);
+  }, [spaces, mapboxToken]); // Removed onSpaceSelect from dependencies to prevent infinite re-renders
 
   if (!mapboxToken) {
     return (
