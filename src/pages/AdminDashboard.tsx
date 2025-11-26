@@ -316,12 +316,7 @@ const AdminDashboard = () => {
   // CONDITIONAL LOGIC AND RETURNS AFTER ALL HOOKS
   // Show loading while checking auth OR while checking user role
   // IMPORTANT: Also show loading while isAdmin is being determined
-  if (
-    authLoading ||
-    loading ||
-    (user && userRole === null) ||
-    (user && !authLoading && isAdmin === false && userRole === null)
-  ) {
+  if (authLoading || loading || userRole === null) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -336,7 +331,7 @@ const AdminDashboard = () => {
   }
 
   // Only show access denied after we've confirmed the user role and they're definitely not an admin
-  if (user && !authLoading && userRole !== null && isAdmin === false) {
+  if (isAdmin === false) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center px-4">
