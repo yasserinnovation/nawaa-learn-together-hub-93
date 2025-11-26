@@ -111,17 +111,10 @@ interface Profile {
 
 
 const AdminDashboard = () => {
+  // ALL HOOKS MUST BE CALLED AT THE TOP LEVEL - BEFORE ANY CONDITIONAL RETURNS
   const { user, isAdmin, loading: authLoading, userRole } = useAuth();
   const { toast } = useToast();
-
-  // Debug logging
-  console.log("🔐 Admin Dashboard Auth State:", { 
-    userId: user?.id, 
-    email: user?.email,
-    userRole, 
-    isAdmin, 
-    authLoading 
-  });
+  
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAddCourseForm, setShowAddCourseForm] = useState(false);
@@ -148,50 +141,6 @@ const AdminDashboard = () => {
   });
   const [profileStats, setProfileStats] = useState<any>(null);
   const [showMapView, setShowMapView] = useState(false);
-
-  // Redirect if not authenticated or not admin
-  if (authLoading) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-        </div>
-      </Layout>
-    );
-  }
-
-  if (!user) {
-    return <Navigate to="/auth" replace />;
-  }
-
-  if (!isAdmin) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center px-4">
-          <Card className="max-w-md w-full">
-            <CardHeader className="text-center">
-              <div className="mx-auto h-12 w-12 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-destructive" />
-              </div>
-              <CardTitle className="text-2xl">Access Denied</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4">
-                You don't have permission to access the admin dashboard. 
-                This area is restricted to administrators only.
-              </p>
-              <Button onClick={() => window.history.back()} variant="outline">
-                Go Back
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </Layout>
-    );
-  }
-
-  // Get Mapbox token - temporarily disabled
-  // const { token: mapboxToken, loading: tokenLoading, error: tokenError } = useMapboxToken();
 
   const fetchSpaces = useCallback(async () => {
     try {
@@ -350,6 +299,56 @@ const AdminDashboard = () => {
       fetchDashboardStats();
     }
   }, [isAdmin, fetchAllData, fetchDashboardStats]);
+
+  // Debug logging
+  console.log("🔐 Admin Dashboard Auth State:", { 
+    userId: user?.id, 
+    email: user?.email,
+    userRole, 
+    isAdmin, 
+    authLoading 
+  });
+
+  // CONDITIONAL LOGIC AND RETURNS AFTER ALL HOOKS
+  if (authLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  if (!isAdmin) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <Card className="max-w-md w-full">
+            <CardHeader className="text-center">
+              <div className="mx-auto h-12 w-12 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
+                <Shield className="h-6 w-6 text-destructive" />
+              </div>
+              <CardTitle className="text-2xl">Access Denied</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-muted-foreground mb-4">
+                You don't have permission to access the admin dashboard. 
+                This area is restricted to administrators only.
+              </p>
+              <Button onClick={() => window.history.back()} variant="outline">
+                Go Back
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    );
+  }
 
   const handleAddSpace = async (newSpaceData: any) => {
     try {
