@@ -33,7 +33,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ spaces, mapboxToken, onSpaceS
   const [selectedSpace, setSelectedSpace] = useState<Space | null>(null);
 
   useEffect(() => {
-    if (!mapContainer.current || !mapboxToken) return;
+    if (!mapContainer.current || !mapboxToken || map.current) return; // Guard against re-initialization
 
     // Initialize map
     mapboxgl.accessToken = mapboxToken;
