@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -38,6 +38,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  
+  // Use refs to persist across renders and prevent repeated role checks
+  const hasCheckedRoleRef = useRef(false);
+  const pendingRoleCheckRef = useRef<Promise<string> | null>(null);
 
   const checkUserRole = async () => {
     if (!user?.id) {
@@ -74,32 +78,44 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    let hasCheckedRole = false;
-
     const checkRoleOnce = async (userId: string): Promise<string> => {
-      if (hasCheckedRole) {
+      // If already checked, return current role
+      if (hasCheckedRoleRef.current && userRole) {
         console.log("✅ Role already checked this session, skipping");
-        return userRole || "user";
+        return userRole;
       }
 
-      hasCheckedRole = true;
+      // If a check is in progress, wait for it
+      if (pendingRoleCheckRef.current) {
+        console.log("⏳ Waiting for pending role check...");
+        return pendingRoleCheckRef.current;
+      }
+
       console.log("🔍 Checking role for user:", userId);
       
-      try {
-        const { data, error } = await supabase.rpc("get_current_user_role");
+      // Create and store the promise
+      pendingRoleCheckRef.current = (async () => {
+        try {
+          const { data, error } = await supabase.rpc("get_current_user_role");
 
-        if (error) {
-          console.error("❌ Error fetching user role:", error);
+          if (error) {
+            console.error("❌ Error fetching user role:", error);
+            return "user";
+          }
+
+          hasCheckedRoleRef.current = true;
+          const role = data || "user";
+          console.log("✅ Role determined:", role);
+          return role;
+        } catch (error) {
+          console.error("❌ Unexpected error checking user role:", error);
           return "user";
+        } finally {
+          pendingRoleCheckRef.current = null;
         }
+      })();
 
-        const role = data || "user";
-        console.log("✅ Role determined:", role);
-        return role;
-      } catch (error) {
-        console.error("❌ Unexpected error checking user role:", error);
-        return "user";
-      }
+      return pendingRoleCheckRef.current;
     };
 
     // Set up auth state listener FIRST
@@ -109,21 +125,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setSession(session);
         setUser(session?.user ?? null);
 
-        // Only check role on SIGNED_IN event or if we don't have a role yet
-        if (session?.user && (event === 'SIGNED_IN' || !userRole)) {
+        // Only check role on SIGNED_IN event
+        if (session?.user && event === 'SIGNED_IN') {
           const role = await checkRoleOnce(session.user.id);
           setUserRole(role);
           
           // Create session for sign-in events
-          if (event === 'SIGNED_IN') {
-            supabase.rpc('create_user_session', {
-              _ip_address: null,
-              _user_agent: navigator.userAgent
-            });
-          }
+          supabase.rpc('create_user_session', {
+            _ip_address: null,
+            _user_agent: navigator.userAgent
+          });
         } else if (!session?.user) {
           setUserRole(null);
-          hasCheckedRole = false; // Reset for next sign-in
+          hasCheckedRoleRef.current = false; // Reset for next sign-in
         }
         
         setLoading(false);
