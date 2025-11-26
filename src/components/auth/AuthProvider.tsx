@@ -78,35 +78,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log("🔍 Checking role for user:", userId);
       
       try {
-        console.log("⏳ Starting user_roles query...");
-        
-        // Add timeout wrapper
-        const queryPromise = supabase
-          .from("user_roles")
-          .select("role, is_active")
-          .eq("user_id", userId)
-          .eq("is_active", true)
-          .maybeSingle();
-
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Query timeout after 5s')), 5000)
-        );
-
-        const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
-
-        console.log("📊 Role query result:", { data, error, userId });
+        // Use the secure RPC function that bypasses RLS
+        const { data, error } = await supabase.rpc("get_current_user_role");
 
         if (error) {
           console.error("❌ Error fetching user role:", error);
           return "user";
         }
 
-        if (!data) {
-          console.warn("⚠️ No role data found for user, defaulting to 'user'");
-          return "user";
-        }
-
-        const role = data?.role || "user";
+        const role = data || "user";
         console.log("✅ Role determined:", role);
         return role;
       } catch (error) {
