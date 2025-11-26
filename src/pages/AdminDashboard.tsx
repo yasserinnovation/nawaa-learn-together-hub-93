@@ -310,7 +310,8 @@ const AdminDashboard = () => {
   });
 
   // CONDITIONAL LOGIC AND RETURNS AFTER ALL HOOKS
-  if (authLoading) {
+  // Show loading while checking auth OR while checking user role
+  if (authLoading || (user && userRole === null)) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -324,6 +325,7 @@ const AdminDashboard = () => {
     return <Navigate to="/auth" replace />;
   }
 
+  // Only show access denied after we've confirmed the user role
   if (!isAdmin) {
     return (
       <Layout>
