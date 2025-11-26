@@ -78,6 +78,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log("🔍 Checking role for user:", userId);
       
       try {
+        console.log("⏳ Starting user_roles query...");
+        
         const { data, error } = await supabase
           .from("user_roles")
           .select("role, is_active")
@@ -85,10 +87,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           .eq("is_active", true)
           .maybeSingle();
 
-        console.log("📊 Role query result:", { data, error });
+        console.log("📊 Role query result:", { data, error, userId });
 
         if (error) {
           console.error("❌ Error fetching user role:", error);
+          setUserRole("user");
+          return;
+        }
+
+        if (!data) {
+          console.warn("⚠️ No role data found for user, defaulting to 'user'");
           setUserRole("user");
           return;
         }
