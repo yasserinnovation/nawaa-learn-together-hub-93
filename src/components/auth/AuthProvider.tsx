@@ -74,63 +74,49 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    let roleCache: { userId: string; role: string; timestamp: number } | null = null;
-    const CACHE_DURATION = 60000; // Cache for 1 minute
     let isCheckingRole = false;
+    let roleCheckPromise: Promise<string> | null = null;
 
-    const checkRole = async (userId: string, retries = 3): Promise<string> => {
-      // Return cached role if available and fresh
-      if (roleCache && roleCache.userId === userId && Date.now() - roleCache.timestamp < CACHE_DURATION) {
-        console.log("✅ Using cached role:", roleCache.role);
-        return roleCache.role;
+    const checkRole = async (userId: string): Promise<string> => {
+      // If a role check is already in progress, return that promise
+      if (roleCheckPromise) {
+        console.log("⏳ Role check already in progress, waiting for result...");
+        return roleCheckPromise;
       }
 
       // Prevent concurrent role checks
       if (isCheckingRole) {
-        console.log("⏳ Role check already in progress, waiting...");
-        await new Promise(resolve => setTimeout(resolve, 500));
-        return checkRole(userId, retries);
+        console.log("⏳ Role check already running, defaulting to user temporarily");
+        return "user";
       }
 
       isCheckingRole = true;
-      console.log("🔍 Checking role for user:", userId, `(${retries} retries left)`);
+      console.log("🔍 Checking role for user:", userId);
       
-      try {
-        // Shorter timeout with retry logic
-        const timeoutPromise = new Promise<never>((_, reject) => 
-          setTimeout(() => reject(new Error('Role check timeout')), 3000)
-        );
-        
-        const rpcPromise = supabase.rpc("get_current_user_role");
-        
-        const { data, error } = await Promise.race([rpcPromise, timeoutPromise]);
+      // Create the promise and store it
+      roleCheckPromise = (async () => {
+        try {
+          // Direct RPC call without timeout - let Supabase handle it
+          const { data, error } = await supabase.rpc("get_current_user_role");
 
-        if (error) {
-          console.error("❌ Error fetching user role:", error);
-          throw error;
-        }
+          if (error) {
+            console.error("❌ Error fetching user role:", error);
+            return "user";
+          }
 
-        const role = data || "user";
-        console.log("✅ Role determined:", role);
-        
-        // Cache the successful result
-        roleCache = { userId, role, timestamp: Date.now() };
-        isCheckingRole = false;
-        
-        return role;
-      } catch (error) {
-        isCheckingRole = false;
-        
-        // Retry with exponential backoff
-        if (retries > 0) {
-          console.log(`🔄 Retrying role check (${retries} attempts remaining)...`);
-          await new Promise(resolve => setTimeout(resolve, (4 - retries) * 1000));
-          return checkRole(userId, retries - 1);
+          const role = data || "user";
+          console.log("✅ Role determined:", role);
+          return role;
+        } catch (error) {
+          console.error("❌ Unexpected error checking user role:", error);
+          return "user";
+        } finally {
+          isCheckingRole = false;
+          roleCheckPromise = null;
         }
-        
-        console.error("❌ All retry attempts failed, defaulting to user role");
-        return "user";
-      }
+      })();
+
+      return roleCheckPromise;
     };
 
     // Set up auth state listener FIRST
