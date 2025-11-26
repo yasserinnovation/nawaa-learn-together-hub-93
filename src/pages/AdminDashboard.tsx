@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
@@ -193,25 +193,117 @@ const AdminDashboard = () => {
   // Get Mapbox token - temporarily disabled
   // const { token: mapboxToken, loading: tokenLoading, error: tokenError } = useMapboxToken();
 
-  useEffect(() => {
-    if (isAdmin) {
-      fetchAllData();
-      fetchDashboardStats();
+  const fetchSpaces = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('spaces')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      
+      // Type cast the data to match our Space interface
+      const spacesData: Space[] = (data || []).map((space: any) => ({
+        ...space,
+        coordinates: (space.coordinates as any) || { lat: 0, lng: 0 },
+        availability: (space.availability as any) || { days: [], hours: "" }
+      }));
+      
+      setSpaces(spacesData);
+    } catch (error) {
+      console.error('Error fetching spaces:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch spaces",
+        description: "Could not load spaces data. Please try again.",
+      });
     }
-  }, [isAdmin]);
+  }, [toast]);
 
-  const fetchAllData = async () => {
-    await Promise.all([
-      fetchSpaces(),
-      fetchCourses(),
-      fetchTools(),
-      fetchCompetitions(),
-      fetchProfiles()
-    ]);
-  };
+  const fetchCourses = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('courses')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-  // Fetch dashboard statistics using the secure function
-  const fetchDashboardStats = async () => {
+      if (error) throw error;
+      setCourses(data || []);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch courses",
+        description: "Could not load courses data. Please try again.",
+      });
+    }
+  }, [toast]);
+
+  const fetchTools = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('tools')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setTools(data || []);
+    } catch (error) {
+      console.error('Error fetching tools:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch tools",
+        description: "Could not load tools data. Please try again.",
+      });
+    }
+  }, [toast]);
+
+  const fetchCompetitions = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('competitions')
+        .select('*')
+        .order('competition_date', { ascending: false });
+
+      if (error) throw error;
+      
+      // Type cast the data to match our Competition interface
+      const competitionsData: Competition[] = (data || []).map((comp: any) => ({
+        ...comp,
+        prizes: (comp.prizes as any) || []
+      }));
+      
+      setCompetitions(competitionsData);
+    } catch (error) {
+      console.error('Error fetching competitions:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch competitions",
+        description: "Could not load competitions data. Please try again.",
+      });
+    }
+  }, [toast]);
+
+  const fetchProfiles = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProfiles(data || []);
+    } catch (error) {
+      console.error('Error fetching profiles:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch profiles",
+        description: "Could not load profiles data. Please try again.",
+      });
+    }
+  }, [toast]);
+
+  const fetchDashboardStats = useCallback(async () => {
     try {
       const { data, error } = await supabase.rpc('get_admin_dashboard_stats');
       
@@ -240,119 +332,24 @@ const AdminDashboard = () => {
         description: "Could not fetch dashboard statistics. Please try again.",
       });
     }
-  };
+  }, [toast]);
 
-  const fetchSpaces = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('spaces')
-        .select('*')
-        .order('created_at', { ascending: false });
+  const fetchAllData = useCallback(async () => {
+    await Promise.all([
+      fetchSpaces(),
+      fetchCourses(),
+      fetchTools(),
+      fetchCompetitions(),
+      fetchProfiles()
+    ]);
+  }, [fetchSpaces, fetchCourses, fetchTools, fetchCompetitions, fetchProfiles]);
 
-      if (error) throw error;
-      
-      // Type cast the data to match our Space interface
-      const spacesData: Space[] = (data || []).map((space: any) => ({
-        ...space,
-        coordinates: (space.coordinates as any) || { lat: 0, lng: 0 },
-        availability: (space.availability as any) || { days: [], hours: "" }
-      }));
-      
-      setSpaces(spacesData);
-    } catch (error) {
-      console.error('Error fetching spaces:', error);
-      toast({
-        variant: "destructive",
-        title: "Failed to fetch spaces",
-        description: "Could not load spaces data. Please try again.",
-      });
+  useEffect(() => {
+    if (isAdmin) {
+      fetchAllData();
+      fetchDashboardStats();
     }
-  };
-
-  const fetchCourses = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('courses')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setCourses(data || []);
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-      toast({
-        variant: "destructive",
-        title: "Failed to fetch courses",
-        description: "Could not load courses data. Please try again.",
-      });
-    }
-  };
-
-  const fetchTools = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('tools')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setTools(data || []);
-    } catch (error) {
-      console.error('Error fetching tools:', error);
-      toast({
-        variant: "destructive",
-        title: "Failed to fetch tools",
-        description: "Could not load tools data. Please try again.",
-      });
-    }
-  };
-
-  const fetchCompetitions = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('competitions')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      
-      // Type cast the data to match our Competition interface
-      const competitionsData: Competition[] = (data || []).map((comp: any) => ({
-        ...comp,
-        prizes: (comp.prizes as any) || []
-      }));
-      
-      setCompetitions(competitionsData);
-    } catch (error) {
-      console.error('Error fetching competitions:', error);
-      toast({
-        variant: "destructive",
-        title: "Failed to fetch competitions",
-        description: "Could not load competitions data. Please try again.",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchProfiles = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setProfiles(data || []);
-    } catch (error) {
-      console.error('Error fetching profiles:', error);
-      toast({
-        variant: "destructive",
-        title: "Failed to fetch profiles",
-        description: "Could not load user profiles. Please try again.",
-      });
-    }
-  };
+  }, [isAdmin, fetchAllData, fetchDashboardStats]);
 
   const handleAddSpace = async (newSpaceData: any) => {
     try {
