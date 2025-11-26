@@ -78,8 +78,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log("🔍 Checking role for user:", userId);
       
       try {
-        // Use the secure RPC function that bypasses RLS
-        const { data, error } = await supabase.rpc("get_current_user_role");
+        // Use the secure RPC function that bypasses RLS with a timeout
+        const timeoutPromise = new Promise<never>((_, reject) => 
+          setTimeout(() => reject(new Error('Role check timeout')), 5000)
+        );
+        
+        const rpcPromise = supabase.rpc("get_current_user_role");
+        
+        const { data, error } = await Promise.race([rpcPromise, timeoutPromise]);
 
         if (error) {
           console.error("❌ Error fetching user role:", error);
