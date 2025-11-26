@@ -845,6 +845,7 @@ const AdminDashboard = () => {
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Manage Spaces</h2>
               <div className="flex gap-2">
+                {/* Temporarily disabled due to mapbox rendering issues
                 <Button 
                   variant="outline" 
                   onClick={() => setShowMapView(!showMapView)}
@@ -853,6 +854,7 @@ const AdminDashboard = () => {
                   <Map className="h-4 w-4 mr-2" />
                   {showMapView ? 'List View' : 'Map View'}
                 </Button>
+                */}
                 <Button onClick={() => setShowAddForm(true)} className="btn-primary">
                   <Plus className="h-4 w-4 mr-2" />
                   Add New Space
@@ -860,7 +862,8 @@ const AdminDashboard = () => {
               </div>
             </div>
 
-            {showMapView ? (
+            {/* Always show list view until map issue is resolved */}
+            {false && showMapView ? (
               <LocationMap 
                 spaces={spaces} 
                 mapboxToken={mapboxToken}
