@@ -41,12 +41,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkUserRole = async () => {
     if (!user?.id) {
-      console.log("❌ No user ID found");
+      console.log("❌ No user ID found in checkUserRole");
       setUserRole(null);
       return;
     }
 
-    console.log("🔍 Checking role for user:", user.id);
+    console.log("🔍 Manual role check for user:", user.id);
 
     try {
       const { data, error } = await supabase
@@ -54,46 +54,73 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         .select("role, is_active")
         .eq("user_id", user.id)
         .eq("is_active", true)
-        .single();
+        .maybeSingle();
 
-      console.log("📊 Role query result:", { data, error });
+      console.log("📊 Manual role query result:", { data, error });
 
-      if (error && error.code !== "PGRST116") {
+      if (error) {
         console.error("❌ Error fetching user role:", error);
+        setUserRole("user");
+        return;
       }
 
       const role = data?.role || "user";
       console.log("✅ Setting user role to:", role);
       setUserRole(role);
     } catch (error) {
-      console.error("❌ Error checking user role:", error);
+      console.error("❌ Unexpected error checking user role:", error);
       setUserRole("user");
     }
   };
 
   useEffect(() => {
+    const checkRole = async (userId: string) => {
+      console.log("🔍 Checking role for user:", userId);
+      
+      try {
+        const { data, error } = await supabase
+          .from("user_roles")
+          .select("role, is_active")
+          .eq("user_id", userId)
+          .eq("is_active", true)
+          .maybeSingle();
+
+        console.log("📊 Role query result:", { data, error });
+
+        if (error) {
+          console.error("❌ Error fetching user role:", error);
+          setUserRole("user");
+          return;
+        }
+
+        const role = data?.role || "user";
+        console.log("✅ Setting user role to:", role);
+        setUserRole(role);
+      } catch (error) {
+        console.error("❌ Unexpected error checking user role:", error);
+        setUserRole("user");
+      }
+    };
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
+        console.log("🔄 Auth state changed:", event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
 
-        // Handle auth events
-        if (event === 'SIGNED_IN') {
-          setTimeout(() => {
-            if (session?.user) {
-              supabase.rpc('create_user_session', {
-                _ip_address: null,
-                _user_agent: navigator.userAgent
-              });
-              checkUserRole();
-            }
-          }, 0);
-        } else if (session?.user) {
-          setTimeout(() => {
-            checkUserRole();
-          }, 0);
+        // Check role immediately after state change
+        if (session?.user) {
+          await checkRole(session.user.id);
+          
+          // Create session for sign-in events
+          if (event === 'SIGNED_IN') {
+            supabase.rpc('create_user_session', {
+              _ip_address: null,
+              _user_agent: navigator.userAgent
+            });
+          }
         } else {
           setUserRole(null);
         }
@@ -101,14 +128,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     );
 
     // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      console.log("🔑 Initial session check:", session?.user?.email);
       setSession(session);
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        setTimeout(() => {
-          checkUserRole();
-        }, 0);
+        await checkRole(session.user.id);
       }
       
       setLoading(false);
