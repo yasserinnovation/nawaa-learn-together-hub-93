@@ -111,8 +111,17 @@ interface Profile {
 
 
 const AdminDashboard = () => {
-  const { user, isAdmin, loading: authLoading } = useAuth();
+  const { user, isAdmin, loading: authLoading, userRole } = useAuth();
   const { toast } = useToast();
+
+  // Debug logging
+  console.log("🔐 Admin Dashboard Auth State:", { 
+    userId: user?.id, 
+    email: user?.email,
+    userRole, 
+    isAdmin, 
+    authLoading 
+  });
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAddCourseForm, setShowAddCourseForm] = useState(false);
