@@ -864,9 +864,6 @@ const AdminDashboard = () => {
               <LocationMap 
                 spaces={spaces} 
                 mapboxToken={mapboxToken}
-                onSpaceSelect={(space) => {
-                  // Handle space selection for future features
-                }}
               />
             ) : (
               <Card>
