@@ -143,6 +143,7 @@ const AdminDashboard = () => {
   const [competitions, setCompetitions] = useState<Competition[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
+  const [initialRoleCheckComplete, setInitialRoleCheckComplete] = useState(false);
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalSpaces: 0,
@@ -293,16 +294,21 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const loadData = async () => {
+      // Mark initial role check as complete once we have a role (even if it's 'user')
+      if (userRole !== null && !authLoading) {
+        setInitialRoleCheckComplete(true);
+      }
+
       if (isAdmin) {
         await Promise.all([fetchAllData(), fetchDashboardStats()]);
         setLoading(false);
-      } else if (userRole !== null) {
+      } else if (userRole !== null && !authLoading) {
         // If user is not admin but role is determined, stop loading
         setLoading(false);
       }
     };
     loadData();
-  }, [isAdmin, userRole, fetchAllData, fetchDashboardStats]);
+  }, [isAdmin, userRole, authLoading, fetchAllData, fetchDashboardStats]);
 
   // Debug logging
   console.log("🔐 Admin Dashboard Auth State:", {
@@ -314,9 +320,8 @@ const AdminDashboard = () => {
   });
 
   // CONDITIONAL LOGIC AND RETURNS AFTER ALL HOOKS
-  // Show loading while checking auth OR while checking user role
-  // IMPORTANT: Also show loading while isAdmin is being determined
-  if (authLoading || loading || userRole === null) {
+  // Show loading while checking auth OR while checking user role OR waiting for initial role check
+  if (authLoading || loading || userRole === null || !initialRoleCheckComplete) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -331,7 +336,8 @@ const AdminDashboard = () => {
   }
 
   // Only show access denied after we've confirmed the user role and they're definitely not an admin
-  if (isAdmin === false) {
+  // Wait for initial role check to be complete before showing this
+  if (isAdmin === false && initialRoleCheckComplete) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center px-4">
