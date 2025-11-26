@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -38,10 +38,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
-  
-  // Use refs to persist across renders and prevent repeated role checks
-  const hasCheckedRoleRef = useRef(false);
-  const pendingRoleCheckRef = useRef<Promise<string> | null>(null);
 
   const checkUserRole = async () => {
     if (!user?.id) {
@@ -78,44 +74,63 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const checkRoleOnce = async (userId: string): Promise<string> => {
-      // If already checked, return current role
-      if (hasCheckedRoleRef.current && userRole) {
-        console.log("✅ Role already checked this session, skipping");
-        return userRole;
+    let roleCache: { userId: string; role: string; timestamp: number } | null = null;
+    const CACHE_DURATION = 60000; // Cache for 1 minute
+    let isCheckingRole = false;
+
+    const checkRole = async (userId: string, retries = 3): Promise<string> => {
+      // Return cached role if available and fresh
+      if (roleCache && roleCache.userId === userId && Date.now() - roleCache.timestamp < CACHE_DURATION) {
+        console.log("✅ Using cached role:", roleCache.role);
+        return roleCache.role;
       }
 
-      // If a check is in progress, wait for it
-      if (pendingRoleCheckRef.current) {
-        console.log("⏳ Waiting for pending role check...");
-        return pendingRoleCheckRef.current;
+      // Prevent concurrent role checks
+      if (isCheckingRole) {
+        console.log("⏳ Role check already in progress, waiting...");
+        await new Promise(resolve => setTimeout(resolve, 500));
+        return checkRole(userId, retries);
       }
 
-      console.log("🔍 Checking role for user:", userId);
+      isCheckingRole = true;
+      console.log("🔍 Checking role for user:", userId, `(${retries} retries left)`);
       
-      // Create and store the promise
-      pendingRoleCheckRef.current = (async () => {
-        try {
-          const { data, error } = await supabase.rpc("get_current_user_role");
+      try {
+        // Shorter timeout with retry logic
+        const timeoutPromise = new Promise<never>((_, reject) => 
+          setTimeout(() => reject(new Error('Role check timeout')), 3000)
+        );
+        
+        const rpcPromise = supabase.rpc("get_current_user_role");
+        
+        const { data, error } = await Promise.race([rpcPromise, timeoutPromise]);
 
-          if (error) {
-            console.error("❌ Error fetching user role:", error);
-            return "user";
-          }
-
-          hasCheckedRoleRef.current = true;
-          const role = data || "user";
-          console.log("✅ Role determined:", role);
-          return role;
-        } catch (error) {
-          console.error("❌ Unexpected error checking user role:", error);
-          return "user";
-        } finally {
-          pendingRoleCheckRef.current = null;
+        if (error) {
+          console.error("❌ Error fetching user role:", error);
+          throw error;
         }
-      })();
 
-      return pendingRoleCheckRef.current;
+        const role = data || "user";
+        console.log("✅ Role determined:", role);
+        
+        // Cache the successful result
+        roleCache = { userId, role, timestamp: Date.now() };
+        isCheckingRole = false;
+        
+        return role;
+      } catch (error) {
+        isCheckingRole = false;
+        
+        // Retry with exponential backoff
+        if (retries > 0) {
+          console.log(`🔄 Retrying role check (${retries} attempts remaining)...`);
+          await new Promise(resolve => setTimeout(resolve, (4 - retries) * 1000));
+          return checkRole(userId, retries - 1);
+        }
+        
+        console.error("❌ All retry attempts failed, defaulting to user role");
+        return "user";
+      }
     };
 
     // Set up auth state listener FIRST
@@ -125,21 +140,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setSession(session);
         setUser(session?.user ?? null);
 
-        // Only check role on SIGNED_IN event
-        if (session?.user && event === 'SIGNED_IN') {
-          const role = await checkRoleOnce(session.user.id);
+        // Check role immediately after state change
+        if (session?.user) {
+          const role = await checkRole(session.user.id);
           setUserRole(role);
           
           // Create session for sign-in events
-          supabase.rpc('create_user_session', {
-            _ip_address: null,
-            _user_agent: navigator.userAgent
-          });
-        } else if (!session?.user) {
+          if (event === 'SIGNED_IN') {
+            supabase.rpc('create_user_session', {
+              _ip_address: null,
+              _user_agent: navigator.userAgent
+            });
+          }
+        } else {
           setUserRole(null);
-          hasCheckedRoleRef.current = false; // Reset for next sign-in
         }
         
+        // Set loading to false AFTER role check completes
         setLoading(false);
       }
     );
@@ -151,10 +168,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        const role = await checkRoleOnce(session.user.id);
+        const role = await checkRole(session.user.id);
         setUserRole(role);
       }
       
+      // Set loading to false AFTER role check completes
       setLoading(false);
     });
 
