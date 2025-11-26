@@ -294,11 +294,17 @@ const AdminDashboard = () => {
   }, [fetchSpaces, fetchCourses, fetchTools, fetchCompetitions, fetchProfiles]);
 
   useEffect(() => {
-    if (isAdmin) {
-      fetchAllData();
-      fetchDashboardStats();
-    }
-  }, [isAdmin, fetchAllData, fetchDashboardStats]);
+    const loadData = async () => {
+      if (isAdmin) {
+        await Promise.all([fetchAllData(), fetchDashboardStats()]);
+        setLoading(false);
+      } else if (userRole !== null) {
+        // If user is not admin but role is determined, stop loading
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, [isAdmin, userRole, fetchAllData, fetchDashboardStats]);
 
   // Debug logging
   console.log("🔐 Admin Dashboard Auth State:", { 
