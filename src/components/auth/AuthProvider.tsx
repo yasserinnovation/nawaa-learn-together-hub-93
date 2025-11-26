@@ -214,18 +214,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signOut = async () => {
-    // Get current session before signing out
-    const currentSession = session;
+    // Log the sign out action BEFORE signing out (while still authenticated)
+    if (session) {
+      try {
+        await supabase.rpc('log_user_action', {
+          _action: 'signout',
+          _metadata: { timestamp: new Date().toISOString() }
+        });
+      } catch (logError) {
+        console.error("Failed to log sign out:", logError);
+      }
+    }
     
     const { error } = await supabase.auth.signOut();
-    
-    if (!error && currentSession) {
-      // Log the sign out action
-      await supabase.rpc('log_user_action', {
-        _action: 'signout',
-        _metadata: { timestamp: new Date().toISOString() }
-      });
-    }
 
     setUser(null);
     setSession(null);
